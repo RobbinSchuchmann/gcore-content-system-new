@@ -1,0 +1,276 @@
+{
+  "timestamp": "2025-08-28T08:59:07.357121",
+  "total_sources": 30,
+  "sources": [
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Cloud_computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nvlpubs",
+      "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Azure",
+      "url": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/cloud-computing-technology-your-complete-guide",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"The National Institute of Standards and Technology (NIST) defines five essential characteristics",
+      "url": "",
+      "snippet": ".\",\"The National Institute of Standards and Technology (NIST) defines five essential characteristics of cloud computing: on-demand self-service, broad network access, resource pooling, rapid elasticity, and measured service",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud computing services are typically categorized into three main service models: Infrastructur",
+      "url": "",
+      "snippet": ".\",\"Cloud computing services are typically categorized into three main service models: Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"There are four primary cloud deployment models: public cloud, private cloud, community cloud, an",
+      "url": "",
+      "snippet": ".\",\"There are four primary cloud deployment models: public cloud, private cloud, community cloud, and hybrid cloud, each differing in ownership, access, and management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud computing works by providing remote access to virtualized computing resources hosted in da",
+      "url": "",
+      "snippet": ".\",\"Cloud computing works by providing remote access to virtualized computing resources hosted in data centers, which users can access over the internet, allowing flexible scaling and resource allocation based on demand",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Key benefits of cloud computing include cost savings through pay-per-use pricing, scalability, f",
+      "url": "",
+      "snippet": ".\",\"Key benefits of cloud computing include cost savings through pay-per-use pricing, scalability, flexibility, improved collaboration, and access to advanced technologies like AI and quantum computing without owning physical infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Performance metrics in cloud computing often include availability (uptime), latency, throughput,",
+      "url": "",
+      "snippet": ".\",\"Performance metrics in cloud computing often include availability (uptime), latency, throughput, scalability, and resource utilization efficiency",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Scalability in cloud computing allows resources to be elastically provisioned and released autom",
+      "url": "",
+      "snippet": ".\",\"Scalability in cloud computing allows resources to be elastically provisioned and released automatically to meet fluctuating demand, often appearing unlimited to the consumer",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Best practices in cloud computing include implementing strong security measures, continuous moni",
+      "url": "",
+      "snippet": ".\",\"Best practices in cloud computing include implementing strong security measures, continuous monitoring, cost management, choosing appropriate service and deployment models, and ensuring compliance with industry standards",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud computing enables remote work by making data and applications accessible from anywhere, su",
+      "url": "",
+      "snippet": ".\",\"Cloud computing enables remote work by making data and applications accessible from anywhere, supporting seamless omnichannel customer engagement and innovation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud providers use multi-tenant models where physical and virtual resources are dynamically ass",
+      "url": "",
+      "snippet": ".\",\"Cloud providers use multi-tenant models where physical and virtual resources are dynamically assigned and reassigned according to consumer demand, ensuring efficient resource pooling",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Measured service in cloud computing involves automatic control and optimization of resource use ",
+      "url": "",
+      "snippet": ".\",\"Measured service in cloud computing involves automatic control and optimization of resource use through metering capabilities, providing transparency for both providers and consumers",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud computing supports a wide range of services including servers, storage, databases, network",
+      "url": "",
+      "snippet": ".\",\"Cloud computing supports a wide range of services including servers, storage, databases, networking, software, analytics, and intelligence delivered over the internet",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"The cloud computing paradigm has evolved with standards refined by organizations like ISO and NI",
+      "url": "",
+      "snippet": ".\",\"The cloud computing paradigm has evolved with standards refined by organizations like ISO and NIST to ensure interoperability, security, and performance",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud computing is foundational to many everyday applications such as email services, streaming ",
+      "url": "",
+      "snippet": ".\",\"Cloud computing is foundational to many everyday applications such as email services, streaming platforms, and cloud-hosted gaming, as well as enterprise IT infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cloud elasticity can scale resources up or down within seconds to minutes\",\"context\":\"",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cloud elasticity can scale resources up or down within seconds to minutes\",\"context\":\"Demonstrates rapid elasticity capability critical for handling variable workloads efficiently",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cloud cost savings can reduce IT infrastructure expenses by 30-50%\",\"context\":\"Estimat",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cloud cost savings can reduce IT infrastructure expenses by 30-50%\",\"context\":\"Estimates average operational cost reduction for businesses migrating to cloud computing",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Google Workspace (formerly G Suite) provides SaaS cloud services for email, document editing, an",
+      "url": "",
+      "snippet": ".\",\"Google Workspace (formerly G Suite) provides SaaS cloud services for email, document editing, and collaboration accessible from any device",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Amazon Web Services (AWS) offers IaaS and PaaS services enabling businesses to deploy scalable a",
+      "url": "",
+      "snippet": ".\",\"Amazon Web Services (AWS) offers IaaS and PaaS services enabling businesses to deploy scalable applications and infrastructure on demand",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Microsoft Azure supports hybrid cloud deployments allowing enterprises to integrate on-premises ",
+      "url": "",
+      "snippet": ".\",\"Microsoft Azure supports hybrid cloud deployments allowing enterprises to integrate on-premises data centers with public cloud resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Salesforce delivers CRM software as a cloud service, enabling businesses to manage customer rela",
+      "url": "",
+      "snippet": ".\",\"Salesforce delivers CRM software as a cloud service, enabling businesses to manage customer relationships without local infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Zoom uses cloud infrastructure to provide scalable video conferencing services accessible worldw",
+      "url": "",
+      "snippet": ".\",\"Zoom uses cloud infrastructure to provide scalable video conferencing services accessible worldwide",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"IBM Cloud offers AI-powered analytics and quantum computing platforms accessible via the cloud f",
+      "url": "",
+      "snippet": ".\",\"IBM Cloud offers AI-powered analytics and quantum computing platforms accessible via the cloud for enterprise innovation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    }
+  ]
+}

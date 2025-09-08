@@ -1,0 +1,276 @@
+{
+  "timestamp": "2025-09-08T09:10:54.388085",
+  "total_sources": 30,
+  "sources": [
+    {
+      "title": "Kaopiz",
+      "url": "https://kaopiz.com/en/articles/10-key-benefits-of-cloud-computing-for-businesses-in-2025/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Cyber",
+      "url": "https://www.cyber.gc.ca/en/guidance/introduction-cloud-computing-itsap50110",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Webasha",
+      "url": "https://www.webasha.com/blog/what-is-cloud-computing-and-why-is-it-important-the-detailed-guide",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/top-cloud-computing-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-computing-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "\",\"It enables users to access technology services from cloud service providers (CSPs) like AWS, Micr",
+      "url": "",
+      "snippet": "\",\"It enables users to access technology services from cloud service providers (CSPs) like AWS, Microsoft Azure, Google Cloud, and Oracle Cloud via web portals or APIs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": "\",\"Cloud computing resources are hosted in large data centers managed by CSPs, offering virtualized ",
+      "url": "",
+      "snippet": "\",\"Cloud computing resources are hosted in large data centers managed by CSPs, offering virtualized resources such as virtual machines and storage systems.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": "\",\"The pay-as-you-go pricing model allows businesses to pay only for the resources they use, reducin",
+      "url": "",
+      "snippet": "\",\"The pay-as-you-go pricing model allows businesses to pay only for the resources they use, reducing upfront capital expenditures and operational costs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\",\"Cloud computing offers high scalability and flexibility, allowing businesses to scale resources u",
+      "url": "",
+      "snippet": "\",\"Cloud computing offers high scalability and flexibility, allowing businesses to scale resources up or down instantly based on demand without costly infrastructure upgrades.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\",\"It improves accessibility and productivity by enabling secure access to data and applications fro",
+      "url": "",
+      "snippet": "\",\"It improves accessibility and productivity by enabling secure access to data and applications from anywhere, supporting remote work and collaboration across locations.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": "\",\"Cloud computing enhances reliability through data backup, disaster recovery, and business continu",
+      "url": "",
+      "snippet": "\",\"Cloud computing enhances reliability through data backup, disaster recovery, and business continuity by mirroring data across multiple geographically dispersed data centers.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Performance is optimized by CSPs providing scalable resources and regularly updating hardware to ",
+      "url": "",
+      "snippet": "\",\"Performance is optimized by CSPs providing scalable resources and regularly updating hardware to handle peak demand efficiently.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Cloud computing supports faster application deployment, enabling businesses to launch new service",
+      "url": "",
+      "snippet": "\",\"Cloud computing supports faster application deployment, enabling businesses to launch new services quickly without hardware limitations.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"It facilitates instant business insights through real-time data access and advanced analytics too",
+      "url": "",
+      "snippet": "\",\"It facilitates instant business insights through real-time data access and advanced analytics tools hosted on cloud platforms.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Cloud computing contributes to environmental sustainability by using energy-efficient data center",
+      "url": "",
+      "snippet": "\",\"Cloud computing contributes to environmental sustainability by using energy-efficient data centers and reducing the carbon footprint compared to on-premises IT systems.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Industry spending on public cloud services is forecasted to reach USD 805 billion in 2024 and is ",
+      "url": "",
+      "snippet": "\",\"Industry spending on public cloud services is forecasted to reach USD 805 billion in 2024 and is expected to double by 2028, reflecting rapid adoption.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Cloud computing underpins digital transformation across industries such as healthcare, finance, e",
+      "url": "",
+      "snippet": "\",\"Cloud computing underpins digital transformation across industries such as healthcare, finance, education, and manufacturing by providing access to AI, machine learning, and automation tools.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"There are four main cloud delivery models, including Infrastructure as a Service (IaaS), Platform",
+      "url": "",
+      "snippet": "\",\"There are four main cloud delivery models, including Infrastructure as a Service (IaaS), Platform as a Service (PaaS), Software as a Service (SaaS), and others, catering to different organizational needs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"Cloud computing enables businesses to reduce electricity costs by eliminating the need for in-hou",
+      "url": "",
+      "snippet": "\",\"Cloud computing enables businesses to reduce electricity costs by eliminating the need for in-house data centers and shifting maintenance and security responsibilities to CSPs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\"],\"statistics\":",
+      "url": "",
+      "snippet": "\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": "\"},{\"value\":\"10 key benefits\",\"context\":\"Top benefits of cloud computing for businesses in 2025 incl",
+      "url": "",
+      "snippet": "\"},{\"value\":\"10 key benefits\",\"context\":\"Top benefits of cloud computing for businesses in 2025 include cost savings, scalability, security, and innovation.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\"},{\"value\":\"High input/output operations per second (IOPS)\",\"context\":\"Cloud environments support h",
+      "url": "",
+      "snippet": "\"},{\"value\":\"High input/output operations per second (IOPS)\",\"context\":\"Cloud environments support high IOPS ensuring high availability and minimal downtime.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": "\"},{\"value\":\"Pay-as-you-go model\",\"context\":\"Cloud computing cost model allowing businesses to pay o",
+      "url": "",
+      "snippet": "\"},{\"value\":\"Pay-as-you-go model\",\"context\":\"Cloud computing cost model allowing businesses to pay only for resources used, improving cost efficiency.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\"}],\"key_points\":",
+      "url": "",
+      "snippet": "\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\",\"Microsoft Azure supports hybrid cloud deployments and offers services for industries like healthc",
+      "url": "",
+      "snippet": "\",\"Microsoft Azure supports hybrid cloud deployments and offers services for industries like healthcare and finance, enabling digital transformation.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"Google Cloud Platform offers advanced analytics and machine learning services that help businesse",
+      "url": "",
+      "snippet": "\",\"Google Cloud Platform offers advanced analytics and machine learning services that help businesses gain real-time insights and improve decision-making.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"IBM Cloud focuses on enterprise cloud solutions integrating AI and automation to enhance operatio",
+      "url": "",
+      "snippet": "\",\"IBM Cloud focuses on enterprise cloud solutions integrating AI and automation to enhance operational efficiency and innovation.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"A multinational retail company uses cloud computing to scale its e-commerce platform during peak ",
+      "url": "",
+      "snippet": "\",\"A multinational retail company uses cloud computing to scale its e-commerce platform during peak shopping seasons, ensuring high performance and availability.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"A healthcare provider leverages cloud-based data storage and analytics to improve patient care an",
+      "url": "",
+      "snippet": "\",\"A healthcare provider leverages cloud-based data storage and analytics to improve patient care and comply with data security regulations.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": "\"]}",
+      "url": "",
+      "snippet": "\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

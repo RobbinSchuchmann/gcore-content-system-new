@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T14:25:50.233425",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Securitybrief",
+      "url": "https://securitybrief.com.au/story/ai-cloud-workloads-face-greater-critical-security-risks",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Cyberriskleaders",
+      "url": "https://cyberriskleaders.com/ai-workloads-driving-new-cloud-security-challenges/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Ttms",
+      "url": "https://ttms.com/ai-security-risks-explained-what-you-need-to-know-in-2025/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Sentinelone",
+      "url": "https://www.sentinelone.com/cybersecurity-101/data-and-ai/ai-security-risks/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Reports",
+      "url": "https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2025.pdf",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}

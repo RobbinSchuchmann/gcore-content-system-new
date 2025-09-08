@@ -1,0 +1,258 @@
+{
+  "timestamp": "2025-08-28T11:36:17.715101",
+  "total_sources": 28,
+  "sources": [
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Msspalert",
+      "url": "https://www.msspalert.com/native/crafting-a-robust-cloud-security-strategy-in-2024",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Orca",
+      "url": "https://orca.security/resources/blog/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Zscaler",
+      "url": "https://www.zscaler.com/resources/security-terms-glossary/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It operates under a shared responsibility model where cloud service providers secure the cloud i",
+      "url": "",
+      "snippet": ".\",\"It operates under a shared responsibility model where cloud service providers secure the cloud infrastructure, while customers are responsible for securing their data and applications within the cloud",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevent",
+      "url": "",
+      "snippet": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevention (DLP), Security Information and Event Management (SIEM), encryption, and continuous monitoring",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"IAM controls user authentication, authorization, and access policies to prevent unauthorized acc",
+      "url": "",
+      "snippet": ".\",\"IAM controls user authentication, authorization, and access policies to prevent unauthorized access to cloud resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"DLP tools monitor, classify, and protect sensitive data in motion, at rest, and in use, helping ",
+      "url": "",
+      "snippet": ".\",\"DLP tools monitor, classify, and protect sensitive data in motion, at rest, and in use, helping organizations comply with regulations like GDPR",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Encryption protects data confidentiality by converting data into unreadable formats both in tran",
+      "url": "",
+      "snippet": ".\",\"Encryption protects data confidentiality by converting data into unreadable formats both in transit and at rest, typically using strong algorithms like AES-256",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud security requires continuous monitoring and real-time threat detection using tools such as",
+      "url": "",
+      "snippet": ".\",\"Cloud security requires continuous monitoring and real-time threat detection using tools such as Cloud Security Posture Management (CSPM) and AI-driven analytics to identify misconfigurations and vulnerabilities",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Misconfiguration is a major cloud security challenge, with 98.6% of organizations having critica",
+      "url": "",
+      "snippet": ".\",\"Misconfiguration is a major cloud security challenge, with 98.6% of organizations having critical misconfigurations that expose data and infrastructure to risk",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Other main challenges include insider threats, data breaches, compliance with regulatory standar",
+      "url": "",
+      "snippet": ".\",\"Other main challenges include insider threats, data breaches, compliance with regulatory standards, and securing hybrid and multi-cloud environments",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security technologies and tools include firewalls, multifactor authentication (MFA), segme",
+      "url": "",
+      "snippet": ".\",\"Cloud security technologies and tools include firewalls, multifactor authentication (MFA), segmentation, configuration management, incident response plans, and compliance monitoring",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security benefits include enhanced data protection, regulatory compliance, improved access",
+      "url": "",
+      "snippet": ".\",\"Cloud security benefits include enhanced data protection, regulatory compliance, improved access control, scalability, and resilience against cyberattacks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Performance metrics for cloud security often focus on incident detection time, mean time to resp",
+      "url": "",
+      "snippet": ".\",\"Performance metrics for cloud security often focus on incident detection time, mean time to respond (MTTR), number of security incidents, and compliance audit results",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Scalability considerations involve ensuring security tools and policies adapt dynamically to clo",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations involve ensuring security tools and policies adapt dynamically to cloud resource changes and growing workloads without performance degradation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Best practices include enforcing least privilege access, regular security audits, automated misc",
+      "url": "",
+      "snippet": ".\",\"Best practices include enforcing least privilege access, regular security audits, automated misconfiguration detection, encryption key management, and employee security training",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security is evolving with advanced features like zero trust architectures, AI-driven threa",
+      "url": "",
+      "snippet": ".\",\"Cloud security is evolving with advanced features like zero trust architectures, AI-driven threat detection, and integrated compliance frameworks to address increasingly sophisticated threats",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"AES-256\",\"context\":\"Commonly used strong encryption algorithm for protecting sensitive",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"AES-256\",\"context\":\"Commonly used strong encryption algorithm for protecting sensitive data in cloud security",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Shared responsibility model\",\"context\":\"Framework defining security duties split betwe",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Shared responsibility model\",\"context\":\"Framework defining security duties split between cloud providers and customers in cloud security",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify sensit",
+      "url": "",
+      "snippet": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify sensitive cloud data, ensuring compliance with GDPR and preventing unauthorized data exposure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Security Information and Event Management (SIEM) systems are deployed in cloud environments to c",
+      "url": "",
+      "snippet": ".\",\"Security Information and Event Management (SIEM) systems are deployed in cloud environments to collect and analyze logs for real-time threat detection and incident response",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud Security Posture Management (CSPM) tools help companies detect and remediate misconfigurat",
+      "url": "",
+      "snippet": ".\",\"Cloud Security Posture Management (CSPM) tools help companies detect and remediate misconfigurations that could lead to data breaches, addressing the 98.6% misconfiguration risk statistic",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Companies implement multifactor authentication (MFA) and role-based access control (RBAC) to enf",
+      "url": "",
+      "snippet": ".\",\"Companies implement multifactor authentication (MFA) and role-based access control (RBAC) to enforce least privilege access and reduce insider threat risks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "timestamp": "2025-09-06T07:55:31.633577",
+  "total_sources": 18,
+  "sources": [
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Cloud_computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nvlpubs",
+      "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Nutanix",
+      "url": "https://www.nutanix.com/info/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Azure",
+      "url": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It is characterized by five essential characteristics defined by NIST: on-demand self-service, b",
+      "url": "",
+      "snippet": ".\",\"It is characterized by five essential characteristics defined by NIST: on-demand self-service, broad network access, resource pooling, rapid elasticity, and measured service",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Cloud computing enables users to access computing resources over the internet without managing t",
+      "url": "",
+      "snippet": ".\",\"Cloud computing enables users to access computing resources over the internet without managing the underlying physical infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"The main types of cloud computing services are Infrastructure as a Service (IaaS), Platform as a",
+      "url": "",
+      "snippet": ".\",\"The main types of cloud computing services are Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud deployment models include public cloud, private cloud, hybrid cloud, and community cloud",
+      "url": "",
+      "snippet": ".\",\"Cloud deployment models include public cloud, private cloud, hybrid cloud, and community cloud",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud computing resources are pooled to serve multiple consumers using a multi-tenant model, wit",
+      "url": "",
+      "snippet": ".\",\"Cloud computing resources are pooled to serve multiple consumers using a multi-tenant model, with resources dynamically assigned and reassigned according to demand",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Rapid elasticity allows cloud resources to be elastically provisioned and released to scale rapi",
+      "url": "",
+      "snippet": ".\",\"Rapid elasticity allows cloud resources to be elastically provisioned and released to scale rapidly outward and inward commensurate with demand, often appearing unlimited to the consumer",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Measured service means cloud systems automatically control and optimize resource use by leveragi",
+      "url": "",
+      "snippet": ".\",\"Measured service means cloud systems automatically control and optimize resource use by leveraging metering capabilities, providing transparency for both provider and consumer",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Cloud computing supports broad network access, allowing access through standard mechanisms from ",
+      "url": "",
+      "snippet": ".\",\"Cloud computing supports broad network access, allowing access through standard mechanisms from heterogeneous thin or thick client platforms such as mobile phones, tablets, laptops, and workstations",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Cloud computing works by users accessing cloud applications via the internet (front end), which ",
+      "url": "",
+      "snippet": ".\",\"Cloud computing works by users accessing cloud applications via the internet (front end), which communicate with backend databases, servers, and computers managed by the cloud provider",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Performance metrics in cloud computing include resource utilization, latency, throughput, availa",
+      "url": "",
+      "snippet": ".\",\"Performance metrics in cloud computing include resource utilization, latency, throughput, availability, and scalability",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud computing supports a pay-per-use pricing model, helping organizations lower operating cost",
+      "url": "",
+      "snippet": ".\",\"Cloud computing supports a pay-per-use pricing model, helping organizations lower operating costs and scale resources as needed",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud computing enables remote work, omnichannel customer engagement, and supports advanced tech",
+      "url": "",
+      "snippet": ".\",\"Cloud computing enables remote work, omnichannel customer engagement, and supports advanced technologies such as AI and quantum computing",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

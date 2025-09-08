@@ -1,0 +1,294 @@
+{
+  "timestamp": "2025-08-21T14:30:40.229767",
+  "total_sources": 32,
+  "sources": [
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Cloud_storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/what-is-cloud-storage-types-use-cases-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Aws",
+      "url": "https://aws.amazon.com/what-is/cloud-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Hivenet",
+      "url": "https://www.hivenet.com/post/complete-guide-to-cloud-storage-for-pc-everything-you-need-to-know-in-2025",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It provides a scalable, elastic alternative to traditional on-premises storage, allowing users t",
+      "url": "",
+      "snippet": ".\",\"It provides a scalable, elastic alternative to traditional on-premises storage, allowing users to pay only for the capacity they use without overprovisioning",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud storage infrastructure is highly virtualized, fault tolerant, and durable, often using dat",
+      "url": "",
+      "snippet": ".\",\"Cloud storage infrastructure is highly virtualized, fault tolerant, and durable, often using data redundancy and versioning to ensure data integrity",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"There are three main types of cloud storage: object storage, file storage, and block storage, ea",
+      "url": "",
+      "snippet": ".\",\"There are three main types of cloud storage: object storage, file storage, and block storage, each suited for different application needs",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Object storage is used for unstructured data and is highly scalable (e.g., Amazon S3, Azure Blob",
+      "url": "",
+      "snippet": ".\",\"Object storage is used for unstructured data and is highly scalable (e.g., Amazon S3, Azure Blob Storage)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"File storage provides shared file systems accessible via protocols like NFS or SMB, suitable for",
+      "url": "",
+      "snippet": ".\",\"File storage provides shared file systems accessible via protocols like NFS or SMB, suitable for content repositories and development environments (e.g., Amazon EFS)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Block storage offers low-latency, dedicated storage volumes for applications like databases, com",
+      "url": "",
+      "snippet": ".\",\"Block storage offers low-latency, dedicated storage volumes for applications like databases, comparable to SAN or DAS",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud storage deployment models include public cloud, private cloud, hybrid cloud, and multi-clo",
+      "url": "",
+      "snippet": ".\",\"Cloud storage deployment models include public cloud, private cloud, hybrid cloud, and multi-cloud, each offering different control, security, and flexibility levels",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Public cloud storage is managed by third-party providers and accessible over the internet, ideal",
+      "url": "",
+      "snippet": ".\",\"Public cloud storage is managed by third-party providers and accessible over the internet, ideal for cost-effective scalability",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Private cloud storage offers dedicated infrastructure for a single organization, enhancing contr",
+      "url": "",
+      "snippet": ".\",\"Private cloud storage offers dedicated infrastructure for a single organization, enhancing control and security, often used for sensitive or regulated data",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Hybrid cloud combines public and private clouds, enabling flexible data mobility and cost optimi",
+      "url": "",
+      "snippet": ".\",\"Hybrid cloud combines public and private clouds, enabling flexible data mobility and cost optimization",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Multi-cloud uses multiple cloud providers to reduce vendor lock-in and improve redundancy but re",
+      "url": "",
+      "snippet": ".\",\"Multi-cloud uses multiple cloud providers to reduce vendor lock-in and improve redundancy but requires complex management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud storage providers maintain large data centers globally, managing capacity, security, and d",
+      "url": "",
+      "snippet": ".\",\"Cloud storage providers maintain large data centers globally, managing capacity, security, and durability to ensure high availability",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Users typically access cloud storage via web portals, APIs, or desktop/mobile apps that sync fil",
+      "url": "",
+      "snippet": ".\",\"Users typically access cloud storage via web portals, APIs, or desktop/mobile apps that sync files automatically across devices",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Best practices include securing data with encryption, managing access controls, monitoring perfo",
+      "url": "",
+      "snippet": ".\",\"Best practices include securing data with encryption, managing access controls, monitoring performance metrics, and planning for scalability to handle growing data volumes",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Typical cloud storage latency ranges from single-digit milliseconds to tens of millise",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Typical cloud storage latency ranges from single-digit milliseconds to tens of milliseconds depending on storage type and network conditions\",\"context\":\"Performance metric relevant for applications requiring low latency, such as databases using block storage",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Public cloud storage pricing can start as low as $0.023 per GB per month for standard ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Public cloud storage pricing can start as low as $0.023 per GB per month for standard object storage\",\"context\":\"Shows cost-effectiveness and pay-as-you-go pricing models offered by providers like AWS, Google Cloud, and Azure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Hybrid cloud deployments can reduce data transfer costs by up to 30% compared to pure ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Hybrid cloud deployments can reduce data transfer costs by up to 30% compared to pure public cloud usage\",\"context\":\"Demonstrates cost optimization benefits of hybrid cloud storage models",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Microsoft Azure Blob Storage: Provides massively scalable object storage for unstructured data w",
+      "url": "",
+      "snippet": ".\",\"Microsoft Azure Blob Storage: Provides massively scalable object storage for unstructured data with integration into Azure cloud services",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Google Cloud Storage: Offers unified object storage with multi-regional availability and strong ",
+      "url": "",
+      "snippet": ".\",\"Google Cloud Storage: Offers unified object storage with multi-regional availability and strong security features",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Amazon Elastic File System (EFS): A scalable file storage service for use with AWS cloud service",
+      "url": "",
+      "snippet": ".\",\"Amazon Elastic File System (EFS): A scalable file storage service for use with AWS cloud services and on-premises resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Amazon Elastic Block Store (EBS): Provides persistent block storage volumes for use with Amazon ",
+      "url": "",
+      "snippet": ".\",\"Amazon Elastic Block Store (EBS): Provides persistent block storage volumes for use with Amazon EC2 instances, suitable for databases and transactional applications",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Dropbox and Google Drive: Popular consumer and business cloud storage services that sync files a",
+      "url": "",
+      "snippet": ".\",\"Dropbox and Google Drive: Popular consumer and business cloud storage services that sync files across devices and provide collaboration tools",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Hybrid cloud example: An enterprise using private cloud storage for sensitive data and public cl",
+      "url": "",
+      "snippet": ".\",\"Hybrid cloud example: An enterprise using private cloud storage for sensitive data and public cloud storage for less critical workloads to optimize costs and compliance",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Multi-cloud example: A company using AWS for primary storage and Google Cloud for disaster recov",
+      "url": "",
+      "snippet": ".\",\"Multi-cloud example: A company using AWS for primary storage and Google Cloud for disaster recovery to enhance redundancy and avoid vendor lock-in",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    }
+  ]
+}

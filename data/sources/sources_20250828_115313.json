@@ -1,0 +1,258 @@
+{
+  "timestamp": "2025-08-28T11:53:13.941351",
+  "total_sources": 28,
+  "sources": [
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Msspalert",
+      "url": "https://www.msspalert.com/native/crafting-a-robust-cloud-security-strategy-in-2024",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Orca",
+      "url": "https://orca.security/resources/blog/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Zscaler",
+      "url": "https://www.zscaler.com/resources/security-terms-glossary/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It operates under a shared responsibility model where cloud service providers secure the cloud i",
+      "url": "",
+      "snippet": ".\",\"It operates under a shared responsibility model where cloud service providers secure the cloud infrastructure, while customers are responsible for securing their data and applications within the cloud",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevent",
+      "url": "",
+      "snippet": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevention (DLP), Security Information and Event Management (SIEM), encryption, and continuous monitoring",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"IAM controls user authentication, authorization, and access permissions to prevent unauthorized ",
+      "url": "",
+      "snippet": ".\",\"IAM controls user authentication, authorization, and access permissions to prevent unauthorized access to cloud resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"DLP technologies monitor, classify, and protect sensitive data in motion, at rest, and in use, h",
+      "url": "",
+      "snippet": ".\",\"DLP technologies monitor, classify, and protect sensitive data in motion, at rest, and in use, helping organizations comply with regulations like GDPR",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Encryption protects data confidentiality by converting data into unreadable formats both in tran",
+      "url": "",
+      "snippet": ".\",\"Encryption protects data confidentiality by converting data into unreadable formats both in transit and at rest, commonly using strong algorithms like AES-256",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud security challenges include misconfigurations, excessive permissions, insider threats, dat",
+      "url": "",
+      "snippet": ".\",\"Cloud security challenges include misconfigurations, excessive permissions, insider threats, data breaches, and compliance with evolving regulations",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Misconfiguration is a critical risk, with 98.6% of organizations having cloud misconfigurations ",
+      "url": "",
+      "snippet": ".\",\"Misconfiguration is a critical risk, with 98.6% of organizations having cloud misconfigurations that expose data and infrastructure to threats",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security technologies and tools include firewalls, multifactor authentication (MFA), cloud",
+      "url": "",
+      "snippet": ".\",\"Cloud security technologies and tools include firewalls, multifactor authentication (MFA), cloud security posture management (CSPM), configuration management, and AI-driven threat detection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Performance metrics for cloud security involve monitoring incident response times, detection rat",
+      "url": "",
+      "snippet": ".\",\"Performance metrics for cloud security involve monitoring incident response times, detection rates of threats, and system uptime to ensure availability and resilience",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Scalability considerations require cloud security solutions to adapt dynamically to changing wor",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations require cloud security solutions to adapt dynamically to changing workloads and user demands without compromising protection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Best practices include enforcing least privilege access, continuous monitoring, regular security",
+      "url": "",
+      "snippet": ".\",\"Best practices include enforcing least privilege access, continuous monitoring, regular security audits, incident response planning, and employee training",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security protects resources individually rather than relying on perimeter defenses, enabli",
+      "url": "",
+      "snippet": ".\",\"Cloud security protects resources individually rather than relying on perimeter defenses, enabling granular control over data and applications",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"The evolution of cloud security has progressed from basic access control to sophisticated real-t",
+      "url": "",
+      "snippet": ".\",\"The evolution of cloud security has progressed from basic access control to sophisticated real-time monitoring and automated incident response systems",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security supports regulatory compliance, data governance, disaster recovery, and privacy c",
+      "url": "",
+      "snippet": ".\",\"Cloud security supports regulatory compliance, data governance, disaster recovery, and privacy controls essential for modern cloud environments",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"},{\"value\":\"AES-256\",\"context\":\"Commonly used encryption standard for protecting sensitive data in",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"AES-256\",\"context\":\"Commonly used encryption standard for protecting sensitive data in cloud security",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Shared responsibility model\",\"context\":\"Framework defining security responsibilities s",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Shared responsibility model\",\"context\":\"Framework defining security responsibilities split between cloud providers and customers",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify regula",
+      "url": "",
+      "snippet": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify regulated data in cloud storage, ensuring compliance with GDPR and other regulations",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Security Information and Event Management (SIEM) systems are deployed to collect and analyze log",
+      "url": "",
+      "snippet": ".\",\"Security Information and Event Management (SIEM) systems are deployed to collect and analyze logs from cloud resources, enabling real-time threat detection and incident response",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud Security Posture Management (CSPM) tools detect and remediate misconfigurations in hybrid ",
+      "url": "",
+      "snippet": ".\",\"Cloud Security Posture Management (CSPM) tools detect and remediate misconfigurations in hybrid cloud environments, reducing the risk of data breaches",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Companies implement multifactor authentication (MFA) and role-based access control (RBAC) to enf",
+      "url": "",
+      "snippet": ".\",\"Companies implement multifactor authentication (MFA) and role-based access control (RBAC) to enforce least privilege and prevent unauthorized access to cloud applications and data",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

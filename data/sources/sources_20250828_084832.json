@@ -1,0 +1,231 @@
+{
+  "timestamp": "2025-08-28T08:48:32.005203",
+  "total_sources": 25,
+  "sources": [
+    {
+      "title": "Webasha",
+      "url": "https://www.webasha.com/blog/what-is-cloud-computing-and-why-is-it-important-the-detailed-guide",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Cloud_computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Nvlpubs",
+      "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Nutanix",
+      "url": "https://www.nutanix.com/info/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Azure",
+      "url": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It allows businesses to pay only for the resources they use, providing cost efficiency and flexi",
+      "url": "",
+      "snippet": ".\",\"It allows businesses to pay only for the resources they use, providing cost efficiency and flexibility",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud computing works through large data centers managed by providers who host virtualized resou",
+      "url": "",
+      "snippet": ".\",\"Cloud computing works through large data centers managed by providers who host virtualized resources accessible via web portals or APIs, enabling rapid scaling up or down based on demand",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"The National Institute of Standards and Technology (NIST) defines cloud computing with five esse",
+      "url": "",
+      "snippet": ".\",\"The National Institute of Standards and Technology (NIST) defines cloud computing with five essential characteristics: on-demand self-service, broad network access, resource pooling, rapid elasticity, and measured service",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"There are three main types of cloud computing services (service models): Infrastructure as a Ser",
+      "url": "",
+      "snippet": ".\",\"There are three main types of cloud computing services (service models): Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud deployment models include Public Cloud, Private Cloud, Hybrid Cloud, and Community Cloud, ",
+      "url": "",
+      "snippet": ".\",\"Cloud deployment models include Public Cloud, Private Cloud, Hybrid Cloud, and Community Cloud, each differing in ownership, access, and management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Resource pooling means providers serve multiple consumers with dynamically assigned physical and",
+      "url": "",
+      "snippet": ".\",\"Resource pooling means providers serve multiple consumers with dynamically assigned physical and virtual resources, often without consumers knowing the exact resource location",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Rapid elasticity allows resources to be elastically provisioned and released automatically to sc",
+      "url": "",
+      "snippet": ".\",\"Rapid elasticity allows resources to be elastically provisioned and released automatically to scale with demand, often appearing unlimited to consumers",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Measured service enables automatic control and optimization of resource use through metering, pr",
+      "url": "",
+      "snippet": ".\",\"Measured service enables automatic control and optimization of resource use through metering, providing transparency for both providers and consumers",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud computing supports digital transformation across industries such as healthcare, finance, e",
+      "url": "",
+      "snippet": ".\",\"Cloud computing supports digital transformation across industries such as healthcare, finance, education, and manufacturing by providing scalable, secure, and flexible IT infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Performance metrics in cloud computing include scalability, availability, latency, throughput, a",
+      "url": "",
+      "snippet": ".\",\"Performance metrics in cloud computing include scalability, availability, latency, throughput, and resource utilization efficiency, which are critical for service quality and cost management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Scalability considerations involve the ability to rapidly provision and release resources to mee",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations involve the ability to rapidly provision and release resources to meet fluctuating workloads without service disruption",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Best practices in cloud computing include using multi-region deployments for high availability, ",
+      "url": "",
+      "snippet": ".\",\"Best practices in cloud computing include using multi-region deployments for high availability, implementing robust security measures, monitoring resource usage, and optimizing costs through usage-based billing",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud computing platforms like Amazon Web Services (AWS), Microsoft Azure, Google Cloud, and Ora",
+      "url": "",
+      "snippet": ".\",\"Cloud computing platforms like Amazon Web Services (AWS), Microsoft Azure, Google Cloud, and Oracle Cloud dominate the market and provide comprehensive cloud services and tools",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud computing enables access from heterogeneous devices (mobile phones, tablets, laptops) thro",
+      "url": "",
+      "snippet": ".\",\"Cloud computing enables access from heterogeneous devices (mobile phones, tablets, laptops) through standard network mechanisms, supporting broad network access",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cloud market size projected to exceed $900 billion by 2025\",\"context\":\"Reflects rapid ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cloud market size projected to exceed $900 billion by 2025\",\"context\":\"Reflects rapid growth and economic impact of cloud computing globally",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\"},{\"value\":\"AWS holds approximately 33% market share in the global cloud infrastructure market in ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"AWS holds approximately 33% market share in the global cloud infrastructure market in 2025\",\"context\":\"Shows AWS as the leading cloud service provider by market share",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\"},{\"value\":\"Typical cloud service availability SLA ranges from 99.9% to 99.999% uptime\",\"context\":",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Typical cloud service availability SLA ranges from 99.9% to 99.999% uptime\",\"context\":\"Represents reliability and performance guarantees offered by cloud providers",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cloud elasticity can scale resources within seconds to minutes depending on provider a",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cloud elasticity can scale resources within seconds to minutes depending on provider and service\",\"context\":\"Demonstrates rapid elasticity capability critical for handling dynamic workloads",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    }
+  ]
+}

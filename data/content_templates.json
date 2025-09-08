@@ -1,0 +1,189 @@
+{
+  "templates": {
+    "cloud_storage_standard": {
+      "name": "Cloud Storage (Standard Test Template)",
+      "description": "Standard template for cloud storage content testing",
+      "primary_keyword": "cloud storage",
+      "introduction": "Cloud storage is a technology service that lets you save digital files on remote servers accessed through the internet instead of your local device.",
+      "headings": [
+        {
+          "text": "What is cloud storage?",
+          "level": "H2",
+          "function": "generate_definition",
+          "notes": "Definition pattern - exact answer"
+        },
+        {
+          "text": "How does cloud storage work?",
+          "level": "H2",
+          "function": "generate_how",
+          "notes": "How process pattern - mechanism explanation"
+        },
+        {
+          "text": "What are the main types of cloud storage?",
+          "level": "H2",
+          "function": "generate_listicle",
+          "notes": "Listicle pattern - bulleted list"
+        },
+        {
+          "text": "What are the different cloud storage deployment models?",
+          "level": "H2",
+          "function": "generate_listicle",
+          "notes": "Listicle pattern - deployment options"
+        },
+        {
+          "text": "What are the key benefits of cloud storage?",
+          "level": "H2",
+          "function": "generate_listicle",
+          "notes": "Listicle pattern - benefits list"
+        },
+        {
+          "text": "What are common cloud storage use cases?",
+          "level": "H2",
+          "function": "generate_listicle",
+          "notes": "Listicle pattern - use cases"
+        },
+        {
+          "text": "How secure is cloud storage?",
+          "level": "H2",
+          "function": "generate_how_stats_answer",
+          "notes": "How with statistics - security metrics"
+        },
+        {
+          "text": "How to choose the right cloud storage solution?",
+          "level": "H2",
+          "function": "generate_how_list",
+          "notes": "How-to pattern - step by step guide"
+        },
+        {
+          "text": "Gcore cloud storage solutions",
+          "level": "H3",
+          "function": "generate_gcore_service",
+          "notes": "Gcore service section - educational with natural integration",
+          "gcore_product": "edge_cloud",
+          "gcore_features": ["Distributed storage", "High availability", "Global reach"]
+        }
+      ],
+      "settings": {
+        "include_faq": false,
+        "auto_generate_intro": true,
+        "target_word_count": 2000
+      }
+    },
+    "cdn_comprehensive": {
+      "name": "CDN Comprehensive Guide",
+      "description": "Full CDN content structure",
+      "primary_keyword": "CDN",
+      "headings": [
+        {
+          "text": "What is a CDN?",
+          "level": "H2",
+          "function": "generate_definition"
+        },
+        {
+          "text": "How does a CDN work?",
+          "level": "H2",
+          "function": "generate_how"
+        },
+        {
+          "text": "Benefits of using a CDN",
+          "level": "H2",
+          "function": "generate_listicle"
+        },
+        {
+          "text": "Types of CDN services",
+          "level": "H2",
+          "function": "generate_listicle"
+        },
+        {
+          "text": "Is CDN necessary for all websites?",
+          "level": "H2",
+          "function": "generate_yes_no_answer"
+        },
+        {
+          "text": "How to implement CDN caching?",
+          "level": "H2",
+          "function": "generate_how_list"
+        },
+        {
+          "text": "CDN performance metrics",
+          "level": "H2",
+          "function": "generate_how_stats_answer"
+        },
+        {
+          "text": "Gcore CDN solutions",
+          "level": "H3",
+          "function": "generate_gcore_service",
+          "gcore_product": "cdn",
+          "gcore_features": ["180+ PoPs", "30ms latency", "DDoS protection"]
+        }
+      ]
+    },
+    "edge_computing_guide": {
+      "name": "Edge Computing Guide",
+      "description": "Edge computing educational content",
+      "primary_keyword": "edge computing",
+      "headings": [
+        {
+          "text": "What is edge computing?",
+          "level": "H2",
+          "function": "generate_definition"
+        },
+        {
+          "text": "How does edge computing differ from cloud computing?",
+          "level": "H2",
+          "function": "generate_how"
+        },
+        {
+          "text": "Key benefits of edge computing",
+          "level": "H2",
+          "function": "generate_listicle"
+        },
+        {
+          "text": "Edge computing use cases",
+          "level": "H2",
+          "function": "generate_listicle"
+        },
+        {
+          "text": "How to implement edge computing?",
+          "level": "H2",
+          "function": "generate_how_list"
+        },
+        {
+          "text": "Is edge computing secure?",
+          "level": "H2",
+          "function": "generate_yes_no_answer"
+        },
+        {
+          "text": "Edge computing with Gcore",
+          "level": "H3",
+          "function": "generate_gcore_service",
+          "gcore_product": "edge_cloud",
+          "gcore_features": ["GPU instances", "Low latency", "Global infrastructure"]
+        }
+      ]
+    },
+    "simple_test": {
+      "name": "Simple Test (3 headings)",
+      "description": "Quick test with minimal structure",
+      "primary_keyword": "test topic",
+      "headings": [
+        {
+          "text": "What is the topic?",
+          "level": "H2",
+          "function": "generate_definition"
+        },
+        {
+          "text": "How does it work?",
+          "level": "H2",
+          "function": "generate_how"
+        },
+        {
+          "text": "What are the benefits?",
+          "level": "H2",
+          "function": "generate_listicle"
+        }
+      ]
+    }
+  },
+  "default_template": "cloud_storage_standard"
+}

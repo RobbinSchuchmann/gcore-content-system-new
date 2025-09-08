@@ -1,0 +1,429 @@
+{
+  "primary_keyword": "cloud computing",
+  "generated_date": "2025-08-28T09:24:22.890006",
+  "quality_scores": {
+    "Introduction": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.89,
+            "semantic_keywords": 4
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 28.0,
+          "complex_word_percentage": 27.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "introduction"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Shorten sentences for better readability"
+      ]
+    },
+    "What is cloud computing?": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 100,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.65,
+            "semantic_keywords": 4
+          },
+          "issues": []
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 24.2,
+          "complex_word_percentage": 36.4,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_definition"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Shorten sentences for better readability"
+      ]
+    },
+    "What are the main types of cloud computing services?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.79,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.9,
+          "complex_word_percentage": 32.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the different cloud deployment models?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "optimize"
+          ],
+          "positions": {
+            "optimize": [
+              [
+                1425,
+                1433
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'best' - Use 'leading' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.2,
+          "complex_word_percentage": 34.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: optimize",
+        "Increase keyword usage in content"
+      ]
+    },
+    "How does cloud computing work?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.49,
+            "semantic_keywords": 4
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.7,
+          "complex_word_percentage": 28.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the key benefits of cloud computing?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 2,
+          "words": [
+            "cutting-edge",
+            "leverage"
+          ],
+          "positions": {
+            "cutting-edge": [
+              [
+                1576,
+                1588
+              ]
+            ],
+            "leverage": [
+              [
+                1694,
+                1702
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'cutting-edge' - Use 'modern' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.8,
+          "complex_word_percentage": 40.6,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 2 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: cutting-edge, leverage",
+        "Increase keyword usage in content"
+      ]
+    },
+    "Gcore Edge Cloud for modern businesses": {
+      "overall_score": 89,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "spectrum"
+          ],
+          "positions": {
+            "spectrum": [
+              [
+                285,
+                293
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 89,
+          "compliant": true,
+          "issues": [
+            "3 sentences exceed max length",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 4
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 19.1,
+          "complex_word_percentage": 35.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_gcore_service_organic"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: spectrum",
+        "Increase keyword usage in content"
+      ]
+    }
+  },
+  "word_count": 1322
+}

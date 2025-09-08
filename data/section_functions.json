@@ -1,0 +1,313 @@
+{
+  "functions": {
+    "generate_intro_first_paragraph": {
+      "name": "Introduction (First Paragraph)",
+      "description": "Definition, brief answer to title queries",
+      "article_methodology": "Direct definition + spot paragraphs",
+      "prompt_template": "Write the opening paragraph for the article: {heading}\n\nSTRICT REQUIREMENTS:\n1. First sentence MUST be a direct definition/answer that repeats the main premise from the heading\n2. If the heading is a question, start by restating it as a statement\n3. Follow with 3-5 sentences of essential context and expansion\n4. Introduction should be 100-150 words total\n5. Provide comprehensive overview that sets up the rest of the article\n6. NO company mentions or promotional language\n7. Avoid these words: delve, moreover, furthermore, notably, essentially, perhaps, maybe, probably\n8. DO NOT add any trailing periods, dots, or punctuation after the paragraph ends\n9. End naturally with the last sentence - no extra formatting or characters\n\nExample pattern:\n- Heading: \"What is CDN caching?\"\n- Opening: \"CDN caching is the process of storing copies of website content on geographically distributed servers called edge servers. These servers are strategically positioned closer to end users than origin servers, dramatically reducing the distance data must travel. When a user requests content, the CDN automatically routes the request to the nearest edge server rather than the origin. This architecture enables faster content delivery, reduces bandwidth costs, and improves website performance globally. Modern CDN networks can achieve latencies as low as 30ms through sophisticated caching algorithms and extensive global infrastructure.\"\n\nWrite ONLY the introduction paragraph content - nothing else:",
+      "requirements": [
+        "Direct definition/answer in first sentence",
+        "Repeat main premise from heading",
+        "2-3 sentences of expansion",
+        "No uncertainty words",
+        "100-150 words for comprehensive introduction"
+      ]
+    },
+    "generate_definition": {
+      "name": "Definition",
+      "description": "Exact definitive answer + expansion",
+      "article_methodology": "Exact definitive answer + Expansion of evidence",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'What + singular' questions:\n1. First sentence MUST start with '[Subject] is...' providing exact definition\n2. Repeat the main premise from the question in your answer\n3. Follow with 2-3 sentences of expansion and evidence\n4. Keep in paragraph form (no lists)\n5. Total 3-4 sentences for comprehensive answer\n6. NO company or product mentions\n\nExample:\nQ: \"What is CDN caching?\"\nA: \"CDN caching is the process of storing copies of website content on geographically distributed servers called edge servers, which are closer to end users than the origin server. This allows faster content delivery by serving cached content directly from these edge servers rather than fetching it from the origin server every time. Modern CDN infrastructure can deliver content with latencies as low as 30ms through strategically placed points of presence globally.\"\n\nAvoid: delve, moreover, furthermore, notably, essentially, perhaps, maybe\nAvoid: Any company names or promotional language\n\nWrite the definition now:",
+      "requirements": [
+        "Start with '[Subject] is...'",
+        "Exact definitive answer",
+        "2-3 sentences total for snippet",
+        "Evidence and expansion",
+        "Paragraph format only"
+      ]
+    },
+    "generate_listicle": {
+      "name": "List/Listicle",
+      "description": "List definition + Listing",
+      "article_methodology": "List definition + Listing",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'What + plural' questions:\n1. First sentence: Define what the items refer to (e.g., \"Signs of X refer to...\")\n2. Second sentence: \"The [items] are listed below.\"\n3. Then provide bulleted list with bullet points (•)\n4. Format: • **Term**: Explanation (2-3 sentences)\n5. Include 5-10 items\n6. NO Gcore mentions in the list items\n\nEXACT FORMAT:\n• **Term**: Main explanation sentence. Supporting detail sentence. [Optional third sentence.]\n\nIMPORTANT: Only capitalize the FIRST letter of each bolded term (not every word)\n\nExample:\nQ: \"What are the benefits of CDN?\"\nA: \"The benefits of CDN refer to the advantages organizations gain from using content delivery networks. The benefits of CDN are listed below.\n\n• **Faster load times**: CDN servers cache content closer to users, reducing the distance data travels. This proximity can cut page load times by 50-70%.\n\n• **Reduced bandwidth costs**: By caching content at edge locations, CDNs minimize data transfer from origin servers. This reduction saves significant bandwidth expenses.\n\n• **Resource optimization**: Multiple websites can share CDN infrastructure, making it cost-effective for smaller sites. This shared model reduces individual infrastructure investments.\"\n\nRULES:\n- USE bullet points (•) before each term\n- Bold terms with **Term**: (only first letter capitalized)\n- Examples: **Resource optimization** NOT **Resource Optimization**\n- Examples: **Faster response times** NOT **Faster Response Times**\n- NO Gcore/company mentions\n- Each item gets 2-3 sentences maximum\n- Focus on facts and evidence\n\nWrite the list now:",
+      "requirements": [
+        "Start with 'The [items] are listed below.'",
+        "Start with definition sentence",
+        "Format: • **Term**: Explanation",
+        "3-7 items",
+        "Clear definitions"
+      ]
+    },
+    "generate_how": {
+      "name": "How (Process)",
+      "description": "Exact definitive answer + expansion",
+      "article_methodology": "Exact definitive answer + Expansion of evidence",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'How does/do' questions:\n1. First sentence MUST directly answer by repeating the premise\n2. For 'How does X work?' start with '[Subject] works by...'\n3. For 'How do you...?' start with 'You [action] by...'\n4. Explain the mechanism or process clearly\n5. Break down into logical steps in paragraph form\n6. Include technical details and evidence\n7. Write 150-200 words for comprehensive explanation\n8. NO company mentions or promotional content\n\nExample:\nQ: \"How does CDN caching work?\"\nA: \"CDN caching works by storing copies of your website's static content on multiple servers distributed across different geographic locations. When a user requests content, the CDN automatically routes the request to the nearest server (Point of Presence), reducing the distance data travels and improving load times. The cached content is stored based on TTL (Time to Live) values and cache rules you configure. Modern CDN networks ensure content is always served from locations that can achieve sub-30ms latency to end users through strategic global placement.\"\n\nAvoid: delve, moreover, furthermore, notably, essentially, perhaps, maybe\nAvoid: Company names, promotional language\nUse contractions naturally (it's, don't)\nKeep sentences under 30 words\n\nWrite the process explanation now:",
+      "requirements": [
+        "Direct answer repeating premise",
+        "Start with '[Subject] works by...'",
+        "Clear mechanism explanation",
+        "Evidence and technical details",
+        "Paragraph format"
+      ]
+    },
+    "generate_how_list": {
+      "name": "How (List Format)",
+      "description": "Step-by-step instructions",
+      "article_methodology": "Instructions",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'How to' questions:\n1. First sentence MUST repeat the premise: 'You [action] by [brief overview].'\n2. Then provide numbered steps WITHOUT bullet points inside\n3. Each step should be ONE clear action with specific details\n4. Use transition words naturally (First, Next, Then, After that, Finally)\n5. Add a brief concluding tip or note after the steps\n\nFORMAT REQUIREMENTS:\n- Opening sentence that states the method\n- Numbered steps (1-8 steps maximum)\n- Each step is a complete sentence/paragraph\n- NO bullet points within numbered steps\n- NO sub-lists inside steps\n- Closing sentence with tip or summary\n\nEXAMPLE OUTPUT:\nQ: \"How to choose the right cloud storage solution?\"\nA: \"You choose the right cloud storage solution by evaluating five key factors: storage needs, performance requirements, security, budget, and integration capabilities.\n\n1. First, assess your current storage needs and projected growth over the next 12-24 months. Calculate your data volume and add a 20-30% buffer for unexpected expansion.\n\n2. Next, identify your performance requirements based on how frequently you'll access the data. Hot storage suits frequently accessed files, while cold storage works for archives.\n\n3. Then, evaluate security and compliance requirements for your industry. Check if you need HIPAA compliance for healthcare data or GDPR for European customers.\n\n4. Compare pricing models between providers, including storage costs per GB and data transfer fees. Reserved capacity often saves 20-30% over pay-as-you-go pricing.\n\n5. Finally, verify integration capabilities with your existing systems. Ensure the solution supports your required APIs and authentication methods.\n\nTest your chosen solution with a pilot project before committing to a full migration to validate performance and costs.\"\n\nRULES:\n- Each step is a self-contained instruction\n- Include specific metrics or examples where helpful\n- Keep steps focused on ONE main action\n- Use active voice and direct language\n- NO nested lists or bullet points\n- Avoid: delve, moreover, furthermore, notably, essentially\n- NO company names unless specifically relevant\n\nWrite the instructions now:",
+      "requirements": [
+        "Start with overview sentence",
+        "5-8 numbered steps maximum",
+        "No bullet points in steps",
+        "One action per step",
+        "Conclude with practical tip"
+      ]
+    },
+    "generate_how_stats_answer": {
+      "name": "How (with Statistics)",
+      "description": "Exact definitive answer + Statistics",
+      "article_methodology": "Exact definitive answer + Statistics",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'How common/often/many' questions:\n1. First sentence MUST include the key statistic answering the question\n2. Repeat the premise from the question\n3. Support with 2-3 additional data points\n4. Explain what the numbers mean in context\n5. Keep in paragraph form\n6. Include Gcore metrics where they add value\n\nExample:\nQ: \"How common is cocaine addiction?\"\nA: \"Cocaine addiction affects approximately 5.5 million people globally, with studies indicating that 15-20% of cocaine users develop addiction within the first year of use. The prevalence is highest among adults aged 18-25, representing 1.4% of this population in developed countries. These statistics show that while not everyone who tries cocaine becomes addicted, the risk is substantial enough to warrant serious concern.\"\n\nAnother Example:\nQ: \"How much faster is CDN delivery?\"\nA: \"CDN delivery is typically 50-70% faster than serving content from a single origin server, reducing page load times from an average of 3 seconds to under 1 second. With Gcore's 180+ PoPs globally, content is delivered with an average latency of just 30ms, compared to 150-300ms for traditional hosting. These improvements translate to 40% better user engagement and 20% higher conversion rates for e-commerce sites.\"\n\nAvoid: delve, moreover, furthermore, notably, essentially\nBe specific with numbers and percentages\n\nWrite the statistical answer now:",
+      "requirements": [
+        "Lead with key statistic",
+        "Answer directly with numbers",
+        "2-3 supporting data points",
+        "Context and significance",
+        "Paragraph format"
+      ]
+    },
+    "generate_yes_no_answer": {
+      "name": "Yes/No Answer",
+      "description": "Yes/No + expansion",
+      "article_methodology": "Yes/No",
+      "prompt_template": "Answer this yes/no question: {heading}\n\nSTRICT PATTERN for Yes/No questions:\n1. MUST start with 'Yes,' or 'No,' (with comma)\n2. Follow immediately with the main point in the same sentence\n3. Provide 3-4 sentences of supporting explanation\n4. Be definitive and avoid hedging\n5. Include evidence or examples\n6. NO company mentions or promotional content\n\nExamples:\nQ: \"Is CDN necessary for all websites?\"\nA: \"No, CDN is not necessary for all websites, particularly small sites with local audiences or minimal traffic. CDNs provide the most value for websites with global audiences, high traffic volumes, or large media files. However, even smaller sites can benefit from CDN's security features and reliability. The decision depends on your specific performance requirements, budget, and user geography.\"\n\nQ: \"Can virtual machines run multiple operating systems?\"\nA: \"Yes, virtual machines can run multiple different operating systems simultaneously on the same physical hardware. Each VM operates in complete isolation with its own OS instance, allowing you to run Windows, Linux, and other systems side by side. This capability makes VMs ideal for testing, development, and running legacy applications. The hypervisor manages resource allocation to ensure each OS gets the CPU, memory, and storage it needs.\"\n\nRules:\n- Never use 'Yes, but' or 'No, but' - be direct\n- Avoid: perhaps, maybe, probably, possibly, might\n- Use contractions naturally (it's, don't, can't)\n- Keep sentences under 30 words\n- NO company names or promotional language\n\nWrite the yes/no answer now:",
+      "requirements": [
+        "Start with 'Yes,' or 'No,'",
+        "Immediate main point",
+        "2-3 supporting sentences",
+        "Definitive and clear",
+        "Evidence-based"
+      ]
+    },
+    "generate_evaluation_bridge": {
+      "name": "Evaluation Criteria Bridge",
+      "description": "Bridge section that naturally leads to CTA",
+      "article_methodology": "Evaluation guide before CTA",
+      "prompt_template": "Write an evaluation criteria section for: {heading}\n\nThis section appears before the CTA to create a natural bridge from educational content to product promotion.\n\nFORMAT: Numbered list with 5-7 evaluation criteria\nEach criterion should be 1-2 sentences explaining what to look for.\n\nEXAMPLE for \"How to choose the right CDN provider\":\n\n\"When evaluating CDN providers, consider these essential factors:\n\n1. **Global coverage**: Look for providers with extensive PoP networks, especially in regions where your users are located. Coverage in emerging markets is increasingly important for global reach.\n\n2. **Performance metrics**: Evaluate average latency, cache hit ratios, and bandwidth capacity. Sub-50ms global latency should be achievable with modern CDN infrastructure.\n\n3. **Pricing model**: Consider both bandwidth costs and any hidden fees like request charges or SSL certificates. Transparent pay-as-you-go pricing without commitments offers the most flexibility.\n\n4. **Security features**: Ensure built-in DDoS protection, WAF capabilities, and SSL/TLS support are included. These should not require separate subscriptions.\n\n5. **Integration ease**: Check for compatibility with your existing stack, availability of APIs, and configuration management tools. Quick deployment and minimal code changes are ideal.\n\n6. **Support and reliability**: Look for 24/7 technical support and strong SLA guarantees. 99.99% uptime should be the minimum standard.\"\n\nRULES:\n- Focus on objective evaluation criteria\n- No company mentions\n- Each point should guide decision-making\n- Use bold for criterion names\n- Keep explanations practical and actionable\n\nWrite the evaluation criteria now:",
+      "requirements": [
+        "5-7 evaluation criteria",
+        "Bold criterion names",
+        "1-2 sentences per criterion",
+        "Objective and educational",
+        "Natural bridge to CTA"
+      ]
+    },
+    "generate_gcore_service_organic": {
+      "name": "Gcore Service CTA (Organic)",
+      "description": "Natural CTA that flows from evaluation criteria",
+      "article_methodology": "Organic service promotion",
+      "prompt_template": "Write an organic CTA section for: {heading}\n\nCONTEXT: This follows an evaluation criteria section about {article_topic}.\nThe reader has just learned what to look for in a solution.\n\nGCORE PRODUCT: {gcore_product}\nENHANCED PRODUCT INFO:\n{gcore_product_info}\n\nSELECTED CTA TEMPLATE (use as inspiration, adapt to context):\n{selected_cta_template}\n\nSTRUCTURE:\n\nParagraph 1 (Natural Connection - 2-3 sentences):\nStart organically: \"Based on these criteria, Gcore's [Service] delivers...\" OR \"These evaluation points highlight why [Service]...\"\nConnect 2-3 specific evaluation criteria to Gcore's capabilities from the enhanced product info.\n\nParagraph 2 (Unique Value & Evidence - 2-3 sentences):\nHighlight what makes Gcore different using specific metrics from enhanced data.\nInclude concrete performance numbers, cost savings, or competitive advantages.\nFocus on solving the specific problem discussed in the article.\n\nParagraph 3 (Soft CTA - 1 sentence):\nNatural invitation: \"Discover how [specific benefit] can [solve problem] at [url]\" OR \"Explore [Service] capabilities at [url]\"\n\nKEY REQUIREMENTS:\n- Use SPECIFIC METRICS from the enhanced product info (not generic claims)\n- Connect directly to evaluation criteria mentioned earlier\n- Maintain educational tone, not sales-heavy\n- Include concrete numbers (latency, cost savings, performance gains)\n- Make the transition feel natural and helpful\n- Focus on reader's specific needs identified in the article\n\nEXAMPLE WITH ENHANCED DATA:\n\"Based on these evaluation criteria, Gcore's CDN excels with 210+ PoPs worldwide and 30ms average latency, addressing the global coverage and performance requirements most organizations prioritize. Our 200+ Tbps network capacity and 85% cache hit ratio ensure reliable content delivery even during traffic spikes.\n\nWhat differentiates Gcore is our free egress traffic and €0/month starter plan, eliminating the hidden costs that often surprise teams with traditional CDN providers. This approach typically reduces total CDN expenses by 40-50% while delivering enterprise-grade DDoS protection and SSL certificates at no additional charge.\n\nExplore how Gcore CDN can accelerate your content delivery at gcore.com/cdn.\"\n\nWrite the organic CTA now:",
+      "requirements": [
+        "Connect to evaluation criteria",
+        "Natural, educational tone",
+        "Specific metrics and benefits",
+        "Problem-solution focus",
+        "Soft call-to-action"
+      ]
+    },
+    "generate_gcore_service": {
+      "name": "Gcore Service CTA (Direct)",
+      "description": "Direct CTA for standalone use",
+      "article_methodology": "Direct service promotion",
+      "prompt_template": "TASK: Write a complete CTA section for: {heading}\n\nThis is a call-to-action section at the end of an educational article about {heading}. Write from Gcore's perspective to promote our relevant service.\n\nGCORE PRODUCT: {gcore_product}\nENHANCED PRODUCT INFO:\n{gcore_product_info}\n\nSELECTED CTA TEMPLATE (adapt this specific template to the article context):\n{selected_cta_template}\n\nEXACT FORMAT TO FOLLOW:\n\nParagraph 1 (Solution Introduction - 2-3 complete sentences):\nStart with: \"At Gcore, we provide [specific solution] for [specific challenge mentioned in article].\"\nFollow with key infrastructure details and capabilities from enhanced product info.\nInclude specific metrics that relate to the article's focus.\n\nParagraph 2 (Unique Value & Benefits - 2-3 complete sentences):\nDescribe 2-3 specific features or competitive advantages from enhanced data.\nInclude concrete metrics (performance numbers, cost savings, capabilities).\nFocus on what customers can ACHIEVE with the platform - outcomes, not just features.\n\nParagraph 3 (Direct CTA - 1 sentence):\nCall to action: \"Explore how Gcore [Service Name] can [specific benefit from article context] at [url].\"\n\nCRITICAL REQUIREMENTS:\n1. MUST write COMPLETE sentences - no fragments\n2. MUST use specific numbers from the enhanced product info\n3. MUST adapt the selected CTA template to article context\n4. MUST end with website URL from product data\n5. Keep total length to 3 paragraphs, 6-8 sentences total\n6. Use confident, active voice throughout\n7. Connect benefits directly to problems discussed in the article\n\nEXAMPLE WITH ENHANCED DATA:\n\"At Gcore, we provide enterprise-grade CDN infrastructure for organizations needing reliable global content delivery. Our network of 210+ PoPs worldwide delivers content with 30ms average latency while handling 200+ Tbps of traffic capacity through strategically positioned edge servers.\n\nWhat sets our platform apart is the combination of performance and cost efficiency - customers typically see 40-50% cost reductions compared to traditional providers while achieving 85% cache hit ratios and enterprise-grade DDoS protection at no additional charge. This means you can scale globally without the complexity or hidden costs that often derail CDN implementations.\n\nExplore how Gcore CDN can accelerate your content delivery and reduce costs at gcore.com/cdn.\"\n\nNOW WRITE THE COMPLETE CTA:",
+      "requirements": [
+        "Clear value proposition",
+        "Specific Gcore capabilities",
+        "Connection to article topics",
+        "Concrete metrics and benefits",
+        "Direct call-to-action"
+      ],
+      "dynamic_product_data": true
+    },
+    "generate_faq_intro": {
+      "name": "FAQ Section Introduction (Skip - Optional)",
+      "description": "Brief intro for FAQ section - OPTIONAL, can be skipped",
+      "article_methodology": "FAQ Introduction (Optional)",
+      "prompt_template": "Write a brief introduction for an FAQ section about: {heading}\n\nSTRICT REQUIREMENTS:\n1. Write exactly 2-3 sentences maximum\n2. First sentence should acknowledge common questions about the topic\n3. Second sentence should briefly mention what areas the FAQs will cover\n4. Keep it concise and direct - this is just a brief intro\n5. NO promotional language or company mentions\n6. Focus on setting context for the questions that follow\n\nEXAMPLE PATTERNS:\n\nExample 1:\nHeading: \"FAQs about CDN caching\"\nIntro: \"Common questions about CDN caching help clarify implementation details and performance expectations. These answers address technical requirements, costs, and integration considerations that organizations typically evaluate.\"\n\nExample 2:\nHeading: \"Frequently asked questions\"\nIntro: \"Organizations evaluating edge computing solutions often have similar concerns about deployment and performance. The following questions address the most common technical and operational considerations.\"\n\nExample 3:\nHeading: \"FAQs\"\nIntro: \"These frequently asked questions cover essential aspects of cloud infrastructure deployment. From security to scalability, these answers provide quick clarity on key decision factors.\"\n\nRULES:\n- Maximum 2-3 sentences\n- No bullet points or lists\n- Natural, conversational tone\n- Focus on helping readers find answers\n- Avoid: delve, moreover, furthermore, essentially\n\nWrite the FAQ introduction now:",
+      "requirements": [
+        "2-3 sentences maximum",
+        "Acknowledge common questions",
+        "Preview FAQ topics briefly",
+        "Conversational tone",
+        "No promotional content"
+      ]
+    },
+    "generate_differences": {
+      "name": "Differences/Comparison",
+      "description": "Comparing two concepts or approaches",
+      "article_methodology": "Direct comparison + evidence-based differences",
+      "prompt_template": "Answer the question: {heading}\n\nSTRICT PATTERN for 'difference between' or 'vs' questions:\n1. First sentence MUST directly state the fundamental differences\n2. Format: '[Concept A] differs from [Concept B] primarily in [key differentiators]'\n3. Follow with 3-4 paragraphs covering different aspects of comparison\n4. Each paragraph should focus on one dimension of difference\n5. Include specific examples and metrics where relevant\n6. Maintain balanced coverage of both concepts\n7. Write 200-250 words total for comprehensive comparison\n8. NO company mentions or promotional content\n\nSTRUCTURE:\nParagraph 1: Core fundamental differences\nParagraph 2: Implementation or technical differences\nParagraph 3: Use case or application differences\nParagraph 4: Cost, performance, or outcome differences\n\nEXAMPLE:\nQ: \"What's the difference between cloud networking and traditional networking?\"\nA: \"Cloud networking differs from traditional networking primarily in infrastructure ownership, scalability approach, and management methodology. Traditional networking requires organizations to purchase, install, and maintain physical hardware like routers, switches, and firewalls on-premises, while cloud networking delivers these functions as virtualized services managed by cloud providers.\n\nTraditional networks scale through hardware procurement and installation processes that can take weeks or months, requiring significant capital investment and physical space. Cloud networking scales instantly through software provisioning, allowing organizations to add or remove network capacity in real-time based on demand without infrastructure purchases.\n\nManagement approaches also differ significantly, with traditional networking requiring specialized on-site personnel to configure and maintain physical equipment, while cloud networking provides centralized management through web interfaces and APIs that enable remote configuration and monitoring of global network infrastructure.\n\nCost structures contrast sharply between the two approaches. Traditional networking involves high upfront capital expenses for hardware and ongoing costs for maintenance, power, and cooling. Cloud networking operates on a pay-as-you-go model with operational expenses that scale with usage, typically reducing total costs by 40-60% for dynamic workloads.\"\n\nRULES:\n- Start with '[X] differs from [Y] primarily in...'\n- Cover multiple dimensions of difference\n- Use parallel structure when comparing\n- Include specific metrics and examples\n- Keep paragraphs focused on single aspects\n- Maintain objectivity and balance\n- Avoid: delve, moreover, furthermore, notably, essentially\n- NO company or product promotions\n\nWrite the comparison now:",
+      "requirements": [
+        "Direct statement of differences",
+        "3-4 comparison paragraphs",
+        "Multiple dimensions covered",
+        "Specific examples and metrics",
+        "Balanced objective comparison"
+      ]
+    },
+    "generate_why": {
+      "name": "Why (Causal Explanation)",
+      "description": "Explains reasons and causality",
+      "article_methodology": "Causal explanation with evidence",
+      "prompt_template": "Answer this why question: {heading}\n\nSTRICT PATTERN (per Holistic SEO SOP):\n1. MUST start: '{Subject} {predicate} because [main reason]...'\n2. Provide clear causal explanation\n3. Follow with 2-3 supporting points or elaboration\n4. Use specific examples or evidence\n5. Keep logical flow from cause to effect\n6. Write 100-150 words\n\nExample:\nQ: 'Why is CDN caching important?'\nA: 'CDN caching is important because it dramatically reduces latency for global users by serving content from nearby edge servers rather than distant origin servers. This proximity cuts page load times by 50-70%, directly improving user experience and engagement metrics. Additionally, caching reduces origin server load by up to 80%, lowering bandwidth costs and preventing server overload during traffic spikes. Search engines also prioritize fast-loading sites, making CDN caching essential for SEO performance.'\n\nAvoid: delve, moreover, furthermore, notably, essentially, perhaps, maybe\nKeep sentences under 30 words\n\nWrite the explanation now:",
+      "requirements": [
+        "Start with 'because' clause",
+        "Clear causal relationship",
+        "2-3 supporting reasons",
+        "Evidence and examples",
+        "Logical flow"
+      ]
+    },
+    "generate_when": {
+      "name": "When (Timing/Conditions)",
+      "description": "Specifies timing, conditions, or circumstances",
+      "article_methodology": "Timing and conditional guidance",
+      "prompt_template": "Answer this when question: {heading}\n\nSTRICT PATTERN (per Holistic SEO SOP):\n1. MUST start: '{Subject} should be {action} when [condition]...' or '{Subject} occurs when...'\n2. Provide specific timing, conditions, or circumstances\n3. Include multiple scenarios if applicable\n4. Be precise with timeframes or triggers\n5. Avoid vague terms like 'sometimes' or 'occasionally'\n6. Write 100-150 words\n\nExample:\nQ: 'When should you implement CDN caching?'\nA: 'You should implement CDN caching when your website serves users across multiple geographic regions or experiences more than 10,000 daily visitors. Implementation becomes critical when page load times exceed 3 seconds, bounce rates rise above 40%, or when origin server costs grow unsustainably. CDN caching is also essential before major traffic events like product launches or marketing campaigns. Sites with heavy media content should implement CDN immediately, as images and videos consume 60-80% of bandwidth.'\n\nAvoid uncertainty words\nBe specific with metrics and thresholds\n\nWrite the timing answer now:",
+      "requirements": [
+        "Start with conditional statement",
+        "Specific triggers or thresholds",
+        "Multiple scenarios covered",
+        "Precise timeframes",
+        "Clear recommendations"
+      ]
+    },
+    "generate_where": {
+      "name": "Where (Location/Context)",
+      "description": "Identifies locations, contexts, or environments",
+      "article_methodology": "Location and context specification",
+      "prompt_template": "Answer this where question: {heading}\n\nSTRICT PATTERN (per Holistic SEO SOP):\n1. MUST start: '{Subject} is located/found/occurs in [location]...' or '{Subject} are typically stored in...'\n2. Provide specific locations, contexts, or environments\n3. Include geographical, digital, or conceptual locations as appropriate\n4. Add relevant details about distribution or availability\n5. Be precise and comprehensive\n6. Write 100-150 words\n\nExample:\nQ: 'Where are CDN edge servers located?'\nA: 'CDN edge servers are located in data centers across major cities worldwide, strategically positioned at internet exchange points (IXPs) and network hubs. These servers cluster in high-traffic regions including North America, Europe, and Asia-Pacific, with growing presence in emerging markets like Africa and South America. Edge servers specifically occupy facilities with direct fiber connections to major ISPs, ensuring sub-50ms latency to end users. Modern CDN providers maintain 100-200+ Points of Presence globally, with each location housing multiple redundant servers.'\n\nBe geographically or logically specific\nInclude distribution patterns\n\nWrite the location answer now:",
+      "requirements": [
+        "Start with location statement",
+        "Specific places or contexts",
+        "Geographic/digital/conceptual coverage",
+        "Distribution details",
+        "Precise descriptions"
+      ]
+    },
+    "generate_who": {
+      "name": "Who (Identity/Responsibility)",
+      "description": "Identifies people, organizations, or entities",
+      "article_methodology": "Entity identification and roles",
+      "prompt_template": "Answer this who question: {heading}\n\nSTRICT PATTERN (per Holistic SEO SOP):\n1. MUST start: '{Subject} is/are [identification]...' or 'The person/organization responsible is...'\n2. Clearly identify the person(s), organization(s), or entity\n3. Provide relevant credentials, roles, or characteristics\n4. Include why they are significant to the topic\n5. Be specific with names, titles, or descriptions\n6. Write 100-150 words\n\nExample:\nQ: 'Who manages CDN infrastructure?'\nA: 'CDN infrastructure is managed by specialized teams including network engineers, systems administrators, and DevOps professionals within CDN provider organizations. Network engineers design and optimize the global distribution network, ensuring optimal routing and performance. Systems administrators handle server maintenance, security patches, and capacity planning across all edge locations. DevOps teams automate deployment processes and monitoring systems. Large enterprises may also employ CDN specialists internally to configure and optimize their specific CDN implementations.'\n\nBe specific with roles and responsibilities\nInclude relevant qualifications\n\nWrite the identification now:",
+      "requirements": [
+        "Direct identification",
+        "Roles and responsibilities",
+        "Credentials or qualifications",
+        "Significance explained",
+        "Specific descriptions"
+      ]
+    },
+    "generate_which": {
+      "name": "Which (Selection/Options)",
+      "description": "Identifies specific choices or options",
+      "article_methodology": "Option identification and selection criteria",
+      "prompt_template": "Answer this which question: {heading}\n\nSTRICT PATTERN (per Holistic SEO SOP):\n1. MUST start with direct identification of the selection/choice\n2. Format: '{Subject} that [criteria] include...' or 'The [options] are...'\n3. Clearly state which option(s) are being discussed\n4. Provide comparison or differentiation if multiple options\n5. Include criteria for selection if applicable\n6. Be definitive in the answer\n7. Write 100-150 words\n\nExample:\nQ: 'Which CDN features are essential?'\nA: 'The essential CDN features include global edge server coverage, SSL/TLS encryption, real-time analytics, and DDoS protection. Global coverage ensures content delivery with sub-50ms latency worldwide through 100+ Points of Presence. SSL/TLS encryption protects data in transit and improves SEO rankings. Real-time analytics provide visibility into traffic patterns, cache hit ratios, and performance metrics. DDoS protection safeguards against attacks that could otherwise overwhelm origin servers. These core features form the minimum requirement for enterprise CDN deployment.'\n\nBe definitive about selections\nInclude selection criteria\n\nWrite the selection answer now:",
+      "requirements": [
+        "Direct option identification",
+        "Clear selection stated",
+        "Comparison if multiple options",
+        "Selection criteria included",
+        "Definitive recommendations"
+      ]
+    },
+    "generate_faq_answer": {
+      "name": "FAQ Answer (Concise)",
+      "description": "Ultra-concise FAQ answer",
+      "article_methodology": "Direct FAQ Answer",
+      "prompt_template": "Answer this FAQ question concisely: {heading}\n\nSTRICT FAQ ANSWER PATTERN:\n1. MUST start with 'Yes,' 'No,' or a direct answer\n2. Complete the answer in the SAME first sentence\n3. Optional: Add ONE clarifying sentence if needed\n4. Maximum 2 sentences total\n5. Be extremely direct and concise\n6. Include specific metrics when relevant\n\nSEMANTIC TRIPLE STRUCTURE:\n- Extract the subject (what is being asked about)\n- Identify the predicate (the relationship/action)\n- Provide the object (the answer/result)\n- Maintain this structure in your answer\n\nEXAMPLE FAQ ANSWERS:\n\nQ: \"Is CDN caching expensive?\"\nA: \"No, CDN caching typically reduces overall infrastructure costs by 30-40% through decreased origin server load and bandwidth usage.\"\nTriple: [CDN caching] - [reduces] - [infrastructure costs]\n\nQ: \"Can CDNs cache dynamic content?\"\nA: \"Yes, modern CDNs cache dynamic content using edge computing and smart invalidation strategies with shorter TTL values.\"\nTriple: [CDNs] - [cache] - [dynamic content]\n\nQ: \"Does edge computing require special hardware?\"\nA: \"No, edge computing runs on standard server infrastructure deployed at network edge locations. Specialized hardware is only needed for specific workloads like GPU processing.\"\nTriple: [Edge computing] - [runs on] - [standard infrastructure]\n\nQ: \"Are virtual machines secure?\"\nA: \"Yes, virtual machines provide strong isolation through hypervisor-level separation and hardware-assisted virtualization.\"\nTriple: [Virtual machines] - [provide] - [strong isolation]\n\nQ: \"Will CDN improve SEO?\"\nA: \"Yes, CDN improves SEO through faster page load times and better Core Web Vitals scores, both ranking factors for search engines.\"\nTriple: [CDN] - [improves] - [SEO]\n\nFORBIDDEN PATTERNS:\n- Don't use 'Yes, but...' or 'No, however...'\n- Don't add unnecessary context or background\n- Don't use three or more sentences\n- Avoid: perhaps, maybe, generally, typically (unless citing specific stats)\n- No company or product promotions\n\nKEY RULES:\n- Maximum 2 sentences (prefer 1 when possible)\n- Include metrics/specifics when available\n- Direct answer in first 3-5 words\n- Maintain semantic triple structure\n- Ultra-concise and scannable\n\nWrite the FAQ answer now:",
+      "requirements": [
+        "Start with Yes/No or direct answer",
+        "Maximum 2 sentences",
+        "Include specifics when relevant",
+        "Maintain semantic triple",
+        "Ultra-concise format"
+      ]
+    },
+    "generate_intelligent_cta": {
+      "name": "Intelligent CTA (Context-Aware)",
+      "description": "Smart CTA that adapts to article context and creates natural transitions",
+      "article_methodology": "Context-aware product promotion",
+      "prompt_template": "Create a natural, context-aware CTA for: {heading}\n\nCONTEXT ANALYSIS:\nArticle Topic: {article_topic}\nContent Type: {content_type}\nTarget Audience: {audience_level}\n\nGCORE PRODUCT: {gcore_product}\nENHANCED PRODUCT INFO:\n{gcore_product_info}\n\nCONTEXT-SELECTED CTA TEMPLATE:\n{selected_cta_template}\n\nINTELLIGENT CTA STRUCTURE:\n\nTransition Sentence (1 sentence):\nCreate a natural bridge from the educational content to the solution.\nExamples:\n- 'Implementing these best practices requires reliable infrastructure...'\n- 'While theory is important, the right platform makes implementation seamless...'\n- 'Understanding these concepts is the first step—choosing the right solution is next...'\n\nValue Proposition (2-3 sentences):\nConnect the article's key points to Gcore's specific capabilities.\nUse exact metrics from enhanced product data.\nFocus on solving the specific challenges discussed in the article.\n\nSoft Call-to-Action (1 sentence):\nInvite exploration without being pushy.\nExamples:\n- 'See how [specific feature] can [solve specific problem] at [url]'\n- 'Discover [product capabilities] designed for [specific use case] at [url]'\n- 'Learn more about [relevant benefit] at [url]'\n\nCONTEXT-AWARE ADAPTATION:\n- If article is technical → emphasize performance metrics and specifications\n- If article is business-focused → highlight cost savings and ROI\n- If article is beginner-level → focus on ease of use and getting started\n- If article discusses problems → position Gcore as the solution\n- If article is comparative → highlight competitive advantages\n\nHUMAN-LIKE WRITING REQUIREMENTS:\n- Use conversational transitions ('While...', 'When...', 'Since...')\n- Include specific numbers and metrics from enhanced data\n- Match the article's technical level and tone\n- Create logical flow from education to solution\n- Avoid salesy language—stay helpful and informative\n\nEXAMPLE WITH ENHANCED DATA:\n'When implementing global content delivery, performance and reliability become critical factors. Gcore CDN addresses these needs with 210+ PoPs worldwide and 30ms average latency, ensuring consistent performance across all regions while handling 200+ Tbps of traffic capacity through our enterprise-grade infrastructure.\n\nBeyond performance, our approach eliminates common deployment barriers with free egress traffic and €0/month starter plans, typically reducing total CDN costs by 40-50% compared to traditional providers while including enterprise-grade DDoS protection and SSL certificates at no additional charge.\n\nDiscover how Gcore CDN can accelerate your global content delivery at gcore.com/cdn.'\n\nWrite the intelligent, context-aware CTA now:",
+      "requirements": [
+        "Natural transition from content",
+        "Context-aware tone and focus",
+        "Specific metrics from enhanced data",
+        "Problem-solution alignment",
+        "Conversational, human-like writing"
+      ]
+    }
+  },
+  "auto_detection_map": {
+    "what is": "generate_definition",
+    "what are": "generate_listicle",
+    "how does": "generate_how",
+    "how do": "generate_how",
+    "how to": "generate_how_list",
+    "how many": "generate_how_stats_answer",
+    "how much": "generate_how_stats_answer",
+    "how often": "generate_how_stats_answer",
+    "how common": "generate_how_stats_answer",
+    "is": "generate_yes_no_answer",
+    "are": "generate_yes_no_answer",
+    "can": "generate_yes_no_answer",
+    "does": "generate_yes_no_answer",
+    "will": "generate_yes_no_answer",
+    "should": "generate_yes_no_answer",
+    "introduction": "generate_intro_first_paragraph",
+    "overview": "generate_intro_first_paragraph",
+    "faqs": "generate_faq_intro",
+    "frequently asked questions": "generate_faq_intro",
+    "common questions": "generate_faq_intro",
+    "how to choose": "generate_evaluation_bridge",
+    "choosing": "generate_evaluation_bridge",
+    "selecting": "generate_evaluation_bridge",
+    "evaluating": "generate_evaluation_bridge",
+    "gcore": "generate_intelligent_cta",
+    "cta": "generate_intelligent_cta",
+    "call to action": "generate_intelligent_cta",
+    "difference between": "generate_differences",
+    "differences between": "generate_differences",
+    "vs": "generate_differences",
+    "versus": "generate_differences",
+    "compared to": "generate_differences",
+    "comparing": "generate_differences",
+    "why": "generate_why",
+    "why is": "generate_why",
+    "why are": "generate_why",
+    "why does": "generate_why",
+    "why do": "generate_why",
+    "when": "generate_when",
+    "when should": "generate_when",
+    "when does": "generate_when",
+    "when do": "generate_when",
+    "when is": "generate_when",
+    "when are": "generate_when",
+    "where": "generate_where",
+    "where is": "generate_where",
+    "where are": "generate_where",
+    "where does": "generate_where",
+    "where do": "generate_where",
+    "who": "generate_who",
+    "who is": "generate_who",
+    "who are": "generate_who",
+    "who does": "generate_who",
+    "who do": "generate_who",
+    "which": "generate_which",
+    "which is": "generate_which",
+    "which are": "generate_which",
+    "which one": "generate_which",
+    "which type": "generate_which"
+  }
+}

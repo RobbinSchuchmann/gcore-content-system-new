@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-08-21T12:37:43.384585",
+  "total_sources": 9,
+  "sources": [
+    {
+      "title": "What is Cloud Storage? - AWS",
+      "url": "https://aws.amazon.com/what-is/cloud-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "2025-07-18",
+      "type": "web"
+    },
+    {
+      "title": "What is Cloud Storage? Definition, Types, Use Cases, and Benefits",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/what-is-cloud-storage-types-use-cases-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "2025-02-27",
+      "type": "web"
+    },
+    {
+      "title": "Cloud based data storage: Essential 2025 Guide",
+      "url": "https://kraftbusiness.com/blog/cloud-based-data-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "2025-08-15",
+      "type": "web"
+    },
+    {
+      "title": "What Is Cloud Storage? - IBM",
+      "url": "https://www.ibm.com/think/topics/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "2024-10-16",
+      "type": "web"
+    },
+    {
+      "title": "What Is Cloud Storage? Definition, Benefits, and Use Cases | Nutanix",
+      "url": "https://www.nutanix.com/info/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "2024-04-04",
+      "type": "web"
+    },
+    {
+      "title": ".",
+      "url": "",
+      "snippet": ".",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ". |",
+      "url": "",
+      "snippet": ". |",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".                |",
+      "url": "",
+      "snippet": ".                |",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".               |",
+      "url": "",
+      "snippet": ".               |",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

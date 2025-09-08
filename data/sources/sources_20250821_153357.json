@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-21T15:33:57.707731",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/what-is-cloud-storage-types-use-cases-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Aws",
+      "url": "https://aws.amazon.com/what-is/cloud-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Broadbandsearch",
+      "url": "https://www.broadbandsearch.net/definitions/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Techradar",
+      "url": "https://www.techradar.com/features/what-is-cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}

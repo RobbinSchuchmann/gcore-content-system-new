@@ -1,0 +1,248 @@
+{
+  "cdn": {
+    "name": "CDN",
+    "full_name": "Content Delivery Network",
+    "description": "Global content delivery network with 180+ PoPs for fast, secure content distribution",
+    "key_features": [
+      "180+ Points of Presence globally",
+      "30ms average global latency",
+      "DDoS protection up to 1 Tbps",
+      "Real-time analytics and reporting",
+      "SSL/TLS encryption",
+      "HTTP/3 support",
+      "WebSocket support",
+      "Origin shield",
+      "Smart caching algorithms",
+      "Instant purge capabilities"
+    ],
+    "use_cases": [
+      "Website acceleration",
+      "Video streaming",
+      "Gaming content delivery",
+      "Software distribution",
+      "API acceleration",
+      "Mobile app content delivery"
+    ],
+    "technical_specs": {
+      "bandwidth": "65+ Tbps total network capacity",
+      "cache_hit_ratio": "95%+ average",
+      "uptime_sla": "99.99%",
+      "protocols": ["HTTP/1.1", "HTTP/2", "HTTP/3", "WebSocket", "QUIC"],
+      "cache_control": "TTL-based, origin-controlled",
+      "purge_time": "<1 second globally"
+    },
+    "differentiators": [
+      "Presence in emerging markets",
+      "Competitive pricing",
+      "No traffic commitment required",
+      "Free SSL certificates",
+      "24/7 expert support"
+    ]
+  },
+  "edge_cloud": {
+    "name": "Edge Cloud",
+    "full_name": "Edge Cloud Computing",
+    "description": "Distributed cloud computing infrastructure at the edge for low-latency processing",
+    "key_features": [
+      "GPU instances for AI/ML workloads",
+      "Bare metal servers",
+      "Virtual machines",
+      "Kubernetes support",
+      "Container registry",
+      "Object storage",
+      "Block storage",
+      "Load balancers",
+      "Private networking",
+      "API-driven infrastructure"
+    ],
+    "use_cases": [
+      "AI model inference",
+      "Real-time data processing",
+      "Gaming servers",
+      "Video transcoding",
+      "IoT data processing",
+      "Edge applications",
+      "Distributed databases",
+      "Content rendering"
+    ],
+    "instance_types": {
+      "gpu": {
+        "models": ["NVIDIA A100", "NVIDIA V100", "NVIDIA T4", "NVIDIA RTX 4090"],
+        "use_cases": ["AI training", "ML inference", "3D rendering", "Video processing"]
+      },
+      "cpu": {
+        "processors": ["Intel Xeon", "AMD EPYC"],
+        "cores": "1-128 vCPUs",
+        "ram": "1GB-2TB"
+      },
+      "bare_metal": {
+        "configurations": "Custom configurations available",
+        "deployment_time": "< 5 minutes"
+      }
+    },
+    "networking": {
+      "bandwidth": "Up to 100 Gbps",
+      "ipv4": "Included",
+      "ipv6": "Supported",
+      "private_networks": "VLAN support"
+    }
+  },
+  "ai_infrastructure": {
+    "name": "AI Infrastructure",
+    "full_name": "AI and Machine Learning Infrastructure",
+    "description": "Purpose-built infrastructure for AI/ML workloads with powerful GPU clusters",
+    "key_features": [
+      "GPU clusters with latest NVIDIA GPUs",
+      "Pre-configured ML frameworks",
+      "Jupyter notebook integration",
+      "Model versioning",
+      "Distributed training support",
+      "Inference optimization",
+      "AutoML capabilities",
+      "MLOps tools",
+      "Data pipeline management",
+      "Model monitoring"
+    ],
+    "supported_frameworks": [
+      "TensorFlow",
+      "PyTorch",
+      "JAX",
+      "Keras",
+      "scikit-learn",
+      "XGBoost",
+      "ONNX",
+      "Triton Inference Server"
+    ],
+    "gpu_specifications": {
+      "nvidia_a100": {
+        "memory": "40GB/80GB HBM2",
+        "performance": "19.5 TFLOPS FP32",
+        "use_cases": ["Large model training", "High-performance inference"]
+      },
+      "nvidia_v100": {
+        "memory": "16GB/32GB HBM2",
+        "performance": "15.7 TFLOPS FP32",
+        "use_cases": ["Deep learning training", "Scientific computing"]
+      },
+      "nvidia_t4": {
+        "memory": "16GB GDDR6",
+        "performance": "8.1 TFLOPS FP32",
+        "use_cases": ["Inference", "Video transcoding", "Virtual workstations"]
+      }
+    },
+    "ml_features": {
+      "distributed_training": "Multi-node training support",
+      "model_serving": "Optimized inference endpoints",
+      "data_storage": "High-performance storage for datasets",
+      "experiment_tracking": "MLflow integration",
+      "model_registry": "Version control for models"
+    }
+  },
+  "streaming_platform": {
+    "name": "Streaming Platform",
+    "full_name": "Video Streaming Platform",
+    "description": "End-to-end video streaming solution with transcoding and global delivery",
+    "key_features": [
+      "Live streaming support",
+      "Video on demand (VOD)",
+      "Adaptive bitrate streaming",
+      "Multi-CDN support",
+      "Real-time transcoding",
+      "DRM protection",
+      "Player SDK",
+      "Analytics dashboard",
+      "Recording capabilities",
+      "Thumbnail generation"
+    ],
+    "streaming_protocols": [
+      "HLS",
+      "DASH",
+      "RTMP",
+      "WebRTC",
+      "SRT",
+      "CMAF"
+    ],
+    "video_formats": {
+      "input": ["MP4", "MOV", "AVI", "MKV", "WebM"],
+      "output": ["H.264", "H.265/HEVC", "VP9", "AV1"],
+      "resolutions": ["360p", "480p", "720p", "1080p", "4K", "8K"],
+      "bitrates": "Adaptive from 200 Kbps to 20 Mbps"
+    },
+    "features": {
+      "latency": "Sub-3 second for live streaming",
+      "concurrent_viewers": "Unlimited",
+      "storage": "Integrated with object storage",
+      "api": "RESTful API for automation"
+    }
+  },
+  "security_services": {
+    "name": "Security Services",
+    "full_name": "Web Security and Protection",
+    "description": "Comprehensive security solutions including DDoS protection and WAF",
+    "key_features": [
+      "DDoS protection up to 1 Tbps",
+      "Web Application Firewall (WAF)",
+      "Bot management",
+      "Rate limiting",
+      "IP reputation filtering",
+      "SSL/TLS management",
+      "DNSSEC support",
+      "Security analytics",
+      "Threat intelligence",
+      "Incident response"
+    ],
+    "ddos_protection": {
+      "capacity": "1 Tbps+",
+      "attack_types": ["Volumetric", "Protocol", "Application layer"],
+      "mitigation_time": "< 1 second",
+      "always_on": true,
+      "scrubbing_centers": "Global network"
+    },
+    "waf_capabilities": {
+      "rule_sets": ["OWASP Top 10", "Custom rules", "Managed rules"],
+      "inspection": "Deep packet inspection",
+      "learning_mode": "ML-based threat detection",
+      "false_positive_rate": "< 0.01%",
+      "api_protection": true
+    },
+    "compliance": {
+      "certifications": ["ISO 27001", "SOC 2", "PCI DSS"],
+      "gdpr": "Compliant",
+      "data_residency": "Regional data storage options"
+    }
+  },
+  "dns": {
+    "name": "DNS",
+    "full_name": "Managed DNS Service",
+    "description": "Fast, reliable, and secure DNS hosting with global anycast network",
+    "key_features": [
+      "Anycast network",
+      "< 30ms global resolution",
+      "DNSSEC support",
+      "GeoDNS",
+      "Failover",
+      "Load balancing",
+      "API access",
+      "Real-time analytics",
+      "DDoS protected",
+      "Zone transfers"
+    ],
+    "performance": {
+      "query_speed": "< 30ms average globally",
+      "uptime_sla": "100%",
+      "ttl": "Configurable from 1 second",
+      "zones": "Unlimited",
+      "records_per_zone": "Unlimited"
+    },
+    "record_types": [
+      "A", "AAAA", "CNAME", "MX", "TXT", 
+      "SRV", "PTR", "NS", "SOA", "CAA"
+    ],
+    "advanced_features": {
+      "traffic_steering": "Geographic and latency-based",
+      "health_checks": "HTTP/HTTPS/TCP monitoring",
+      "failover": "Automatic with health checks",
+      "analytics": "Query logs and performance metrics"
+    }
+  }
+}

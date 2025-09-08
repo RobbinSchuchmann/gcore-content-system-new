@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-08-21T12:10:13.017262",
+  "total_sources": 6,
+  "sources": [
+    {
+      "title": "Cloud storage - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cloud_storage",
+      "snippet": "",
+      "author": "",
+      "date": "2007-05-18",
+      "type": "web"
+    },
+    {
+      "title": "What is Cloud Storage? Definition, Types, Use Cases, and Benefits",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/what-is-cloud-storage-types-use-cases-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "2025-02-27",
+      "type": "web"
+    },
+    {
+      "title": "What Is Cloud Storage? Definition, Benefits, and Use Cases | Nutanix",
+      "url": "https://www.nutanix.com/info/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "2024-04-04",
+      "type": "web"
+    },
+    {
+      "title": "How a Unified Private Cloud Storage Architecture Saves Money",
+      "url": "https://openmetal.io/resources/blog/how-a-unified-private-cloud-storage-architecture-saves-money/",
+      "snippet": "",
+      "author": "",
+      "date": "2025-08-12",
+      "type": "web"
+    },
+    {
+      "title": "6 Cloud Architecture Best Practices To Follow in 2025 - nOps",
+      "url": "https://www.nops.io/blog/cloud-architecture-best-practices/",
+      "snippet": "",
+      "author": "",
+      "date": "2025-01-01",
+      "type": "web"
+    },
+    {
+      "title": ".",
+      "url": "",
+      "snippet": ".",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    }
+  ]
+}

@@ -1,0 +1,902 @@
+{
+  "primary_keyword": "cloud security",
+  "generated_date": "2025-08-28T10:24:10.812270",
+  "quality_scores": {
+    "Introduction": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "robust"
+          ],
+          "positions": {
+            "robust": [
+              [
+                962,
+                968
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.24,
+            "semantic_keywords": 1
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 19.1,
+          "complex_word_percentage": 45.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "introduction"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [],
+      "suggestions": [
+        "Replace AI words: robust"
+      ]
+    },
+    "What is cloud security?": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.77,
+            "semantic_keywords": 1
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 22.6,
+          "complex_word_percentage": 38.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_definition"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Shorten sentences for better readability"
+      ]
+    },
+    "How does the shared responsibility model work in cloud security?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.46,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.6,
+          "complex_word_percentage": 29.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 8,
+          "total_key_terms": 8
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the main cloud security challenges?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.33,
+            "semantic_keywords": 2
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.8,
+          "complex_word_percentage": 35.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the essential cloud security technologies and tools?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "potentially"
+          ],
+          "positions": {
+            "potentially": [
+              [
+                2252,
+                2263
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.66,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 17.9,
+          "complex_word_percentage": 34.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [],
+      "suggestions": [
+        "Replace AI words: potentially",
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the key benefits of cloud security?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "significantly"
+          ],
+          "positions": {
+            "significantly": [
+              [
+                1670,
+                1683
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'fast' - Use specific metrics like '30ms latency'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.5,
+          "complex_word_percentage": 41.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: significantly",
+        "Increase keyword usage in content"
+      ]
+    },
+    "How to implement cloud security best practices?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'best' - Use 'leading' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.39,
+            "semantic_keywords": 2
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 12.1,
+          "complex_word_percentage": 30.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how_list"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Frequently asked questions": {
+      "overall_score": 60,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'best' - Use 'leading' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.7,
+          "complex_word_percentage": 34.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_intro"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 1,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 44 words (minimum: 100)",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    },
+    "What's the difference between cloud security and traditional network security?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.0,
+          "complex_word_percentage": 44.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 10
+        }
+      },
+      "issues": [
+        "Content too short: 52 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Is cloud security more secure than on-premises security?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.5,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 10.0,
+          "complex_word_percentage": 40.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 7,
+          "total_key_terms": 7
+        }
+      },
+      "issues": [
+        "Content too short: 40 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "What is cloud security posture management (CSPM)?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.33,
+            "semantic_keywords": 2
+          },
+          "issues": [
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.3,
+          "complex_word_percentage": 44.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 5
+        }
+      },
+      "issues": [
+        "Content too short: 43 words (minimum: 50)"
+      ],
+      "warnings": [],
+      "suggestions": []
+    },
+    "How does Zero Trust apply to cloud security?": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "potentially"
+          ],
+          "positions": {
+            "potentially": [
+              [
+                219,
+                230
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.04,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.3,
+          "complex_word_percentage": 34.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": false,
+          "issues": [
+            "Should explain how 'zero trust apply to cloud security' works by..."
+          ],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words",
+        "Content too short: 49 words (minimum: 100)",
+        "Should explain how 'zero trust apply to cloud security' works by..."
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: potentially"
+      ]
+    },
+    "What compliance standards apply to cloud security?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.22,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.0,
+          "complex_word_percentage": 28.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Content too short: 45 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "How much does cloud security cost?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.3,
+          "complex_word_percentage": 37.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 4
+        }
+      },
+      "issues": [
+        "Content too short: 46 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What happens during a cloud security breach?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "potentially"
+          ],
+          "positions": {
+            "potentially": [
+              [
+                252,
+                263
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.7,
+          "complex_word_percentage": 29.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words",
+        "Content too short: 41 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Replace AI words: potentially",
+        "Increase keyword usage in content"
+      ]
+    }
+  },
+  "word_count": 1983
+}

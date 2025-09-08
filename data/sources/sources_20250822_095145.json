@@ -1,0 +1,231 @@
+{
+  "timestamp": "2025-08-22T09:51:45.270153",
+  "total_sources": 25,
+  "sources": [
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Object_storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Cloudian",
+      "url": "https://cloudian.com/guides/object-storage/object-storage-care/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Snia",
+      "url": "https://www.snia.org/education/what-is-object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Techtarget",
+      "url": "https://www.techtarget.com/searchstorage/definition/object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"Unlike file storage, which organizes data hierarchically in folders, and block storage, which br",
+      "url": "",
+      "snippet": ".\",\"Unlike file storage, which organizes data hierarchically in folders, and block storage, which breaks data into blocks with unique addresses, object storage uses a flat address space without a hierarchical file system",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Each object in object storage is stored in a flat data environment and can be accessed via its u",
+      "url": "",
+      "snippet": ".\",\"Each object in object storage is stored in a flat data environment and can be accessed via its unique identifier, enabling multiple access paths and eliminating the need for directory structures",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Object storage systems typically distribute data objects across multiple storage nodes to ensure",
+      "url": "",
+      "snippet": ".\",\"Object storage systems typically distribute data objects across multiple storage nodes to ensure high durability, availability, and redundancy, often replicating data automatically across nodes",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Metadata in object storage is extensible and user-definable, allowing rich descriptive informati",
+      "url": "",
+      "snippet": ".\",\"Metadata in object storage is extensible and user-definable, allowing rich descriptive information to be stored with each object, which supports advanced data management and analytics",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Object storage is optimized for unstructured data such as photos, videos, emails, audio files, l",
+      "url": "",
+      "snippet": ".\",\"Object storage is optimized for unstructured data such as photos, videos, emails, audio files, logs, and web content, which do not fit neatly into traditional databases",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"The architecture supports scalability to very large data volumes with fewer limits compared to b",
+      "url": "",
+      "snippet": ".\",\"The architecture supports scalability to very large data volumes with fewer limits compared to block or file storage, making it cost-effective for massive data storage needs",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Object storage often does not support partial updates to objects; typically, the entire object m",
+      "url": "",
+      "snippet": ".\",\"Object storage often does not support partial updates to objects; typically, the entire object must be rewritten to modify data",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Object storage is commonly used for cloud storage services, data archiving, backup solutions, co",
+      "url": "",
+      "snippet": ".\",\"Object storage is commonly used for cloud storage services, data archiving, backup solutions, content distribution, and big data analytics",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"The Object Storage Device (OSD) standard defines objects with 64-bit partition and object IDs, a",
+      "url": "",
+      "snippet": ".\",\"The Object Storage Device (OSD) standard defines objects with 64-bit partition and object IDs, and supports attributes for security and classification, enhancing interoperability and management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Object storage systems combine HDDs and SSDs in storage nodes to balance capacity, performance, ",
+      "url": "",
+      "snippet": ".\",\"Object storage systems combine HDDs and SSDs in storage nodes to balance capacity, performance, and cost",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Because objects are atomic units, object storage systems can efficiently handle large-scale data",
+      "url": "",
+      "snippet": ".\",\"Because objects are atomic units, object storage systems can efficiently handle large-scale data without the overhead of managing file hierarchies or block mappings",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Object storage is increasingly preferred for static content storage, data lakes, and backup due ",
+      "url": "",
+      "snippet": ".\",\"Object storage is increasingly preferred for static content storage, data lakes, and backup due to its scalability, durability, and metadata capabilities",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"The unique identifier in object storage allows direct retrieval of objects without traversing a ",
+      "url": "",
+      "snippet": ".\",\"The unique identifier in object storage allows direct retrieval of objects without traversing a file path, improving access speed and simplifying data retrieval",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Object storage supports searching and filtering collections of objects by metadata attributes wi",
+      "url": "",
+      "snippet": ".\",\"Object storage supports searching and filtering collections of objects by metadata attributes without needing to know specific object IDs, facilitating data management at scale",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Replication across multiple nodes typically ensures 99.999999999% (11 nines) durabilit",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Replication across multiple nodes typically ensures 99.999999999% (11 nines) durability\",\"context\":\"Leading object storage solutions replicate data automatically to achieve extremely high durability and availability",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cost per GB is generally 30-50% lower than traditional block storage for large unstruc",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cost per GB is generally 30-50% lower than traditional block storage for large unstructured datasets\",\"context\":\"Object storage offers cost advantages for storing large volumes of unstructured data compared to block storage",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"},{\"value\":\"Metadata can include hundreds of user-defined attributes per object\",\"context\":\"Extens",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Metadata can include hundreds of user-defined attributes per object\",\"context\":\"Extensible metadata capabilities allow detailed classification and analytics on stored objects",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"},{\"value\":\"Typical object sizes range from a few KB to multiple TBs\",\"context\":\"Object storage su",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Typical object sizes range from a few KB to multiple TBs\",\"context\":\"Object storage supports a wide range of object sizes, accommodating diverse data types from small files to large media",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    }
+  ]
+}

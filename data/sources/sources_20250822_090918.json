@@ -1,0 +1,285 @@
+{
+  "timestamp": "2025-08-22T09:09:18.859954",
+  "total_sources": 31,
+  "sources": [
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Techtarget",
+      "url": "https://www.techtarget.com/searchstorage/definition/cloud-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/what-is-cloud-storage-types-use-cases-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Aws",
+      "url": "https://aws.amazon.com/what-is/cloud-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Cloudflare",
+      "url": "https://www.cloudflare.com/learning/cloud/what-is-the-cloud/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"Cloud service providers (CSPs) host, secure, manage, and maintain the storage infrastructure, wh",
+      "url": "",
+      "snippet": ".\",\"Cloud service providers (CSPs) host, secure, manage, and maintain the storage infrastructure, while customers are responsible for securing their data and applications within the cloud",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud storage offers a scalable and cost-effective alternative to traditional on-premises storag",
+      "url": "",
+      "snippet": ".\",\"Cloud storage offers a scalable and cost-effective alternative to traditional on-premises storage, eliminating the need for physical hardware investments and maintenance",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Users pay for cloud storage based on actual usage, allowing elasticity to scale capacity up or d",
+      "url": "",
+      "snippet": ".\",\"Users pay for cloud storage based on actual usage, allowing elasticity to scale capacity up or down as needed without overprovisioning",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud storage is based on virtualized storage infrastructure with features like near-instant ela",
+      "url": "",
+      "snippet": ".\",\"Cloud storage is based on virtualized storage infrastructure with features like near-instant elasticity, multi-tenancy, and metered resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"There are three main types of cloud storage: block storage, file storage, and object storage, ea",
+      "url": "",
+      "snippet": ".\",\"There are three main types of cloud storage: block storage, file storage, and object storage, each suited for different use cases and performance needs",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud storage deployment models include public cloud, private cloud, hybrid cloud, and multi-clo",
+      "url": "",
+      "snippet": ".\",\"Cloud storage deployment models include public cloud, private cloud, hybrid cloud, and multi-cloud, each offering different levels of control, security, and flexibility",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Public cloud storage is managed by third-party providers and accessible over the internet, ideal",
+      "url": "",
+      "snippet": ".\",\"Public cloud storage is managed by third-party providers and accessible over the internet, ideal for cost-effective and scalable solutions",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Private cloud storage provides dedicated infrastructure for a single organization, offering enha",
+      "url": "",
+      "snippet": ".\",\"Private cloud storage provides dedicated infrastructure for a single organization, offering enhanced control and security, often used for sensitive or compliance-bound data",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Hybrid cloud storage combines public and private clouds, allowing data mobility and cost optimiz",
+      "url": "",
+      "snippet": ".\",\"Hybrid cloud storage combines public and private clouds, allowing data mobility and cost optimization by mixing on-premises and cloud resources",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Multi-cloud storage uses multiple cloud providers to reduce vendor lock-in, improve redundancy, ",
+      "url": "",
+      "snippet": ".\",\"Multi-cloud storage uses multiple cloud providers to reduce vendor lock-in, improve redundancy, and leverage diverse services, though it requires complex management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud storage providers maintain large data centers globally, ensuring high availability, durabi",
+      "url": "",
+      "snippet": ".\",\"Cloud storage providers maintain large data centers globally, ensuring high availability, durability, and performance through distributed infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Access to cloud storage is typically via internet or dedicated private connections using web por",
+      "url": "",
+      "snippet": ".\",\"Access to cloud storage is typically via internet or dedicated private connections using web portals, APIs, or traditional storage protocols",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Performance in cloud storage can be enhanced by using solid-state drives (SSDs) and high-perform",
+      "url": "",
+      "snippet": ".\",\"Performance in cloud storage can be enhanced by using solid-state drives (SSDs) and high-performance layers integrated within cloud infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Best practices for cloud storage include securing data with encryption, managing access controls",
+      "url": "",
+      "snippet": ".\",\"Best practices for cloud storage include securing data with encryption, managing access controls, monitoring usage to optimize costs, and choosing appropriate storage types and deployment models based on workload requirements",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Public cloud providers operate data centers in dozens of locations worldwide, with AWS",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Public cloud providers operate data centers in dozens of locations worldwide, with AWS having 35+ availability zones globally as of 2025\",\"context\":\"Demonstrates the geographic distribution and redundancy of cloud storage infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"},{\"value\":\"Cloud storage elasticity allows capacity to scale from gigabytes to petabytes on deman",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Cloud storage elasticity allows capacity to scale from gigabytes to petabytes on demand\",\"context\":\"Shows the scalability advantage over fixed on-premises storage systems",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"Average latency for cloud storage access ranges from single-digit milliseconds to tens",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Average latency for cloud storage access ranges from single-digit milliseconds to tens of milliseconds depending on storage type and network conditions\",\"context\":\"Performance metric relevant for applications requiring fast data retrieval",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Google Cloud Storage offers multi-regional and regional storage classes optimized for different ",
+      "url": "",
+      "snippet": ".\",\"Google Cloud Storage offers multi-regional and regional storage classes optimized for different latency and availability needs",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Microsoft Azure Blob Storage supports massive unstructured data storage with integration into Az",
+      "url": "",
+      "snippet": ".\",\"Microsoft Azure Blob Storage supports massive unstructured data storage with integration into Azure's analytics and AI services",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Dropbox and Box use cloud storage to enable file sharing and collaboration across devices and us",
+      "url": "",
+      "snippet": ".\",\"Dropbox and Box use cloud storage to enable file sharing and collaboration across devices and users globally",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Private cloud storage solutions like VMware vSAN allow enterprises to build dedicated storage in",
+      "url": "",
+      "snippet": ".\",\"Private cloud storage solutions like VMware vSAN allow enterprises to build dedicated storage infrastructure with cloud-like flexibility",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Hybrid cloud deployments combine on-premises storage with public cloud services for workload bur",
+      "url": "",
+      "snippet": ".\",\"Hybrid cloud deployments combine on-premises storage with public cloud services for workload bursting and disaster recovery, used by enterprises with sensitive data",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Multi-cloud strategies are adopted by large organizations to leverage best-of-breed services fro",
+      "url": "",
+      "snippet": ".\",\"Multi-cloud strategies are adopted by large organizations to leverage best-of-breed services from AWS, Azure, and Google Cloud while mitigating risks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    }
+  ]
+}

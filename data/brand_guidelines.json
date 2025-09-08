@@ -1,0 +1,135 @@
+{
+  "company_info": {
+    "name": "Gcore",
+    "tagline": "Global Edge Computing and CDN Provider",
+    "founded": "2014",
+    "headquarters": "Luxembourg",
+    "global_reach": "180+ Points of Presence",
+    "average_latency": "30ms"
+  },
+  "style_rules": {
+    "tone": "formal_but_approachable",
+    "voice": "authoritative_yet_friendly",
+    "use_contractions": true,
+    "sentence_case_headings": true,
+    "formal_tone": true,
+    "avoid_competitors": true,
+    "max_sentence_length": 30,
+    "max_paragraph_length": 150,
+    "use_active_voice": true,
+    "use_second_person": false,
+    "use_first_person_plural": true
+  },
+  "terminology": {
+    "preferred": {
+      "CDN": "CDN",
+      "edge_computing": "edge computing",
+      "points_of_presence": "Points of Presence",
+      "pops": "PoPs",
+      "edge_servers": "edge servers",
+      "cloud_computing": "cloud computing",
+      "infrastructure": "infrastructure",
+      "latency": "latency",
+      "bandwidth": "bandwidth",
+      "performance": "performance",
+      "scalability": "scalability",
+      "reliability": "reliability",
+      "security": "security",
+      "DDoS_protection": "DDoS protection",
+      "SSL_TLS": "SSL/TLS",
+      "API": "API",
+      "SLA": "SLA",
+      "uptime": "uptime"
+    },
+    "avoid": {
+      "content_delivery_network": "Use 'CDN' instead",
+      "edge_nodes": "Use 'edge servers' or 'PoPs' instead",
+      "cloud": "Be specific: 'cloud computing' or 'cloud infrastructure'",
+      "fast": "Use specific metrics like '30ms latency'",
+      "cheap": "Use 'cost-effective' or 'affordable'",
+      "best": "Use 'leading' or 'advanced'",
+      "revolutionary": "Use 'innovative' or 'advanced'",
+      "cutting-edge": "Use 'modern' or 'advanced'"
+    }
+  },
+  "content_guidelines": {
+    "introduction": {
+      "structure": "Direct answer first, then expansion",
+      "length": "2-3 sentences",
+      "requirements": [
+        "Answer the main question immediately",
+        "Include primary keyword in first sentence",
+        "Set context for the rest of the content"
+      ]
+    },
+    "body_content": {
+      "paragraph_structure": "Topic sentence + 2-3 supporting sentences",
+      "evidence": "Include statistics, metrics, or examples",
+      "transitions": "Use natural transitions between sections",
+      "gcore_context": "Mention Gcore capabilities where relevant"
+    },
+    "technical_content": {
+      "accuracy": "Ensure technical accuracy",
+      "explanation_level": "Explain technical concepts clearly",
+      "examples": "Include practical examples",
+      "metrics": "Use specific performance metrics"
+    }
+  },
+  "seo_guidelines": {
+    "keyword_density": {
+      "primary": "2-3%",
+      "secondary": "1-2%",
+      "semantic": "Natural inclusion"
+    },
+    "meta_descriptions": {
+      "length": "150-160 characters",
+      "include_keyword": true,
+      "include_cta": false
+    },
+    "internal_linking": {
+      "frequency": "2-3 per 500 words",
+      "relevance": "Only link to related content",
+      "anchor_text": "Use descriptive anchor text"
+    }
+  },
+  "formatting": {
+    "headings": {
+      "case": "sentence",
+      "punctuation": "no_end_punctuation",
+      "length": "max_10_words"
+    },
+    "lists": {
+      "bullet_style": "•",
+      "numbering": "1. 2. 3.",
+      "capitalization": "sentence_case",
+      "punctuation": "period_for_complete_sentences"
+    },
+    "emphasis": {
+      "bold": "**text**",
+      "italic": "*text*",
+      "code": "`code`"
+    }
+  },
+  "prohibited": {
+    "words": [
+      "cheap",
+      "best",
+      "number one",
+      "guaranteed",
+      "revolutionary",
+      "groundbreaking",
+      "game-changing"
+    ],
+    "phrases": [
+      "the best in the industry",
+      "unmatched performance",
+      "the only solution",
+      "guaranteed results"
+    ],
+    "claims": [
+      "Unsubstantiated performance claims",
+      "Comparative claims without data",
+      "Absolute statements without evidence"
+    ]
+  }
+}

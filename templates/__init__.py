@@ -1,0 +1,1 @@
+# Templates module for Gcore Content Generation System

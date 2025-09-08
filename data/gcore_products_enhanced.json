@@ -1,0 +1,1811 @@
+{
+  "products": {
+    "cdn": {
+      "name": "CDN",
+      "full_name": "Gcore Content Delivery Network",
+      "url": "https://gcore.com/cdn",
+      "tagline": "Next-gen CDN. Global. Fast. Flexible.",
+      "description": "Make your app fast and responsive for a global audience with Gcore CDN. Next-generation content delivery with 210+ PoPs worldwide and 30ms average latency.",
+      "key_features": [
+        "210+ Points of Presence worldwide",
+        "30ms average global latency",
+        "200+ Tbps network capacity",
+        "85% average cache hit ratio",
+        "2M requests per second capacity",
+        "14 Tbps daily peak bandwidth",
+        "Free €0/month starter plan",
+        "HTTP/3 (beta) and HTTP/2 support",
+        "TLS 1.3 with 0-RTT",
+        "IPv4/IPv6 dual support",
+        "Anycast and GeoDNS routing",
+        "Dynamic content acceleration",
+        "Free Let's Encrypt SSL",
+        "Custom SSL certificates",
+        "Extended API with Terraform support",
+        "Grafana integration",
+        "Origin shielding and groups",
+        "Built-in DDoS protection"
+      ],
+      "performance_metrics": {
+        "latency_reduction": "From 110ms to 20ms average response time",
+        "network_capacity": "200+ Tbps",
+        "pops_count": "210+",
+        "cache_hit_ratio": "85%",
+        "requests_per_second": "2,000,000",
+        "daily_peak_bandwidth": "14 Tbps"
+      },
+      "use_cases": {
+        "web_applications": {
+          "title": "Web Applications & E-commerce",
+          "benefits": [
+            "Improved website speed",
+            "Acceleration of dynamically-generated assets",
+            "Image compression and transformation on-the-fly",
+            "Instant playbook for product videos",
+            "Availability during traffic surges and DDoS attacks",
+            "TLS encryption and access control"
+          ]
+        },
+        "gaming": {
+          "title": "Games & Software Assets",
+          "benefits": [
+            "200 Tbps of global network capacity",
+            "Content prefetching",
+            "Large file delivery optimization",
+            "Cache sharding for better latency",
+            "Origin server shielding"
+          ]
+        },
+        "video_streaming": {
+          "title": "Video Streaming",
+          "benefits": [
+            "Reduced TTFB for instant playback",
+            "Better connectivity for stream integrity",
+            "Micro-segmented caching for live video",
+            "RAM caching for live video",
+            "Public and restricted access control",
+            "Deliver stutter-free 4K video playback",
+            "0.5-4s latency for near real-time broadcasting",
+            "Support for 10M+ concurrent viewers"
+          ]
+        }
+      },
+      "pricing": {
+        "free_plan": "€0 per month starter plan",
+        "model": "Pay-as-you-grow with no commitments"
+      },
+      "technical_specs": {
+        "protocols": ["IPv4", "IPv6", "HTTP/2", "HTTP/3 (beta)"],
+        "security": ["TLS 1.3 with 0-RTT", "Free Let's Encrypt SSL", "Custom SSL certificates", "DDoS protection", "WAF integration"],
+        "routing": ["Anycast", "GeoDNS routing"],
+        "features": ["Dynamic content acceleration", "Edge rules", "Origin shielding", "Origin groups"],
+        "integrations": ["Extended API", "Terraform support", "Grafana support", "Two-factor authentication"]
+      },
+      "image_optimization": {
+        "name": "Image Stack by Gcore",
+        "features": [
+          "Convert to WebP, AVIF (up to 85% file size savings)",
+          "Quality control for images",
+          "Resize images with query strings",
+          "Crop images automatically"
+        ]
+      },
+      "customer_testimonials": [
+        {
+          "company": "Stage Audio Works",
+          "testimonial": "For security and scalability reasons, we decided right away that we wanted to entrust the delivery of our customers' videos to a reputable CDN provider. We settled on the infrastructure of Gcore and don't regret our choice.",
+          "author": "Nathan Ihlenfeldt"
+        },
+        {
+          "company": "Sandbox Interactive", 
+          "testimonial": "We managed to transfer all our resources without any problems. Our users did not notice any changes. Thanks to Gcore, we achieved the results we expected and saved over 40% on CDN infrastructure in a year.",
+          "author": "David Salz"
+        },
+        {
+          "company": "Shopcada",
+          "testimonial": "I want to be able to quickly deliver content to my visitors, and Gcore does a great job of this.",
+          "author": "Ethan Cheong"
+        }
+      ],
+      "competitive_advantages": [
+        "210+ PoPs with strongest presence in emerging markets",
+        "200+ Tbps network capacity (industry-leading)",
+        "85% cache hit ratio optimization",
+        "Dynamic content acceleration for web applications",
+        "Built-in security (DDoS, WAF, SSL)",
+        "Developer-friendly with extensive API and DevOps tools",
+        "Image optimization as a service included",
+        "Free starter plan with no commitments"
+      ],
+      "cta_templates": {
+        "performance": "Reduce latency from 110ms to 20ms with Gcore CDN's 210+ PoPs and 200+ Tbps network capacity. Deliver content 5x faster to your global audience.",
+        "cost": "Start free with €0/month and scale as you grow. Save over 40% on CDN costs compared to traditional providers - no commitments required.",
+        "global": "Reach 10M+ concurrent users worldwide with 85% cache hit ratio. Strongest presence in emerging markets where others can't deliver.",
+        "enterprise": "Handle 2M requests per second with 14 Tbps peak capacity. Built-in DDoS protection and enterprise APIs included.",
+        "developers": "Deploy in minutes with Terraform support, extensive APIs, and Grafana integration. Built for DevOps teams who need speed and control.",
+        "streaming": "Deliver stutter-free 4K video with 0.5-4s latency. Optimized for live streaming with micro-segmented caching and RAM optimization."
+      }
+    },
+    "gpu_cloud": {
+      "name": "GPU Cloud",
+      "full_name": "AI GPU Cloud Infrastructure",
+      "url": "https://gcore.com/gpu-cloud",
+      "tagline": "Accelerate AI training, inference, and high‑performance computing (HPC) with cutting‑edge NVIDIA GPUs and ultra‑low latency network",
+      "description": "Powerful, scalable, and globally available GPUs in the cloud. Accelerate your most demanding workflows with high-performance Virtual Machines and Bare Metal servers.",
+      "key_features": [
+        "NVIDIA H200, H100, A100, L40S, GB200 GPUs",
+        "Bare metal GPU performance with no virtualization overhead",
+        "Multi-instance GPU (MIG) support",
+        "Ultra-fast InfiniBand networking",
+        "Multi-GPU cluster support",
+        "Automated API and Terraform control",
+        "Intelligent auto-scaling",
+        "Pre-configured AI/ML environments",
+        "Docker and Kubernetes support",
+        "TensorFlow, PyTorch, and JAX compatibility",
+        "Enterprise-grade security and compliance",
+        "Global availability with DDoS protection"
+      ],
+      "gpu_models": [
+        {
+          "model": "L40S",
+          "description": "Optimized for AI inference, 3D rendering, and simulations. Ideal for media production, gaming, and design applications",
+          "price": "From €1.28/hour",
+          "availability": "Available"
+        },
+        {
+          "model": "A100",
+          "description": "Multi-instance GPU (MIG) for AI inference, data analytics, and HPC. Scalable with or without InfiniBand",
+          "price": "From €1.25/hour",
+          "availability": "Available"
+        },
+        {
+          "model": "H100",
+          "description": "Advanced tensor cores for large-scale AI/ML training and HPC. Designed for high-performance AI model development",
+          "price": "From €2.90/hour",
+          "availability": "Available"
+        },
+        {
+          "model": "H200",
+          "description": "Next-gen architecture for cutting-edge AI and real-time applications. High efficiency and performance for AI and HPC",
+          "price": "From €3.00/hour",
+          "availability": "Reserve now"
+        },
+        {
+          "model": "GB200",
+          "description": "Ultra-efficient compute for cost-conscious AI inference and HPC. Balanced performance for AI/ML and analytics workloads",
+          "price": "Contact for pricing",
+          "availability": "Reserve now"
+        }
+      ],
+      "core_capabilities": {
+        "ai_ml_optimized": {
+          "title": "Optimized for AI and ML",
+          "description": "Run AI and ML workloads with precision. Supports TensorFlow, PyTorch, and JAX for training and deployment on NVIDIA GPUs"
+        },
+        "flexible_scalable": {
+          "title": "Flexible and scalable",
+          "description": "Get started with pre-configured environments and containerized workloads using Docker and Kubernetes. Scale on demand with multi-instance GPUs and high-speed networking"
+        },
+        "secure_global": {
+          "title": "Secure and globally available",
+          "description": "Deploy anywhere with global GPUs. Benefit from enterprise-grade security, high uptime, DDoS protection, and compliance"
+        }
+      },
+      "technical_features": {
+        "bare_metal": "Full access to NVIDIA GPUs with no virtualization overhead",
+        "api_terraform": "Easily manage clusters, automate provisioning, and scale workloads with full API and Terraform integration",
+        "auto_scaling": "Dynamically scale GPU clusters based on real-time workload demands",
+        "infiniband": "Low-latency, high-bandwidth InfiniBand for seamless multi-GPU training",
+        "multi_gpu": "Support for multi-GPU configurations across distributed nodes",
+        "pricing_flexibility": "Pay-as-you-go, reserved instances, and long-term subscription options"
+      },
+      "use_cases": {
+        "ai_training": {
+          "title": "AI model training",
+          "description": "Train large language models (LLMs) and deep learning networks faster with high-performance GPUs optimized for large-scale workloads"
+        },
+        "ai_inference": {
+          "title": "AI inference at scale", 
+          "description": "Deploy and run real-time AI applications with ultra-low latency for critical use cases like chatbots, recommendation engines, and autonomous systems"
+        },
+        "hpc": {
+          "title": "High-Performance Computing (HPC)",
+          "description": "Solve complex scientific and engineering problems, from genomics and computational fluid dynamics to financial modeling and risk analysis"
+        },
+        "generative_ai": {
+          "title": "Generative AI and deep learning",
+          "description": "Power generative AI applications, including image synthesis, video generation, and AI-powered content creation"
+        },
+        "rendering": {
+          "title": "3D rendering and simulations",
+          "description": "Accelerate visual effects, gaming, and CAD modeling with industry-leading GPU performance for rendering and physics simulations"
+        },
+        "analytics": {
+          "title": "Big data and AI-powered analytics",
+          "description": "Process massive datasets with machine learning-driven insights, supporting industries like finance, healthcare, and cybersecurity"
+        }
+      },
+      "pricing": {
+        "model": "Flexible on-demand and reserved pricing",
+        "billing": "Pay-as-you-go, reserved instances, and long-term subscriptions",
+        "starting_price": "From €1.25/hour for A100 GPUs"
+      },
+      "supported_frameworks": [
+        "TensorFlow",
+        "PyTorch", 
+        "JAX",
+        "Docker",
+        "Kubernetes"
+      ],
+      "competitive_advantages": [
+        "No virtualization overhead with bare metal performance",
+        "Latest NVIDIA GPU models including H200 and GB200",
+        "Ultra-fast InfiniBand networking for distributed training",
+        "Multi-instance GPU (MIG) support for efficient resource utilization",
+        "Global availability with enterprise-grade security",
+        "Full API and Terraform automation",
+        "Intelligent auto-scaling based on workload demands",
+        "Competitive pricing starting from €1.25/hour"
+      ],
+      "cta_templates": {
+        "ai_ml": "Train LLMs and deploy AI models with NVIDIA H100/H200 GPUs. Start from €1.25/hour with bare metal performance and no virtualization overhead.",
+        "cost": "Save on GPU costs with flexible pricing - pay-as-you-go from €1.25/hour, reserved instances, or long-term subscriptions. No quotas or waitlists.",
+        "performance": "Maximize AI training speed with ultra-fast InfiniBand networking and multi-GPU clusters. Get bare metal performance with zero virtualization overhead.",
+        "enterprise": "Deploy enterprise AI workloads with global availability, DDoS protection, and compliance. Full API/Terraform automation included.",
+        "scale": "Scale from prototype to production with intelligent auto-scaling and multi-instance GPU support. Pre-configured environments for TensorFlow, PyTorch, and JAX.",
+        "hpc": "Accelerate scientific computing and financial modeling with NVIDIA H100/A100 GPUs. Solve complex problems faster with distributed computing support."
+      }
+    },
+    "inference": {
+      "name": "Everywhere Inference",
+      "full_name": "Gcore Everywhere Inference",
+      "url": "https://gcore.com/everywhere-inference",
+      "tagline": "Performance, flexibility, and scalability for any AI workload—built for startups and enterprises alike",
+      "description": "Deploy anywhere, scale everywhere. Seamless AI deployment across any cloud or on-premises setup with smart routing to the nearest GPU or region for optimal performance.",
+      "key_features": [
+        "Deploy across any cloud or on-premises",
+        "Smart routing powered by 210+ PoPs worldwide",
+        "Real-time dynamic scaling",
+        "Multi-tenancy across multiple regions",
+        "Per-second GPU billing with cost transparency",
+        "Open-source and custom model support",
+        "Comprehensive observability and monitoring",
+        "OpenAI API compatibility",
+        "Enterprise-ready security and isolation",
+        "Regulatory compliance with regional deployment",
+        "Automated workload management",
+        "Granular cost control"
+      ],
+      "deployment_options": {
+        "public_inference": {
+          "title": "Public inference",
+          "description": "Deploy AI fast with Gcore's global network of GPUs and PoPs, simplifying setup with integrated solutions"
+        },
+        "hybrid_deployments": {
+          "title": "Hybrid deployments", 
+          "description": "Extend Gcore's inference solution benefits across all your deployments, leveraging any third-party cloud or on-prem infrastructure"
+        },
+        "private_on_premises": {
+          "title": "Private on-premises",
+          "description": "Decide where to host control plane for enhanced security. Full operational oversight and privacy with business flexibility"
+        }
+      },
+      "core_advantages": {
+        "high_performance": {
+          "title": "High performance",
+          "description": "Deliver ultra-fast AI applications with smart routing powered by Gcore's CDN network of over 210 PoPs worldwide"
+        },
+        "dynamic_scalability": {
+          "title": "Dynamic scalability",
+          "description": "Adapt to changing demands with real-time scaling. Deploy AI workloads seamlessly across Gcore's cloud, third-party clouds, or on-premises"
+        },
+        "cost_efficiency": {
+          "title": "Cost efficiency",
+          "description": "Optimize spending for informed decision-making with intelligent resource allocation and granular cost tracking"
+        },
+        "quick_time_to_market": {
+          "title": "Quick time-to-market",
+          "description": "Accelerate AI development by focusing on innovation while Everywhere Inference handles infrastructure complexities"
+        },
+        "regulatory_compliance": {
+          "title": "Regulatory compliance",
+          "description": "Serve workloads in the region of your choice with smart routing that helps manage compliance with local data regulations"
+        },
+        "enterprise_reliability": {
+          "title": "Enterprise-ready reliability",
+          "description": "Leverage secure, scalable infrastructure with integrated security, data isolation, and multi-tenancy for reliable performance"
+        }
+      },
+      "technical_capabilities": {
+        "smart_routing": "Automatically direct workloads to the nearest data center or designated region, reducing latency and simplifying compliance",
+        "multi_tenancy": "Support various user entities and applications simultaneously, with efficient scalability across multiple locations",
+        "real_time_scaling": "Dynamically adjust AI infrastructure to meet demands of time-sensitive applications",
+        "model_flexibility": "Deploy AI models effortlessly—choose from ready-to-use model library or bring your own custom models",
+        "cost_control": "Access real-time cost estimates with per-second GPU billing, offering full transparency and optimized resource usage",
+        "observability": "Track performance and logs with detailed monitoring tools to maintain seamless operations"
+      },
+      "featured_models": [
+        {
+          "name": "SDXL-Lightning",
+          "category": "Image generation",
+          "description": "High-speed image generation model"
+        },
+        {
+          "name": "Mistral-7B",
+          "category": "LLM / Chat",
+          "description": "Large language model for conversational AI"
+        },
+        {
+          "name": "Whisper-Large",
+          "category": "ASR",
+          "description": "Automatic speech recognition model"
+        }
+      ],
+      "use_cases": {
+        "telecommunications": {
+          "title": "Telecommunications",
+          "applications": [
+            "Predictive maintenance/anomaly detection",
+            "Network traffic management", 
+            "Customer call transcribing",
+            "Customer churn predictions",
+            "Personalised recommendations",
+            "Fraud detection"
+          ]
+        },
+        "healthcare": {
+          "title": "Healthcare",
+          "applications": [
+            "Drug discovery acceleration",
+            "Medical imaging analysis for diagnostics",
+            "Genomics and precision medicine applications",
+            "Chatbots for patient engagement and support",
+            "Continuous patient monitoring systems"
+          ]
+        },
+        "financial_services": {
+          "title": "Financial Services",
+          "applications": [
+            "Fraud detection",
+            "Customer call transcribing",
+            "Customer churn predictions",
+            "Personalised recommendations",
+            "Credit and risk scoring",
+            "Loan default prediction",
+            "Trading"
+          ]
+        },
+        "retail": {
+          "title": "Retail",
+          "applications": [
+            "Content generation (image, video, text)",
+            "Customer call transcribing",
+            "Dynamic pricing",
+            "Customer churn predictions", 
+            "Personalised recommendations",
+            "Fraud detection"
+          ]
+        },
+        "energy": {
+          "title": "Energy",
+          "applications": [
+            "Real-time seismic data processing",
+            "Predictive maintenance / anomaly detection"
+          ]
+        },
+        "public_sector": {
+          "title": "Public Sector",
+          "applications": [
+            "Emergency response system management",
+            "Chatbots processing identifiable citizen data",
+            "Traffic management",
+            "Natural disaster prediction"
+          ]
+        }
+      },
+      "pricing": {
+        "model": "Per-second GPU billing",
+        "transparency": "Real-time cost estimates with full transparency",
+        "optimization": "Intelligent resource allocation for cost efficiency"
+      },
+      "gpu_optimization": {
+        "nvidia_l40s": {
+          "description": "Latest universal data center GPU specifically designed for AI inference",
+          "performance": "Up to 5× faster inference performance compared to A100 and H100",
+          "advantage": "Superior price/performance ratio for AI inference workloads"
+        }
+      },
+      "competitive_advantages": [
+        "Deploy across any cloud or on-premises infrastructure",
+        "Smart routing with 210+ PoPs for ultra-low latency",
+        "Real-time dynamic scaling based on demand",
+        "Per-second GPU billing for cost optimization",
+        "OpenAI API compatibility for easy integration",
+        "Multi-tenancy with enterprise-grade security",
+        "Custom and open-source model support",
+        "Comprehensive observability and monitoring",
+        "Regulatory compliance with regional deployment options",
+        "NVIDIA L40S optimization for 5× faster inference"
+      ],
+      "integrations": {
+        "apis": ["OpenAI libraries and APIs", "REST APIs", "Terraform"],
+        "frameworks": ["Custom models", "Open-source models", "Model library"],
+        "infrastructure": ["Gcore Cloud", "Third-party clouds", "On-premises"]
+      },
+      "cta_templates": {
+        "performance": "Deploy AI anywhere with smart routing across 210+ PoPs. Get up to 5× faster inference with NVIDIA L40S GPUs and ultra-low latency worldwide.",
+        "flexibility": "Scale across any cloud or on-premises with real-time dynamic scaling. Deploy public, hybrid, or private inference solutions that fit your needs.",
+        "cost": "Optimize AI costs with per-second GPU billing and intelligent resource allocation. Get full cost transparency and control over your inference spending.",
+        "enterprise": "Enterprise-ready AI inference with multi-tenancy, data isolation, and regulatory compliance. Deploy securely across regions with full observability.",
+        "integration": "Seamlessly integrate with OpenAI APIs and your existing ML pipeline. Deploy custom models or choose from our ready-to-use model library.",
+        "compliance": "Meet regulatory requirements with regional deployment options. Smart routing helps manage compliance with local data regulations and industry standards."
+      }
+    },
+    "virtual_machines": {
+      "name": "Virtual Machines",
+      "full_name": "Cloud Virtual Machines",
+      "url": "https://gcore.com/cloud/virtual-machines",
+      "tagline": "High-performance compute and storage across 30+ global regions—enjoy free egress traffic and pay only for active instances",
+      "description": "Virtual machines for every workload. Choose from a wide range of pre-configured VMs with flexible options for processors, storage, networking, operating systems, and pricing.",
+      "key_features": [
+        "30+ global cloud regions",
+        "Free egress traffic",
+        "Pay only for active instances",
+        "Dedicated vCPUs for all VM types",
+        "Multiple network interfaces",
+        "Pre-configured VM images and custom image support",
+        "Load balancer integration",
+        "Floating IP addresses",
+        "Expandable SSD storage volumes",
+        "Cloud firewall protection",
+        "Basic DDoS protection included",
+        "WAF and encryption at no additional cost",
+        "API and Terraform support",
+        "Intuitive control panel"
+      ],
+      "vm_types": [
+        {
+          "type": "Standard",
+          "description": "Dedicated vCPUs, including free egress traffic and billing only for active instances. Suited for general workloads, balancing compute resources",
+          "price": "From €14.98/month",
+          "use_case": "General workloads with balanced compute resources"
+        },
+        {
+          "type": "CPU-Optimized",
+          "description": "Dedicated vCPUs, including free egress traffic and billing only for active instances. Suited for high-demand, CPU-intensive workloads",
+          "price": "From €23.98/month",
+          "use_case": "High-demand, CPU-intensive applications"
+        },
+        {
+          "type": "Memory-Optimized",
+          "description": "Dedicated vCPUs, including free egress traffic and billing only for active instances. Suited for memory-intensive workloads requiring high RAM",
+          "price": "From €66.02/month",
+          "use_case": "Memory-intensive applications requiring high RAM"
+        },
+        {
+          "type": "High-Frequency",
+          "description": "Dedicated vCPUs, including free egress traffic and billing only for active instances. Suited for high-frequency CPU workloads",
+          "price": "From €14.98/month",
+          "use_case": "High-frequency CPU workloads"
+        },
+        {
+          "type": "GPU",
+          "description": "Dedicated compute resources with state-of-the-art GPUs. Designed for AI-intensive workloads, including generative AI and large language models (LLM)",
+          "price": "From €1.25/hour",
+          "use_case": "AI-intensive workloads, generative AI, LLMs"
+        }
+      ],
+      "core_capabilities": {
+        "scalability": {
+          "title": "Scalability",
+          "description": "Scale your cloud computing resources on demand to meet changing needs, optimizing performance for every workload"
+        },
+        "global_reach": {
+          "title": "Global reach",
+          "description": "Deploy globally across 30+ cloud regions and enable latency-sensitive applications on dedicated servers"
+        },
+        "integrated_security": {
+          "title": "Integrated security",
+          "description": "Secure your data and applications with basic DDoS protection, WAF, and encryption at no additional cost"
+        },
+        "easy_deployment": {
+          "title": "Easy deployment",
+          "description": "Deploy and manage virtual machines quickly and effortlessly with an intuitive control panel, APIs, and orchestration tools like Terraform"
+        },
+        "cost_effective": {
+          "title": "Cost-effective",
+          "description": "Unlock savings with free egress traffic, flexible pay-as-you-go options, and affordable pricing to maximize the value of your cloud investments"
+        },
+        "compliance": {
+          "title": "Data sovereignty and compliance",
+          "description": "Meet GDPR, ISO 27001, and PCI DSS standards by keeping data in-region with secure cloud locations"
+        }
+      },
+      "technical_features": {
+        "multiple_network_interfaces": "Directly connect to public or private networks",
+        "images": "Accelerate project deployment with pre-configured virtual machine images or add custom images",
+        "load_balancer": "Maintain application availability during traffic spikes by managing infrastructure loads via the API",
+        "floating_ips": "Easily disable and migrate public IPv4 addresses between resources as needed",
+        "volumes": "Expand SSD storage as needed based on your application requirements",
+        "cloud_firewall": "Implement security rules for one or more virtual machines"
+      },
+      "deployment_process": [
+        {
+          "step": 1,
+          "title": "Configure",
+          "description": "Choose a virtual machine that fits your workload requirements"
+        },
+        {
+          "step": 2,
+          "title": "Deploy",
+          "description": "Deploy your virtual machine in the right region for optimal performance"
+        },
+        {
+          "step": 3,
+          "title": "Manage",
+          "description": "Monitor performance, adjust resources, and scale as needed to maintain efficiency"
+        }
+      ],
+      "use_cases": {
+        "retail": {
+          "title": "Retail",
+          "description": "Power online stores with scalable virtual machines that ensure fast, secure, and reliable operations for a seamless shopping experience"
+        },
+        "media_entertainment": {
+          "title": "Media and Entertainment",
+          "description": "Deliver high-quality live and on-demand streaming, with low latency and high performance for global audiences"
+        },
+        "gaming": {
+          "title": "Gaming",
+          "description": "Host multiplayer game servers with ultra-low latency and high-frequency compute power for a responsive player experience"
+        },
+        "financial_services": {
+          "title": "Financial Services",
+          "description": "Run mission-critical trading platforms, analytics, and financial applications with maximum reliability and security"
+        },
+        "healthcare": {
+          "title": "Healthcare",
+          "description": "Support telemedicine, patient data analysis, and healthcare applications with secure and compliant compute infrastructure"
+        },
+        "education": {
+          "title": "Education",
+          "description": "Scale online learning platforms and virtual classrooms with robust virtual machines designed for interactive environments"
+        }
+      },
+      "pricing": {
+        "model": "Pay only for active instances",
+        "starting_price": "From €14.98/month",
+        "benefits": ["Free egress traffic", "Flexible pay-as-you-go options", "Regional pricing variations"],
+        "note": "Prices exclude VAT and are based on the Luxembourg data center. Pricing and availability may vary according to location."
+      },
+      "security_features": [
+        "Basic DDoS protection (free)",
+        "WAF (Web Application Firewall) included",
+        "Encryption at no additional cost",
+        "Cloud firewall options",
+        "Data sovereignty and compliance (GDPR, ISO 27001, PCI DSS)"
+      ],
+      "competitive_advantages": [
+        "30+ global cloud regions for ultra-low latency",
+        "Free egress traffic (significant cost savings)",
+        "Pay only for active instances (not idle time)",
+        "Dedicated vCPUs for all VM types (no shared resources)",
+        "5 specialized VM types for different workloads",
+        "Integrated security features at no additional cost",
+        "Flexible pricing starting from €14.98/month",
+        "Full API and Terraform automation support",
+        "Compliance with major standards (GDPR, ISO 27001, PCI DSS)",
+        "Pre-configured images for faster deployment"
+      ],
+      "vm_comparison": {
+        "shared_vms": "Use a pool of resources divided among multiple users. Ideal for lightweight applications that don't require consistent high performance",
+        "dedicated_vms": "Provide exclusive access to compute resources, offering predictable and reliable performance for demanding workloads"
+      },
+      "cta_templates": {
+        "cost_savings": "Save significantly with free egress traffic and pay only for active instances. Deploy VMs starting from €14.98/month across 30+ global regions.",
+        "performance": "Get dedicated vCPUs and ultra-low latency with deployment across 30+ global regions. Choose from 5 specialized VM types optimized for your workload.",
+        "security": "Deploy with confidence using integrated DDoS protection, WAF, and encryption at no additional cost. Meet GDPR, ISO 27001, and PCI DSS compliance requirements.",
+        "flexibility": "Scale on demand with 5 VM types from Standard to GPU-powered instances. Deploy globally with API/Terraform automation and custom image support.",
+        "enterprise": "Run mission-critical applications with dedicated resources, enterprise-grade security, and compliance. 30+ regions ensure optimal performance worldwide.",
+        "developer": "Accelerate development with pre-configured images, intuitive control panel, and full API integration. Deploy and manage VMs effortlessly with Terraform support."
+      }
+    },
+    "bare_metal": {
+      "name": "Bare Metal",
+      "full_name": "Bare Metal Servers",
+      "url": "https://gcore.com/cloud/bare-metal",
+      "tagline": "Dedicated, scalable, and secure physical servers—built to power your applications",
+      "description": "Robust processing power for intensive workloads. Choose from a wide range of fully dedicated bare metal servers, customizable with various processors, storage, and operating systems.",
+      "key_features": [
+        "100% dedicated physical servers",
+        "15-20 minute deployment for standard configurations",
+        "No virtualization overhead",
+        "25+ global data center locations",
+        "99.9% uptime SLA",
+        "Multiple operating systems (Ubuntu, CentOS, Debian, Windows)",
+        "Custom image upload support",
+        "High availability networking with LACP-aggregated ports",
+        "API-driven automation",
+        "Multiple network interfaces",
+        "Private and hybrid network support",
+        "Single-tenant hardware security",
+        "Free basic DDoS protection",
+        "24/7 technical support"
+      ],
+      "server_types": [
+        {
+          "type": "Basic",
+          "description": "Optimized for lightweight workloads. Best for micro-containers and less intensive applications",
+          "price": "From €186.00/month",
+          "use_case": "Micro-containers and lightweight applications"
+        },
+        {
+          "type": "High-frequency",
+          "description": "Designed for fast processing needs. Suited for applications requiring high processor speeds",
+          "price": "From €196.00/month",
+          "use_case": "Applications requiring high processor speeds"
+        },
+        {
+          "type": "Infrastructure",
+          "description": "Built for the most demanding performance needs. Ideal for multithreaded and resource-intensive applications",
+          "price": "From €408.15/month",
+          "use_case": "Multithreaded and resource-intensive applications"
+        }
+      ],
+      "core_capabilities": {
+        "high_performance": {
+          "title": "High performance",
+          "description": "Achieve low latency and fast processing with 100% dedicated resources and no virtualization overhead"
+        },
+        "reliable_uptime": {
+          "title": "Reliable uptime",
+          "description": "Keep your business running smoothly with failover infrastructure, 99.9% SLA, and 24/7 technical support"
+        },
+        "integrated_security": {
+          "title": "Integrated security",
+          "description": "Safeguard your data with single-tenant hardware, exclusive server access, and free basic DDoS protection"
+        },
+        "cost_effective": {
+          "title": "Cost-effective",
+          "description": "Maximize value with flexible pay-as-you-go plans and scalable pricing without compromising server performance"
+        },
+        "rapid_deployment": {
+          "title": "Rapid deployment",
+          "description": "Get servers up and running in under 15 minutes, minimize downtime, and scale faster"
+        },
+        "ease_of_use": {
+          "title": "Ease of use",
+          "description": "Simplify configuration and management with an intuitive platform that seamlessly integrates into your existing infrastructure"
+        }
+      },
+      "technical_features": {
+        "operating_systems": "Deploy with Ubuntu, CentOS, Debian, or Windows—or upload custom images for complete flexibility",
+        "networking": "Improve traffic throughput and server availability with LACP-aggregated ports",
+        "api_automation": "Simplify deployment and integrate Gcore Bare Metal into your workflows",
+        "network_interfaces": "Build private or hybrid networks by consolidating bare metal and virtual machines",
+        "global_reach": "Access Tier III and IV data centers in 25+ locations",
+        "integrations": "Combine bare metal servers with Kubernetes, CDN, Video Streaming, and WAAP from Gcore"
+      },
+      "deployment_process": [
+        {
+          "step": 1,
+          "title": "Configure",
+          "description": "Choose your data center location, and configure your bare metal server"
+        },
+        {
+          "step": 2,
+          "title": "Deploy",
+          "description": "Set up your operating system, network and SSH keys, and launch your server"
+        },
+        {
+          "step": 3,
+          "title": "Manage",
+          "description": "Monitor performance, optimize resources, and scale easily through our intuitive control panel or APIs"
+        }
+      ],
+      "use_cases": {
+        "gaming": {
+          "title": "Gaming",
+          "description": "Experience multiplayer gaming with high-performance bare metal, enabling low latency, stable connections, and fast experiences"
+        },
+        "financial_services": {
+          "title": "Financial Services",
+          "description": "Handle real-time transactions and process large volumes of data with secure, fast, compliant dedicated servers"
+        },
+        "technology": {
+          "title": "Technology",
+          "description": "Support large-scale data processing and application hosting with high-speed, reliable, and dedicated servers"
+        },
+        "healthcare": {
+          "title": "Healthcare",
+          "description": "Enable real-time diagnostics and securely process medical data while prioritizing compliance with privacy regulations"
+        },
+        "retail": {
+          "title": "Retail",
+          "description": "Handle peak traffic and keep transactions secure while providing reliable shopping experiences"
+        },
+        "media_entertainment": {
+          "title": "Media and Entertainment",
+          "description": "Deliver high-quality content, stream videos seamlessly, and manage large media files with robust, high-performance infrastructure"
+        }
+      },
+      "pricing": {
+        "model": "Flexible pay-as-you-go plans",
+        "starting_price": "From €186.00/month",
+        "custom_pricing": "Available for large orders or 12+ month prepayment",
+        "note": "Prices exclude VAT and are based on the Frankfurt data center. Pricing and availability may vary according to location."
+      },
+      "security_features": {
+        "single_tenant": "Single-tenant hardware with exclusive server access",
+        "ddos_protection": "Free basic DDoS protection with 5 Gbps threshold",
+        "advanced_ddos": "Customizable protection settings available",
+        "private_networking": "Private networks between servers at no additional cost",
+        "compliance": "Healthcare and financial services compliance support"
+      },
+      "infrastructure_specs": {
+        "deployment_time": "15-20 minutes for standard configurations",
+        "uptime_sla": "99.9% SLA",
+        "data_centers": "25+ locations with Tier III and IV facilities",
+        "networking": "LACP-aggregated ports for high availability",
+        "ip_addresses": "Multiple dedicated public IPv4 and IPv6 addresses",
+        "support": "24/7 technical support",
+        "management": "Serial console (VNC) access through customer portal"
+      },
+      "competitive_advantages": [
+        "100% dedicated resources with no virtualization overhead",
+        "15-20 minute deployment (fastest in industry)",
+        "25+ global data center locations",
+        "99.9% uptime SLA with 24/7 support",
+        "Free basic DDoS protection included",
+        "Single-tenant hardware for maximum security",
+        "Custom image upload and OS flexibility",
+        "API-driven automation and integration",
+        "Private networking at no additional cost",
+        "Flexible pricing starting from €186/month",
+        "LACP-aggregated ports for high availability",
+        "Integration with full Gcore ecosystem"
+      ],
+      "customization_options": {
+        "hardware": "RAM upgrades, storage replacement, and configuration changes available",
+        "os_options": "Ubuntu, CentOS, Debian, Windows Server, custom images",
+        "networking": "Multiple IPv4/IPv6 addresses, private networks, hybrid setups",
+        "pricing": "Custom pricing for large deployments and long-term commitments"
+      },
+      "cta_templates": {
+        "performance": "Get 100% dedicated resources with zero virtualization overhead. Deploy in 15-20 minutes across 25+ global locations with 99.9% uptime SLA.",
+        "security": "Secure your workloads with single-tenant hardware, exclusive server access, and free DDoS protection. Perfect for compliance-sensitive applications.",
+        "deployment": "Deploy faster than anyone else - standard configurations ready in 15-20 minutes. Scale rapidly with API automation and flexible configurations.",
+        "cost": "Maximize value with flexible pay-as-you-go pricing starting from €186/month. Custom pricing available for large deployments.",
+        "enterprise": "Power enterprise workloads with 99.9% SLA, 24/7 support, and integration with Kubernetes, CDN, and security services.",
+        "flexibility": "Deploy with Ubuntu, CentOS, Debian, Windows, or custom images. Build private networks and integrate with virtual machines seamlessly."
+      }
+    },
+    "kubernetes": {
+      "name": "Managed Kubernetes",
+      "full_name": "Managed Kubernetes Service",
+      "url": "https://gcore.com/cloud/managed-kubernetes",
+      "tagline": "Easily deploy, manage, and scale Kubernetes clusters",
+      "description": "Production-grade cluster management with 99.9% SLA. Choose between Virtual Machine or Bare Metal worker nodes for optimal performance.",
+      "key_features": [
+        "Free production-grade cluster management",
+        "99.9% uptime SLA",
+        "Free egress traffic for VM worker nodes",
+        "One-click provisioning",
+        "Bare Metal worker node support",
+        "GPU worker node support",
+        "Latest 4 Kubernetes versions supported",
+        "Automated health monitoring and restart",
+        "Automated scaling",
+        "High availability with duplicated cluster dashboard",
+        "Secure encrypted connections",
+        "Built-in DDoS protection",
+        "24/7 technical support",
+        "API and Terraform support"
+      ],
+      "worker_node_types": {
+        "virtual_machines": {
+          "title": "Virtual Machines as worker nodes",
+          "description": "VMs provide a good balance of scalability, performance, security, and cost for most web applications",
+          "benefits": [
+            "Faster node provisioning",
+            "Faster cluster scalability", 
+            "Easier OS updates and backups"
+          ],
+          "use_case": "Good for most web applications that don't require very high levels of performance and aren't sensitive to latency"
+        },
+        "bare_metal": {
+          "title": "Bare Metal servers as worker nodes",
+          "description": "Direct access to physical server resources without hypervisor overhead for maximum performance",
+          "benefits": [
+            "Better compute performance",
+            "Lower network latency",
+            "No problems with noisy neighbors"
+          ],
+          "use_case": "Superior choice for compute-intensive applications that need high performance and lower latency"
+        }
+      },
+      "pricing_advantage": {
+        "cluster_management": "FREE (vs. $40-73 competitors)",
+        "egress_traffic": "FREE for VM nodes (vs. $0.01-0.09 per GiB)",
+        "example_savings": "2 vCPU/4GB cluster: $37.41 vs competitors $82-515",
+        "comparison": "Significantly cheaper than AWS, Google Cloud, Azure, and Digital Ocean"
+      },
+      "technical_capabilities": {
+        "provisioning": "One-click provisioning via portal, API, or Terraform",
+        "gpu_support": "GPU worker nodes for ML, video processing, and gaming workloads",
+        "versions": "Support for at least 4 latest Kubernetes versions",
+        "monitoring": "Continuous health monitoring with automatic restart",
+        "scaling": "Dynamic auto-scaling up or down based on demand",
+        "availability": "High availability with duplicated cluster dashboard",
+        "security": "All connections automatically encrypted between master and worker nodes",
+        "protection": "DDoS protection at network and transport layers",
+        "support": "24/7 technical support"
+      },
+      "supported_features": {
+        "os_support": "Ubuntu for VM and Bare Metal worker nodes",
+        "ingress": "nginx Ingress Controller support for external traffic routing",
+        "control_plane": "Fully managed by Gcore (no customer management required)",
+        "applications": "Compatible with existing Kubernetes applications and tools",
+        "billing": "Hourly billing for worker nodes, no control plane charges"
+      },
+      "use_cases": {
+        "microservices": {
+          "title": "Microservices architectures",
+          "description": "Deploy and orchestrate microservices with automated scaling and load balancing"
+        },
+        "machine_learning": {
+          "title": "Machine learning workloads",
+          "description": "Run ML pipelines with GPU worker nodes for training and inference"
+        },
+        "web_applications": {
+          "title": "Web applications",
+          "description": "Host scalable web applications with high availability and automatic scaling"
+        },
+        "ci_cd": {
+          "title": "CI/CD pipelines",
+          "description": "Build continuous integration and deployment pipelines with containerized environments"
+        },
+        "gaming": {
+          "title": "Gaming applications",
+          "description": "Run game servers and gaming workloads with GPU support and low latency"
+        },
+        "video_processing": {
+          "title": "Video processing",
+          "description": "Process video content with GPU-enabled worker nodes for optimal performance"
+        }
+      },
+      "pricing": {
+        "cluster_management": "Free production-grade cluster management",
+        "worker_nodes": "Same pricing as VMs and Bare Metal servers",
+        "egress_traffic": "Free for VM worker nodes",
+        "sla": "99.9% SLA included",
+        "example": "2 vCPU/4GB cluster starts at $37.41/month",
+        "billing": "Hourly billing for worker nodes only"
+      },
+      "competitive_advantages": [
+        "Free cluster management (competitors charge $40-73/month)",
+        "Free egress traffic for VM nodes (significant cost savings)",
+        "Support for both VM and Bare Metal worker nodes",
+        "GPU worker node support for AI/ML workloads",
+        "99.9% SLA for production workloads",
+        "One-click provisioning and management",
+        "Latest Kubernetes versions always supported",
+        "Automated health monitoring and scaling",
+        "Built-in DDoS protection included",
+        "24/7 technical support",
+        "API and Terraform automation",
+        "Significantly lower total cost than major cloud providers"
+      ],
+      "comparison_data": {
+        "vs_digitalocean": "54% cost savings on typical configurations",
+        "vs_aws": "92% cost savings on typical configurations", 
+        "vs_google_cloud": "92% cost savings on typical configurations",
+        "vs_azure": "92% cost savings on typical configurations"
+      },
+      "management_features": {
+        "control_plane": "Fully managed by Gcore (customers only manage worker nodes)",
+        "automated_operations": "Health monitoring, updates, and restarts handled automatically",
+        "scaling": "Configure auto-scaling limits and policies",
+        "security": "Encrypted connections and DDoS protection by default",
+        "monitoring": "Integrated monitoring and logging capabilities"
+      },
+      "cta_templates": {
+        "cost_savings": "Save up to 92% vs AWS/Google/Azure with free cluster management and egress traffic. Deploy production Kubernetes for just $37.41/month.",
+        "performance": "Choose VM or Bare Metal worker nodes with GPU support. Get 99.9% SLA and automated scaling for optimal performance.",
+        "simplicity": "One-click provisioning via portal, API, or Terraform. Focus on your applications while we manage the Kubernetes infrastructure.",
+        "enterprise": "Production-ready with 99.9% SLA, 24/7 support, and built-in DDoS protection. Support for latest Kubernetes versions.",
+        "ml_ai": "Deploy ML workloads with GPU worker nodes and Bare Metal performance. Perfect for machine learning, video processing, and gaming.",
+        "developer": "Seamless integration with existing Kubernetes tools and applications. nginx Ingress Controller and automated CI/CD pipeline support."
+      }
+    },
+    "load_balancers": {
+      "name": "Load Balancers",
+      "full_name": "Managed Load Balancers",
+      "url": "https://gcore.com/cloud/load-balancers",
+      "tagline": "Ensure the availability of web applications during spikes or bursts of traffic",
+      "description": "Intelligent load balancing service that distributes traffic across your infrastructure to maintain high availability and performance during traffic spikes.",
+      "key_features": [
+        "Multi-protocol support (TCP, HTTP, UDP, HTTPS)",
+        "Public and private IP address options",
+        "Free outgoing traffic",
+        "Cross-region load balancing",
+        "Automatic resource scaling integration",
+        "SSL/TLS encryption with Let's Encrypt",
+        "Custom SSL certificate support",
+        "Integrated CDN for faster content delivery",
+        "Flexible API management",
+        "24/7 technical support",
+        "Health monitoring and checks",
+        "Session persistence",
+        "DDoS protection integration",
+        "50+ global deployment locations"
+      ],
+      "core_advantages": {
+        "resilience": {
+          "title": "Resilience",
+          "description": "Allocate the load to cloud resources in different regions to ensure availability"
+        },
+        "scalability": {
+          "title": "Scalability", 
+          "description": "Add new computing resources to which the balancer can automatically transfer the load"
+        },
+        "security": {
+          "title": "Security",
+          "description": "Monitor traffic security with Let's Encrypt and your own SSL certificates"
+        },
+        "cdn_integration": {
+          "title": "CDN",
+          "description": "Deliver web application content even faster with an integrated CDN"
+        },
+        "api_control": {
+          "title": "API",
+          "description": "Flexibly manage the load on the infrastructure with APIs"
+        },
+        "support": {
+          "title": "24/7 technical support",
+          "description": "Contact us for assistance in configuring and managing the balancing service"
+        }
+      },
+      "protocol_support": [
+        {
+          "protocol": "TCP",
+          "description": "Layer 4 load balancing for high-performance applications"
+        },
+        {
+          "protocol": "HTTP",
+          "description": "Layer 7 load balancing with content-based routing"
+        },
+        {
+          "protocol": "UDP",
+          "description": "UDP load balancing for real-time applications"
+        },
+        {
+          "protocol": "HTTPS",
+          "description": "Secure HTTP load balancing with SSL/TLS termination"
+        }
+      ],
+      "deployment_options": {
+        "ip_addresses": ["Public IP addresses", "Private IP addresses"],
+        "traffic": "Free outgoing traffic",
+        "regions": "50+ global locations",
+        "deployment_time": "Within 15 minutes"
+      },
+      "infrastructure_features": {
+        "global_presence": "50+ locations around the world",
+        "tier_iv_datacenters": "Access to Tier IV data centers",
+        "no_hardware_needed": "No need to purchase advanced hardware or worry about upgrading",
+        "fast_deployment": "Deploy instances in optimal locations within 15 minutes",
+        "latency_testing": "Built-in latency testing and benchmarking tools"
+      },
+      "use_cases": {
+        "high_availability": {
+          "title": "High availability",
+          "description": "Ensure application availability during traffic spikes and bursts with cross-region load distribution"
+        },
+        "traffic_distribution": {
+          "title": "Traffic distribution",
+          "description": "Intelligently distribute traffic across multiple servers and regions for optimal performance"
+        },
+        "ssl_termination": {
+          "title": "SSL termination",
+          "description": "Offload SSL/TLS processing with Let's Encrypt integration and custom certificate support"
+        },
+        "content_acceleration": {
+          "title": "Content acceleration",
+          "description": "Combine load balancing with integrated CDN for faster web application content delivery"
+        },
+        "api_management": {
+          "title": "API traffic management",
+          "description": "Manage and balance API traffic across multiple backend services with protocol flexibility"
+        },
+        "auto_scaling": {
+          "title": "Auto-scaling integration",
+          "description": "Automatically add new computing resources and transfer load as demand increases"
+        }
+      },
+      "pricing": {
+        "outgoing_traffic": "Free outgoing traffic",
+        "deployment": "Fast deployment within 15 minutes",
+        "locations": "50+ global locations available",
+        "support": "24/7 technical support included"
+      },
+      "integration_capabilities": {
+        "cdn": "Integrated CDN for enhanced content delivery",
+        "ssl": "Let's Encrypt and custom SSL certificate support",
+        "api": "Flexible API management and control",
+        "monitoring": "Health monitoring and traffic security",
+        "scaling": "Automatic integration with scaling resources"
+      },
+      "competitive_advantages": [
+        "Multi-protocol support (TCP, HTTP, UDP, HTTPS)",
+        "Free outgoing traffic (significant cost savings)",
+        "50+ global deployment locations",
+        "15-minute deployment time",
+        "Integrated CDN for content acceleration",
+        "Cross-region load balancing for resilience",
+        "Let's Encrypt SSL integration included",
+        "24/7 technical support",
+        "Flexible API management",
+        "Public and private IP options",
+        "Automatic scaling integration",
+        "Tier IV data center access",
+        "Built-in latency testing tools"
+      ],
+      "technical_specs": {
+        "protocols": ["TCP", "HTTP", "UDP", "HTTPS"],
+        "ssl_support": ["Let's Encrypt (free)", "Custom SSL certificates"],
+        "ip_options": ["Public IP addresses", "Private IP addresses"],
+        "traffic": "Free outgoing traffic",
+        "locations": "50+ global regions",
+        "deployment": "15-minute setup time",
+        "monitoring": "Health checks and traffic monitoring",
+        "api": "Full API control and management"
+      },
+      "cta_templates": {
+        "availability": "Ensure 99.99% application availability with cross-region load balancing across 50+ global locations. Deploy in just 15 minutes.",
+        "performance": "Handle traffic spikes effortlessly with multi-protocol support and integrated CDN. Get free outgoing traffic and SSL termination.",
+        "security": "Protect your applications with built-in DDoS protection, Let's Encrypt SSL, and secure traffic monitoring across global regions.",
+        "scalability": "Scale automatically with intelligent load distribution. Add new resources dynamically as demand increases with API control.",
+        "cost_efficiency": "Save on traffic costs with free outgoing traffic and fast 15-minute deployment. Access Tier IV data centers without hardware investment.",
+        "integration": "Accelerate content delivery with integrated CDN and flexible API management. Support for TCP, HTTP, UDP, and HTTPS protocols."
+      }
+    },
+    "ddos_protection": {
+      "name": "DDoS Protection",
+      "full_name": "Global DDoS Protection Service",
+      "url": "https://gcore.com/ddos-protection",
+      "tagline": "All-in-one real-time DDoS protection for websites, apps, and servers",
+      "description": "Global DDoS protection service with 200+ Tbps filtering capacity and 99.99% SLA. Protect against network, transport, and application layer attacks worldwide.",
+      "key_features": [
+        "200+ Tbps total filtering capacity",
+        "99.99% uptime SLA",
+        "Block attacks from first request by sessions, not IPs",
+        "Multi-layer protection (L3, L4, L7)",
+        "Global scrubbing centers worldwide",
+        "Proprietary DDoS protection solution",
+        "Low-frequency attack detection from first query",
+        "False positive rate less than 0.01%",
+        "Real-time statistics in control panel",
+        "Server protection via GRE tunnel",
+        "24/7 high-qualified technical support",
+        "No performance degradation",
+        "Automatic attack detection within 1 minute",
+        "Protected IP Transit service"
+      ],
+      "protection_types": {
+        "network_layer": {
+          "title": "Network-layer DDoS attacks (L3)",
+          "description": "Attacks that sap networks' bandwidth and disrupt target's interactions with partners and clients"
+        },
+        "transport_layer": {
+          "title": "Transport-layer DDoS attacks (L4)", 
+          "description": "Overload servers with large numbers of TCP packets (SYN/RST/ACK/PSH) to consume all available resources"
+        },
+        "application_layer": {
+          "title": "Application-layer DDoS attacks (L7)",
+          "description": "Interfere with or completely paralyze business applications, causing huge material and reputational losses"
+        }
+      },
+      "protection_services": {
+        "server_protection": {
+          "title": "Server protection",
+          "description": "Protecting servers against DDoS attacks at network (L3), transport (L4), and application (L7) layers in data centers worldwide"
+        },
+        "network_protection": {
+          "title": "Network Protection", 
+          "description": "Protect your datacenter with Protected IP Transit service"
+        }
+      },
+      "filtering_platform": {
+        "infrastructure": "Global network of scrubbing centers worldwide",
+        "redundancy": "Connected to multiple service providers with backup copies of all systems",
+        "components": ["Cleaning servers", "Managing servers", "Data storage systems", "Network equipment"],
+        "guarantee": "No delays and no performance degradation",
+        "user_experience": "Users won't notice web resource has been attacked"
+      },
+      "advanced_features": {
+        "proprietary_solution": "Proprietary DDoS protection solution",
+        "first_query_detection": "Low-frequency attacks detection from the first query",
+        "accuracy": "False positive rate less than 0.01%",
+        "monitoring": "Real-time statistics in control panel",
+        "gre_tunnel": "Server protection in data center through GRE tunnel",
+        "support": "24/7 high-qualified technical support"
+      },
+      "attack_types_covered": [
+        "UDP Flood attacks",
+        "TCP SYN/RST/ACK/PSH attacks",
+        "Amplification attacks",
+        "Multi-vector attacks",
+        "Application-specific attacks",
+        "Gaming traffic simulation attacks",
+        "Complex botnet attacks up to 2 Tbps"
+      ],
+      "business_risks": {
+        "profit_loss": {
+          "title": "Loss of profits",
+          "description": "Resource inaccessibility per hour equals earnings per hour"
+        },
+        "data_loss": {
+          "title": "Loss of customers' data",
+          "description": "DDoS attacks can be part of larger attacks to steal users' personal data"
+        },
+        "loyalty_loss": {
+          "title": "Loss of loyalty",
+          "description": "Negative reviews from service disruptions take away new customers"
+        },
+        "compensation": {
+          "title": "Loss due to compensation",
+          "description": "SaaS projects must compensate customers for service unavailability"
+        }
+      },
+      "use_cases": {
+        "fintech": {
+          "title": "Fintech industry",
+          "description": "Banking resources suffer from complex DDoS attacks. Monitor single requests, identify threats, and protect websites/applications and APIs",
+          "impact": "Protect against attacks aimed at making services unavailable and stealing financial data"
+        },
+        "ecommerce": {
+          "title": "E-commerce",
+          "description": "Easy to calculate losses: entire revenue for attack duration. Every hour of inaccessibility costs your full hourly revenue",
+          "impact": "Example: $50,000/hour store loses $50,000 for each hour of attack downtime"
+        },
+        "gaming": {
+          "title": "Gaming industry",
+          "description": "~80% of attacks target game servers. Failure risks losing reputation and customer loyalty forever",
+          "impact": "Specialized game server protection expertise available"
+        },
+        "saas": {
+          "title": "SaaS companies",
+          "description": "DDoS attacks cause resource unavailability and require customer compensation for downtime",
+          "impact": "Must maintain service availability to avoid customer compensation claims"
+        }
+      },
+      "pricing_plans": {
+        "pro": {
+          "name": "PRO",
+          "price": "€3.9/month",
+          "features": [
+            "Protection against L3, L4, L7 attacks",
+            "2 GRE Tunnels",
+            "24/7 support (email, chat, phone)"
+          ],
+          "notes": ["Price depends on location", "Minimum commitment rate 100 Mbps", "Price for 1 Mbps/month"]
+        },
+        "custom": {
+          "name": "CUSTOM", 
+          "price": "Custom pricing",
+          "features": [
+            "Protection against L3, L4, L7 attacks",
+            "2 GRE Tunnels",
+            "Secure Transit",
+            "24/7 support (email, chat, phone)"
+          ],
+          "notes": ["Connection and configuration of additional equipment in data center required"]
+        }
+      },
+      "customer_success_stories": [
+        {
+          "company": "Fawkes Games",
+          "challenge": "Sophisticated DDoS attacks peaking at 2 Tbps affecting MMORPG gameplay",
+          "result": "Successfully mitigated massive attacks with no player disruption, freed up 30% of engineering time"
+        },
+        {
+          "company": "Photon", 
+          "challenge": "Infrastructure for 1.2+ billion users monthly requiring global DDoS protection",
+          "result": "Reliable protection allowing focus on game development instead of attack mitigation"
+        },
+        {
+          "company": "Wargaming",
+          "challenge": "253 Gbps UDP Flood attack targeting World of Tanks servers",
+          "result": "Successfully repelled attack in 15 minutes with no service interruption"
+        }
+      ],
+      "technical_specs": {
+        "filtering_capacity": "200+ Tbps total",
+        "sla": "99.99% uptime",
+        "detection_time": "Within 1 minute",
+        "false_positive_rate": "Less than 0.01%",
+        "protection_layers": ["L3 (Network)", "L4 (Transport)", "L7 (Application)"],
+        "gre_tunnels": "2 included",
+        "support": "24/7 high-qualified technical support"
+      },
+      "competitive_advantages": [
+        "200+ Tbps filtering capacity (industry-leading)",
+        "99.99% SLA guarantee",
+        "Global scrubbing centers with redundancy", 
+        "Block attacks from first request (not just IPs)",
+        "Proprietary protection solution",
+        "Less than 0.01% false positive rate",
+        "1-minute attack detection",
+        "No performance degradation",
+        "Multi-layer protection (L3, L4, L7)",
+        "Protected IP Transit service",
+        "GRE tunnel support",
+        "Gaming industry expertise (~80% of attacks)",
+        "Proven at scale (2+ Tbps attack mitigation)",
+        "24/7 expert support"
+      ],
+      "attack_mitigation_process": [
+        {
+          "step": 1,
+          "title": "Automatic Detection",
+          "description": "Attacks detected and traffic cleaned automatically in traffic validation mode within 1 minute"
+        },
+        {
+          "step": 2,
+          "title": "Traffic Analysis",
+          "description": "Advanced cleaning system receives, detects, and analyzes attack patterns"
+        },
+        {
+          "step": 3,
+          "title": "Intelligent Filtering", 
+          "description": "Comprehensive algorithms separate legitimate traffic from attacks, even sophisticated gaming traffic simulations"
+        },
+        {
+          "step": 4,
+          "title": "Clean Traffic Delivery",
+          "description": "Only clean traffic arrives at servers via dedicated channel with no performance impact"
+        }
+      ],
+      "cta_templates": {
+        "enterprise": "Protect your business with 200+ Tbps filtering capacity and 99.99% SLA. Block sophisticated attacks from the first request with <0.01% false positives.",
+        "gaming": "Secure game servers against the 80% of attacks targeting gaming. Proven protection up to 2 Tbps with specialized gaming traffic analysis.",
+        "financial": "Safeguard fintech and banking with multi-layer L3/L4/L7 protection. Prevent data theft and maintain customer trust with 24/7 expert monitoring.",
+        "ecommerce": "Avoid revenue loss from DDoS downtime. Every hour of attack costs your full hourly revenue - protect with 1-minute detection and mitigation.",
+        "performance": "Zero performance degradation guaranteed. Global scrubbing centers ensure users never notice attacks with proprietary filtering technology.",
+        "cost_effective": "Starting at €3.9/month for enterprise-grade protection. Custom pricing available for large deployments with dedicated support."
+      }
+    },
+    "waf": {
+      "name": "WAAP",
+      "full_name": "Web Application and API Protection",
+      "url": "https://gcore.com/web-app-and-api-protection",
+      "tagline": "Protect websites, web applications, and APIs from zero-day vulnerabilities, bots, and DDoS attacks",
+      "description": "Multi-layered security solution delivering comprehensive protection for websites, web applications, and APIs. Integrates WAF, bot management, DDoS protection, and API security at the edge.",
+      "key_features": [
+        "Multi-layered security (WAF, bot management, DDoS, API security)",
+        "OWASP Top 10 protection",
+        "Zero-day vulnerability protection",
+        "AI-driven threat detection and analytics",
+        "Edge-based security processing",
+        "Bot management and abuse prevention",
+        "DDoS protection integration",
+        "API security and validation",
+        "Real-time anomaly detection",
+        "Behavioral analysis",
+        "Auto-learning and self-tuning capabilities",
+        "Custom rule creation and policy management",
+        "Rate limiting and input validation",
+        "IP blacklisting and access control",
+        "Seamless CDN integration"
+      ],
+      "core_advantages": {
+        "comprehensive_protection": {
+          "title": "Comprehensive protection",
+          "description": "Secure digital experiences by defending against a wide range of threats with multi-layered security, covering OWASP Top 10, bots, DDoS, and APIs"
+        },
+        "high_performance": {
+          "title": "High performance",
+          "description": "Secure, scale, and accelerate apps and APIs at the edge to maintain optimal web performance and low latency"
+        },
+        "ai_driven": {
+          "title": "AI-driven threat detection",
+          "description": "Adapt to evolving threats with AI-driven analytics and customizable policies tailored to your business needs"
+        },
+        "compliance": {
+          "title": "Data sovereignty and compliance",
+          "description": "Meet data sovereignty and regulatory standards, including GDPR, ISO 27001, and PCI DSS"
+        },
+        "ease_of_use": {
+          "title": "Ease of use",
+          "description": "Streamline deployment, configuration, and management via an intuitive platform that seamlessly integrates with your existing infrastructure"
+        },
+        "cost_efficiency": {
+          "title": "Cost efficiency",
+          "description": "Maximize value with scalable, transparent pricing and strong ROI by reducing the risk of downtime, data breaches, and associated costs"
+        }
+      },
+      "security_components": {
+        "waf": {
+          "title": "Web Application Firewall",
+          "description": "Protects against web application attacks including OWASP Top 10 vulnerabilities"
+        },
+        "bot_management": {
+          "title": "Bot Management",
+          "description": "Identifies and blocks malicious bots while allowing legitimate automated traffic"
+        },
+        "ddos_protection": {
+          "title": "DDoS Protection",
+          "description": "Integrated DDoS mitigation to prevent service disruption from volumetric attacks"
+        },
+        "api_security": {
+          "title": "API Security",
+          "description": "Specialized protection for APIs including input validation, rate limiting, and authentication"
+        }
+      },
+      "protection_process": [
+        {
+          "step": 1,
+          "title": "Detect",
+          "description": "Route traffic through Gcore's edge network for continuous monitoring, using anomaly detection, behavioral analysis, and AI for early vulnerability detection"
+        },
+        {
+          "step": 2,
+          "title": "Mitigate", 
+          "description": "Proactively block malicious requests at the edge, enforce rate limits, validate inputs, and apply robust authentication to mitigate attacks before they reach applications"
+        },
+        {
+          "step": 3,
+          "title": "Adapt",
+          "description": "Leverage auto-learning and self-tuning capabilities or manually update rules, blacklist IPs, and restrict access to adapt to evolving threats"
+        }
+      ],
+      "threat_protection": [
+        "SQL injection attacks",
+        "Cross-site scripting (XSS)",
+        "Zero-day vulnerabilities",
+        "OWASP Top 10 threats",
+        "API abuse and attacks",
+        "Bot attacks and scraping",
+        "DDoS attacks",
+        "Account takeover attempts",
+        "Data exfiltration",
+        "Fraud and unauthorized access"
+      ],
+      "use_cases": {
+        "retail": {
+          "title": "Retail",
+          "description": "Protect customer data and payment information from fraud, theft, and account takeover"
+        },
+        "financial_services": {
+          "title": "Financial Services",
+          "description": "Ensure compliance and safeguard financial data from data breaches, unauthorized access, and fraud"
+        },
+        "technology": {
+          "title": "Technology",
+          "description": "Maintain uptime and prevent data breaches in cloud-based applications and services"
+        },
+        "media_entertainment": {
+          "title": "Media and Entertainment",
+          "description": "Protect your content from piracy and secure user accounts from unauthorized access"
+        },
+        "healthcare": {
+          "title": "Healthcare",
+          "description": "Safeguard sensitive health data, ensuring patient privacy and compliance with regulations"
+        },
+        "public_sector": {
+          "title": "Public Sector",
+          "description": "Protect public services from unauthorized access and ensure the confidentiality of sensitive data"
+        }
+      },
+      "compliance_standards": [
+        "GDPR (General Data Protection Regulation)",
+        "ISO 27001 (Information Security Management)",
+        "PCI DSS (Payment Card Industry Data Security Standard)",
+        "HIPAA (Health Insurance Portability and Accountability Act)",
+        "Data sovereignty requirements"
+      ],
+      "technical_capabilities": {
+        "edge_processing": "Security processing at the edge for optimal performance",
+        "ai_analytics": "AI-driven threat detection and behavioral analysis",
+        "auto_learning": "Self-tuning capabilities that adapt to new threats",
+        "custom_policies": "Customizable security policies tailored to business needs",
+        "real_time_monitoring": "Continuous monitoring with anomaly detection",
+        "cdn_integration": "Seamless integration with any CDN and multi-CDN environments",
+        "api_validation": "Input validation and authentication for API endpoints",
+        "rate_limiting": "Configurable rate limits to prevent abuse"
+      },
+      "competitive_advantages": [
+        "Multi-layered security in one solution (WAF + Bot + DDoS + API)",
+        "AI-driven threat detection and adaptation",
+        "Edge-based processing for optimal performance",
+        "Zero-day vulnerability protection",
+        "Auto-learning and self-tuning capabilities",
+        "Comprehensive compliance support (GDPR, PCI DSS, HIPAA)",
+        "CDN-agnostic integration",
+        "Real-time anomaly detection and behavioral analysis",
+        "Scalable, transparent pricing with strong ROI",
+        "Intuitive platform for easy management",
+        "No performance impact on web resources",
+        "Enterprise-grade threat mitigation"
+      ],
+      "integration_features": {
+        "cdn_compatibility": "Works with any content delivery network",
+        "multi_cdn": "Operates in multi-CDN environments",
+        "existing_infrastructure": "Seamless integration with existing infrastructure",
+        "api_integration": "Full API support for automated management",
+        "platform_agnostic": "Compatible with various platforms and architectures"
+      },
+      "performance_benefits": {
+        "no_performance_impact": "Designed to protect while maintaining optimal performance",
+        "edge_acceleration": "Accelerate apps and APIs at the edge",
+        "low_latency": "Maintain low latency while providing security",
+        "scalable_protection": "Scale security measures with traffic growth"
+      },
+      "cta_templates": {
+        "comprehensive": "Protect websites, apps, and APIs with multi-layered security. Get WAF, bot management, DDoS protection, and API security in one solution.",
+        "ai_powered": "Stop zero-day attacks with AI-driven threat detection and auto-learning capabilities. Adapt to evolving threats in real-time.",
+        "performance": "Secure and accelerate at the edge with no performance impact. Maintain optimal web performance while blocking advanced threats.",
+        "compliance": "Meet GDPR, PCI DSS, and HIPAA requirements with comprehensive data protection. Ensure regulatory compliance and customer trust.",
+        "enterprise": "Enterprise-grade security for digital assets. Reduce downtime risk, prevent data breaches, and maximize ROI with transparent pricing.",
+        "integration": "Seamlessly integrate with any CDN and existing infrastructure. Deploy comprehensive security without disrupting your current setup."
+      }
+    },
+    "dns": {
+      "name": "Managed DNS",
+      "full_name": "Managed DNS Service",
+      "url": "https://gcore.com/dns",
+      "tagline": "Enterprise-grade authoritative DNS delivering blazing-fast DNS resolution and mission-critical availability",
+      "description": "Global network of 210+ Anycast DNS servers providing fast application performance and 24/7 business continuity with comprehensive load balancing options.",
+      "key_features": [
+        "210+ Anycast DNS servers globally",
+        "Blazing-fast DNS resolution",
+        "Mission-critical 24/7 availability",
+        "DDoS-protected DNS infrastructure",
+        "Advanced GeoDNS routing",
+        "Weighted load balancing",
+        "Load balancing by subnet",
+        "DNS Health Checks with automatic failover",
+        "Vanity name servers",
+        "IPv6 support",
+        "DNSSEC (beta)",
+        "Rapid change propagation",
+        "Minimum TTL: 1 second",
+        "CNAME Flattening",
+        "HTTPS record support",
+        "Extended API",
+        "DevOps integrations (Terraform, OctoDNS, Kubernetes)",
+        "Free tier available"
+      ],
+      "core_benefits": {
+        "network_performance": {
+          "title": "Optimize your network performance",
+          "description": "Experience fast application performance with our global network of over 210 Anycast DNS servers. Wherever your users are in the world, we make sure they reach your service with minimal latency"
+        },
+        "business_continuity": {
+          "title": "Ensure your business continuity", 
+          "description": "Keep your services and applications available 24/7, without exception, with our robust, geo-distributed DNS infrastructure. We're committed to keeping your operations running smoothly"
+        },
+        "traffic_orchestration": {
+          "title": "Orchestrate traffic with ease",
+          "description": "Navigate even the most complex network challenges with ease, thanks to our comprehensive load balancing options. Direct traffic intelligently to pass on optimal performance and reliability to your customers"
+        }
+      },
+      "anycast_technology": {
+        "title": "Anycast DNS",
+        "description": "With Anycast, your queries are always routed to the nearest edge location, ensuring blazing-fast query response and resilient domain resolution even during massive traffic events like DDoS attacks",
+        "benefits": [
+          "Queries routed to nearest edge location",
+          "Blazing-fast query response",
+          "Resilient domain resolution",
+          "DDoS attack protection",
+          "Global load distribution"
+        ]
+      },
+      "advanced_load_balancing": {
+        "title": "More than GeoDNS",
+        "description": "Take control of your traffic routing with advanced load balancing mechanisms. Wide range of rules and settings to accurately tailor traffic routing to specific needs",
+        "methods": [
+          "Geographic-based routing",
+          "Weighted load balancing",
+          "Subnet-based load balancing",
+          "Health-based routing",
+          "Latency-based routing",
+          "Custom routing rules"
+        ]
+      },
+      "health_checks": {
+        "title": "DNS Health Checks",
+        "description": "Peace of mind with DNS Health Checks designed to keep applications running smoothly with high availability",
+        "capabilities": [
+          "Constant endpoint monitoring",
+          "High availability assurance",
+          "Automatic DNS record updates",
+          "Issue detection and response",
+          "Continuous operation maintenance"
+        ]
+      },
+      "devops_integration": {
+        "title": "DevOps-friendly DNS",
+        "description": "Optimize your DevOps experience with extended API and configuration-as-code tools",
+        "integrations": [
+          "Extended API",
+          "Terraform integration",
+          "OctoDNS integration", 
+          "Kubernetes ExternalDNS integration",
+          "Certbot integration"
+        ]
+      },
+      "technical_features": {
+        "anycast_dns": "Global Anycast network for optimal performance",
+        "ddos_protection": "DDoS-protected DNS infrastructure",
+        "vanity_nameservers": "Custom vanity name servers",
+        "ipv6_support": "Full IPv6 support",
+        "dnssec": "DNSSEC support (beta)",
+        "change_propagation": "Rapid change propagation",
+        "advanced_geodns": "Advanced GeoDNS routing capabilities",
+        "weighted_balancing": "Weighted load balancing",
+        "subnet_balancing": "Load balancing by subnet",
+        "health_monitoring": "Health Checks with automatic failover",
+        "low_ttl": "Minimum TTL: 1 second",
+        "cname_flattening": "CNAME Flattening support",
+        "https_records": "HTTPS record support"
+      },
+      "use_cases": {
+        "high_traffic_domains": {
+          "title": "High-traffic domains",
+          "description": "Handle massive traffic volumes with resilient Anycast infrastructure and DDoS protection"
+        },
+        "global_applications": {
+          "title": "Global applications",
+          "description": "Route traffic intelligently across global regions with advanced GeoDNS and load balancing"
+        },
+        "mission_critical_services": {
+          "title": "Mission-critical services", 
+          "description": "Ensure 24/7 availability with Health Checks and automatic failover capabilities"
+        },
+        "devops_automation": {
+          "title": "DevOps automation",
+          "description": "Integrate DNS management into CI/CD pipelines with Terraform, OctoDNS, and Kubernetes support"
+        },
+        "content_delivery": {
+          "title": "Content delivery optimization",
+          "description": "Optimize content delivery with intelligent routing and minimal latency DNS resolution"
+        },
+        "disaster_recovery": {
+          "title": "Disaster recovery",
+          "description": "Implement robust failover strategies with Health Checks and automatic DNS record updates"
+        }
+      },
+      "pricing": {
+        "free_tier": "Free tier available",
+        "no_credit_card": "No credit card required for free tier",
+        "enterprise": "Custom enterprise pricing available"
+      },
+      "network_specifications": {
+        "servers": "210+ Anycast DNS servers",
+        "global_coverage": "Worldwide presence",
+        "ddos_protection": "Built-in DDoS protection",
+        "response_time": "Blazing-fast query response",
+        "availability": "Mission-critical 24/7 availability"
+      },
+      "competitive_advantages": [
+        "210+ Anycast DNS servers globally (industry-leading)",
+        "Mission-critical 24/7 availability guarantee",
+        "DDoS-protected DNS infrastructure",
+        "Advanced load balancing beyond GeoDNS",
+        "Health Checks with automatic failover",
+        "Minimum 1-second TTL for rapid updates",
+        "Comprehensive DevOps integrations",
+        "Free tier with no credit card required",
+        "CNAME Flattening and HTTPS record support",
+        "Rapid change propagation",
+        "Vanity name servers included",
+        "Full IPv6 and DNSSEC support",
+        "Extended API for automation",
+        "Kubernetes and container-native support"
+      ],
+      "integration_ecosystem": {
+        "infrastructure_as_code": ["Terraform", "OctoDNS"],
+        "container_platforms": ["Kubernetes ExternalDNS"],
+        "ssl_automation": ["Certbot integration"],
+        "api_automation": ["Extended API", "Real-time management"],
+        "monitoring": ["Health Checks", "Analytics"]
+      },
+      "reliability_features": {
+        "geo_distributed": "Robust, geo-distributed DNS infrastructure",
+        "ddos_resilience": "Resilient domain resolution during DDoS attacks",
+        "automatic_failover": "Automatic failover with Health Checks",
+        "redundancy": "Multiple layers of redundancy",
+        "uptime_commitment": "24/7 availability without exception"
+      },
+      "cta_templates": {
+        "performance": "Achieve blazing-fast DNS resolution with 210+ Anycast servers globally. Route queries to nearest edge location for minimal latency worldwide.",
+        "reliability": "Ensure mission-critical 24/7 availability with DDoS-protected infrastructure and automatic Health Check failover. Never experience DNS downtime.",
+        "enterprise": "Enterprise-grade DNS with advanced load balancing, DNSSEC, and vanity name servers. Get custom pricing and dedicated support.",
+        "devops": "DevOps-friendly DNS with Terraform, Kubernetes, and OctoDNS integrations. Automate DNS management in your CI/CD pipeline.",
+        "free_start": "Start free with no credit card required. Scale from free tier to enterprise-grade DNS as your business grows.",
+        "advanced_routing": "Go beyond GeoDNS with weighted balancing, subnet routing, and Health Checks. Intelligently orchestrate traffic for optimal performance."
+      }
+    },
+    "fastedge": {
+      "name": "FastEdge",
+      "full_name": "Edge Computing Platform",
+      "url": "https://gcore.com/fastedge",
+      "tagline": "Low-latency edge computing for serverless app deployment. Run code close to your users on Gcore's global network",
+      "description": "Serverless edge computing platform using WebAssembly runtime on 210+ global edge servers with 30ms average latency. Build highly responsive apps with zero server provisioning.",
+      "key_features": [
+        "WebAssembly runtime on every edge server",
+        "210+ global data centers",
+        "30ms average global latency",
+        "Cold start in microseconds",
+        "JavaScript and Rust support (Go coming soon)",
+        "Isolated sandbox security environment",
+        "Quick deployment in minutes",
+        "Zero server provisioning required",
+        "Event-driven pricing (pay for usage only)",
+        "Seamless Gcore ecosystem integration",
+        "Auto-scaling capabilities",
+        "Built-in CDN integration",
+        "Custom logic implementation",
+        "Header manipulation and request orchestration"
+      ],
+      "core_advantages": {
+        "low_latency": {
+          "title": "Low latency everywhere",
+          "description": "FastEdge runs over a robust global network, with more than 210 data centers and outstanding connectivity. Gcore's average global latency is just 30 ms"
+        },
+        "fast_performance": {
+          "title": "Fast performance",
+          "description": "FastEdge employs WebAssembly runtime, making it a great choice for performance-critical tasks and applications"
+        },
+        "cloud_ecosystem": {
+          "title": "Cloud ecosystem",
+          "description": "Your FastEdge application works seamlessly with Gcore's cloud and network products including CDN, Virtual Machines, and S3 Storage"
+        }
+      },
+      "webassembly_technology": {
+        "title": "WebAssembly at the edge",
+        "description": "We've deployed WebAssembly (Wasm) runtime on every edge server of our network. This keeps code execution close to your users for exceptional app responsiveness",
+        "benefits": [
+          "Deployed on every edge server",
+          "Code execution close to users",
+          "Exceptional app responsiveness",
+          "Performance-critical task optimization",
+          "Microsecond cold start times"
+        ]
+      },
+      "technical_features": {
+        "language_support": {
+          "title": "Write in your language",
+          "description": "Code in JavaScript and Rust. We're adding Go and other languages soon",
+          "supported": ["JavaScript", "Rust"],
+          "coming_soon": ["Go", "Other languages"]
+        },
+        "cold_start": {
+          "title": "Cold start in microseconds",
+          "description": "Enjoy super-fast Wasm runtime, in several magnitudes faster than Linux container solutions"
+        },
+        "security": {
+          "title": "Secure environment",
+          "description": "Run your app within the isolated sandbox, protected from malicious software"
+        },
+        "deployment": {
+          "title": "Quick deployment",
+          "description": "Propagate your code to the edges in just a couple of minutes"
+        },
+        "operations": {
+          "title": "Zero server provisioning",
+          "description": "Develop, test, and run your apps—we've got the operations covered"
+        },
+        "pricing": {
+          "title": "Event-driven pricing",
+          "description": "Pay only for the resources you use, not for idle capacity"
+        }
+      },
+      "use_cases": {
+        "ai_inference": {
+          "title": "AI inference",
+          "description": "Run lightweight AI-models on edge servers from more than 210 locations worldwide. Build fast and responsive generative AI apps"
+        },
+        "image_editing": {
+          "title": "Advanced image editing",
+          "description": "Create your custom image editing logic to convert original images into the format your web design requires. Your image will be processed on the fly and served from the closest edge server"
+        },
+        "personalization": {
+          "title": "Personalization",
+          "description": "Deliver customized page content or notifications based on user preferences like location, device type, or sign-in status. Content will be served from the closest location without querying the origin server"
+        },
+        "ab_testing": {
+          "title": "A/B testing",
+          "description": "Design and launch page tests by orchestrating your traffic at the edge. You can change the experiment settings quickly while maintaining a seamless experience for your end users"
+        },
+        "authentication": {
+          "title": "Quick authentication",
+          "description": "Manage access to app content by validating secure tokens from the closest edge. This reduces the time taken for the end user to access the content, especially if you serve it from the CDN cache"
+        },
+        "custom_logic": {
+          "title": "Custom edge logic",
+          "description": "Design and implement your custom logic at the edge by using header manipulation, rewrite, redirect, and orchestration of requests to backend endpoints"
+        }
+      },
+      "performance_specifications": {
+        "network_size": "210+ global data centers",
+        "average_latency": "30ms global average",
+        "cold_start": "Microseconds (magnitudes faster than containers)",
+        "deployment_time": "Couple of minutes to propagate",
+        "runtime": "WebAssembly (Wasm) on every edge server"
+      },
+      "integration_capabilities": {
+        "gcore_products": ["CDN", "Virtual Machines", "S3 Storage"],
+        "runtime_features": ["Header manipulation", "Request rewrite", "Redirect capabilities", "Backend orchestration"],
+        "development": ["Zero server provisioning", "Automated operations", "Built-in caching"]
+      },
+      "competitive_advantages": [
+        "WebAssembly runtime on 210+ edge servers",
+        "30ms average global latency",
+        "Microsecond cold start (vs. container solutions)",
+        "Event-driven pricing (pay only for usage)",
+        "Zero server provisioning required",
+        "Seamless Gcore ecosystem integration",
+        "Quick deployment in minutes",
+        "Isolated sandbox security",
+        "Multiple programming language support",
+        "Built-in CDN and caching integration",
+        "Custom logic implementation capabilities",
+        "AI inference at the edge",
+        "Advanced image processing on-the-fly",
+        "Real-time personalization without origin queries"
+      ],
+      "development_benefits": {
+        "no_infrastructure": "Focus on coding and creativity while FastEdge handles operations",
+        "responsive_apps": "Build highly responsive apps with dynamically generated content",
+        "scalability": "Automatic scaling without capacity planning",
+        "cost_efficiency": "Pay only for actual resource usage",
+        "global_reach": "Deploy once, run everywhere on global network"
+      },
+      "security_features": {
+        "isolation": "Isolated sandbox environment for each application",
+        "malware_protection": "Protection from malicious software",
+        "secure_runtime": "WebAssembly provides secure execution environment",
+        "edge_security": "Security processing at edge locations"
+      },
+      "cta_templates": {
+        "performance": "Run code with 30ms average latency on 210+ edge servers worldwide. WebAssembly runtime delivers microsecond cold starts, magnitudes faster than containers.",
+        "serverless": "Build serverless apps with zero infrastructure management. Deploy in minutes and pay only for actual usage with event-driven pricing.",
+        "ai_edge": "Deploy AI inference at the edge across 210+ locations. Build fast, responsive generative AI apps with lightweight models running close to users.",
+        "personalization": "Deliver real-time personalization without origin server queries. Customize content based on location, device, and user preferences at the edge.",
+        "developer": "Code in JavaScript and Rust (Go coming soon) with zero server provisioning. Focus on creativity while FastEdge handles global deployment and operations.",
+        "integration": "Seamlessly integrate with Gcore CDN, VMs, and S3 Storage. Implement custom logic with header manipulation, redirects, and backend orchestration."
+      }
+    }
+  },
+  "product_categories": {
+    "compute": ["gpu_cloud", "virtual_machines", "bare_metal", "kubernetes"],
+    "networking": ["cdn", "dns", "load_balancers"],
+    "security": ["ddos_protection", "waf"],
+    "edge": ["fastedge", "inference"],
+    "storage": ["object_storage"]
+  },
+  "topic_mapping": {
+    "cdn": ["cdn"],
+    "content_delivery": ["cdn"],
+    "website_performance": ["cdn", "fastedge"],
+    "cloud_storage": ["object_storage", "cdn"],
+    "gpu": ["gpu_cloud"],
+    "ai_ml": ["gpu_cloud", "inference"],
+    "machine_learning": ["gpu_cloud", "inference"],
+    "virtual_machines": ["virtual_machines"],
+    "containers": ["kubernetes"],
+    "kubernetes": ["kubernetes"],
+    "ddos": ["ddos_protection"],
+    "security": ["ddos_protection", "waf"],
+    "dns": ["dns"],
+    "load_balancing": ["load_balancers"],
+    "edge_computing": ["fastedge", "inference"],
+    "serverless": ["fastedge"],
+    "bare_metal": ["bare_metal"],
+    "dedicated_servers": ["bare_metal"]
+  }
+}

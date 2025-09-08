@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-27T10:47:23.637355",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Petri",
+      "url": "https://petri.com/azure-blob-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Logicmonitor",
+      "url": "https://www.logicmonitor.com/blog/what-is-azure-blob",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Azure",
+      "url": "https://azure.microsoft.com/en-us/products/storage/blobs",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Cloudzero",
+      "url": "https://www.cloudzero.com/blog/azure-blob-storage-pricing/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}

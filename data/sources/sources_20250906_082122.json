@@ -1,0 +1,222 @@
+{
+  "timestamp": "2025-09-06T08:21:22.060295",
+  "total_sources": 24,
+  "sources": [
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Techtarget",
+      "url": "https://www.techtarget.com/searchsecurity/definition/cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Orca",
+      "url": "https://orca.security/resources/blog/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Zscaler",
+      "url": "https://www.zscaler.com/resources/security-terms-glossary/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"Cloud security operates under a shared responsibility model where both the cloud service provide",
+      "url": "",
+      "snippet": ".\",\"Cloud security operates under a shared responsibility model where both the cloud service provider and the customer share security duties",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevent",
+      "url": "",
+      "snippet": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevention (DLP), Security Information and Event Management (SIEM), and encryption for data protection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Cloud security protects data confidentiality both in transit and at rest using encryption algori",
+      "url": "",
+      "snippet": ".\",\"Cloud security protects data confidentiality both in transit and at rest using encryption algorithms such as AES-256",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud security differs from traditional cybersecurity because it requires securing assets within",
+      "url": "",
+      "snippet": ".\",\"Cloud security differs from traditional cybersecurity because it requires securing assets within third-party service provider infrastructures",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security addresses unique challenges such as multi-tenancy, data privacy, compliance requi",
+      "url": "",
+      "snippet": ".\",\"Cloud security addresses unique challenges such as multi-tenancy, data privacy, compliance requirements, and the risk of misconfigurations",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud security technologies often include firewalls, segmentation, multifactor authentication (M",
+      "url": "",
+      "snippet": ".\",\"Cloud security technologies often include firewalls, segmentation, multifactor authentication (MFA), cloud security posture management (CSPM), and configuration management tools",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Continuous monitoring and threat detection using AI-driven tools and CSPM help detect misconfigu",
+      "url": "",
+      "snippet": ".\",\"Continuous monitoring and threat detection using AI-driven tools and CSPM help detect misconfigurations and vulnerabilities in real time",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Incident response planning is essential for minimizing the impact of cloud security breaches and",
+      "url": "",
+      "snippet": ".\",\"Incident response planning is essential for minimizing the impact of cloud security breaches and should be regularly tested and updated",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security protects resources and data individually rather than relying on perimeter-based s",
+      "url": "",
+      "snippet": ".\",\"Cloud security protects resources and data individually rather than relying on perimeter-based security, enabling granular control over access and data protection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Performance metrics in cloud security include detection time for threats, incident response time",
+      "url": "",
+      "snippet": ".\",\"Performance metrics in cloud security include detection time for threats, incident response time, and the rate of misconfiguration detection and remediation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Scalability considerations involve ensuring security tools and policies can adapt to dynamic clo",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations involve ensuring security tools and policies can adapt to dynamic cloud environments, including hybrid and multi-cloud setups",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Best practices include encrypting sensitive data before uploading to the cloud, implementing rol",
+      "url": "",
+      "snippet": ".\",\"Best practices include encrypting sensitive data before uploading to the cloud, implementing role-based access control (RBAC), using MFA, and regularly reviewing IAM policies",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"98.6% of organizations have misconfigurations in their cloud environments that cause critical ri",
+      "url": "",
+      "snippet": ".\",\"98.6% of organizations have misconfigurations in their cloud environments that cause critical risks to data and infrastructure",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security supports regulatory compliance and data governance, ensuring privacy and control ",
+      "url": "",
+      "snippet": ".\",\"Cloud security supports regulatory compliance and data governance, ensuring privacy and control over user and device authentication",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Zscaler highlights that cloud security protects resources individually using technologies like f",
+      "url": "",
+      "snippet": ".\",\"Zscaler highlights that cloud security protects resources individually using technologies like firewalls, IAM, segmentation, and encryption, addressing vulnerabilities in hybrid cloud environments",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"CrowdStrike recommends best practices such as encrypting data with AES-256, implementing role-ba",
+      "url": "",
+      "snippet": ".\",\"CrowdStrike recommends best practices such as encrypting data with AES-256, implementing role-based access control, continuous monitoring with AI-driven tools, and maintaining an incident response plan to secure cloud environments",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    }
+  ]
+}

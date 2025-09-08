@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-08T09:12:25.503053",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Kaopiz",
+      "url": "https://kaopiz.com/en/articles/10-key-benefits-of-cloud-computing-for-businesses-in-2025/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Cyber",
+      "url": "https://www.cyber.gc.ca/en/guidance/introduction-cloud-computing-itsap50110",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Pg-p",
+      "url": "https://pg-p.ctme.caltech.edu/blog/cloud-computing/top-cloud-computing-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Revolgy",
+      "url": "https://www.revolgy.com/insights/blog/8-reasons-every-business-needs-the-cloud",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-computing-benefits",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}

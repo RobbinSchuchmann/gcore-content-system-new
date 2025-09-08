@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-06T08:23:03.926567",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Cycognito",
+      "url": "https://www.cycognito.com/learn/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nordlayer",
+      "url": "https://nordlayer.com/blog/cloud-native-security-guide/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Proserveit",
+      "url": "https://www.proserveit.com/blog/cloud-security-best-practices",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Checkpoint",
+      "url": "https://www.checkpoint.com/cyber-hub/cloud-security/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}
