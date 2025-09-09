@@ -417,7 +417,7 @@ class ContentGenerator:
                 "  - Do NOT cite basic definitions, common processes, or general explanations",
                 "  - NEVER include citations in FAQ sections - keep FAQs clean and direct",
                 "  - Maximum 5 citations per entire document (be very selective)",
-                "  - Maximum 1 citation per section (2 for introduction only)",
+                "  - Maximum 1 citation per section (including introduction)",
                 "  - Focus citations on: market size, growth rates, performance claims, industry scale",
                 "• SOURCE REQUIREMENT: Every citation MUST have corresponding verified source from research data",
                 "• If no verified source exists for a claim, present it without citation or omit it",

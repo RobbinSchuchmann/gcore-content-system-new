@@ -52,8 +52,8 @@ class CitationTracker:
         if any(faq_term in section.lower() for faq_term in ["faq", "frequently asked", "question", "answer"]):
             return False
         
-        # Check section limit (max 1 per section, 2 for introduction)
-        section_limit = 2 if section.lower() in ["introduction", "intro", "general"] else 1
+        # Check section limit (max 1 per section, including introduction)
+        section_limit = 1
         if self.stats_by_section.get(section, 0) >= section_limit:
             return False
         
