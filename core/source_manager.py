@@ -10,13 +10,16 @@ import json
 from pathlib import Path
 
 class CitationTracker:
-    """Track citations globally to prevent duplicates"""
+    """Track citations globally to prevent duplicates and manage fact distribution"""
     
     def __init__(self):
         self.cited_stats: Set[str] = set()  # Track which statistics have been cited
         self.citation_count: int = 0        # Total citations in document
         self.max_citations_per_doc: int = 8 # Global maximum citations (increased from 5)
         self.stats_by_section: Dict[str, int] = {}  # Track citations per section
+        self.fact_to_source: Dict[str, str] = {}  # Map facts to their sources
+        self.used_facts_content: Set[str] = set()  # Track actual fact content to prevent repetition
+        self.section_fact_count: Dict[str, int] = {}  # Track how many facts per section
         
     def extract_stat_key(self, text: str) -> str:
         """Extract a normalized key from a statistic for deduplication"""
@@ -55,11 +58,45 @@ class CitationTracker:
         if stat_key in self.cited_stats:
             return False
         
+        # Enhanced fact content deduplication
+        fact_fingerprint = self._create_fact_fingerprint(stat_text)
+        if fact_fingerprint in self.used_facts_content:
+            return False
+        
         # Check if it's significant enough to cite
         if not self._is_significant_stat(stat_text):
             return False
         
         return True
+    
+    def _create_fact_fingerprint(self, text: str) -> str:
+        """Create a normalized fingerprint of fact content to detect duplicates"""
+        import re
+        
+        # Extract key numbers and concepts
+        numbers = re.findall(r'\d+(?:\.\d+)?', text)
+        
+        # Extract key concepts (market, growth, billion, etc.)
+        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow)\b', 
+                              text.lower())
+        
+        # Create fingerprint from numbers + key terms
+        fingerprint = ''.join(numbers) + '_' + '_'.join(sorted(set(key_terms)))
+        return fingerprint
+    
+    def check_fact_duplication(self, fact_text: str) -> bool:
+        """Check if a fact (not just statistic) has already been used"""
+        fact_fingerprint = self._create_fact_fingerprint(fact_text)
+        return fact_fingerprint in self.used_facts_content
+    
+    def record_fact_usage(self, fact_text: str, section: str = "general", source: str = ""):
+        """Record that a fact has been used to prevent repetition"""
+        fact_fingerprint = self._create_fact_fingerprint(fact_text)
+        self.used_facts_content.add(fact_fingerprint)
+        self.section_fact_count[section] = self.section_fact_count.get(section, 0) + 1
+        
+        if source:
+            self.fact_to_source[fact_fingerprint] = source
     
     def _is_significant_stat(self, text: str) -> bool:
         """Check if a statistic is significant enough to warrant citation"""
@@ -94,6 +131,9 @@ class CitationTracker:
         self.cited_stats.clear()
         self.citation_count = 0
         self.stats_by_section.clear()
+        self.fact_to_source.clear()
+        self.used_facts_content.clear()
+        self.section_fact_count.clear()
 
 class SourceManager:
     """Manage research sources and citations"""
@@ -254,19 +294,48 @@ class SourceManager:
         # Extract from content
         content = response.get('choices', [{}])[0].get('message', {}).get('content', '') if 'choices' in response else ''
         
-        # Extract URLs from content
-        url_pattern = r'https?://[^\s\])]+'
-        urls = re.findall(url_pattern, content)
-        for url in urls:
-            if not any(s['url'] == url for s in extracted_sources):
-                extracted_sources.append({
-                    'title': self._extract_domain_name(url),
-                    'url': url,
-                    'snippet': '',
-                    'author': '',
-                    'date': '',
-                    'type': 'web'
-                })
+        # Extract URLs from content with enhanced pattern matching
+        url_patterns = [
+            r'https?://[^\s\])\n]+',  # Standard URLs
+            r'Source:\s*(https?://[^\s\])\n]+)',  # "Source: URL" format
+            r'(?:from|via|at):\s*(https?://[^\s\])\n]+)',  # "from: URL" format
+        ]
+        
+        for pattern in url_patterns:
+            urls = re.findall(pattern, content, re.IGNORECASE)
+            for url in urls:
+                if isinstance(url, tuple):
+                    url = url[0]  # Extract from capture group
+                if not any(s['url'] == url for s in extracted_sources):
+                    extracted_sources.append({
+                        'title': self._extract_domain_name(url),
+                        'url': url,
+                        'snippet': self._extract_url_context(content, url),
+                        'author': '',
+                        'date': '',
+                        'type': 'web'
+                    })
+        
+        # Extract organization names that might be sources
+        org_patterns = [
+            r'(?:according to|per|from|by)\s+([A-Z][a-zA-Z\s&]+(?:Research|Institute|University|Company|Corporation|Inc|LLC))',
+            r'([A-Z][a-zA-Z\s&]+(?:Research|Institute|University))\s+(?:reports?|study|survey|data|analysis)',
+            r'([A-Z][a-zA-Z\s&]+Research)\s+(?:\(\d{4}\))?',  # "Market Research Future (2024)" pattern
+        ]
+        
+        for pattern in org_patterns:
+            matches = re.findall(pattern, content, re.IGNORECASE)
+            for match in matches:
+                org_name = match.strip()
+                if len(org_name) > 3 and not any(org_name.lower() in s.get('title', '').lower() for s in extracted_sources):
+                    extracted_sources.append({
+                        'title': org_name,
+                        'url': '',
+                        'snippet': self._extract_organization_context(content, org_name),
+                        'author': '',
+                        'date': self._extract_year_from_context(content, org_name),
+                        'type': 'research_organization'
+                    })
         
         # Extract academic citations (Author, Year) format
         academic_pattern = r'\(([A-Z][a-z]+(?:\s+(?:et\s+al\.|&\s+[A-Z][a-z]+))?),\s*(\d{4})\)'
@@ -346,6 +415,35 @@ class SourceManager:
             return domain_parts[0].capitalize()
         return domain
     
+    def _extract_url_context(self, content: str, url: str) -> str:
+        """Extract context around a URL mention"""
+        lines = content.split('\n')
+        for line in lines:
+            if url in line:
+                # Return the line containing the URL, cleaned up
+                return line.strip().replace(url, '').strip('- []()').strip()[:200]
+        return ''
+    
+    def _extract_organization_context(self, content: str, org_name: str) -> str:
+        """Extract context around an organization mention"""
+        lines = content.split('\n')
+        for line in lines:
+            if org_name.lower() in line.lower():
+                # Return the line containing the organization
+                return line.strip('- []()').strip()[:200]
+        return ''
+    
+    def _extract_year_from_context(self, content: str, org_name: str) -> str:
+        """Extract year from context around organization mention"""
+        lines = content.split('\n')
+        for line in lines:
+            if org_name.lower() in line.lower():
+                # Look for year patterns in the line
+                year_match = re.search(r'\b(20[12]\d)\b', line)
+                if year_match:
+                    return year_match.group(1)
+        return ''
+    
     def format_inline_citation(self, fact: str, source: Dict[str, Any], section: str = "general") -> str:
         """
         Format a fact with proper inline citation using Svalbardi method
@@ -364,8 +462,22 @@ class SourceManager:
         if not self.needs_citation(fact, section):
             return f"{fact}." if not fact.endswith('.') else fact
         
+        # Check for fact duplication FIRST
+        if self.citation_tracker.check_fact_duplication(fact):
+            return f"{fact}." if not fact.endswith('.') else fact
+        
         # Double-check with citation tracker (redundant but ensures consistency)
         if not self.citation_tracker.should_cite(fact, section):
+            return f"{fact}." if not fact.endswith('.') else fact
+        
+        # STRICT SOURCE VALIDATION - Only cite if we have a verified source
+        if not source or not isinstance(source, dict):
+            return f"{fact}." if not fact.endswith('.') else fact
+        
+        # Reject sources without proper attribution
+        source_url = source.get('url', '')
+        source_title = source.get('title', '')
+        if not source_url and not source_title:
             return f"{fact}." if not fact.endswith('.') else fact
         # Extract all available source information
         author = source.get('author', '')
@@ -512,6 +624,10 @@ class SourceManager:
         # Record that we're adding this citation
         self.citation_tracker.record_citation(fact, section)
         
+        # Record fact usage to prevent repetition
+        source_id = source_url or source_title or 'unknown'
+        self.citation_tracker.record_fact_usage(fact, section, source_id)
+        
         # Format with citation
         return f"{fact}, {citation}."
     
@@ -521,8 +637,16 @@ class SourceManager:
         
         Example: "60% in adult men, according to Dr. Jeffrey Utz of Allegheny University (2023)"
         """
-        # Check with citation tracker first
+        # Check for fact duplication FIRST
+        if self.citation_tracker.check_fact_duplication(statistic):
+            return f"{statistic}." if not statistic.endswith('.') else statistic
+        
+        # Check with citation tracker 
         if not self.citation_tracker.should_cite(statistic, section):
+            return f"{statistic}." if not statistic.endswith('.') else statistic
+        
+        # STRICT SOURCE VALIDATION - Must have verified source
+        if not source or not isinstance(source, dict):
             return f"{statistic}." if not statistic.endswith('.') else statistic
         
         # Statistics usually need citations, but check if it's a truly significant stat
@@ -620,6 +744,12 @@ class SourceManager:
         
         # Record that we're adding this citation
         self.citation_tracker.record_citation(statistic, section)
+        
+        # Record fact usage to prevent repetition
+        source_url = source.get('url', '')
+        source_title = source.get('title', '')
+        source_id = source_url or source_title or 'unknown'
+        self.citation_tracker.record_fact_usage(statistic, section, source_id)
         
         return f"{statistic}, {attribution}."
     

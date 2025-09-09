@@ -27,6 +27,7 @@ from core.table_formatter import TableFormatter
 from core.internal_linker import InternalLinker
 from core.link_manager import LinkManager
 from core.product_loader import product_loader
+from core.source_manager import SourceManager
 import re
 
 def validate_content_structure(content: str) -> Dict[str, Any]:
@@ -110,6 +111,9 @@ class ContentGenerator:
         self.ai_word_replacements = self._load_ai_word_replacements()
         self.blacklist_prompt = self._format_blacklist_prompt()
         
+        # Initialize source manager for global fact tracking
+        self.source_manager = SourceManager()
+        
         # Initialize internal linking system
         self.enable_internal_links = enable_internal_links
         if enable_internal_links:
@@ -124,6 +128,10 @@ class ContentGenerator:
         else:
             self.link_manager = None
             self.internal_linker = None
+    
+    def reset_fact_tracking(self):
+        """Reset fact tracking for new document generation"""
+        self.source_manager.citation_tracker.reset()
     
     def _load_ai_word_replacements(self) -> Dict[str, Any]:
         """Load AI word replacements from JSON file"""
@@ -395,17 +403,21 @@ class ContentGenerator:
                 "• Use proper Svalbardi citation format: 'according to [Source] ([Year])'",
                 "• PRIORITIZE citing financial projections and market data ($ trillion, billion)",
                 "• Cite credible sources: academic, government, industry research, market forecasts",
-                "• NEVER invent generic attributions - FORBIDDEN phrases:",
+                "• STRICT SOURCE VALIDATION - FORBIDDEN phrases (will cause content rejection):",
                 "  - 'according to industry standards'",
                 "  - 'according to major providers' (without specific name)",
                 "  - 'according to industry analysis' (without specific source)",
                 "  - 'according to research' (without specific source)",
-                "  - 'based on industry reports' (without specific source)",
-                "• If research data includes a real source, use it exactly as provided",
-                "• ALWAYS cite market size projections and financial forecasts when available",
-                "• Maximum 8 citations per document, up to 3 in introduction section",
-                "• NEVER cite the same statistic twice",
-                "• DO NOT cite general statements, definitions, or common knowledge",
+                "  - 'according to market research' (without specific organization name)",
+                "  - 'based on industry reports' (without specific report/org)",
+                "  - 'Market Research Future' (unless specifically provided in research data)",
+                "  - 'Fortune Business Insights' (unless specifically provided in research data)",
+                "• SOURCE REQUIREMENT: Every statistic MUST have corresponding verified source from research data",
+                "• If no verified source exists for a statistic, DO NOT include the statistic",
+                "• Use exact source attribution as provided in research - no fabrication allowed",
+                "• Maximum 1 major statistic per section (introduction gets 2 maximum)",
+                "• NEVER repeat the same fact/statistic in multiple sections",
+                "• When in doubt, omit the statistic rather than risk source fabrication",
                 ""
             ])
             

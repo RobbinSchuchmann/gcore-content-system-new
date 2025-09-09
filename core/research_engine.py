@@ -333,15 +333,18 @@ class ResearchEngine:
         return deduped
     
     def _process_research_response(self, response: Dict[str, Any], topic: str) -> Dict[str, Any]:
-        """Process and structure the Perplexity API response"""
+        """Process and structure the Perplexity API response with enhanced source tracking"""
         
         # Extract the main content
         content = ""
         if 'choices' in response and len(response['choices']) > 0:
             content = response['choices'][0]['message']['content']
         
-        # Extract sources using source manager  
+        # Extract sources using source manager with enhanced extraction
         sources = self.source_manager.extract_sources_from_perplexity(response)
+        
+        # Store raw response for debugging
+        self._store_raw_response(response, topic)
         
         # Try to parse structured JSON output
         structured_data = None
@@ -428,6 +431,26 @@ class ResearchEngine:
             research_data['source_file'] = source_file
         
         return research_data
+    
+    def _store_raw_response(self, response: Dict[str, Any], topic: str):
+        """Store raw API response for debugging source attribution issues"""
+        try:
+            import json
+            from pathlib import Path
+            from datetime import datetime
+            
+            debug_dir = Path("debug_responses")
+            debug_dir.mkdir(exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = debug_dir / f"research_{topic.replace(' ', '_')}_{timestamp}.json"
+            
+            with open(filename, 'w') as f:
+                json.dump(response, f, indent=2)
+                
+        except Exception as e:
+            # Don't fail research if debug storage fails
+            print(f"Debug storage failed: {e}")
     
     def _extract_facts_with_sources(self, content: str, sources: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Extract facts with selective source attribution"""

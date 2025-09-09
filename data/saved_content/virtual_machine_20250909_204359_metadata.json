@@ -1,0 +1,815 @@
+{
+  "primary_keyword": "virtual machine",
+  "generated_date": "2025-09-09T20:43:59.912377",
+  "quality_scores": {
+    "Introduction": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.7,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.2,
+          "complex_word_percentage": 35.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "introduction"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": []
+    },
+    "What is a virtual machine?": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.61,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.4,
+          "complex_word_percentage": 31.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_definition"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": []
+    },
+    "How does a virtual machine work?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.36,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.7,
+          "complex_word_percentage": 30.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 4
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": []
+    },
+    "What are the main benefits of virtual machines?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "utilization"
+          ],
+          "positions": {
+            "utilization": [
+              [
+                577,
+                588
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.5,
+          "complex_word_percentage": 33.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Replace AI words: utilization",
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are virtual machines used for?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "potentially"
+          ],
+          "positions": {
+            "potentially": [
+              [
+                1426,
+                1437
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.8,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.2,
+          "complex_word_percentage": 35.6,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: potentially",
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the different types of virtual machines?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'fast' - Use specific metrics like '30ms latency'"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.6,
+          "complex_word_percentage": 28.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are potential challenges of virtual machines?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.75,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.8,
+          "complex_word_percentage": 35.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Are virtual machines better than physical servers?": {
+      "overall_score": 78,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 78,
+          "compliant": false,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'fast' - Use specific metrics like '30ms latency'",
+            "Avoid 'best' - Use 'leading' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.47,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 19.4,
+          "complex_word_percentage": 35.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_yes_no_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%",
+        "Content too long: 213 words (maximum: 150)"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "How do virtual machines work in cloud computing?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.93,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.4,
+          "complex_word_percentage": 33.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "How Gcore helps you deploy virtual machines": {
+      "overall_score": 71,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "streamline"
+          ],
+          "positions": {
+            "streamline": [
+              [
+                788,
+                798
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 91,
+          "compliant": true,
+          "issues": [
+            "2 sentences exceed max length",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 17.5,
+          "complex_word_percentage": 43.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_intelligent_cta"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 2,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Replace AI words: streamline",
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    },
+    "Frequently asked questions": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 12.0,
+          "complex_word_percentage": 41.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_intro"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 1,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 36 words (minimum: 100)",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    },
+    "Are virtual machines safe?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.22,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.0,
+          "complex_word_percentage": 37.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 45 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "What's the difference between VMs and containers?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'fast' - Use specific metrics like '30ms latency'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.7,
+          "complex_word_percentage": 24.4,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 7
+        }
+      },
+      "issues": [
+        "Content too short: 41 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Can virtual machines access the internet?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.78,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 12.0,
+          "complex_word_percentage": 33.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Content too short: 36 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    }
+  },
+  "word_count": 2380
+}
