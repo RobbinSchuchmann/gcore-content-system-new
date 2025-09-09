@@ -1459,6 +1459,44 @@ if selected_mode == "📝 New Content":
     elif st.session_state.current_step == 5:
         st.subheader("Step 5: Export Content")
         
+        # Source validation function
+        def validate_source_attribution(content_sections, research_sources):
+            """Validate that all cited sources in content exist in research sources"""
+            validation_errors = []
+            research_source_names = set()
+            
+            # Extract source names from research
+            if research_sources:
+                for source in research_sources:
+                    if isinstance(source, dict):
+                        title = source.get('title', '').lower()
+                        url = source.get('url', '')
+                        if title:
+                            research_source_names.add(title)
+                        if url:
+                            # Extract domain name
+                            domain = url.split('//')[1].split('/')[0] if '//' in url else url
+                            research_source_names.add(domain.replace('www.', '').lower())
+            
+            # Check for fabricated sources in content
+            forbidden_sources = [
+                'market research future', 'fortune business insights',
+                'according to research', 'according to market research',
+                'according to industry analysis', 'according to studies'
+            ]
+            
+            all_content_text = ""
+            for section in content_sections:
+                content = section.get('content', '')
+                if isinstance(content, str):
+                    all_content_text += content.lower() + " "
+            
+            for forbidden in forbidden_sources:
+                if forbidden in all_content_text:
+                    validation_errors.append(f"⚠️ Found fabricated source: '{forbidden}' - not in research data")
+            
+            return validation_errors
+        
         # Check if we have content to export
         if not st.session_state.content_brief.get('generated_content'):
             st.warning("Please generate content first")
@@ -1516,12 +1554,36 @@ if selected_mode == "📝 New Content":
                     avg_quality = sum(scores) / len(scores) if scores else 0
                 st.metric("Avg Quality", f"{avg_quality:.1f}%")
             
+            # Source validation function (defined inline to avoid scope issues)
+            def validate_source_attribution_inline(content_sections, research_sources):
+                """Validate that all cited sources in content exist in research sources"""
+                validation_errors = []
+                
+                # Check for fabricated sources in content
+                forbidden_sources = [
+                    'market research future', 'fortune business insights',
+                    'according to research', 'according to market research',
+                    'according to industry analysis', 'according to studies'
+                ]
+                
+                all_content_text = ""
+                for section in content_sections:
+                    content = section.get('content', '')
+                    if isinstance(content, str):
+                        all_content_text += content.lower() + " "
+                
+                for forbidden in forbidden_sources:
+                    if forbidden in all_content_text:
+                        validation_errors.append(f"⚠️ Found fabricated source: '{forbidden}' - not in research data")
+                
+                return validation_errors
+            
             # Validate source attribution before export
             research_data = st.session_state.content_brief.get('research_data', {})
             research_sources = research_data.get('data', {}).get('sources', [])
             content_sections = export_content['content']['sections']
             
-            validation_errors = validate_source_attribution(content_sections, research_sources)
+            validation_errors = validate_source_attribution_inline(content_sections, research_sources)
             if validation_errors:
                 st.error("⚠️ **Source Attribution Issues Found:**")
                 for error in validation_errors:
@@ -1602,43 +1664,6 @@ if selected_mode == "📝 New Content":
                                 md_content.append(f"{i}. {source}")
                 
                 return '\n'.join(md_content)
-            
-            def validate_source_attribution(content_sections, research_sources):
-                """Validate that all cited sources in content exist in research sources"""
-                validation_errors = []
-                research_source_names = set()
-                
-                # Extract source names from research
-                if research_sources:
-                    for source in research_sources:
-                        if isinstance(source, dict):
-                            title = source.get('title', '').lower()
-                            url = source.get('url', '')
-                            if title:
-                                research_source_names.add(title)
-                            if url:
-                                # Extract domain name
-                                domain = url.split('//')[1].split('/')[0] if '//' in url else url
-                                research_source_names.add(domain.replace('www.', '').lower())
-                
-                # Check for fabricated sources in content
-                forbidden_sources = [
-                    'market research future', 'fortune business insights',
-                    'according to research', 'according to market research',
-                    'according to industry analysis', 'according to studies'
-                ]
-                
-                all_content_text = ""
-                for section in content_sections:
-                    content = section.get('content', '')
-                    if isinstance(content, str):
-                        all_content_text += content.lower() + " "
-                
-                for forbidden in forbidden_sources:
-                    if forbidden in all_content_text:
-                        validation_errors.append(f"⚠️ Found fabricated source: '{forbidden}' - not in research data")
-                
-                return validation_errors
             
             def generate_html():
                 """Generate HTML format"""
@@ -1915,6 +1940,10 @@ if selected_mode == "📝 New Content":
                 
                 # Merge consecutive </ul>\n    <ul> patterns
                 html_content = re.sub(r'</ul>\s*<ul>', '', html_content)
+                
+                # Convert all <ul> to <ol> for better Google Sheets compatibility
+                html_content = html_content.replace('<ul>', '<ol>')
+                html_content = html_content.replace('</ul>', '</ol>')
                 
                 return html_content
             
@@ -3272,6 +3301,10 @@ elif selected_mode == "🔧 Content Optimization":
                 
                 # Merge consecutive </ul>\n    <ul> patterns
                 html_content = re.sub(r'</ul>\s*<ul>', '', html_content)
+                
+                # Convert all <ul> to <ol> for better Google Sheets compatibility
+                html_content = html_content.replace('<ul>', '<ol>')
+                html_content = html_content.replace('</ul>', '</ol>')
                 
                 return html_content
 

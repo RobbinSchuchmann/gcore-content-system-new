@@ -15,7 +15,7 @@ class CitationTracker:
     def __init__(self):
         self.cited_stats: Set[str] = set()  # Track which statistics have been cited
         self.citation_count: int = 0        # Total citations in document
-        self.max_citations_per_doc: int = 8 # Global maximum citations (increased from 5)
+        self.max_citations_per_doc: int = 5 # Reduced from 8 - be more selective
         self.stats_by_section: Dict[str, int] = {}  # Track citations per section
         self.fact_to_source: Dict[str, str] = {}  # Map facts to their sources
         self.used_facts_content: Set[str] = set()  # Track actual fact content to prevent repetition
@@ -48,8 +48,12 @@ class CitationTracker:
         if self.citation_count >= self.max_citations_per_doc:
             return False
         
-        # Check section limit (max 2 per section, 3 for introduction)
-        section_limit = 3 if section.lower() in ["introduction", "intro", "general"] else 2
+        # NO CITATIONS in FAQ sections - keep FAQs clean and direct
+        if any(faq_term in section.lower() for faq_term in ["faq", "frequently asked", "question", "answer"]):
+            return False
+        
+        # Check section limit (max 1 per section, 2 for introduction)
+        section_limit = 2 if section.lower() in ["introduction", "intro", "general"] else 1
         if self.stats_by_section.get(section, 0) >= section_limit:
             return False
         
@@ -77,7 +81,7 @@ class CitationTracker:
         numbers = re.findall(r'\d+(?:\.\d+)?', text)
         
         # Extract key concepts (market, growth, billion, etc.)
-        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow)\b', 
+        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow|organizations?|concern|security|report|study|survey|according|findings)\b', 
                               text.lower())
         
         # Create fingerprint from numbers + key terms
@@ -167,41 +171,39 @@ class SourceManager:
         Returns:
             True if citation is needed, False otherwise
         """
+        # NO CITATIONS in FAQ sections - keep FAQs clean and direct
+        if any(faq_term in section.lower() for faq_term in ["faq", "frequently asked", "question", "answer"]):
+            return False
+        
         # First check with citation tracker - if we've hit limits, no more citations
         if not self.citation_tracker.should_cite(statement, section):
             return False
         
         statement_lower = statement.lower()
         
-        # Updated patterns to include market and financial projections
+        # STRATEGIC CITATION PATTERNS - Only cite truly significant, non-obvious claims
         exceptional_patterns = [
-            # High percentages or high precision
-            r'[789]\d%',  # 70-99%
-            r'[234]\d%.*?(?:reduce|increase|improve|grow|CAGR)',  # 20%+ with growth/improvement context
-            r'99\.9+%',  # 99.9%+ availability/durability
-            
-            # Financial projections and market data (ALWAYS cite these)
-            r'\$\d+(?:\.\d+)?\s*(?:trillion|billion|million)\b',  # Any market size projections
-            r'(?:market|revenue|spending).*?\$\d+',  # Market revenue/spending
-            r'(?:projected|forecast|expected).*?\$\d+',  # Financial forecasts
+            # Market size and financial projections (HIGH PRIORITY - always cite)
+            r'\$\d+(?:\.\d+)?\s*(?:trillion|billion)\b.*?(?:market|revenue|industry)',  # Market size
+            r'(?:market|industry).*?\$\d+(?:\.\d+)?\s*(?:trillion|billion)',  # Market size reverse
+            r'(?:projected|forecast|expected|anticipated).*?\$\d+(?:\.\d+)?\s*(?:trillion|billion)',  # Financial forecasts
             r'(?:reach|grow|increase).*?\$\d+(?:\.\d+)?\s*(?:trillion|billion)',  # Growth to X trillion/billion
-            
-            # Large scale numbers with significance
-            r'\d+\s*(?:billion|million)\s+(?:users|customers|enterprises)',
-            r'\$\d+(?:\.\d+)?.*?per\s+',  # Specific pricing (more flexible)
-            
-            # Performance metrics - more flexible
-            r'(?:reduce|increase|improve|reduced).*?\d+%',  # Any % improvements
-            r'\d+(?:-\d+)?\s*(?:ms|milliseconds|seconds)',  # Time measurements
-            r'(?:average|latency|response).*?\d+',  # Performance metrics
-            
-            # Research/study results with specific numbers
-            r'(?:study|research|survey|report|according).*?(?:shows|found|reveals)?.*?\d+',
-            r'(?:CAGR|growth).*?\d+%',  # Growth rates
-            
-            # Market projections and forecasts (high priority)
             r'(?:by\s+20\d{2}).*?\$\d+(?:\.\d+)?\s*(?:trillion|billion)',  # "by 2025, $1.25 trillion"
-            r'(?:projected|forecast|expected|anticipated).*?(?:trillion|billion)',  # Market forecasts
+            
+            # Specific growth rates and CAGR (only with context)
+            r'(?:CAGR|compound annual growth|growth rate).*?\d+(?:\.\d+)?%',  # Specific CAGR
+            r'grow.*?(?:at|by).*?\d+(?:\.\d+)?%.*?(?:CAGR|annually|year)',  # Growth rate context
+            
+            # Industry scale metrics (significant numbers only)
+            r'\d+\s*(?:billion|million)\s+(?:users|customers|enterprises|servers|devices)',  # Scale metrics
+            
+            # Performance claims that need verification (specific metrics only)
+            r'(?:reduce|increase|improve).*?\d+(?:\.\d+)?%.*?(?:performance|efficiency|speed|cost)',  # Performance claims
+            r'\d+(?:-\d+)?\s*(?:ms|milliseconds)\s+(?:latency|response|average)',  # Latency claims
+            
+            # Technical specifications that are non-obvious
+            r'\d+(?:\+)?\s*(?:points of presence|pops|data centers|locations).*?(?:global|worldwide)',  # Network scale
+            r'99\.9+%\s*(?:uptime|availability|sla)',  # High availability claims
         ]
         
         # Check if it's exceptional enough
@@ -214,21 +216,36 @@ class SourceManager:
         if not is_exceptional:
             return False
         
-        # Patterns that indicate NO citation is needed
+        # Patterns that indicate NO citation is needed (expanded to be more comprehensive)
         no_citation_patterns = [
-            # Basic definitions
-            r'^[\w\s]+\s+(?:is|are|refers to|means)\s+(?:a|an|the)?\s+',
-            r'^(?:a|an|the)?\s*[\w\s]+\s+(?:is|are)\s+(?:used|designed|built)\s+(?:for|to)',
+            # Basic definitions and explanations
+            r'^[\w\s]+\s+(?:is|are|refers to|means|involves|consists of|represents)\s+',
+            r'^(?:a|an|the)?\s*[\w\s]+\s+(?:is|are)\s+(?:used|designed|built|created|made)\s+',
             
-            # General descriptions
-            r'^(?:this|these|it)\s+(?:allows|enables|provides|offers|includes)',
+            # Process and feature descriptions
+            r'^(?:this|these|it|they)\s+(?:allows|enables|provides|offers|includes|supports|works|operates)',
             r'^users?\s+can\s+',
             r'^you\s+can\s+',
+            r'^organizations?\s+(?:can|use|implement)',
             
-            # Common knowledge
-            r'commonly\s+(?:used|known|understood)',
-            r'typically\s+(?:includes|involves|requires)',
-            r'generally\s+(?:refers|means|includes)',
+            # Common knowledge and typical behaviors
+            r'commonly\s+(?:used|known|understood|implemented)',
+            r'typically\s+(?:includes|involves|requires|uses|supports)',
+            r'generally\s+(?:refers|means|includes|provides)',
+            r'usually\s+(?:includes|involves|requires|means)',
+            r'often\s+(?:includes|used|implemented)',
+            
+            # Technical process descriptions  
+            r'(?:works by|operates by|functions by|starts when|begins when)',
+            r'(?:consists of|made up of|composed of|includes|contains)',
+            r'(?:main|primary|key)\s+(?:components|features|benefits|advantages)',
+            
+            # List introductions and explanations
+            r'(?:benefits|advantages|features|types|components)\s+(?:include|are|consist)',
+            r'(?:examples|instances|cases)\s+(?:include|are)',
+            
+            # General statements about capabilities
+            r'(?:can be|may be|might be)\s+(?:used|implemented|configured)',
         ]
         
         # Check if it's a general statement that doesn't need citation

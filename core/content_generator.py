@@ -412,12 +412,17 @@ class ContentGenerator:
                 "  - 'based on industry reports' (without specific report/org)",
                 "  - 'Market Research Future' (unless specifically provided in research data)",
                 "  - 'Fortune Business Insights' (unless specifically provided in research data)",
-                "• SOURCE REQUIREMENT: Every statistic MUST have corresponding verified source from research data",
-                "• If no verified source exists for a statistic, DO NOT include the statistic",
-                "• Use exact source attribution as provided in research - no fabrication allowed",
-                "• Maximum 1 major statistic per section (introduction gets 2 maximum)",
+                "• STRATEGIC CITATION POLICY:",
+                "  - Only cite claims that truly need verification (market data, financial projections, technical specs)",
+                "  - Do NOT cite basic definitions, common processes, or general explanations",
+                "  - NEVER include citations in FAQ sections - keep FAQs clean and direct",
+                "  - Maximum 5 citations per entire document (be very selective)",
+                "  - Maximum 1 citation per section (2 for introduction only)",
+                "  - Focus citations on: market size, growth rates, performance claims, industry scale",
+                "• SOURCE REQUIREMENT: Every citation MUST have corresponding verified source from research data",
+                "• If no verified source exists for a claim, present it without citation or omit it",
                 "• NEVER repeat the same fact/statistic in multiple sections",
-                "• When in doubt, omit the statistic rather than risk source fabrication",
+                "• Quality over quantity - fewer, more impactful citations are better",
                 ""
             ])
             

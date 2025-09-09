@@ -1,0 +1,240 @@
+{
+  "timestamp": "2025-09-09T21:12:14.316357",
+  "total_sources": 26,
+  "sources": [
+    {
+      "title": "Cycognito",
+      "url": "https://www.cycognito.com/learn/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Orca",
+      "url": "https://orca.security/resources/blog/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Proserveit",
+      "url": "https://www.proserveit.com/blog/cloud-security-best-practices",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Checkpoint",
+      "url": "https://www.checkpoint.com/cyber-hub/cloud-security/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"It operates under a shared responsibility model where cloud providers secure the infrastructure,",
+      "url": "",
+      "snippet": ".\",\"It operates under a shared responsibility model where cloud providers secure the infrastructure, and customers secure their deployed applications, data, and access policies, varying by service model (IaaS, PaaS, SaaS)",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevent",
+      "url": "",
+      "snippet": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevention (DLP), Security Information and Event Management (SIEM), encryption, workload protection, and continuous monitoring",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"IAM controls user authentication, authorization, and access policies to prevent unauthorized acc",
+      "url": "",
+      "snippet": ".\",\"IAM controls user authentication, authorization, and access policies to prevent unauthorized access and reduce data breach risks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Data Loss Prevention technologies automatically discover, classify, and protect sensitive data i",
+      "url": "",
+      "snippet": ".\",\"Data Loss Prevention technologies automatically discover, classify, and protect sensitive data in motion, at rest, and in use, aiding compliance and intellectual property protection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"SIEM systems collect and analyze logs from cloud infrastructure for real-time monitoring, threat",
+      "url": "",
+      "snippet": ".\",\"SIEM systems collect and analyze logs from cloud infrastructure for real-time monitoring, threat detection, and incident response",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Encryption, using strong algorithms like AES-256, protects data confidentiality both in transit ",
+      "url": "",
+      "snippet": ".\",\"Encryption, using strong algorithms like AES-256, protects data confidentiality both in transit and at rest, with key management being critical",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Cloud security challenges include misconfigurations (e.g., improper permissions, exposed storage",
+      "url": "",
+      "snippet": ".\",\"Cloud security challenges include misconfigurations (e.g., improper permissions, exposed storage buckets), insider threats, evolving AI-driven attacks, and the dynamic nature of cloud environments complicating security management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Best practices involve automated security integrated with CI/CD pipelines, continuous monitoring",
+      "url": "",
+      "snippet": ".\",\"Best practices involve automated security integrated with CI/CD pipelines, continuous monitoring, incident response planning, and regular policy reviews",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Cloud security technologies and tools include cloud-native firewalls, endpoint protection, Cloud",
+      "url": "",
+      "snippet": ".\",\"Cloud security technologies and tools include cloud-native firewalls, endpoint protection, Cloud Security Posture Management (CSPM), multi-factor authentication (MFA), and AI-driven threat detection tools",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Performance metrics for cloud security focus on incident detection time, response time, system a",
+      "url": "",
+      "snippet": ".\",\"Performance metrics for cloud security focus on incident detection time, response time, system availability, and compliance adherence",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Scalability considerations require security solutions that adapt dynamically to cloud resource c",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations require security solutions that adapt dynamically to cloud resource changes without degrading performance or increasing risk",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security benefits include enhanced data protection, regulatory compliance, reduced risk of",
+      "url": "",
+      "snippet": ".\",\"Cloud security benefits include enhanced data protection, regulatory compliance, reduced risk of breaches, operational resilience, and enabling secure cloud adoption and innovation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Automation and AI integration in cloud security improve threat detection accuracy and speed, red",
+      "url": "",
+      "snippet": ".\",\"Automation and AI integration in cloud security improve threat detection accuracy and speed, reducing manual workload and human error",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Regular security training and awareness for users are essential to mitigate risks from misconfig",
+      "url": "",
+      "snippet": ".\",\"Regular security training and awareness for users are essential to mitigate risks from misconfigurations and insider threats",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Organizations use Security Information and Event Management (SIEM) tools to monitor cloud logs c",
+      "url": "",
+      "snippet": ".\",\"Organizations use Security Information and Event Management (SIEM) tools to monitor cloud logs continuously, enabling early detection of suspicious activities",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Companies implement Cloud Security Posture Management (CSPM) tools to automatically detect and r",
+      "url": "",
+      "snippet": ".\",\"Companies implement Cloud Security Posture Management (CSPM) tools to automatically detect and remediate misconfigurations in real time",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"A financial services firm employs multi-factor authentication and role-based access control to r",
+      "url": "",
+      "snippet": ".\",\"A financial services firm employs multi-factor authentication and role-based access control to restrict access to sensitive cloud resources, reducing insider threat risks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"An enterprise integrates automated security checks into its CI/CD pipeline to prevent vulnerable",
+      "url": "",
+      "snippet": ".\",\"An enterprise integrates automated security checks into its CI/CD pipeline to prevent vulnerable code deployment and ensure compliance before production release",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    }
+  ]
+}

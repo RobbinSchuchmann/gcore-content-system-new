@@ -1,0 +1,276 @@
+{
+  "timestamp": "2025-09-09T21:02:35.225027",
+  "total_sources": 30,
+  "sources": [
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Orca",
+      "url": "https://orca.security/resources/blog/what-is-cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Zscaler",
+      "url": "https://www.zscaler.com/resources/security-terms-glossary/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Cloudsecurityalliance",
+      "url": "https://cloudsecurityalliance.org/blog/2024/06/27/cloud-security-in-2024-addressing-the-shifting-landscape",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": ".\",\"Cloud security operates under a shared responsibility model where both the cloud service provide",
+      "url": "",
+      "snippet": ".\",\"Cloud security operates under a shared responsibility model where both the cloud service provider and the customer share security duties",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevent",
+      "url": "",
+      "snippet": ".\",\"Key components of cloud security include Identity and Access Management (IAM), Data Loss Prevention (DLP), Security Information and Event Management (SIEM), and encryption for data protection",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Cloud security protects resources and data individually rather than relying on a traditional per",
+      "url": "",
+      "snippet": ".\",\"Cloud security protects resources and data individually rather than relying on a traditional perimeter defense, using granular controls such as cloud security posture management (CSPM), segmentation, and multifactor authentication",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Common cloud security challenges include misconfigurations, insider threats, data breaches, and ",
+      "url": "",
+      "snippet": ".\",\"Common cloud security challenges include misconfigurations, insider threats, data breaches, and the complexity of managing multi-cloud and SaaS environments",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Encryption is essential for protecting data both in transit and at rest, with strong algorithms ",
+      "url": "",
+      "snippet": ".\",\"Encryption is essential for protecting data both in transit and at rest, with strong algorithms like AES-256 recommended alongside proper key management",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Best practices for cloud security include continuous monitoring, threat detection, incident resp",
+      "url": "",
+      "snippet": ".\",\"Best practices for cloud security include continuous monitoring, threat detection, incident response planning, and regular review of IAM policies",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security technologies and tools include firewalls, IAM, CSPM, DLP, SIEM, encryption tools,",
+      "url": "",
+      "snippet": ".\",\"Cloud security technologies and tools include firewalls, IAM, CSPM, DLP, SIEM, encryption tools, and multifactor authentication systems",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud environments are increasingly complex due to multi-cloud adoption and extensive use of Saa",
+      "url": "",
+      "snippet": ".\",\"Cloud environments are increasingly complex due to multi-cloud adoption and extensive use of SaaS applications, which increases security management challenges",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Cloud security supports regulatory compliance, data governance, disaster recovery, and privacy c",
+      "url": "",
+      "snippet": ".\",\"Cloud security supports regulatory compliance, data governance, disaster recovery, and privacy controls",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Performance metrics for cloud security include detection speed, incident response time, and redu",
+      "url": "",
+      "snippet": ".\",\"Performance metrics for cloud security include detection speed, incident response time, and reduction in misconfigurations or vulnerabilities",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Scalability considerations involve ensuring security tools and policies adapt to dynamic cloud w",
+      "url": "",
+      "snippet": ".\",\"Scalability considerations involve ensuring security tools and policies adapt to dynamic cloud workloads and multi-cloud architectures without performance degradation",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\",\"Zero trust architecture is a growing approach in cloud security, emphasizing strict access contr",
+      "url": "",
+      "snippet": ".\",\"Zero trust architecture is a growing approach in cloud security, emphasizing strict access controls and continuous verification",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Cloud security helps organizations maintain agility and flexibility while protecting against int",
+      "url": "",
+      "snippet": ".\",\"Cloud security helps organizations maintain agility and flexibility while protecting against internal and external threats",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\",\"Incident response plans tailored for cloud environments are critical for minimizing damage from ",
+      "url": "",
+      "snippet": ".\",\"Incident response plans tailored for cloud environments are critical for minimizing damage from security breaches and ensuring rapid recovery",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\"],\"statistics\":",
+      "url": "",
+      "snippet": ".\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": ".\"},{\"value\":\"65%\",\"context\":\"Percentage of security and IT professionals who consider cloud securit",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"65%\",\"context\":\"Percentage of security and IT professionals who consider cloud security a top concern in 2024",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": ".\"},{\"value\":\"72%\",\"context\":\"Percentage of professionals who believe cloud security will become an ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"72%\",\"context\":\"Percentage of professionals who believe cloud security will become an even higher priority in the future",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"2.02\",\"context\":\"Average number of cloud providers per enterprise in 2024, indicating ",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"2.02\",\"context\":\"Average number of cloud providers per enterprise in 2024, indicating multi-cloud complexity",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"},{\"value\":\"Over 60%\",\"context\":\"Percentage of organizations using more than 25 SaaS applications,",
+      "url": "",
+      "snippet": ".\"},{\"value\":\"Over 60%\",\"context\":\"Percentage of organizations using more than 25 SaaS applications, increasing cloud security challenges",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\"}],\"key_points\":",
+      "url": "",
+      "snippet": ".\"}],\"key_points\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Financial services firms face challenges securing multi-cloud environments with multiple provide",
+      "url": "",
+      "snippet": ".\",\"Financial services firms face challenges securing multi-cloud environments with multiple providers, requiring integrated cloud security strategies to manage risks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify sensit",
+      "url": "",
+      "snippet": ".\",\"Organizations use Data Loss Prevention (DLP) tools to automatically discover and classify sensitive cloud data, helping comply with regulations and prevent data leaks",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": ".\",\"Companies implement Security Information and Event Management (SIEM) systems to monitor cloud lo",
+      "url": "",
+      "snippet": ".\",\"Companies implement Security Information and Event Management (SIEM) systems to monitor cloud logs in real time, enabling faster threat detection and incident response",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\",\"Many enterprises adopt cloud-native encryption and multifactor authentication to secure access a",
+      "url": "",
+      "snippet": ".\",\"Many enterprises adopt cloud-native encryption and multifactor authentication to secure access and protect data confidentiality in cloud applications",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "2"
+    },
+    {
+      "title": ".\"]}",
+      "url": "",
+      "snippet": ".\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    }
+  ]
+}
