@@ -1058,7 +1058,13 @@ if selected_mode == "📝 New Content":
                 
                 if APIS_AVAILABLE:
                     from core.content_generator import ContentGenerator
-                    generator = ContentGenerator(enable_internal_links=enable_internal_links)
+                    # Use session-persistent generator to maintain fact tracking
+                    if 'content_generator' not in st.session_state:
+                        st.session_state.content_generator = ContentGenerator(enable_internal_links=enable_internal_links)
+                    generator = st.session_state.content_generator
+                    
+                    # Reset fact tracking for new content generation
+                    generator.reset_fact_tracking()
                     
                     # Generate introduction using dedicated method
                     status_text.text("Generating introduction...")
@@ -1559,11 +1565,15 @@ if selected_mode == "📝 New Content":
                 """Validate that all cited sources in content exist in research sources"""
                 validation_errors = []
                 
-                # Check for fabricated sources in content
+                # Check for fabricated sources in content (comprehensive list)
                 forbidden_sources = [
                     'market research future', 'fortune business insights',
-                    'according to research', 'according to market research',
-                    'according to industry analysis', 'according to studies'
+                    'according to research', 'according to market research', 
+                    'according to industry analysis', 'according to studies',
+                    'according to reports', 'according to data',
+                    'market research data', 'market research reports',
+                    'research shows', 'studies indicate', 'data suggests',
+                    'based on research', 'research findings'
                 ]
                 
                 all_content_text = ""
@@ -1927,8 +1937,15 @@ if selected_mode == "📝 New Content":
                         html_parts.append('    <ol>')
                         for source in research['sources'][:10]:
                             if isinstance(source, dict):
-                                html_parts.append(f'        <li><a href="{source.get("url", "#")}">{source.get("title", "Source")}</a></li>')
-                            else:
+                                url = source.get("url", "").strip()
+                                title = source.get("title", "").strip()
+                                
+                                # Only include sources with proper URL and title
+                                if url and title and url.startswith('http') and len(title) > 3:
+                                    html_parts.append(f'        <li><a href="{url}">{title}</a></li>')
+                                elif title and len(title) > 10:  # Title-only sources
+                                    html_parts.append(f'        <li>{title}</li>')
+                            elif isinstance(source, str) and len(source.strip()) > 10:
                                 html_parts.append(f'        <li>{source}</li>')
                         html_parts.append('    </ol>')
                 

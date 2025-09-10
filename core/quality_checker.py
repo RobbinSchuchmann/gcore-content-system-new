@@ -145,7 +145,14 @@ class QualityChecker:
             results['issues'].append(f"Found {len(ai_check['words'])} AI-sounding words")
             results['overall_score'] -= min(len(ai_check['words']) * 5, 30)
         
-        # 2. Check Gcore compliance
+        # 2. Check for competitor mentions (critical brand violation)
+        competitor_check = self._check_competitor_mentions(content)
+        results['checks']['competitor_mentions'] = competitor_check
+        if competitor_check['found']:
+            results['issues'].append(f"Found {len(competitor_check['mentions'])} competitor mentions")
+            results['overall_score'] -= len(competitor_check['mentions']) * 10  # Heavy penalty
+        
+        # 3. Check Gcore compliance
         gcore_check = self._check_gcore_compliance(content)
         results['checks']['gcore_compliance'] = gcore_check
         results['overall_score'] = min(results['overall_score'], gcore_check['score'])
@@ -210,6 +217,39 @@ class QualityChecker:
             'words': found_words,
             'positions': word_positions,
             'threshold_exceeded': len(found_words) > QUALITY_THRESHOLDS['max_ai_words']
+        }
+    
+    def _check_competitor_mentions(self, content: str) -> Dict[str, Any]:
+        """Check for competitor mentions (critical brand violation)"""
+        competitors = [
+            'AWS', 'Amazon Web Services', 'Amazon EC2', 'Amazon', 
+            'Microsoft Azure', 'Azure GPU', 'Azure ML', 'Azure',
+            'Google Cloud', 'Google Cloud Platform', 'GCP', 'Google',
+            'Oracle Cloud', 'IBM Cloud', 'Alibaba Cloud', 'DigitalOcean',
+            'Cloudflare', 'Fastly', 'Akamai', 'KeyCDN'
+        ]
+        
+        found_competitors = []
+        content_lower = content.lower()
+        
+        for competitor in competitors:
+            # Use word boundaries to avoid partial matches
+            pattern = r'\b' + re.escape(competitor.lower()) + r'\b'
+            if re.search(pattern, content_lower):
+                # Find actual positions for reporting
+                matches = list(re.finditer(pattern, content_lower))
+                for match in matches:
+                    found_competitors.append({
+                        'competitor': competitor,
+                        'position': match.start(),
+                        'context': content[max(0, match.start()-30):match.end()+30]
+                    })
+        
+        return {
+            'found': len(found_competitors) > 0,
+            'mentions': found_competitors,
+            'count': len(found_competitors),
+            'violation': len(found_competitors) > 0  # Any competitor mention is a violation
         }
     
     def _check_gcore_compliance(self, content: str) -> Dict[str, Any]:

@@ -1,0 +1,240 @@
+{
+  "timestamp": "2025-09-10T09:53:41.443771",
+  "total_sources": 26,
+  "sources": [
+    {
+      "title": "Rackset",
+      "url": "https://rackset.com/blog/what-is-a-virtual-machine",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nutanix",
+      "url": "https://www.nutanix.com/info/virtual-machine",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Okta",
+      "url": "https://www.okta.com/en-nl/identity-101/virtual-machines/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/virtual-machines",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Scalecomputing",
+      "url": "https://www.scalecomputing.com/resources/understanding-virtual-machine-advantages-and-disadvantages",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "\",\"VMs operate on a physical host machine using a hypervisor, which manages and allocates hardware r",
+      "url": "",
+      "snippet": "\",\"VMs operate on a physical host machine using a hypervisor, which manages and allocates hardware resources like CPU, memory, storage, and networking to each VM.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Each VM has its own operating system and applications, isolated from other VMs and the host, enab",
+      "url": "",
+      "snippet": "\",\"Each VM has its own operating system and applications, isolated from other VMs and the host, enabling multiple OS types to run concurrently on a single physical machine.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Key virtual hardware components include virtual CPUs (vCPUs), virtual RAM, virtual hard disks (e.",
+      "url": "",
+      "snippet": "\",\"Key virtual hardware components include virtual CPUs (vCPUs), virtual RAM, virtual hard disks (e.g., .vmdk, .vdi files), virtual network interface cards (vNICs), and optionally virtual GPUs and USB controllers.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Virtualization technology allows a single physical server to host multiple VMs, improving hardwar",
+      "url": "",
+      "snippet": "\",\"Virtualization technology allows a single physical server to host multiple VMs, improving hardware utilization and flexibility.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": "\",\"VMs provide isolation, ensuring that processes and failures in one VM do not affect others, enhan",
+      "url": "",
+      "snippet": "\",\"VMs provide isolation, ensuring that processes and failures in one VM do not affect others, enhancing security and stability.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Multi-tenancy is a core feature allowing multiple users or applications to share the same physica",
+      "url": "",
+      "snippet": "\",\"Multi-tenancy is a core feature allowing multiple users or applications to share the same physical hardware securely via VMs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"VMs are portable and can be transferred between different hardware platforms or cloud environment",
+      "url": "",
+      "snippet": "\",\"VMs are portable and can be transferred between different hardware platforms or cloud environments, facilitating scalability and disaster recovery.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"Virtual machines are widely used for software development and testing, running legacy application",
+      "url": "",
+      "snippet": "\",\"Virtual machines are widely used for software development and testing, running legacy applications, server consolidation, cloud computing, and enabling remote desktop environments.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"VMs enable running different operating systems on the same physical hardware, such as running Lin",
+      "url": "",
+      "snippet": "\",\"VMs enable running different operating systems on the same physical hardware, such as running Linux or MacOS on a Windows host.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"The global virtual machine market size was USD 11.11 billion in 2024 and is projected to grow to ",
+      "url": "",
+      "snippet": "\",\"The global virtual machine market size was USD 11.11 billion in 2024 and is projected to grow to USD 12.73 billion in 2025, with a CAGR of 14.71% expected through 2034.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\",\"Integration of artificial intelligence (AI) technologies into VMs is increasing, with the global ",
+      "url": "",
+      "snippet": "\",\"Integration of artificial intelligence (AI) technologies into VMs is increasing, with the global AI market projected to reach USD 826.70 billion by 2030, influencing VM capabilities.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"VMs support various network configurations including bridged, NAT, and host-only modes to connect",
+      "url": "",
+      "snippet": "\",\"VMs support various network configurations including bridged, NAT, and host-only modes to connect to the internet or local networks.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Shared folders and virtual USB controllers allow VMs to interact with host files and physical dev",
+      "url": "",
+      "snippet": "\",\"Shared folders and virtual USB controllers allow VMs to interact with host files and physical devices, enhancing usability in development and testing.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": "\",\"VM technology includes virtual servers, virtual server instances (VSIs), and virtual private serv",
+      "url": "",
+      "snippet": "\",\"VM technology includes virtual servers, virtual server instances (VSIs), and virtual private servers (VPSs), which are common in cloud infrastructure.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": "\"],\"statistics\":",
+      "url": "",
+      "snippet": "\"],\"statistics\":",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Cloud providers like AWS and Azure use virtual machines to offer scalable virtual servers to cust",
+      "url": "",
+      "snippet": "\",\"Cloud providers like AWS and Azure use virtual machines to offer scalable virtual servers to customers worldwide.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\",\"Enterprises consolidate multiple physical servers into fewer machines by running several VMs on p",
+      "url": "",
+      "snippet": "\",\"Enterprises consolidate multiple physical servers into fewer machines by running several VMs on powerful hosts, reducing hardware costs.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    },
+    {
+      "title": "\",\"Gaming developers use VMs with virtual GPU passthrough to test graphics-intensive applications in",
+      "url": "",
+      "snippet": "\",\"Gaming developers use VMs with virtual GPU passthrough to test graphics-intensive applications in isolated environments.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "5"
+    },
+    {
+      "title": "\",\"IT departments deploy VMs to provide remote desktop environments for employees, enabling secure a",
+      "url": "",
+      "snippet": "\",\"IT departments deploy VMs to provide remote desktop environments for employees, enabling secure access from anywhere.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "1"
+    },
+    {
+      "title": "\",\"Virtual private servers (VPS) hosted on cloud platforms allow small businesses to run websites an",
+      "url": "",
+      "snippet": "\",\"Virtual private servers (VPS) hosted on cloud platforms allow small businesses to run websites and applications without owning physical hardware.",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "3"
+    },
+    {
+      "title": "\"]}",
+      "url": "",
+      "snippet": "\"]}",
+      "author": "",
+      "date": "",
+      "type": "reference",
+      "ref_number": "4"
+    }
+  ]
+}

@@ -77,16 +77,29 @@ class CitationTracker:
         """Create a normalized fingerprint of fact content to detect duplicates"""
         import re
         
-        # Extract key numbers and concepts
-        numbers = re.findall(r'\d+(?:\.\d+)?', text)
+        # Special handling for market statistics - focus on the market/subject, not all numbers
+        text_lower = text.lower()
         
-        # Extract key concepts (market, growth, billion, etc.)
-        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow|organizations?|concern|security|report|study|survey|according|findings)\b', 
+        # Check if this is a market statistic
+        if 'virtual machine market' in text_lower or 'vm market' in text_lower:
+            return 'virtual_machine_market_statistic'  # All VM market stats get same fingerprint
+        elif 'cloud security' in text_lower and ('96%' in text or '95%' in text):
+            return 'cloud_security_concern_statistic'  # All cloud security concern stats get same fingerprint
+        elif 'gpu market' in text_lower or 'graphics processing' in text_lower:
+            return 'gpu_market_statistic'  # All GPU market stats get same fingerprint
+        
+        # For other statistics, use the original approach but be more focused
+        numbers = re.findall(r'\d+(?:\.\d+)?', text)
+        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow|organizations?|concern|security|virtual|machine|gpu|cloud)\b', 
                               text.lower())
         
-        # Create fingerprint from numbers + key terms
-        fingerprint = ''.join(numbers) + '_' + '_'.join(sorted(set(key_terms)))
-        return fingerprint
+        # Remove attribution terms that vary between cited/uncited versions
+        attribution_terms = ['according', 'report', 'study', 'survey', 'findings', 'research']
+        key_terms = [term for term in key_terms if term not in attribution_terms]
+        
+        # Create fingerprint focusing on core content
+        core_fingerprint = ''.join(sorted(numbers[:3])) + '_' + '_'.join(sorted(set(key_terms)))  # Limit to first 3 numbers
+        return core_fingerprint
     
     def check_fact_duplication(self, fact_text: str) -> bool:
         """Check if a fact (not just statistic) has already been used"""
@@ -333,24 +346,32 @@ class SourceManager:
                         'type': 'web'
                     })
         
-        # Extract organization names that might be sources
-        org_patterns = [
-            r'(?:according to|per|from|by)\s+([A-Z][a-zA-Z\s&]+(?:Research|Institute|University|Company|Corporation|Inc|LLC))',
-            r'([A-Z][a-zA-Z\s&]+(?:Research|Institute|University))\s+(?:reports?|study|survey|data|analysis)',
-            r'([A-Z][a-zA-Z\s&]+Research)\s+(?:\(\d{4}\))?',  # "Market Research Future (2024)" pattern
+        # Extract ONLY legitimate research organizations (strict whitelist approach)
+        legitimate_orgs = [
+            'Precedence Research', 'Grand View Research', 'Market Research Future', 
+            'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
+            'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
+            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group',
+            'Harvard Business Review', 'MIT Technology Review'
         ]
         
-        for pattern in org_patterns:
-            matches = re.findall(pattern, content, re.IGNORECASE)
-            for match in matches:
-                org_name = match.strip()
-                if len(org_name) > 3 and not any(org_name.lower() in s.get('title', '').lower() for s in extracted_sources):
+        # Only extract organization names that match our whitelist
+        for org in legitimate_orgs:
+            # Look for exact organization mentions in content
+            org_pattern = r'\b' + re.escape(org) + r'\b'
+            if re.search(org_pattern, content, re.IGNORECASE):
+                # Extract year if available
+                year_match = re.search(rf'{re.escape(org)}.*?(\(\d{{4}}\)|\b20[12]\d\b)', content, re.IGNORECASE)
+                year = year_match.group(1).strip('()') if year_match else ''
+                
+                # Only add if not already present
+                if not any(org.lower() in s.get('title', '').lower() for s in extracted_sources):
                     extracted_sources.append({
-                        'title': org_name,
+                        'title': org,
                         'url': '',
-                        'snippet': self._extract_organization_context(content, org_name),
+                        'snippet': self._extract_organization_context(content, org),
                         'author': '',
-                        'date': self._extract_year_from_context(content, org_name),
+                        'date': year,
                         'type': 'research_organization'
                     })
         
@@ -367,20 +388,8 @@ class SourceManager:
                 'type': 'academic'
             })
         
-        # Extract numbered references [1], [2], etc.
-        numbered_pattern = r'\[(\d+)\]\s*([^[\n]+)'
-        numbered_refs = re.findall(numbered_pattern, content)
-        for num, text in numbered_refs:
-            # Try to extract title or description
-            extracted_sources.append({
-                'title': text.strip()[:100],
-                'url': '',
-                'snippet': text.strip(),
-                'author': '',
-                'date': '',
-                'type': 'reference',
-                'ref_number': num
-            })
+        # DO NOT extract numbered references - they create malformed sources
+        # The [1], [2] pattern extraction was causing JSON fragments to be treated as sources
         
         # Deduplicate sources
         unique_sources = []
@@ -487,14 +496,27 @@ class SourceManager:
         if not self.citation_tracker.should_cite(fact, section):
             return f"{fact}." if not fact.endswith('.') else fact
         
-        # STRICT SOURCE VALIDATION - Only cite if we have a verified source
+        # ABSOLUTE SOURCE VALIDATION - Must have legitimate research organization
         if not source or not isinstance(source, dict):
             return f"{fact}." if not fact.endswith('.') else fact
         
-        # Reject sources without proper attribution
-        source_url = source.get('url', '')
         source_title = source.get('title', '')
-        if not source_url and not source_title:
+        source_url = source.get('url', '')
+        
+        # Whitelist of legitimate research organizations
+        legitimate_orgs = [
+            'Precedence Research', 'Grand View Research', 'Market Research Future', 
+            'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
+            'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
+            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group'
+        ]
+        
+        # Only allow citations from whitelisted organizations OR verified URLs
+        is_legitimate_org = any(org in source_title for org in legitimate_orgs) if source_title else False
+        is_verified_url = source_url and source_url.startswith('http') and len(source_url) > 10
+        
+        if not (is_legitimate_org or is_verified_url):
+            # No legitimate source - return fact without citation
             return f"{fact}." if not fact.endswith('.') else fact
         # Extract all available source information
         author = source.get('author', '')
@@ -662,8 +684,27 @@ class SourceManager:
         if not self.citation_tracker.should_cite(statistic, section):
             return f"{statistic}." if not statistic.endswith('.') else statistic
         
-        # STRICT SOURCE VALIDATION - Must have verified source
+        # ABSOLUTE SOURCE VALIDATION - Must have legitimate research organization
         if not source or not isinstance(source, dict):
+            return f"{statistic}." if not statistic.endswith('.') else statistic
+        
+        source_title = source.get('title', '')
+        source_url = source.get('url', '')
+        
+        # Whitelist of legitimate research organizations (same as above)
+        legitimate_orgs = [
+            'Precedence Research', 'Grand View Research', 'Market Research Future', 
+            'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
+            'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
+            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group'
+        ]
+        
+        # Only allow citations from whitelisted organizations OR verified URLs
+        is_legitimate_org = any(org in source_title for org in legitimate_orgs) if source_title else False
+        is_verified_url = source_url and source_url.startswith('http') and len(source_url) > 10
+        
+        if not (is_legitimate_org or is_verified_url):
+            # No legitimate source - return statistic without citation
             return f"{statistic}." if not statistic.endswith('.') else statistic
         
         # Statistics usually need citations, but check if it's a truly significant stat

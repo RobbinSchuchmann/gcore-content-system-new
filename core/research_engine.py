@@ -379,19 +379,22 @@ class ResearchEngine:
                 else:
                     formatted_stats.append({'text': str(stat), 'original': str(stat), 'source': None})
             
-            # Process facts - most don't need citations
+            # Process facts - clean competitors and format with citations
             formatted_facts = []
             for fact in structured_data.get('facts', []):
+                # Clean competitor mentions from fact first
+                cleaned_fact = self._clean_competitor_mentions_from_research(fact)
+                
                 # Check if this fact needs a citation
-                if self.source_manager.needs_citation(fact):
+                if self.source_manager.needs_citation(cleaned_fact):
                     # Only cite the most important facts with specific data
                     source = sources[0] if sources else None
                     if source:
-                        formatted_fact = self.source_manager.format_inline_citation(fact, source)
+                        formatted_fact = self.source_manager.format_inline_citation(cleaned_fact, source)
                     else:
-                        formatted_fact = fact
+                        formatted_fact = cleaned_fact
                 else:
-                    formatted_fact = fact if fact.endswith('.') else f"{fact}."
+                    formatted_fact = cleaned_fact if cleaned_fact.endswith('.') else f"{cleaned_fact}."
                 formatted_facts.append({'text': formatted_fact, 'original': fact})
             
             research_data = {
@@ -452,13 +455,42 @@ class ResearchEngine:
             # Don't fail research if debug storage fails
             print(f"Debug storage failed: {e}")
     
+    def _clean_competitor_mentions_from_research(self, text: str) -> str:
+        """Remove competitor mentions from research data to prevent them appearing in content"""
+        import re
+        
+        # Define competitor replacement patterns for research data
+        replacements = [
+            # Major cloud providers
+            (r'\b(?:AWS|Amazon Web Services|Amazon EC2)\b', 'major cloud providers'),
+            (r'\b(?:Microsoft Azure|Azure GPU|Azure ML|Azure)\b', 'enterprise cloud platforms'),
+            (r'\b(?:Google Cloud|Google Cloud Platform|GCP)\b', 'leading cloud platforms'),
+            
+            # Multiple competitors mentioned together  
+            (r'\b(?:AWS|Amazon),?\s*(?:Azure|Microsoft),?\s*(?:and\s+)?(?:Google Cloud|GCP)\b', 'major cloud providers'),
+            (r'\b(?:AWS|Amazon)\s*,\s*(?:Google Cloud|GCP)\s*,?\s*(?:and\s+)?(?:Azure|Microsoft)\b', 'leading cloud platforms'),
+            
+            # Other competitors
+            (r'\b(?:Oracle Cloud|IBM Cloud|Alibaba Cloud|DigitalOcean)\b', 'cloud platforms'),
+            (r'\b(?:Cloudflare|Fastly|Akamai|KeyCDN)\b', 'CDN providers'),
+        ]
+        
+        cleaned_text = text
+        for pattern, replacement in replacements:
+            cleaned_text = re.sub(pattern, replacement, cleaned_text, flags=re.IGNORECASE)
+        
+        return cleaned_text
+    
     def _extract_facts_with_sources(self, content: str, sources: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Extract facts with selective source attribution"""
         facts = self._extract_facts(content)
         
+        # Clean competitor mentions from facts first
+        cleaned_facts = [self._clean_competitor_mentions_from_research(fact) for fact in facts]
+        
         # Format facts with source attribution only when needed
         formatted_facts = []
-        for i, fact in enumerate(facts):
+        for i, fact in enumerate(cleaned_facts):
             # Check if fact contains citation numbers like [1], [2], etc.
             import re
             citation_pattern = r'\[(\d+)\]'

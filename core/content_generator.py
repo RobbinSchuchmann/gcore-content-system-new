@@ -133,6 +133,96 @@ class ContentGenerator:
         """Reset fact tracking for new document generation"""
         self.source_manager.citation_tracker.reset()
     
+    def _clean_competitor_mentions(self, content: str) -> str:
+        """Remove competitor mentions and replace with generic terms"""
+        import re
+        
+        # Define competitor replacement patterns
+        replacements = [
+            # Major cloud providers
+            (r'\b(?:AWS|Amazon Web Services|Amazon EC2)\b', 'major cloud providers'),
+            (r'\b(?:Microsoft Azure|Azure GPU|Azure ML|Azure)\b', 'enterprise cloud platforms'),
+            (r'\b(?:Google Cloud|Google Cloud Platform|GCP)\b', 'leading cloud platforms'),
+            
+            # Multiple competitors mentioned together  
+            (r'\b(?:AWS|Amazon),\s*(?:Azure|Microsoft),?\s*(?:and\s+)?(?:Google Cloud|GCP)\b', 'major cloud providers'),
+            (r'\b(?:AWS|Amazon)\s*,\s*(?:Google Cloud|GCP)\s*,?\s*(?:and\s+)?(?:Azure|Microsoft)\b', 'leading cloud platforms'),
+            (r'\b(?:Azure|Microsoft)\s*,\s*(?:AWS|Amazon)\s*,?\s*(?:and\s+)?(?:Google Cloud|GCP)\b', 'major cloud providers'),
+            
+            # Other competitors
+            (r'\b(?:Oracle Cloud|IBM Cloud|Alibaba Cloud|DigitalOcean)\b', 'cloud platforms'),
+            
+            # Generic patterns
+            (r'providers?\s+like\s+(?:AWS|Azure|Google Cloud)(?:\s*,\s*\w+)*', 'major cloud providers'),
+            (r'(?:AWS|Azure|Google Cloud)(?:\s*,\s*\w+)*\s+offers?', 'cloud providers offer'),
+        ]
+        
+        cleaned_content = content
+        for pattern, replacement in replacements:
+            cleaned_content = re.sub(pattern, replacement, cleaned_content, flags=re.IGNORECASE)
+        
+        return cleaned_content
+    
+    def _fix_format_mixing(self, content: str) -> str:
+        """Fix HTML/Markdown format mixing issues"""
+        import re
+        
+        # Remove markdown headings that shouldn't be in content
+        # These appear when Claude adds extra structure
+        content = re.sub(r'^#{1,6}\s+.*$', '', content, flags=re.MULTILINE)
+        
+        # Clean up any double line breaks created by heading removal
+        content = re.sub(r'\n{3,}', '\n\n', content)
+        
+        # Remove any standalone markdown formatting
+        content = re.sub(r'^\*\*([^*]+)\*\*$', r'\1', content, flags=re.MULTILINE)  # **text** on own line
+        content = re.sub(r'^\*([^*]+)\*$', r'\1', content, flags=re.MULTILINE)      # *text* on own line
+        
+        # Clean up extra whitespace
+        content = content.strip()
+        
+        return content
+    
+    def _remove_duplicate_statistics_from_content(self, content: str) -> str:
+        """Final safety net to remove duplicate statistics from content"""
+        import re
+        
+        # Common market statistics that tend to repeat
+        market_stat_patterns = [
+            r'(?:global\s+)?(?:virtual machine|VM)\s+market.*?(?:reached|size).*?\$?[\d.]+\s*billion.*?(?:2024|2025)',
+            r'(?:projected|expected|forecast).*?(?:grow|reach).*?\$?[\d.]+\s*billion.*?(?:2034|2030)',
+            r'(?:CAGR|growth rate).*?[\d.]+%.*?(?:through|by|until)\s+\d{4}',
+            r'96%.*?organizations.*?(?:concern|worry|express).*?(?:cloud\s+)?security'
+        ]
+        
+        seen_stats = set()
+        lines = content.split('\n')
+        cleaned_lines = []
+        
+        for line in lines:
+            line_has_duplicate = False
+            
+            # Check each line for market statistics
+            for pattern in market_stat_patterns:
+                matches = re.findall(pattern, line, re.IGNORECASE)
+                for match in matches:
+                    stat_key = re.sub(r'\s+', ' ', match.strip()).lower()
+                    if stat_key in seen_stats:
+                        # This line contains a duplicate statistic
+                        line_has_duplicate = True
+                        break
+                    else:
+                        seen_stats.add(stat_key)
+                
+                if line_has_duplicate:
+                    break
+            
+            # Only keep lines that don't contain duplicate statistics
+            if not line_has_duplicate:
+                cleaned_lines.append(line)
+        
+        return '\n'.join(cleaned_lines)
+    
     def _load_ai_word_replacements(self) -> Dict[str, Any]:
         """Load AI word replacements from JSON file"""
         replacements_file = Path('data') / 'ai_word_replacements.json'
@@ -403,28 +493,50 @@ class ContentGenerator:
                 "• Use proper Svalbardi citation format: 'according to [Source] ([Year])'",
                 "• PRIORITIZE citing financial projections and market data ($ trillion, billion)",
                 "• Cite credible sources: academic, government, industry research, market forecasts",
-                "• STRICT SOURCE VALIDATION - FORBIDDEN phrases (will cause content rejection):",
-                "  - 'according to industry standards'",
-                "  - 'according to major providers' (without specific name)",
-                "  - 'according to industry analysis' (without specific source)",
-                "  - 'according to research' (without specific source)",
-                "  - 'according to market research' (without specific organization name)",
-                "  - 'based on industry reports' (without specific report/org)",
-                "  - 'Market Research Future' (unless specifically provided in research data)",
-                "  - 'Fortune Business Insights' (unless specifically provided in research data)",
-                "• STRATEGIC CITATION POLICY:",
+                "• STRICT SOURCE VALIDATION - ABSOLUTELY FORBIDDEN phrases:",
+                "  - 'according to research' (any variation)",
+                "  - 'according to market research' (any variation)",
+                "  - 'according to industry analysis' (any variation)",  
+                "  - 'according to studies' (any variation)",
+                "  - 'according to reports' (any variation)",
+                "  - 'according to data' (any variation)",
+                "  - 'based on research' (any variation)",
+                "  - 'research shows' (without specific source)",
+                "  - 'studies indicate' (without specific source)",
+                "  - 'data suggests' (without specific source)",
+                "• If you cannot identify the EXACT organization name from research data, DO NOT cite",
+                "• ONLY cite with format: 'according to [Specific Organization Name] (Year)'",
+                "",
+                "ABSOLUTE SOURCE LOCKDOWN (CRITICAL):",
+                "• If a statistic/claim does not have a verified research organization source, OMIT IT COMPLETELY",
+                "• Do NOT include market statistics unless you can cite the exact organization",
+                "• OMIT rather than fabricate - content quality is more important than including every statistic",
+                "• Verified organizations include: Precedence Research, Gartner, Forrester, IDC, McKinsey",
+                "",
+                "STRATEGIC CITATION POLICY:",
                 "  - Only cite claims that truly need verification (market data, financial projections, technical specs)",
                 "  - Do NOT cite basic definitions, common processes, or general explanations",
                 "  - NEVER include citations in FAQ sections - keep FAQs clean and direct",
                 "  - Maximum 5 citations per entire document (be very selective)",
                 "  - Maximum 1 citation per section (including introduction)",
                 "  - Focus citations on: market size, growth rates, performance claims, industry scale",
-                "• SOURCE REQUIREMENT: Every citation MUST have corresponding verified source from research data",
-                "• If no verified source exists for a claim, present it without citation or omit it",
+                "",
+                "FACT REPETITION PREVENTION:",
                 "• NEVER repeat the same fact/statistic in multiple sections",
+                "• Each significant statistic should appear only ONCE in the entire document",
+                "• If a fact was used in introduction, do not use it again in body sections",
                 "• Quality over quantity - fewer, more impactful citations are better",
                 ""
             ])
+            
+            # Add already used facts to prevent repetition
+            used_facts = list(self.source_manager.citation_tracker.used_facts_content)
+            if used_facts:
+                prompt_parts.append("\nALREADY USED FACTS (DO NOT REPEAT THESE):")
+                for i, fact_fingerprint in enumerate(used_facts[:5]):  # Show first 5 
+                    prompt_parts.append(f"• {fact_fingerprint}")
+                prompt_parts.append("• CRITICAL: Do not use any variation of the above facts/statistics")
+                prompt_parts.append("")
             
             if research_data['data'].get('facts'):
                 prompt_parts.append("\nVerified Facts (incorporate naturally, only cite if it's a specific claim):")
@@ -472,6 +584,26 @@ class ContentGenerator:
             "• Active voice only",
             "• NO self-promotion or company mentions unless explicitly relevant",
             "• Focus on educational content, not sales",
+            "",
+            "CONTENT STRUCTURE (CRITICAL - follow user's heading structure exactly):",
+            "• ONLY answer the specific heading question - do not add sub-headings",
+            "• Do not add ## headings, subheadings, or extra structure",
+            "• Stick to paragraphs and lists only",
+            "• Do not create your own content organization beyond the assigned heading",
+            "",
+            "COMPETITOR AVOIDANCE (CRITICAL - Gcore brand requirement):",
+            "• NEVER mention specific competitors by name:",
+            "  - AWS, Amazon Web Services, Amazon EC2",
+            "  - Microsoft Azure, Azure GPU, Azure ML",
+            "  - Google Cloud, Google Cloud Platform, GCP",
+            "  - Oracle Cloud, IBM Cloud, Alibaba Cloud",
+            "• Use generic terms instead:",
+            "  - 'major cloud providers' instead of 'AWS, Azure, Google Cloud'",
+            "  - 'leading platforms' instead of specific company names",
+            "  - 'enterprise cloud services' instead of Azure/AWS",
+            "  - 'cloud computing platforms' for general references",
+            "• Focus on capabilities and features, not company names",
+            "• When examples are needed, use generic scenarios or 'Provider A/B'",
             "",
             # Note: FORBIDDEN WORDS are now comprehensively covered at the beginning of the prompt
         ])
@@ -1236,6 +1368,15 @@ class ContentGenerator:
             # Split long paragraphs automatically
             content = split_long_paragraphs(content)
         
+        # Clean competitor mentions (critical brand requirement)
+        content = self._clean_competitor_mentions(content)
+        
+        # Clean up HTML/Markdown mixing (should only be HTML or only be Markdown)
+        content = self._fix_format_mixing(content)
+        
+        # FINAL SAFETY NET: Remove any duplicate statistics that escaped other checks
+        content = self._remove_duplicate_statistics_from_content(content)
+        
         return content
     
     def generate_introduction(self,
@@ -1525,6 +1666,9 @@ class ContentGenerator:
         Returns:
             Dictionary mapping headings to generated content
         """
+        # Reset global fact tracking at start of batch generation
+        self.reset_fact_tracking()
+        
         results = {}
         total = len(headings)
         

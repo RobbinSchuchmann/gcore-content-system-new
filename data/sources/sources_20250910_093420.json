@@ -1,0 +1,59 @@
+{
+  "timestamp": "2025-09-10T09:34:20.476849",
+  "total_sources": 6,
+  "sources": [
+    {
+      "title": "Northflank",
+      "url": "https://northflank.com/blog/what-is-a-cloud-gpu",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Digitalocean",
+      "url": "https://www.digitalocean.com/resources/articles/how-to-choose-a-cloud-gpu",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Digitalocean",
+      "url": "https://www.digitalocean.com/resources/articles/on-premise-gpu-vs-cloud-gpu",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Absolute",
+      "url": "https://absolute.co.in/cloud-based-gpu-vs-on-premise-gpu/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Acecloud",
+      "url": "https://acecloud.ai/blog/cloud-gpus-vs-on-premises-gpus/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "A research",
+      "url": "",
+      "snippet": "{\"facts\":[\"A cloud GPU is a remotely rented graphics processing unit hosted in a cloud provider's data center, accessible over the internet via APIs or virtual machines.\",\"Physical GPUs are dedicated ",
+      "author": "",
+      "date": "2024",
+      "type": "research_organization"
+    }
+  ]
+}

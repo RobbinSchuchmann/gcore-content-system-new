@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-10T10:21:16.507709",
+  "total_sources": 5,
+  "sources": [
+    {
+      "title": "Rackset",
+      "url": "https://rackset.com/blog/what-is-a-virtual-machine",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nutanix",
+      "url": "https://www.nutanix.com/info/virtual-machine",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Okta",
+      "url": "https://www.okta.com/en-nl/identity-101/virtual-machines/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/virtual-machines",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Scalecomputing",
+      "url": "https://www.scalecomputing.com/resources/understanding-virtual-machine-advantages-and-disadvantages",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    }
+  ]
+}
