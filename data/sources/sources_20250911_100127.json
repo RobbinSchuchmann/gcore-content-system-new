@@ -1,0 +1,115 @@
+{
+  "timestamp": "2025-09-11T10:01:27.252316",
+  "total_sources": 13,
+  "sources": [
+    {
+      "title": "Cherryservers",
+      "url": "https://www.cherryservers.com/blog/what-is-block-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Simplyblock",
+      "url": "https://www.simplyblock.io/blog/what-is-block-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Geeksforgeeks",
+      "url": "https://www.geeksforgeeks.org/system-design/block-object-and-file-storage-in-cloud-with-difference/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Storagenewsletter",
+      "url": "https://www.storagenewsletter.com/2023/12/29/2024-block-storage-buyers-guide/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Acecloud",
+      "url": "https://acecloud.ai/blog/block-storage-vs-object-storage/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "IBM",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Microsoft",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Amazon",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    },
+    {
+      "title": "AWS",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Oracle",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "VMware",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Dell",
+      "url": "",
+      "snippet": "{\"facts\":[\"Block storage is a data storage method that divides data into fixed-size chunks called blocks, each with a unique logical block address (LBA).\",\"The operating system accesses block storage ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    }
+  ]
+}

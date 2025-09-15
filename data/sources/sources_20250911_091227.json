@@ -1,0 +1,83 @@
+{
+  "timestamp": "2025-09-11T09:12:27.842440",
+  "total_sources": 9,
+  "sources": [
+    {
+      "title": "Geeksforgeeks",
+      "url": "https://www.geeksforgeeks.org/cloud-computing/infrastructure-as-a-service-iaas/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/iaas",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Atlassian",
+      "url": "https://www.atlassian.com/microservices/cloud-computing/infrastructure-as-a-service",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Aws",
+      "url": "https://aws.amazon.com/what-is/iaas/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Openmetal",
+      "url": "https://openmetal.io/resources/blog/the-business-guide-to-cloud-infrastructure-as-a-service-iaas/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "Microsoft",
+      "url": "",
+      "snippet": "{\"facts\":[\"Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet, including servers, storage, and networking components[",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Amazon",
+      "url": "",
+      "snippet": "{\"facts\":[\"Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet, including servers, storage, and networking components[",
+      "author": "",
+      "date": "2024",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet, including servers, storage, and networking components[",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Oracle",
+      "url": "",
+      "snippet": "{\"facts\":[\"Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet, including servers, storage, and networking components[",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    }
+  ]
+}

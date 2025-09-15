@@ -62,10 +62,18 @@ class CitationTracker:
         if stat_key in self.cited_stats:
             return False
         
-        # Enhanced fact content deduplication
+        # Enhanced fact content deduplication - check both detailed and simplified fingerprints
         fact_fingerprint = self._create_fact_fingerprint(stat_text)
         if fact_fingerprint in self.used_facts_content:
             return False
+        
+        # Also check simplified fingerprint for broader duplicate detection
+        try:
+            simplified_fingerprint = self._create_simplified_fingerprint(stat_text)
+            if simplified_fingerprint in self.used_facts_content:
+                return False
+        except:
+            pass  # Continue if simplified fingerprint fails
         
         # Check if it's significant enough to cite
         if not self._is_significant_stat(stat_text):
@@ -77,28 +85,72 @@ class CitationTracker:
         """Create a normalized fingerprint of fact content to detect duplicates"""
         import re
         
-        # Special handling for market statistics - focus on the market/subject, not all numbers
+        # Normalize text for better matching
         text_lower = text.lower()
         
-        # Check if this is a market statistic
-        if 'virtual machine market' in text_lower or 'vm market' in text_lower:
-            return 'virtual_machine_market_statistic'  # All VM market stats get same fingerprint
-        elif 'cloud security' in text_lower and ('96%' in text or '95%' in text):
-            return 'cloud_security_concern_statistic'  # All cloud security concern stats get same fingerprint
-        elif 'gpu market' in text_lower or 'graphics processing' in text_lower:
-            return 'gpu_market_statistic'  # All GPU market stats get same fingerprint
+        # Remove currency symbols and normalize dollar amounts
+        text_normalized = re.sub(r'(?:usd\s*|\$\s*)', '', text_lower)
         
-        # For other statistics, use the original approach but be more focused
-        numbers = re.findall(r'\d+(?:\.\d+)?', text)
-        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|CAGR|projected|forecast|expected|reach|grow|organizations?|concern|security|virtual|machine|gpu|cloud)\b', 
-                              text.lower())
+        # Special handling for market statistics - focus on the market/subject AND specific numbers
+        market_patterns = [
+            # IaaS market patterns
+            (r'(?:iaas|infrastructure.*service).*market.*(?:562|563|560|565).*billion', 'iaas_market_562_billion'),
+            (r'(?:iaas|infrastructure.*service).*(?:33|34|35).*(?:cagr|growth)', 'iaas_market_33_cagr'),
+            
+            # Virtual machine market patterns  
+            (r'(?:virtual machine|vm).*market', 'virtual_machine_market_statistic'),
+            
+            # Cloud security patterns
+            (r'cloud security.*(?:96|95|97|98).*percent', 'cloud_security_concern_statistic'),
+            (r'(?:96|95|97|98).*percent.*cloud.*(?:security|misconfigur)', 'cloud_security_concern_statistic'),
+            
+            # GPU market patterns
+            (r'(?:gpu|graphics processing).*market', 'gpu_market_statistic'),
+            
+            # General breach cost patterns
+            (r'(?:breach|data breach).*(?:cost|costs).*(?:5|4|6).*million', 'data_breach_cost_5_million'),
+            (r'(?:5|4|6).*million.*(?:breach|data breach)', 'data_breach_cost_5_million'),
+        ]
+        
+        # Check specific market statistic patterns first
+        for pattern, fingerprint in market_patterns:
+            if re.search(pattern, text_normalized):
+                return fingerprint
+        
+        # Enhanced number extraction - normalize currency and units
+        numbers = []
+        
+        # Extract monetary values (billion, million, trillion)
+        money_matches = re.findall(r'(\d+(?:\.\d+)?)\s*(?:billion|million|trillion)', text_normalized)
+        numbers.extend(money_matches)
+        
+        # Extract percentages
+        percent_matches = re.findall(r'(\d+(?:\.\d+)?)\s*(?:%|percent)', text_normalized)
+        numbers.extend(percent_matches)
+        
+        # Extract years
+        year_matches = re.findall(r'\b(20[0-9]{2})\b', text_normalized)
+        numbers.extend(year_matches)
+        
+        # Extract other significant numbers
+        other_numbers = re.findall(r'\b(\d+(?:\.\d+)?)\b', text_normalized)
+        numbers.extend(other_numbers[:2])  # Limit to first 2 other numbers
+        
+        # Extract key market terms
+        key_terms = re.findall(r'\b(?:market|growth|billion|million|trillion|cagr|projected|forecast|expected|reach|grow|organizations?|concern|security|virtual|machine|gpu|cloud|iaas|infrastructure|service|breach|cost)\b', 
+                              text_normalized)
         
         # Remove attribution terms that vary between cited/uncited versions
         attribution_terms = ['according', 'report', 'study', 'survey', 'findings', 'research']
         key_terms = [term for term in key_terms if term not in attribution_terms]
         
-        # Create fingerprint focusing on core content
-        core_fingerprint = ''.join(sorted(numbers[:3])) + '_' + '_'.join(sorted(set(key_terms)))  # Limit to first 3 numbers
+        # Create more specific fingerprint focusing on core numbers and market terms
+        unique_numbers = list(dict.fromkeys(numbers))  # Remove duplicates while preserving order
+        unique_terms = list(dict.fromkeys(key_terms))  # Remove duplicates while preserving order
+        
+        # Create fingerprint: numbers + key terms
+        core_fingerprint = '_'.join(sorted(unique_numbers[:3])) + '_' + '_'.join(sorted(unique_terms[:5]))
+        
         return core_fingerprint
     
     def check_fact_duplication(self, fact_text: str) -> bool:
@@ -114,6 +166,32 @@ class CitationTracker:
         
         if source:
             self.fact_to_source[fact_fingerprint] = source
+        
+        # Also record a simplified version for broader matching
+        simplified_fingerprint = self._create_simplified_fingerprint(fact_text)
+        if simplified_fingerprint != fact_fingerprint:
+            self.used_facts_content.add(simplified_fingerprint)
+    
+    def _create_simplified_fingerprint(self, text: str) -> str:
+        """Create a simplified fingerprint for broader duplicate detection"""
+        import re
+        
+        text_lower = text.lower()
+        
+        # Extract just the key market/financial terms and major numbers
+        if 'iaas' in text_lower or 'infrastructure' in text_lower:
+            if '562' in text_lower or '563' in text_lower:
+                return 'iaas_market_size_global'
+            elif '33' in text_lower and ('cagr' in text_lower or 'growth' in text_lower):
+                return 'iaas_market_growth_rate'
+        
+        # Extract source organization for broader matching
+        major_sources = ['precedence research', 'gartner', 'forrester', 'idc', 'ibm', 'zscaler']
+        for source in major_sources:
+            if source in text_lower:
+                return f"{source.replace(' ', '_')}_statistic"
+        
+        return text_lower[:50]  # Fallback to first 50 chars
     
     def _is_significant_stat(self, text: str) -> bool:
         """Check if a statistic is significant enough to warrant citation"""
@@ -346,13 +424,24 @@ class SourceManager:
                         'type': 'web'
                     })
         
-        # Extract ONLY legitimate research organizations (strict whitelist approach)
+        # Extract legitimate organizations and companies mentioned in research (expanded list)
         legitimate_orgs = [
+            # Research Organizations
             'Precedence Research', 'Grand View Research', 'Market Research Future', 
             'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
             'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
             'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group',
-            'Harvard Business Review', 'MIT Technology Review'
+            'Harvard Business Review', 'MIT Technology Review',
+            # Major Tech Companies (credible for industry statistics)
+            'IBM', 'Microsoft', 'Amazon', 'AWS', 'Google', 'Apple', 'Oracle', 'VMware',
+            'Salesforce', 'Adobe', 'Intel', 'NVIDIA', 'Cisco', 'Dell', 'HPE',
+            # Security Companies (credible for security statistics)
+            'Zscaler', 'CrowdStrike', 'Palo Alto Networks', 'Fortinet', 'Check Point',
+            'FireEye', 'Symantec', 'McAfee', 'Trend Micro', 'Kaspersky',
+            # Academic and Government Organizations
+            'MIT', 'Stanford', 'Harvard', 'Berkeley', 'NIST', 'NSF', 'NASA',
+            # International Organizations
+            'OECD', 'World Bank', 'UN', 'WHO', 'UNESCO', 'UNICEF', 'WTO'
         ]
         
         # Only extract organization names that match our whitelist
@@ -503,12 +592,23 @@ class SourceManager:
         source_title = source.get('title', '')
         source_url = source.get('url', '')
         
-        # Whitelist of legitimate research organizations
+        # Expanded list of credible sources - including major tech companies, research orgs, and institutions
         legitimate_orgs = [
+            # Research Organizations
             'Precedence Research', 'Grand View Research', 'Market Research Future', 
             'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
             'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
-            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group'
+            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group',
+            # Major Tech Companies (credible for industry statistics)
+            'IBM', 'Microsoft', 'Amazon', 'AWS', 'Google', 'Apple', 'Oracle', 'VMware',
+            'Salesforce', 'Adobe', 'Intel', 'NVIDIA', 'Cisco', 'Dell', 'HPE',
+            # Security Companies (credible for security statistics)
+            'Zscaler', 'CrowdStrike', 'Palo Alto Networks', 'Fortinet', 'Check Point',
+            'FireEye', 'Symantec', 'McAfee', 'Trend Micro', 'Kaspersky',
+            # Academic and Government Organizations
+            'MIT', 'Stanford', 'Harvard', 'Berkeley', 'NIST', 'NSF', 'NASA',
+            # International Organizations
+            'OECD', 'World Bank', 'UN', 'WHO', 'UNESCO', 'UNICEF', 'WTO'
         ]
         
         # Only allow citations from whitelisted organizations OR verified URLs
@@ -602,11 +702,44 @@ class SourceManager:
                 if match:
                     organization = match.group(1).upper()
         
-        # Build citation using Svalbardi patterns
+        # Build citation using natural semantic patterns
         citation = ""
         
-        # Pattern 1: Academic with author and institution
-        if author and organization and credibility_indicators['academic']:
+        # Extract organization name from source title or URL if available
+        org_name = organization or source_title
+        
+        # Clean up organization name - remove common URL artifacts
+        if org_name:
+            # Remove domain extensions and clean up
+            org_name = re.sub(r'\.(com|org|net|edu|gov).*$', '', org_name, flags=re.IGNORECASE)
+            org_name = org_name.replace('www.', '').strip()
+            
+            # Capitalize properly for well-known organizations
+            known_orgs = {
+                'ibm': 'IBM', 'zscaler': 'Zscaler', 'microsoft': 'Microsoft', 
+                'amazon': 'Amazon', 'google': 'Google', 'gartner': 'Gartner',
+                'forrester': 'Forrester', 'mckinsey': 'McKinsey', 'deloitte': 'Deloitte',
+                'pwc': 'PwC', 'kpmg': 'KPMG', 'crowdstrike': 'CrowdStrike'
+            }
+            
+            org_lower = org_name.lower()
+            for key, proper_name in known_orgs.items():
+                if key in org_lower:
+                    org_name = proper_name
+                    break
+            else:
+                # Capitalize first letter if not a known org
+                org_name = org_name.capitalize()
+        
+        # Pattern 1: Simple organization attribution (most common and natural)
+        if org_name:
+            citation = f"according to {org_name}"
+            # Add year in parentheses if available and not already in org_name
+            if date and date not in org_name and len(date) == 4:
+                citation += f" ({date})"
+        
+        # Pattern 2: Author with organization (for academic/expert sources)
+        elif author and organization:
             if any(title in author for title in ['Dr.', 'Professor', 'Prof.']):
                 citation = f"according to {author} at {organization}"
             else:
@@ -614,41 +747,9 @@ class SourceManager:
             if date:
                 citation += f" ({date})"
         
-        # Pattern 2: Research by institution
-        elif organization and credibility_indicators['research']:
-            if date:
-                citation = f"according to {organization}'s {date} research"
-            else:
-                citation = f"according to research by {organization}"
-        
-        # Pattern 3: Government source
-        elif credibility_indicators['government']:
-            if organization:
-                citation = f"according to {organization}"
-            elif author:
-                citation = f"according to {author}"
-            if date and citation:
-                citation += f" ({date})"
-        
-        # Pattern 4: Industry research
-        elif credibility_indicators['industry'] and organization:
-            if date:
-                citation = f"according to {organization} ({date})"
-            else:
-                citation = f"according to {organization}"
-        
-        # Pattern 4a: Market research (new pattern for market projections)
-        elif credibility_indicators['market_research'] and organization:
-            if date:
-                citation = f"according to {organization} ({date})"
-            else:
-                citation = f"according to {organization}"
-        
-        # Pattern 5: Expert opinion
-        elif author and credibility_indicators['expert']:
+        # Pattern 3: Author only (when no clear organization)
+        elif author:
             citation = f"according to {author}"
-            if organization:
-                citation += f" of {organization}"
             if date:
                 citation += f" ({date})"
         
@@ -691,12 +792,23 @@ class SourceManager:
         source_title = source.get('title', '')
         source_url = source.get('url', '')
         
-        # Whitelist of legitimate research organizations (same as above)
+        # Expanded list of credible sources (consistent with format_inline_citation)
         legitimate_orgs = [
+            # Research Organizations
             'Precedence Research', 'Grand View Research', 'Market Research Future', 
             'Fortune Business Insights', 'Research and Markets', 'Allied Market Research',
             'Gartner', 'Forrester', 'IDC', 'McKinsey', 'Deloitte', 'PwC', 'KPMG',
-            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group'
+            'Statista', 'IBISWorld', 'Frost & Sullivan', 'Aberdeen Group',
+            # Major Tech Companies (credible for industry statistics)
+            'IBM', 'Microsoft', 'Amazon', 'AWS', 'Google', 'Apple', 'Oracle', 'VMware',
+            'Salesforce', 'Adobe', 'Intel', 'NVIDIA', 'Cisco', 'Dell', 'HPE',
+            # Security Companies (credible for security statistics)
+            'Zscaler', 'CrowdStrike', 'Palo Alto Networks', 'Fortinet', 'Check Point',
+            'FireEye', 'Symantec', 'McAfee', 'Trend Micro', 'Kaspersky',
+            # Academic and Government Organizations
+            'MIT', 'Stanford', 'Harvard', 'Berkeley', 'NIST', 'NSF', 'NASA',
+            # International Organizations
+            'OECD', 'World Bank', 'UN', 'WHO', 'UNESCO', 'UNICEF', 'WTO'
         ]
         
         # Only allow citations from whitelisted organizations OR verified URLs
@@ -771,30 +883,60 @@ class SourceManager:
             # Return statistic without weak source
             return f"{statistic}."
         
-        # Format the attribution using Svalbardi patterns
+        # Format the attribution using natural semantic patterns (consistent with format_inline_citation)
         attribution = ""
         
-        if author and organization:
+        # Extract organization name from source title or URL if available
+        org_name = organization or source_title
+        
+        # Clean up organization name - remove common URL artifacts
+        if org_name:
+            # Remove domain extensions and clean up
+            org_name = re.sub(r'\.(com|org|net|edu|gov).*$', '', org_name, flags=re.IGNORECASE)
+            org_name = org_name.replace('www.', '').strip()
+            
+            # Capitalize properly for well-known organizations
+            known_orgs = {
+                'ibm': 'IBM', 'zscaler': 'Zscaler', 'microsoft': 'Microsoft', 
+                'amazon': 'Amazon', 'google': 'Google', 'gartner': 'Gartner',
+                'forrester': 'Forrester', 'mckinsey': 'McKinsey', 'deloitte': 'Deloitte',
+                'pwc': 'PwC', 'kpmg': 'KPMG', 'crowdstrike': 'CrowdStrike'
+            }
+            
+            org_lower = org_name.lower()
+            for key, proper_name in known_orgs.items():
+                if key in org_lower:
+                    org_name = proper_name
+                    break
+            else:
+                # Capitalize first letter if not a known org
+                org_name = org_name.capitalize()
+        
+        # Pattern 1: Simple organization attribution (most common and natural)
+        if org_name:
+            attribution = f"according to {org_name}"
+            # Add year in parentheses if available and not already in org_name
+            if date and date not in org_name and len(date) == 4:
+                attribution += f" ({date})"
+        
+        # Pattern 2: Author with organization (for academic/expert sources)
+        elif author and organization:
             if any(title in author for title in ['Dr.', 'Professor', 'Prof.']):
                 attribution = f"according to {author} at {organization}"
             else:
                 attribution = f"according to {author} of {organization}"
-        elif organization and is_research:
-            attribution = f"according to {organization}"
-        elif author and is_academic:
+            if date:
+                attribution += f" ({date})"
+        
+        # Pattern 3: Author only (when no clear organization)
+        elif author:
             attribution = f"according to {author}"
-        elif organization:
-            attribution = f"according to {organization}"
-        elif date and is_research:
-            attribution = f"according to {date} research"
+            if date:
+                attribution += f" ({date})"
         
         # If no credible attribution, return statistic alone
         if not attribution:
             return f"{statistic}."
-        
-        # Add date if available
-        if date and '(' not in attribution:
-            attribution += f" ({date})"
         
         # Combine statistic with attribution
         if statistic.endswith('.'):

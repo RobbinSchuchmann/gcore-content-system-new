@@ -532,10 +532,18 @@ class ContentGenerator:
             # Add already used facts to prevent repetition
             used_facts = list(self.source_manager.citation_tracker.used_facts_content)
             if used_facts:
-                prompt_parts.append("\nALREADY USED FACTS (DO NOT REPEAT THESE):")
-                for i, fact_fingerprint in enumerate(used_facts[:5]):  # Show first 5 
-                    prompt_parts.append(f"• {fact_fingerprint}")
-                prompt_parts.append("• CRITICAL: Do not use any variation of the above facts/statistics")
+                prompt_parts.append("\nALREADY USED FACTS (DO NOT REPEAT THESE - CRITICAL):")
+                prompt_parts.append("• If any of the following fact patterns appear in your content, you MUST omit them completely")
+                prompt_parts.append("• NEVER repeat market statistics, financial projections, or growth rates already used")
+                prompt_parts.append("• NEVER cite the same source organization twice in one article")
+                for i, fact_fingerprint in enumerate(used_facts[:10]):  # Show more facts to be thorough
+                    prompt_parts.append(f"{i+1}. {fact_fingerprint}")
+                prompt_parts.append("")
+                prompt_parts.append("REPETITION PREVENTION RULES:")
+                prompt_parts.append("• Each source should be mentioned only ONCE in the entire article")
+                prompt_parts.append("• Each market statistic should appear only ONCE in the entire article") 
+                prompt_parts.append("• If a statistic was used in introduction, DO NOT use it again in other sections")
+                prompt_parts.append("• Use different research points from your data for each section")
                 prompt_parts.append("")
             
             if research_data['data'].get('facts'):

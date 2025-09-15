@@ -44,6 +44,96 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Authentication system
+import time
+
+def get_auth_file_path():
+    """Get path to authentication file"""
+    return Path("data/.auth_session")
+
+def is_authenticated():
+    """Check if authentication file exists and is still valid"""
+    auth_file = get_auth_file_path()
+    if not auth_file.exists():
+        return False
+
+    try:
+        with open(auth_file, 'r') as f:
+            stored_data = json.load(f)
+
+        # Check if session is still valid (24 hours)
+        if time.time() - stored_data.get('timestamp', 0) < 86400:  # 24 hours
+            return True
+        else:
+            # Session expired, remove file
+            auth_file.unlink()
+            return False
+    except (json.JSONDecodeError, KeyError, FileNotFoundError):
+        return False
+
+def set_authenticated():
+    """Mark session as authenticated"""
+    auth_file = get_auth_file_path()
+    auth_file.parent.mkdir(exist_ok=True)
+
+    auth_data = {
+        'authenticated': True,
+        'timestamp': time.time()
+    }
+
+    with open(auth_file, 'w') as f:
+        json.dump(auth_data, f)
+
+def clear_authentication():
+    """Clear authentication"""
+    auth_file = get_auth_file_path()
+    if auth_file.exists():
+        auth_file.unlink()
+
+def check_authentication():
+    """Check if user is authenticated"""
+    # Initialize authentication state
+    if 'authenticated' not in st.session_state:
+        st.session_state.authenticated = is_authenticated()
+
+    if not st.session_state.authenticated:
+        show_login_form()
+        return False
+    return True
+
+def show_login_form():
+    """Display login form"""
+    st.title("🔒 Gcore Content System - Login")
+    st.markdown("---")
+
+    # Center the login form
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        st.markdown("### Please login to access the content system")
+
+        with st.form("login_form"):
+            username = st.text_input("Username", placeholder="Enter username")
+            password = st.text_input("Password", type="password", placeholder="Enter password")
+            submitted = st.form_submit_button("Login", type="primary", use_container_width=True)
+
+            if submitted:
+                # Hardcoded credentials
+                if username == "Gcore" and password == "pqz@J5rkv@3$zGUv":
+                    st.session_state.authenticated = True
+                    set_authenticated()  # Save authentication to file
+                    st.success("✅ Login successful! Redirecting...")
+                    st.rerun()
+                else:
+                    st.error("❌ Invalid username or password")
+
+        st.markdown("---")
+        st.caption("Contact your administrator if you need access.")
+
+# Check authentication before showing main app
+if not check_authentication():
+    st.stop()
+
 # Initialize session state
 if 'content_brief' not in st.session_state:
     st.session_state.content_brief = {
@@ -3578,3 +3668,10 @@ st.sidebar.markdown("---")
 st.sidebar.subheader("Current Workflow")
 st.sidebar.info(f"Mode: {st.session_state.active_mode}")
 st.sidebar.info(f"Step: {st.session_state.current_step}")
+
+# Logout button
+st.sidebar.markdown("---")
+if st.sidebar.button("🚪 Logout", type="secondary", use_container_width=True):
+    st.session_state.authenticated = False
+    clear_authentication()  # Clear authentication file
+    st.rerun()

@@ -1,0 +1,904 @@
+{
+  "primary_keyword": "cloud networking",
+  "generated_date": "2025-09-11T09:34:54.981418",
+  "quality_scores": {
+    "Introduction": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 100,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.24,
+            "semantic_keywords": 4
+          },
+          "issues": []
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 19.1,
+          "complex_word_percentage": 42.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "introduction"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": []
+    },
+    "What is cloud networking?": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.2,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 20.8,
+          "complex_word_percentage": 38.6,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_definition"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Shorten sentences for better readability"
+      ]
+    },
+    "How does cloud networking work?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.85,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 19.6,
+          "complex_word_percentage": 28.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the main components of cloud networking?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.8,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.6,
+          "complex_word_percentage": 39.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the benefits of cloud networking?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.0,
+          "complex_word_percentage": 40.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What's the difference between cloud networking and traditional networking?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 17.1,
+          "complex_word_percentage": 45.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_differences"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 9
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are common cloud networking use cases?": {
+      "overall_score": 80,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "seamless"
+          ],
+          "positions": {
+            "seamless": [
+              [
+                372,
+                380
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 80,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'",
+            "Avoid 'best' - Use 'leading' or 'advanced'"
+          ]
+        },
+        "seo": {
+          "score": 80,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 0.76,
+            "semantic_keywords": 2
+          },
+          "issues": [
+            "Keyword density too low"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.4,
+          "complex_word_percentage": 41.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [],
+      "suggestions": [
+        "Replace AI words: seamless",
+        "Increase keyword usage in content"
+      ]
+    },
+    "How to implement cloud networking strategy?": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "seamless"
+          ],
+          "positions": {
+            "seamless": [
+              [
+                946,
+                954
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 3
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 11.8,
+          "complex_word_percentage": 39.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": false,
+          "issues": [
+            "Instructions should start by restating the action: 'You implement cloud networking strategy by...'"
+          ],
+          "pattern_type": "generate_how_list"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 5
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words",
+        "Instructions should start by restating the action: 'You implement cloud networking strategy by...'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: seamless",
+        "Increase keyword usage in content"
+      ]
+    },
+    "Frequently asked questions": {
+      "overall_score": 65,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 12.0,
+          "complex_word_percentage": 41.7,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_intro"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 1,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 36 words (minimum: 100)",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    },
+    "What's the difference between cloud networking and SD-WAN?": {
+      "overall_score": 81,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 81,
+          "compliant": true,
+          "issues": [
+            "2 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 21.3,
+          "complex_word_percentage": 40.6,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 8
+        }
+      },
+      "issues": [
+        "Content too short: 64 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Shorten sentences for better readability"
+      ]
+    },
+    "Is cloud networking secure?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.13,
+            "semantic_keywords": 1
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 11.8,
+          "complex_word_percentage": 36.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 47 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "How much does cloud networking cost compared to traditional networking?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 11.0,
+          "complex_word_percentage": 45.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 8
+        }
+      },
+      "issues": [
+        "Content too short: 33 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "How does cloud networking affect network performance?": {
+      "overall_score": 68,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.47,
+            "semantic_keywords": 1
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 20.2,
+          "complex_word_percentage": 30.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": false,
+          "issues": [
+            "Should explain how 'cloud networking affect network performance' works by..."
+          ],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 5
+        }
+      },
+      "issues": [
+        "Content too short: 81 words (minimum: 100)",
+        "Should explain how 'cloud networking affect network performance' works by..."
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Shorten sentences for better readability"
+      ]
+    },
+    "What happens if cloud networking services experience outages?": {
+      "overall_score": 65,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 1
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 11.5,
+          "complex_word_percentage": 47.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 3,
+          "total_key_terms": 7
+        }
+      },
+      "issues": [
+        "Content too short: 46 words (minimum: 100)",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    }
+  },
+  "word_count": 2215
+}

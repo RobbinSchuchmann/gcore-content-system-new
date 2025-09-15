@@ -1,0 +1,982 @@
+{
+  "primary_keyword": "blob storage",
+  "generated_date": "2025-09-11T10:09:55.102809",
+  "quality_scores": {
+    "Introduction": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.65,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.1,
+          "complex_word_percentage": 29.3,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "introduction"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [],
+      "warnings": [],
+      "suggestions": []
+    },
+    "What is blob storage?": {
+      "overall_score": 83,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "optimize"
+          ],
+          "positions": {
+            "optimize": [
+              [
+                607,
+                615
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 83,
+          "compliant": true,
+          "issues": [
+            "1 sentences exceed max length",
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 2.8,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 65,
+          "avg_sentence_length": 21.4,
+          "complex_word_percentage": 20.6,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_definition"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 2,
+          "total_key_terms": 2
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [],
+      "suggestions": [
+        "Replace AI words: optimize",
+        "Shorten sentences for better readability"
+      ]
+    },
+    "How does blob storage work?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "optimize"
+          ],
+          "positions": {
+            "optimize": [
+              [
+                1235,
+                1243
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.62,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 17.6,
+          "complex_word_percentage": 19.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [],
+      "suggestions": [
+        "Replace AI words: optimize"
+      ]
+    },
+    "How does blob storage relate to object storage?": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 90,
+          "optimized": true,
+          "metrics": {
+            "keyword_density": 1.83,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.8,
+          "complex_word_percentage": 25.1,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": false,
+          "issues": [
+            "Should explain how 'blob storage relate to object storage' works by..."
+          ],
+          "pattern_type": "generate_how"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Should explain how 'blob storage relate to object storage' works by..."
+      ],
+      "warnings": [],
+      "suggestions": []
+    },
+    "What are the different types of blobs?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 100,
+          "avg_sentence_length": 16.5,
+          "complex_word_percentage": 14.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are the key benefits of blob storage?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 2,
+          "words": [
+            "significantly",
+            "optimize"
+          ],
+          "positions": {
+            "significantly": [
+              [
+                908,
+                921
+              ]
+            ],
+            "optimize": [
+              [
+                1360,
+                1368
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 60,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.1,
+          "complex_word_percentage": 28.2,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 2 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 60%"
+      ],
+      "suggestions": [
+        "Replace AI words: significantly, optimize",
+        "Increase keyword usage in content"
+      ]
+    },
+    "What are common blob storage use cases?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": true,
+          "count": 1,
+          "words": [
+            "seamlessly"
+          ],
+          "positions": {
+            "seamlessly": [
+              [
+                2082,
+                2092
+              ]
+            ]
+          },
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.71,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Insufficient semantic keywords"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 16.6,
+          "complex_word_percentage": 32.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_listicle"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 1,
+          "total_key_terms": 1
+        }
+      },
+      "issues": [
+        "Found 1 AI-sounding words"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": [
+        "Replace AI words: seamlessly",
+        "Increase keyword usage in content"
+      ]
+    },
+    "Frequently asked questions": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 10.3,
+          "complex_word_percentage": 29.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_intro"
+        },
+        "direct_answer": {
+          "has_direct_answer": false,
+          "key_terms_found": 1,
+          "total_key_terms": 3
+        }
+      },
+      "issues": [
+        "Content too short: 31 words (minimum: 100)",
+        "Content doesn't directly answer the heading question"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content",
+        "Start with a direct answer to the heading question"
+      ]
+    },
+    "What's the difference between blob storage and file storage?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 15.7,
+          "complex_word_percentage": 23.4,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 5,
+          "total_key_terms": 9
+        }
+      },
+      "issues": [
+        "Content too short: 47 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Can blob storage handle structured data?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 4.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 12.5,
+          "complex_word_percentage": 36.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 4,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Content too short: 25 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "How much does blob storage cost?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 100,
+          "avg_sentence_length": 7.7,
+          "complex_word_percentage": 13.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 3,
+          "total_key_terms": 4
+        }
+      },
+      "issues": [
+        "Content too short: 54 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "Is blob storage secure for sensitive data?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 4.55,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.7,
+          "complex_word_percentage": 25.0,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Content too short: 44 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "Can I search data stored in blob storage?": {
+      "overall_score": 85,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.38,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 14.0,
+          "complex_word_percentage": 23.8,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 8,
+          "total_key_terms": 8
+        }
+      },
+      "issues": [
+        "Content too short: 42 words (minimum: 50)",
+        "Yes/No pattern must start with 'Yes' or 'No'"
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    },
+    "What's the maximum size for a blob?": {
+      "overall_score": 90,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 90,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included"
+          ]
+        },
+        "seo": {
+          "score": 40,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 0.0,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Keyword density too low",
+            "Primary keyword not in opening",
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 100,
+          "avg_sentence_length": 10.5,
+          "complex_word_percentage": 11.9,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": true,
+          "issues": [],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 7
+        }
+      },
+      "issues": [
+        "Content too short: 42 words (minimum: 100)"
+      ],
+      "warnings": [
+        "SEO score below threshold: 40%"
+      ],
+      "suggestions": [
+        "Increase keyword usage in content"
+      ]
+    },
+    "How do I migrate data to blob storage?": {
+      "overall_score": 70,
+      "checks": {
+        "ai_words": {
+          "found": false,
+          "count": 0,
+          "words": [],
+          "positions": {},
+          "threshold_exceeded": false
+        },
+        "competitor_mentions": {
+          "found": false,
+          "mentions": [],
+          "count": 0,
+          "violation": false
+        },
+        "gcore_compliance": {
+          "score": 85,
+          "compliant": true,
+          "issues": [
+            "No Gcore-specific context included",
+            "Avoid 'cloud' - Be specific: 'cloud computing' or 'cloud infrastructure'"
+          ]
+        },
+        "seo": {
+          "score": 70,
+          "optimized": false,
+          "metrics": {
+            "keyword_density": 2.44,
+            "semantic_keywords": 0
+          },
+          "issues": [
+            "Insufficient semantic keywords",
+            "Content too short for SEO"
+          ]
+        },
+        "readability": {
+          "score": 85,
+          "avg_sentence_length": 13.7,
+          "complex_word_percentage": 19.5,
+          "readable": true
+        },
+        "pattern_compliance": {
+          "compliant": false,
+          "issues": [
+            "Should explain how 'i migrate data to blob storage' works by..."
+          ],
+          "pattern_type": "generate_faq_answer"
+        },
+        "direct_answer": {
+          "has_direct_answer": true,
+          "key_terms_found": 6,
+          "total_key_terms": 6
+        }
+      },
+      "issues": [
+        "Content too short: 41 words (minimum: 100)",
+        "Should explain how 'i migrate data to blob storage' works by..."
+      ],
+      "warnings": [
+        "SEO score below threshold: 70%"
+      ],
+      "suggestions": []
+    }
+  },
+  "word_count": 1934
+}

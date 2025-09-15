@@ -1,0 +1,76 @@
+{
+  "id": "87ddaa61-78c6-4cb8-b545-71e69e101ffd",
+  "model": "sonar",
+  "created": 1757553147,
+  "usage": {
+    "prompt_tokens": 150,
+    "completion_tokens": 916,
+    "total_tokens": 1066,
+    "search_context_size": "low",
+    "cost": {
+      "input_tokens_cost": 0.0,
+      "output_tokens_cost": 0.001,
+      "request_cost": 0.005,
+      "total_cost": 0.006
+    }
+  },
+  "citations": [
+    "https://www.geeksforgeeks.org/cloud-computing/infrastructure-as-a-service-iaas/",
+    "https://www.ibm.com/think/topics/iaas",
+    "https://www.atlassian.com/microservices/cloud-computing/infrastructure-as-a-service",
+    "https://aws.amazon.com/what-is/iaas/",
+    "https://openmetal.io/resources/blog/the-business-guide-to-cloud-infrastructure-as-a-service-iaas/"
+  ],
+  "search_results": [
+    {
+      "title": "What is IaaS? Infrastructure as a Service Definition",
+      "url": "https://www.geeksforgeeks.org/cloud-computing/infrastructure-as-a-service-iaas/",
+      "date": "2025-08-06",
+      "last_updated": "2025-09-10",
+      "snippet": "Infrastructure as a Service (IaaS) is a cloud computing service model that gives virtualized computing resources over the web."
+    },
+    {
+      "title": "What Is Infrastructure as a Service?",
+      "url": "https://www.ibm.com/think/topics/iaas",
+      "date": "2024-12-18",
+      "last_updated": "2025-09-09",
+      "snippet": "IaaS is a form of cloud computing that delivers fundamental compute, network and storage resources to consumers."
+    },
+    {
+      "title": "What is Infrastructure as a Service? IaaS Explained",
+      "url": "https://www.atlassian.com/microservices/cloud-computing/infrastructure-as-a-service",
+      "date": "2024-01-01",
+      "last_updated": "2025-09-10",
+      "snippet": "IaaS is a cloud computing infrastructure that provides compute, network, and storage resources over the internet, via a subscription model that can scale."
+    },
+    {
+      "title": "What is IaaS (Infrastructure as a Service)?",
+      "url": "https://aws.amazon.com/what-is/iaas/",
+      "date": "2025-08-28",
+      "last_updated": "2025-09-10",
+      "snippet": "IaaS is a business model that delivers IT infrastructure like compute, storage, and network resources on a pay-as-you-go basis over the internet."
+    },
+    {
+      "title": "The Business Guide to Cloud Infrastructure as a Service ...",
+      "url": "https://openmetal.io/resources/blog/the-business-guide-to-cloud-infrastructure-as-a-service-iaas/",
+      "date": "2025-09-09",
+      "last_updated": "2025-09-11",
+      "snippet": "Definition of IaaS ... Infrastructure as a Service (IaaS) is a form of cloud computing that provides access to computing resources over the internet. In the IaaS ..."
+    }
+  ],
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\"facts\":[\"Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet, including servers, storage, and networking components[1][2][3][4].\",\"IaaS enables organizations to outsource their entire IT infrastructure to cloud providers, allowing on-demand access and management of resources without investing in physical hardware[1][2][5].\",\"The main components of IaaS include virtual machines (VMs), storage systems, networking hardware, and management software for provisioning and scaling resources[1][2][3].\",\"IaaS providers maintain and manage the physical infrastructure, while users are responsible for installing and managing their own software applications and data[2][4].\",\"IaaS operates on a pay-as-you-go pricing model, where users pay only for the resources they consume, enabling cost efficiency and scalability[1][2][4].\",\"Compared to Platform as a Service (PaaS) and Software as a Service (SaaS), IaaS offers more control over infrastructure but requires more management effort from users[4].\",\"IaaS is foundational and can be used to build or complement PaaS and SaaS solutions, often favored by agile and DevOps teams for flexibility[3][4].\",\"IaaS supports rapid scaling of resources, which is especially beneficial for workloads with variable or spiky demand[2].\",\"The IaaS market is projected to grow significantly, with forecasts estimating a market size of USD 562.53 billion by 2031, growing at a CAGR of 33.5% from 2024 to 2031[2].\",\"IaaS emerged around 2006 with the launch of Amazon EC2, which pioneered virtualized computing resources accessible over the internet[2].\",\"Key benefits of IaaS include reduced capital expenditure, increased agility, flexibility to scale resources, and avoidance of hardware maintenance overhead[1][2][5].\",\"IaaS providers often offer additional services such as billing, monitoring, security, load balancing, and clustering to support infrastructure management[5].\",\"IaaS is widely used by startups, enterprises, and businesses with high-performance or fluctuating workloads due to its cost-effectiveness and scalability[2].\",\"IaaS allows businesses of all sizes to access cutting-edge technology without large upfront investments, leveling the competitive playing field[5].\",\"Typical IaaS resources include compute power (virtual CPUs), storage (block and object storage), and networking (virtual networks, IP addresses, firewalls)[1][4].\"],\"statistics\":[{\"value\":\"USD 562.53 billion by 2031\",\"context\":\"Projected size of the global IaaS market, growing at a CAGR of 33.5% from 2024 to 2031[2].\"},{\"value\":\"33.5% CAGR (2024-2031)\",\"context\":\"Compound annual growth rate forecast for the IaaS market from 2024 to 2031[2].\"}],\"key_points\":[\"IaaS delivers virtualized infrastructure resources over the internet on a pay-as-you-go basis, freeing organizations from owning and maintaining physical hardware.\",\"Users control and manage their software and applications, while providers handle the physical infrastructure and its maintenance.\",\"IaaS offers high scalability and flexibility, ideal for workloads with variable demand and for organizations seeking agility.\",\"It is distinct from PaaS and SaaS by providing lower-level infrastructure control rather than platform or software services.\",\"The model reduces capital expenditure and operational complexity, enabling faster deployment and innovation.\",\"IaaS is foundational to cloud computing and supports building higher-level cloud services and applications.\",\"Leading IaaS providers include Amazon Web Services (AWS), Microsoft Azure, Google Cloud, IBM Cloud, and Oracle Cloud.\",\"The rapid market growth reflects increasing adoption across industries for digital transformation and cloud migration.\",\"Additional management services provided by IaaS vendors enhance usability and operational efficiency.\",\"IaaS empowers businesses of all sizes to leverage advanced IT infrastructure without large upfront investments.\"],\"examples\":[\"Amazon Web Services (AWS) Elastic Compute Cloud (EC2) \u2013 launched in 2006, a pioneering IaaS offering providing scalable virtual servers[2][4].\",\"Microsoft Azure Virtual Machines \u2013 provides on-demand scalable computing resources integrated with Azure cloud services[2].\",\"Google Cloud Compute Engine \u2013 offers virtual machines with customizable configurations and global networking[2].\",\"IBM Cloud Infrastructure \u2013 delivers compute, storage, and networking with enterprise-grade security and management tools[2].\",\"Oracle Cloud Infrastructure \u2013 provides high-performance compute and storage resources optimized for enterprise workloads[2].\"]}"
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      }
+    }
+  ]
+}

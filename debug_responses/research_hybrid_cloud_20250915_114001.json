@@ -1,0 +1,100 @@
+{
+  "id": "671c86e5-3b51-49e0-9275-3080954f400b",
+  "model": "sonar",
+  "created": 1757907601,
+  "usage": {
+    "prompt_tokens": 150,
+    "completion_tokens": 1020,
+    "total_tokens": 1170,
+    "search_context_size": "low",
+    "cost": {
+      "input_tokens_cost": 0.0,
+      "output_tokens_cost": 0.001,
+      "request_cost": 0.005,
+      "total_cost": 0.006
+    }
+  },
+  "citations": [
+    "https://faddom.com/hybrid-cloud-architecture-use-cases-and-5-critical-best-practices/",
+    "https://www.ibm.com/think/topics/hybrid-cloud-architecture",
+    "https://www.nutanix.com/info/what-is-hybrid-cloud",
+    "https://www.ibm.com/think/topics/hybrid-cloud",
+    "https://deepscienceresearch.com/dsr/catalog/book/42/chapter/131",
+    "https://www.estruxture.com/blog/what-is-hybrid-cloud-definition-examples-benefits",
+    "https://www.okta.com/en-nl/identity-101/what-is-hybrid-cloud-architecture/",
+    "https://www.deloitte.com/dk/en/services/consulting/services/hybrid-cloud.html"
+  ],
+  "search_results": [
+    {
+      "title": "Hybrid Cloud: Architecture, Use Cases & 5 Critical Best ...",
+      "url": "https://faddom.com/hybrid-cloud-architecture-use-cases-and-5-critical-best-practices/",
+      "date": "2025-05-18",
+      "last_updated": "2025-09-15",
+      "snippet": "A hybrid cloud is a computing environment that blends public and private clouds, allowing data and applications to be shared between them."
+    },
+    {
+      "title": "What Is Hybrid Cloud Architecture?",
+      "url": "https://www.ibm.com/think/topics/hybrid-cloud-architecture",
+      "date": "2024-01-12",
+      "last_updated": "2025-09-13",
+      "snippet": "Hybrid cloud architecture is combining on-premises, private cloud, public cloud and edge settings to create a single, flexible managed IT infrastructure."
+    },
+    {
+      "title": "What is Hybrid Cloud? Definition & Benefits",
+      "url": "https://www.nutanix.com/info/what-is-hybrid-cloud",
+      "date": "2025-07-07",
+      "last_updated": "2025-09-14",
+      "snippet": "A hybrid cloud is a type of cloud computing environment that combines elements of both public and private clouds."
+    },
+    {
+      "title": "What is Hybrid Cloud?",
+      "url": "https://www.ibm.com/think/topics/hybrid-cloud",
+      "date": "2024-10-08",
+      "last_updated": "2025-09-12",
+      "snippet": "Hybrid cloud combines and unifies public cloud, private cloud and on-premises infrastructure to create a single, flexible, cost-optimal IT infrastructure."
+    },
+    {
+      "title": "The future of hybrid cloud: Trends, technologies, and ...",
+      "url": "https://deepscienceresearch.com/dsr/catalog/book/42/chapter/131",
+      "date": "2025-01-10",
+      "last_updated": "2025-08-30",
+      "snippet": "Hybrid cloud computing involves employing two public clouds or private and public clouds situated separately. Hybrid cloud combines the ..."
+    },
+    {
+      "title": "What Is Hybrid Cloud? Definition, Examples, & Benefits",
+      "url": "https://www.estruxture.com/blog/what-is-hybrid-cloud-definition-examples-benefits",
+      "date": "2024-02-15",
+      "last_updated": "2024-11-30",
+      "snippet": "A hybrid cloud strategy blends private clouds, public clouds, and on-premises infrastructure, connecting these environments through ..."
+    },
+    {
+      "title": "What Is Hybrid Cloud Architecture and How Can We Use It?",
+      "url": "https://www.okta.com/en-nl/identity-101/what-is-hybrid-cloud-architecture/",
+      "date": "2024-08-21",
+      "last_updated": "2025-06-07",
+      "snippet": "Hybrid cloud solutions combine public and private environments to support applications. When you need to reduce costs, downtime, and security risk, ..."
+    },
+    {
+      "title": "Hybrid Cloud from Deloitte",
+      "url": "https://www.deloitte.com/dk/en/services/consulting/services/hybrid-cloud.html",
+      "date": "2024-12-19",
+      "last_updated": "2025-09-04",
+      "snippet": "Hybrid cloud is cloud your way. It's integrating information systems\u2014from on-premises core systems to private cloud, public cloud, and edge environments ..."
+    }
+  ],
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\"facts\":[\"Hybrid cloud is a computing environment that combines private clouds, public clouds, and on-premises infrastructure, enabling data and applications to be shared and managed across these environments[1][3][4].\",\"Hybrid cloud architecture includes components such as private cloud (for sensitive data), public cloud (for scalable workloads), orchestration software (to manage resources), and secure networking (to ensure data integrity)[1][2].\",\"Private clouds are typically dedicated environments hosted on-premises or by private vendors, used for sensitive applications requiring control and compliance[1][3].\",\"Public clouds are third-party services (e.g., AWS, Microsoft Azure, Google Cloud) offering scalability and cost-effectiveness for less sensitive or peak workloads[1][3].\",\"Orchestration software manages workload distribution between private and public clouds based on rules or real-time demand, ensuring efficient resource use[1][2].\",\"Hybrid cloud differs from multi-cloud: hybrid cloud integrates private and public clouds with interoperability, while multi-cloud uses multiple cloud providers independently to avoid vendor lock-in[1][2].\",\"Hybrid cloud architecture relies heavily on virtualization technology to create virtual machines that abstract physical hardware, enabling flexible and scalable compute resources[2].\",\"Network connectivity is critical in hybrid cloud to enable resource sharing across locations, often secured with encryption and strict access controls[1][2].\",\"Hybrid cloud supports a mix of cloud service models including Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS)[3].\",\"Hybrid cloud enables agility by allowing rapid provisioning of resources, supporting digital transformation and integration of emerging technologies like AI, IoT, and edge computing[4][5].\",\"Common hybrid cloud use cases include handling sensitive data on private clouds while leveraging public clouds for scalable workloads, disaster recovery, and workload bursting[1][3][6].\",\"Hybrid cloud environments can be optimized for performance with low-latency network connectivity and virtualization, ensuring high compute and storage capacity[2][4].\",\"Best practices for hybrid cloud include secure networking, effective orchestration, compliance management, and cost optimization strategies[1][5].\",\"Hybrid cloud adoption is widespread, with 72% of businesses embracing hybrid cloud approaches by 2023 to balance performance, cost, and risk[6].\",\"Hybrid cloud infrastructure varies by organization but typically includes on-premises data centers, private clouds, and public cloud services unified under a flexible management layer[4].\"],\"statistics\":[{\"value\":\"USD 125 billion in 2023\",\"context\":\"Global hybrid cloud market size in 2023\"},{\"value\":\"USD 558.6 billion by 2032\",\"context\":\"Projected global hybrid cloud market size by 2032, indicating rapid growth driven by digital transformation and cloud adoption[4].\"},{\"value\":\"72% of businesses\",\"context\":\"Percentage of businesses that embraced a hybrid cloud approach in 2023 to optimize performance, cost, and risk[6].\"},{\"value\":\"$1 trillion\",\"context\":\"Forecast worldwide spending on cloud computing infrastructure in 2024, reflecting massive investment in cloud technologies including hybrid cloud[6].\"}],\"key_points\":[\"Hybrid cloud integrates private, public, and on-premises resources to provide flexibility, security, and scalability.\",\"It differs from multi-cloud by emphasizing interoperability between private and public clouds rather than just using multiple cloud vendors independently.\",\"Virtualization and secure network connectivity are foundational technologies enabling hybrid cloud architectures.\",\"Hybrid cloud supports rapid resource provisioning, enabling agility and integration of advanced technologies like AI and edge computing.\",\"Key benefits include cost optimization, improved security for sensitive workloads, operational flexibility, and scalability.\",\"Common use cases include workload bursting, disaster recovery, data sovereignty compliance, and hybrid application deployment.\",\"Performance depends on low-latency network connections, efficient orchestration, and virtualization to manage resources dynamically.\",\"Best practices involve strong security controls, compliance adherence, effective orchestration tools, and continuous cost and performance monitoring.\",\"Hybrid cloud adoption is accelerating globally, driven by enterprises seeking to balance control, cost, and innovation needs.\"],\"examples\":[\"A financial services company uses a private cloud to store sensitive customer data to comply with regulations, while leveraging public cloud resources for customer-facing applications that require scalability during peak times[1][3].\",\"A healthcare provider employs hybrid cloud to keep patient records on-premises for security, while using public cloud services for analytics and telemedicine applications[1][6].\",\"An e-commerce retailer uses hybrid cloud to handle regular workloads on private infrastructure but bursts to public cloud during holiday sales to manage traffic spikes[1][3].\",\"A manufacturing firm integrates IoT data collected at the edge with hybrid cloud infrastructure to process data locally for latency-sensitive tasks and in the cloud for large-scale analytics[4][5].\",\"A global enterprise adopts hybrid multicloud architecture combining private cloud, on-premises data centers, and multiple public cloud providers to optimize cost, performance, and avoid vendor lock-in[2][5].\"]}"
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      }
+    }
+  ]
+}

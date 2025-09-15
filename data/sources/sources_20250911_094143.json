@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-09-11T09:41:43.513758",
+  "total_sources": 10,
+  "sources": [
+    {
+      "title": "Easeus",
+      "url": "https://www.easeus.com/whitepapers/2025-data-storage-statistics-facts-and-trends.html",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Datafy",
+      "url": "https://www.datafy.io/blog/cloud-storage-2025",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Stateofcloud",
+      "url": "https://stateofcloud.com/cloud-computing-the-ultimate-guide-in-2025/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Kaashivinfotech",
+      "url": "https://www.kaashivinfotech.com/blog/cloud-storage-a-comprehensive-guide/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Itconvergence",
+      "url": "https://www.itconvergence.com/blog/top-strategic-cloud-computing-predictions-for-2025-and-onwards/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "Gartner",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud storage is a digital storage solution that allows users to save and access files over the internet instead of local devices like hard drives or USB sticks.\",\"Cloud storage works by st",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Microsoft",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud storage is a digital storage solution that allows users to save and access files over the internet instead of local devices like hard drives or USB sticks.\",\"Cloud storage works by st",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    },
+    {
+      "title": "Amazon",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud storage is a digital storage solution that allows users to save and access files over the internet instead of local devices like hard drives or USB sticks.\",\"Cloud storage works by st",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "AWS",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud storage is a digital storage solution that allows users to save and access files over the internet instead of local devices like hard drives or USB sticks.\",\"Cloud storage works by st",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud storage is a digital storage solution that allows users to save and access files over the internet instead of local devices like hard drives or USB sticks.\",\"Cloud storage works by st",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    }
+  ]
+}

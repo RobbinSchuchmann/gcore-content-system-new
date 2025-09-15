@@ -1,0 +1,83 @@
+{
+  "timestamp": "2025-09-11T09:51:53.320582",
+  "total_sources": 9,
+  "sources": [
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Object_storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Cloudian",
+      "url": "https://cloudian.com/guides/object-storage/object-storage-care/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Snia",
+      "url": "https://www.snia.org/education/what-is-object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Techtarget",
+      "url": "https://www.techtarget.com/searchstorage/definition/object-storage",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "IBM",
+      "url": "",
+      "snippet": "{\"facts\":[\"Object storage is a data storage architecture that manages data as discrete units called objects, each containing the data itself, metadata, and a unique identifier (object ID)[2][3][4][5].",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Amazon",
+      "url": "",
+      "snippet": "{\"facts\":[\"Object storage is a data storage architecture that manages data as discrete units called objects, each containing the data itself, metadata, and a unique identifier (object ID)[2][3][4][5].",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Object storage is a data storage architecture that manages data as discrete units called objects, each containing the data itself, metadata, and a unique identifier (object ID)[2][3][4][5].",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Dell",
+      "url": "",
+      "snippet": "{\"facts\":[\"Object storage is a data storage architecture that manages data as discrete units called objects, each containing the data itself, metadata, and a unique identifier (object ID)[2][3][4][5].",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    }
+  ]
+}
