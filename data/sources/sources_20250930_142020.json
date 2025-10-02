@@ -1,0 +1,152 @@
+{
+  "timestamp": "2025-09-30T14:20:20.367250",
+  "total_sources": 17,
+  "sources": [
+    {
+      "title": "En",
+      "url": "https://en.wikipedia.org/wiki/Cloud_computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Nvlpubs",
+      "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Azure",
+      "url": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Openmetal",
+      "url": "https://openmetal.io/resources/blog/what-is-cloud-computing/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "Cloudflare",
+      "url": "https://www.cloudflare.com/learning/cloud/what-is-the-cloud/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 6
+    },
+    {
+      "title": "Aws",
+      "url": "https://aws.amazon.com/what-is-cloud-computing/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 7
+    },
+    {
+      "title": "Oracle",
+      "url": "https://www.oracle.com/cloud/what-is-cloud-computing/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 8
+    },
+    {
+      "title": "Its",
+      "url": "https://its.umich.edu/computing/virtualization-cloud/cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 9
+    },
+    {
+      "title": "Mckinsey",
+      "url": "https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-cloud-computing",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 10
+    },
+    {
+      "title": "Gartner",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "2028",
+      "type": "research_organization"
+    },
+    {
+      "title": "Microsoft",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Amazon",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Salesforce",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "NIST",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "2028",
+      "type": "research_organization"
+    },
+    {
+      "title": "NASA",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual computing resources with on-demand self-service and administration, as ",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    }
+  ]
+}

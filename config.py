@@ -10,8 +10,8 @@ ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
 
 # Model Configuration
-CLAUDE_MODEL = "claude-sonnet-4-20250514"  # Latest Claude Sonnet 4 model
-DEFAULT_TEMPERATURE = 0.4  # Balanced temperature for factual yet natural output
+CLAUDE_MODEL = "claude-sonnet-4-5-20250929"  # Latest Claude Sonnet 4.5 model
+DEFAULT_TEMPERATURE = 0.7  # Higher temperature for more natural, human-like writing while maintaining accuracy
 MAX_TOKENS = 4000
 
 # Perplexity Configuration

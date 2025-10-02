@@ -1,0 +1,112 @@
+{
+  "timestamp": "2025-09-16T07:36:47.066503",
+  "total_sources": 12,
+  "sources": [
+    {
+      "title": "Sagiss",
+      "url": "https://www.sagiss.com/blog/what-is-private-cloud-architecture",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Swirlaiconnect",
+      "url": "https://swirlaiconnect.com/private-cloud-computing-architecture-benefits-challenges-and-best-practices/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Sangfor",
+      "url": "https://www.sangfor.com/glossary/cloud-and-infrastructure/what-is-private-cloud",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Nutanix",
+      "url": "https://www.nutanix.com/info/private-cloud",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Marutitech",
+      "url": "https://marutitech.com/public-cloud-vs-private-cloud/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/insights/private-cloud-advantages-disadvantages",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 6
+    },
+    {
+      "title": "Upcloud",
+      "url": "https://upcloud.com/blog/private-cloud-definition-architecture-examples/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 7
+    },
+    {
+      "title": "Okta",
+      "url": "https://www.okta.com/identity-101/private-cloud/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 8
+    },
+    {
+      "title": "Beeksgroup",
+      "url": "https://beeksgroup.com/blog/what-is-managed-private-cloud/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 9
+    },
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-architecture",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 10
+    },
+    {
+      "title": "Microsoft",
+      "url": "",
+      "snippet": "{\"facts\":[\"A private cloud is a cloud computing environment dedicated exclusively to a single organization, providing a single-tenant infrastructure that enhances security, control, and customization ",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    },
+    {
+      "title": "VMware",
+      "url": "",
+      "snippet": "{\"facts\":[\"A private cloud is a cloud computing environment dedicated exclusively to a single organization, providing a single-tenant infrastructure that enhances security, control, and customization ",
+      "author": "",
+      "date": "2025",
+      "type": "research_organization"
+    }
+  ]
+}

@@ -513,7 +513,7 @@ class ContentOptimizer:
                         }
                         optimized['change_summary']['rewritten'] += 1
             
-            elif action == 'new':
+            elif action == 'add':
                 # Generate completely new section
                 if self.content_generator and research_data:
                     pattern_type = detect_question_type(heading_text)
@@ -521,7 +521,7 @@ class ContentOptimizer:
                         heading=heading_text,
                         pattern_type=pattern_type,
                         research_data=research_data,
-                        context={'action': 'new'},
+                        context={'action': 'add'},
                         function_name=heading_plan.get('function')
                     )
                     

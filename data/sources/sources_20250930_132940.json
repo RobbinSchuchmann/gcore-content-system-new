@@ -1,0 +1,111 @@
+{
+  "timestamp": "2025-09-30T13:29:40.897242",
+  "total_sources": 12,
+  "sources": [
+    {
+      "title": "Cloud",
+      "url": "https://cloud.google.com/learn/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 1
+    },
+    {
+      "title": "Techtarget",
+      "url": "https://www.techtarget.com/searchsecurity/definition/cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 2
+    },
+    {
+      "title": "Cybersierra",
+      "url": "https://cybersierra.co/blog/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 3
+    },
+    {
+      "title": "Aquasec",
+      "url": "https://www.aquasec.com/cloud-native-academy/cspm/cloud-security-controls/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 4
+    },
+    {
+      "title": "Zscaler",
+      "url": "https://www.zscaler.com/resources/security-terms-glossary/what-is-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 5
+    },
+    {
+      "title": "Crowdstrike",
+      "url": "https://www.crowdstrike.com/en-us/cybersecurity-101/cloud-security/",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 6
+    },
+    {
+      "title": "Ibm",
+      "url": "https://www.ibm.com/think/topics/cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 7
+    },
+    {
+      "title": "Ncsc",
+      "url": "https://www.ncsc.gov.uk/collection/cloud/introduction-to-cloud-security",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 8
+    },
+    {
+      "title": "Cloudsecurityalliance",
+      "url": "https://cloudsecurityalliance.org/research/guidance",
+      "snippet": "",
+      "author": "",
+      "date": "",
+      "type": "web",
+      "citation_index": 9
+    },
+    {
+      "title": "Gartner",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud security is the set of cybersecurity measures, policies, practices, and technologies used to protect cloud-based applications, data, and infrastructure from internal and external thre",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "AWS",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud security is the set of cybersecurity measures, policies, practices, and technologies used to protect cloud-based applications, data, and infrastructure from internal and external thre",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    },
+    {
+      "title": "Google",
+      "url": "",
+      "snippet": "{\"facts\":[\"Cloud security is the set of cybersecurity measures, policies, practices, and technologies used to protect cloud-based applications, data, and infrastructure from internal and external thre",
+      "author": "",
+      "date": "",
+      "type": "research_organization"
+    }
+  ]
+}

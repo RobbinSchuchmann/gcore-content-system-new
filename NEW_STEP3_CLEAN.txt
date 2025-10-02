@@ -1,0 +1,252 @@
+elif st.session_state.current_step == 3:
+    st.subheader("Step 3: Structure Editor")
+
+    # Check prerequisites
+    parsed = st.session_state.optimization_data.get('parsed_structure', {})
+
+    if not parsed:
+        st.warning("⚠️ Please complete Step 1 (Import Content) first")
+        if st.button("← Back to Import"):
+            st.session_state.current_step = 1
+            st.rerun()
+    else:
+        # Load section functions
+        section_functions = load_section_functions()
+        function_options = get_function_options(section_functions)
+
+        # Initialize optimized_headings if not already done
+        if 'optimized_headings' not in st.session_state.optimization_data:
+            # Check if we have AI recommendations
+            analysis_result = st.session_state.optimization_data.get('analysis_result', {})
+            recommendations = analysis_result.get('recommendations', [])
+
+            if recommendations:
+                # Build from AI recommendations (exclude REMOVE)
+                optimized_headings = []
+                for rec in recommendations:
+                    if rec['action'] == 'remove':
+                        continue  # Skip REMOVE items
+
+                    heading_dict = {
+                        'level': 'H2',
+                        'text': rec['heading'],
+                        'original_text': rec['heading'] if rec['action'] in ['keep', 'improve'] else '',
+                        'action': rec['action'],
+                        'function': auto_detect_function(rec['heading'], section_functions),
+                        'h3_subheadings': rec.get('h3_subheadings', []),
+                        'reason': rec.get('reason', '')
+                    }
+
+                    # For keep/improve actions, find original content
+                    if rec['action'] in ['keep', 'improve']:
+                        original_content = ''
+                        existing_structure = analysis_result.get('existing_structure', {})
+
+                        for existing_h in existing_structure.get('headings', []):
+                            if (existing_h['text'].lower() in rec['heading'].lower() or
+                                rec['heading'].lower() in existing_h['text'].lower()):
+                                original_content = parsed.get('sections', {}).get(existing_h['text'], '')
+                                break
+
+                        heading_dict['original_content'] = original_content
+                        heading_dict['word_count'] = len(original_content.split()) if original_content else 0
+                    else:
+                        heading_dict['original_content'] = ''
+                        heading_dict['word_count'] = 0
+
+                    optimized_headings.append(heading_dict)
+
+                st.session_state.optimization_data['optimized_headings'] = optimized_headings
+            else:
+                # No AI recommendations - populate from existing structure
+                optimized_headings = []
+                existing_headings = parsed.get('headings', [])
+
+                for h in existing_headings:
+                    section_content = parsed.get('sections', {}).get(h['text'], '')
+                    heading_dict = {
+                        'level': h.get('level', 'H2'),
+                        'text': h.get('text', ''),
+                        'original_text': h.get('text', ''),
+                        'original_content': section_content,
+                        'word_count': len(section_content.split()) if section_content else 0,
+                        'action': 'keep',
+                        'function': auto_detect_function(h.get('text', ''), section_functions)
+                    }
+                    optimized_headings.append(heading_dict)
+
+                st.session_state.optimization_data['optimized_headings'] = optimized_headings
+
+        # Get current headings
+        optimized_headings = st.session_state.optimization_data['optimized_headings']
+
+        # Display mode based on user choice
+        auto_accept = st.session_state.optimization_data.get('auto_accept', False)
+
+        if auto_accept:
+            st.info("📝 **AI-Recommended Structure** • Review and adjust functions as needed")
+        else:
+            st.info("✏️ **Custom Structure Editor** • Edit headings, reorder, add/remove sections")
+
+        # Summary metrics
+        keep_count = len([h for h in optimized_headings if h.get('action') == 'keep'])
+        improve_count = len([h for h in optimized_headings if h.get('action') == 'improve'])
+        add_count = len([h for h in optimized_headings if h.get('action') == 'add'])
+
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("✅ Keep", keep_count)
+        with col2:
+            st.metric("🔧 Improve", improve_count)
+        with col3:
+            st.metric("➕ Add", add_count)
+        with col4:
+            st.metric("📊 Total", len(optimized_headings))
+
+        st.markdown("---")
+
+        # Display headings with appropriate controls
+        for i, heading in enumerate(optimized_headings):
+            action = heading.get('action', 'keep')
+            heading_text = heading['text']
+            word_count = heading.get('word_count', 0)
+
+            # Action emoji
+            action_emoji = {"keep": "✅", "improve": "🔧", "add": "➕"}
+            action_label = {"keep": "Keep", "improve": "Improve", "add": "Add"}
+
+            if auto_accept:
+                # ACCEPT MODE: Simple view with function selector only
+                col1, col2, col3 = st.columns([3, 2, 0.5])
+
+                with col1:
+                    st.markdown(f"**{i+1}. {heading_text}**")
+                    st.caption(f"{action_emoji.get(action, '•')} {action_label.get(action, action).upper()} • {word_count} words")
+
+                with col2:
+                    # Function selector
+                    current_function = heading.get('function', 'general')
+                    selected_function = st.selectbox(
+                        f"Function {i+1}",
+                        options=list(function_options.keys()),
+                        format_func=lambda x: function_options[x],
+                        index=list(function_options.keys()).index(current_function) if current_function in function_options else 0,
+                        key=f"func_{i}",
+                        label_visibility="collapsed"
+                    )
+                    heading['function'] = selected_function
+
+                with col3:
+                    st.write("")  # Spacing
+
+            else:
+                # CUSTOMIZE MODE: Full editing controls
+                col1, col2, col3, col4, col5 = st.columns([0.3, 2.5, 1.5, 0.6, 0.6])
+
+                with col1:
+                    st.write(f"{i+1}.")
+
+                with col2:
+                    # Editable heading text
+                    new_text = st.text_input(
+                        f"Heading {i}",
+                        value=heading_text,
+                        key=f"heading_{i}",
+                        label_visibility="collapsed"
+                    )
+                    if new_text != heading_text:
+                        heading['text'] = new_text
+                        heading['function'] = auto_detect_function(new_text, section_functions)
+
+                    st.caption(f"{action_emoji.get(action, '•')} {action_label.get(action, action).upper()} • {word_count} words")
+
+                with col3:
+                    # Function selector
+                    current_function = heading.get('function', 'general')
+                    selected_function = st.selectbox(
+                        f"Function {i}",
+                        options=list(function_options.keys()),
+                        format_func=lambda x: function_options[x],
+                        index=list(function_options.keys()).index(current_function) if current_function in function_options else 0,
+                        key=f"func_{i}",
+                        label_visibility="collapsed"
+                    )
+                    heading['function'] = selected_function
+
+                with col4:
+                    # Move up button
+                    if i > 0:
+                        if st.button("↑", key=f"up_{i}", help="Move up"):
+                            optimized_headings[i], optimized_headings[i-1] = optimized_headings[i-1], optimized_headings[i]
+                            st.rerun()
+                    else:
+                        st.write("")
+
+                with col5:
+                    # Move down button
+                    if i < len(optimized_headings) - 1:
+                        if st.button("↓", key=f"down_{i}", help="Move down"):
+                            optimized_headings[i], optimized_headings[i+1] = optimized_headings[i+1], optimized_headings[i]
+                            st.rerun()
+                    else:
+                        st.write("")
+
+        # Show removed sections if we have AI recommendations
+        if st.session_state.optimization_data.get('analysis_complete'):
+            analysis_result = st.session_state.optimization_data.get('analysis_result', {})
+            recommendations = analysis_result.get('recommendations', [])
+            remove_recs = [r for r in recommendations if r['action'] == 'remove']
+
+            if remove_recs:
+                st.markdown("---")
+                with st.expander(f"❌ Sections That Will Be Removed ({len(remove_recs)})", expanded=False):
+                    for rec in remove_recs:
+                        st.markdown(f"**~~{rec['heading']}~~**")
+                        st.caption(f"💡 {rec['reason']}")
+
+        # CTA Product Selection
+        st.markdown("---")
+        with st.expander("🎯 CTA Product Settings", expanded=False):
+            st.markdown("**Configure product CTAs for optimized content**")
+
+            if APIS_AVAILABLE:
+                try:
+                    from core.product_loader import product_loader
+
+                    products = product_loader.get_products()
+                    product_options = {"none": "No Product CTA"}
+                    for product in products:
+                        product_options[product['slug']] = f"{product['name']} - {product['category']}"
+
+                    selected_product = st.selectbox(
+                        "Select Product for CTA",
+                        options=list(product_options.keys()),
+                        format_func=lambda x: product_options[x],
+                        index=0,
+                        key="opt_product_select"
+                    )
+
+                    st.session_state.optimization_data['selected_product'] = selected_product
+
+                    if selected_product != "none":
+                        product_data = next((p for p in products if p['slug'] == selected_product), None)
+                        if product_data:
+                            st.info(f"**{product_data['name']}**\n\n{product_data['description'][:200]}...")
+                except Exception as e:
+                    st.warning(f"Could not load products: {str(e)}")
+                    st.session_state.optimization_data['selected_product'] = "none"
+            else:
+                st.warning("API not available. Product CTAs disabled.")
+                st.session_state.optimization_data['selected_product'] = "none"
+
+        # Navigation
+        st.markdown("---")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            if st.button("← Back to Analysis"):
+                st.session_state.current_step = 2
+                st.rerun()
+        with col3:
+            if st.button("Generate Content →", type="primary"):
+                st.session_state.current_step = 4  # Go to Step 4 (Generate)
+                st.rerun()
