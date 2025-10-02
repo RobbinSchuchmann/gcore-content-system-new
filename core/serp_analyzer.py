@@ -639,6 +639,135 @@ Provide your suggestions in this exact format:
 
         return result
 
+    def _detect_unnecessary_sections(self, headings: List[Dict]) -> List[Dict]:
+        """
+        Detect sections that should typically be removed in educational SEO content
+
+        Args:
+            headings: List of heading dictionaries with 'text' and 'level'
+
+        Returns:
+            List of headings that are likely unnecessary
+        """
+        unnecessary = []
+        unnecessary_patterns = [
+            r'\bconclusion\b',
+            r'\bsummary\b',
+            r'\bwrap[\s-]?up\b',
+            r'\bfinal thoughts\b',
+            r'\babout (the )?author\b',
+            r'\babout us\b',
+            r'\btable of contents\b',
+            r'\breferences\b',
+            r'\bcitations\b'
+        ]
+
+        for heading in headings:
+            text_lower = heading.get('text', '').lower()
+            for pattern in unnecessary_patterns:
+                if re.search(pattern, text_lower):
+                    unnecessary.append(heading)
+                    break
+
+        return unnecessary
+
+    def _validate_heading_format(self, heading_text: str) -> Dict[str, Any]:
+        """
+        Validate if a heading follows question format (semantic SEO best practice)
+
+        Args:
+            heading_text: The heading text to validate
+
+        Returns:
+            Dictionary with validation results and suggested improvements
+        """
+        # Allow exception for FAQ section
+        if 'frequently asked' in heading_text.lower() or heading_text.lower().strip() == 'faq':
+            return {
+                'is_valid': True,
+                'is_question': False,
+                'needs_improvement': False,
+                'suggested_format': heading_text
+            }
+
+        # Check if it starts with question words
+        question_starters = ['what', 'how', 'why', 'when', 'where', 'which', 'who', 'is', 'are', 'can', 'does', 'do']
+        first_word = heading_text.lower().split()[0] if heading_text else ''
+
+        is_question = first_word in question_starters and heading_text.strip().endswith('?')
+
+        # If not a question, try to suggest one
+        suggested_format = heading_text
+        if not is_question:
+            # Try to convert to question format
+            text_lower = heading_text.lower()
+
+            # Pattern: "X benefits" → "What are the benefits of X?"
+            if 'benefit' in text_lower:
+                suggested_format = f"What are the benefits of {heading_text.replace('benefits', '').replace('Benefits', '').strip()}?"
+            # Pattern: "X features" → "What are the key features of X?"
+            elif 'feature' in text_lower:
+                suggested_format = f"What are the key features of {heading_text.replace('features', '').replace('Features', '').strip()}?"
+            # Pattern: "How X works" → "How does X work?"
+            elif text_lower.startswith('how ') and 'work' in text_lower:
+                suggested_format = heading_text if heading_text.endswith('?') else f"{heading_text}?"
+            # Default: "X" → "What is X?"
+            else:
+                suggested_format = f"What is {heading_text.lower()}?"
+
+        return {
+            'is_valid': is_question,
+            'is_question': is_question,
+            'needs_improvement': not is_question,
+            'suggested_format': suggested_format
+        }
+
+    def _extract_competitor_gaps(self, existing_headings: List[Dict], competitor_headings_list: List[List[Dict]]) -> List[Dict]:
+        """
+        Identify topics that competitors cover but we don't
+
+        Args:
+            existing_headings: Our current headings
+            competitor_headings_list: List of competitor heading structures
+
+        Returns:
+            List of missing topics with frequency data
+        """
+        from collections import Counter
+
+        # Extract our topics (normalized)
+        our_topics = set()
+        for h in existing_headings:
+            # Normalize: lowercase, remove question marks, remove common words
+            topic = h.get('text', '').lower().strip('?').strip()
+            topic = re.sub(r'\b(what|how|why|when|where|is|are|does|do|the|a|an)\b', '', topic).strip()
+            our_topics.add(topic)
+
+        # Extract competitor topics
+        competitor_topics = []
+        for comp_headings in competitor_headings_list:
+            for h in comp_headings:
+                if h.get('level') == 'H2':  # Focus on H2 level
+                    topic = h.get('text', '').lower().strip('?').strip()
+                    topic = re.sub(r'\b(what|how|why|when|where|is|are|does|do|the|a|an)\b', '', topic).strip()
+                    if topic:
+                        competitor_topics.append(topic)
+
+        # Count frequency
+        topic_counts = Counter(competitor_topics)
+
+        # Find gaps (topics in 2+ competitors but not in ours)
+        gaps = []
+        for topic, count in topic_counts.most_common():
+            if count >= 2 and topic not in our_topics and len(topic) > 3:  # Skip very short topics
+                gaps.append({
+                    'topic': topic,
+                    'frequency': count,
+                    'appears_in': f"{count} out of {len(competitor_headings_list)} competitors"
+                })
+
+        return gaps
+
     def _suggest_optimization_actions(self, existing_headings: List[Dict], competitor_headings_list: List[List[Dict]], keyword: str) -> Dict[str, Any]:
         """
         Use Claude AI to suggest optimization actions for each section
@@ -667,8 +796,8 @@ Provide your suggestions in this exact format:
                     competitor_text += f"- {heading['level']}: {heading['text']}\n"
                 competitor_text += "\n"
 
-            # Build AI prompt
-            prompt = f"""You are an expert SEO content strategist analyzing an existing article for optimization.
+            # Build AI prompt with 4-phase analysis
+            prompt = f"""You are an expert SEO and content optimization specialist.
 
 **Primary Keyword:** {keyword if keyword else "Not specified"}
 
@@ -676,59 +805,161 @@ Provide your suggestions in this exact format:
 
 {competitor_text}
 
-**Your Task:**
-Analyze the current article structure against competitors and provide optimization recommendations.
+**CRITICAL INSTRUCTION:**
+You MUST analyze each current article heading and assign it to EXACTLY ONE category:
+- REMOVE: Only if it's a conclusion, "About Author", table of contents, or duplicate
+- IMPROVE: If it exists in current article but needs better question format
+- KEEP: If it exists in current article and is already perfect
+- ADD: ONLY if it does NOT exist in current article but appears in competitors
 
-For each existing section, decide:
-- **KEEP**: Section is competitive and should be preserved exactly as-is
-- **IMPROVE**: Section exists but needs enhancement (better examples, more depth, clearer structure)
-- **REMOVE**: Section is redundant, low-value, or off-topic
+**YOUR TASK: 4-PHASE OPTIMIZATION ANALYSIS**
 
-Also identify:
-- **ADD**: Missing sections that competitors cover and we should add
+Follow this EXACT sequence. Each heading can only appear in ONE phase.
 
-**IMPORTANT RULES:**
-1. Be balanced - preserve unique valuable content
-2. **KEEP** means keeping the heading AND content as-is - don't suggest KEEP if you want to change the heading
-3. **IMPROVE** means enhancing existing content - keep the same topic but make it better
-4. **DO NOT suggest transforming or restructuring headings** - if a heading needs a different title, use IMPROVE and explain the better title in the reason
-5. All NEW headings (ADD) should be in question format (What is...? How does...? etc.)
-6. **CRITICAL: NEVER recommend the same heading for both REMOVE and ADD** - If you want to completely rewrite a section, use IMPROVE instead
-7. **H3 Subheadings**: Only suggest H3s for complex technical sections. For lists (benefits, challenges, features), do NOT suggest H3s.
+═══════════════════════════════════════════════════════════
+PHASE 1: IDENTIFY UNNECESSARY SECTIONS (What to REMOVE)
+═══════════════════════════════════════════════════════════
 
-**Output Format:**
+Look ONLY at current article headings. Mark for REMOVE if the heading text contains:
+- "Conclusion"
+- "Summary"
+- "Final Thoughts"
+- "Wrapping Up"
+- "About the Author"
+- "About Us"
+- "Table of Contents"
+
+**IMPORTANT:**
+- FAQ sections are GOOD - never mark "Frequently asked questions" or "FAQ" as REMOVE
+- Question-format headings are GOOD - never mark them as REMOVE
+- If a heading doesn't match the list above, DO NOT mark it as REMOVE
+
+**Only mark REMOVE if the heading is literally one of these types.**
+
+═══════════════════════════════════════════════════════════
+PHASE 2: COMPETITOR GAP ANALYSIS (What to ADD)
+═══════════════════════════════════════════════════════════
+
+Compare competitor headings to current article headings. For each competitor heading:
+
+**IF** the topic appears in 2+ competitors **AND** is NOT in our current article → **ADD**
+
+Steps:
+1. Look at each competitor heading
+2. Check: Do we have this topic in our current article? (ignore exact wording, focus on topic)
+3. If NO and it appears in 2+ competitors → ADD it
+4. If YES → Skip (will handle in Phase 3 or 4)
+
+**FAQ HANDLING:**
+- If competitors have FAQ section and we don't → Add ONE H2: "Frequently asked questions"
+- For individual FAQ-type questions → Add as H3 subheadings under the FAQ H2
+- Examples of FAQ questions: "Can X handle Y?", "Do X support Z?", "How are X monitored?"
+
+**Format for ADD:**
+- H2 sections: Convert to question format: "What is...?", "How does...?", "Why...?"
+- FAQ questions: List as H3 subheadings under "Frequently asked questions" H2
+- Include frequency: "Appears in X out of Y competitors"
+
+═══════════════════════════════════════════════════════════
+PHASE 3: SEMANTIC PATTERN VALIDATION (What to IMPROVE)
+═══════════════════════════════════════════════════════════
+
+Look at current article headings that are NOT marked for REMOVE:
+
+**IF** heading is NOT in question format → **IMPROVE**
+
+Examples:
+- "CDN Benefits" → IMPROVE to "What are the benefits of CDN?"
+- "Understanding cloud servers" → IMPROVE to "What is a cloud server?"
+- "Types of storage" → IMPROVE to "What are the types of storage?"
+
+**SKIP** if already a question:
+- "What is cloud storage?" → Already good, will handle in Phase 4
+- "How does it work?" → Already good, will handle in Phase 4
+
+Exception: "Frequently asked questions" is allowed as non-question format
+
+═══════════════════════════════════════════════════════════
+PHASE 4: VALIDATE LOGICAL STRUCTURE (What to KEEP)
+═══════════════════════════════════════════════════════════
+
+All remaining current article headings that are:
+- NOT marked for REMOVE (Phase 1)
+- NOT marked for IMPROVE (Phase 3)
+
+→ Mark as **KEEP**
+
+These are headings already in question format that don't need changes.
+
+═══════════════════════════════════════════════════════════
+CRITICAL RULES - MUST FOLLOW
+═══════════════════════════════════════════════════════════
+
+**DECISION TREE - Use this for EVERY heading:**
+
+FOR CURRENT ARTICLE HEADINGS:
+1. Is it "Conclusion", "Summary", "About Author", "Table of Contents"? → **REMOVE**
+2. Is it NOT in question format? → **IMPROVE**
+3. Otherwise → **KEEP**
+
+FOR COMPETITOR HEADINGS (gaps):
+1. Does this topic exist in our current article? Check carefully!
+2. If NO and appears in 2+ competitors → **ADD**
+3. If YES → Do nothing (already handled above)
+
+**ABSOLUTE RULES:**
+- NO heading should appear in multiple categories
+- "Frequently asked questions" is GOOD - never REMOVE it
+- Question-format headings are GOOD - never REMOVE them
+- If unsure, prefer KEEP over other actions
+
+═══════════════════════════════════════════════════════════
+OUTPUT FORMAT - FOLLOW EXACTLY
+═══════════════════════════════════════════════════════════
 
 # Strategic Insights:
-[2-3 sentences explaining the overall optimization strategy and why these changes will improve SEO]
+[2-3 sentences: (1) What's working well, (2) What gaps exist, (3) How changes improve SEO/UX]
 
 ## Recommendations:
 
-### KEEP (Preserve as-is):
-- H2: [heading text] | Reason: [why this is valuable and should be kept]
+### KEEP (Already optimal - preserve as-is):
+- H2: [exact current heading] | Reason: Already in question format and well-positioned for [specific benefit]
 
-### IMPROVE (Enhance content):
-- H2: [heading text] | Reason: [what's weak and how to improve]
+### IMPROVE (Needs better heading format or depth):
+- H2: [current heading] → [improved question format] | Reason: Convert to question format for semantic SEO + [specific enhancement needed]
 
-### REMOVE (Delete section):
-- H2: [heading text] | Reason: [why this should be removed]
+### REMOVE (Delete these sections):
+- H2: [heading to delete] | Reason: [Specific reason: "Conclusion sections redundant in evergreen content" OR "Duplicate of X section" OR "Off-topic"]
 
-### ADD (New sections needed):
-- H2: [new heading text] | Reason: [what gap this fills]
-  - H3: [subheading] (ONLY if genuinely needed for complex content - skip for listicles)
+### ADD (Missing topics from competitor analysis):
+- H2: [new question-format heading] | Reason: Appears in [X] out of [Y] competitors, covers [specific topic gap]
+  - H3: [subheading if complex topic] (OPTIONAL - only if needed)
+
+**For FAQ sections:**
+- H2: Frequently asked questions | Reason: Appears in [X] out of [Y] competitors, captures long-tail queries
+  - H3: Can cloud servers handle high traffic?
+  - H3: How are cloud servers monitored?
+  - H3: Do cloud servers support software integrations?
+  (List ALL FAQ-type questions as H3s, not as separate H2s)
 
 ## Optimal Structure:
-[List all headings in recommended order, including existing KEEP/IMPROVE sections and new ADD sections]
-1. H2: [heading text] - [KEEP/IMPROVE/ADD]
-2. H2: [heading text] - [KEEP/IMPROVE/ADD]
+[List ALL headings in logical order - KEEP + IMPROVE + ADD sections. Exclude REMOVE.]
+1. H2: What is [keyword]? - KEEP
+2. H2: How does [keyword] work? - IMPROVE
+3. H2: What are the benefits of [keyword]? - ADD
 ...
-"""
+[Last] H2: Frequently asked questions - ADD
+
+═══════════════════════════════════════════════════════════
+BEGIN YOUR 4-PHASE ANALYSIS NOW
+═══════════════════════════════════════════════════════════"""
 
             # Call Claude API
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=4000,
-                temperature=0.7,
-                system="You are an expert SEO content strategist specializing in content optimization and competitive analysis.",
+                temperature=0.6,  # Slightly lower for more consistent analysis
+                system="You are an expert SEO and content optimization specialist. Your expertise includes competitive analysis, semantic SEO, content structure optimization, and identifying content gaps. You provide clear, actionable recommendations that improve search rankings and user experience.",
                 messages=[{
                     "role": "user",
                     "content": prompt
@@ -798,8 +1029,8 @@ Also identify:
             parsed['strategic_insights'] = insights_match.group(1).strip()
 
         # Extract KEEP recommendations
-        keep_match = re.search(r'### KEEP.*?:\s*\n((?:- \*?\*?H2:.+\n?)+)', response_text, re.DOTALL | re.IGNORECASE)
-        keep_text = keep_match.group(1) if keep_match else ''
+        keep_match = re.search(r'### KEEP.*?:\s*\n(.+?)(?=\n###|\Z)', response_text, re.DOTALL | re.IGNORECASE)
+        keep_text = keep_match.group(1).strip() if keep_match else ''
         keep_sections = re.findall(
             r'-\s*\*?\*?H2:\s*(.+?)\*?\*?\s*\|\s*Reason:\s*(.+?)(?=\n-|\n\n|\Z)',
             keep_text,
@@ -814,31 +1045,55 @@ Also identify:
                 'h3_subheadings': []
             })
 
-        # Extract IMPROVE recommendations
-        improve_match = re.search(r'### IMPROVE.*?:\s*\n((?:- \*?\*?H2:.+\n?)+)', response_text, re.DOTALL | re.IGNORECASE)
-        improve_text = improve_match.group(1) if improve_match else ''
+        # Extract IMPROVE recommendations (handles both "Current" and "Current → Improved" formats)
+        improve_match = re.search(r'### IMPROVE.*?:\s*\n(.+?)(?=\n###|\Z)', response_text, re.DOTALL | re.IGNORECASE)
+        improve_text = improve_match.group(1).strip() if improve_match else ''
         improve_sections = re.findall(
             r'-\s*\*?\*?H2:\s*(.+?)\*?\*?\s*\|\s*Reason:\s*(.+?)(?=\n-|\n\n|\Z)',
             improve_text,
             re.DOTALL
         )
         for heading, reason in improve_sections:
-            parsed['recommendations'].append({
-                'action': 'improve',
-                'heading': self._to_sentence_case(heading.strip()),
-                'level': 'H2',
-                'reason': reason.strip(),
-                'h3_subheadings': []
-            })
+            # Check if heading has arrow notation (Current → Improved)
+            if '→' in heading or '->' in heading:
+                # Split on arrow and use the improved version
+                arrow = '→' if '→' in heading else '->'
+                parts = heading.split(arrow)
+                current_heading = parts[0].strip()
+                improved_heading = parts[1].strip() if len(parts) > 1 else current_heading
+
+                parsed['recommendations'].append({
+                    'action': 'improve',
+                    'heading': self._to_sentence_case(improved_heading),
+                    'original_heading': self._to_sentence_case(current_heading),
+                    'level': 'H2',
+                    'reason': reason.strip(),
+                    'h3_subheadings': []
+                })
+            else:
+                # No arrow, use heading as-is
+                parsed['recommendations'].append({
+                    'action': 'improve',
+                    'heading': self._to_sentence_case(heading.strip()),
+                    'level': 'H2',
+                    'reason': reason.strip(),
+                    'h3_subheadings': []
+                })
 
         # Extract REMOVE recommendations
-        remove_match = re.search(r'### REMOVE.*?:\s*\n((?:- \*?\*?H2:.+\n?)+)', response_text, re.DOTALL | re.IGNORECASE)
-        remove_text = remove_match.group(1) if remove_match else ''
+        remove_match = re.search(r'### REMOVE.*?:\s*\n(.+?)(?=\n###|\Z)', response_text, re.DOTALL | re.IGNORECASE)
+        remove_text = remove_match.group(1).strip() if remove_match else ''
         remove_sections = re.findall(
             r'-\s*\*?\*?H2:\s*(.+?)\*?\*?\s*\|\s*Reason:\s*(.+?)(?=\n-|\n\n|\Z)',
             remove_text,
             re.DOTALL
         )
+
+        # DEBUG
+        print(f"\n=== PARSING REMOVE SECTIONS ===")
+        print(f"Remove text extracted: {repr(remove_text[:200])}")
+        print(f"Found {len(remove_sections)} REMOVE sections: {[h[0] for h in remove_sections]}")
+
         for heading, reason in remove_sections:
             parsed['recommendations'].append({
                 'action': 'remove',
@@ -849,7 +1104,7 @@ Also identify:
             })
 
         # Extract ADD recommendations with H3s
-        add_section = re.search(r'### ADD.*?:\s*\n((?:- \*?\*?H2:.+(?:\n\s+- H3:.+)*\n?)+)', response_text, re.DOTALL | re.IGNORECASE)
+        add_section = re.search(r'### ADD.*?:\s*\n(.+?)(?=\n###|\n##|\Z)', response_text, re.DOTALL | re.IGNORECASE)
         if add_section:
             add_text = add_section.group(1)
             # Parse each ADD section

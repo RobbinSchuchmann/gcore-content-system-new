@@ -1676,22 +1676,22 @@ if selected_mode == "📝 New Content":
                 st.session_state.current_step = 2
                 st.rerun()
         with col_right:
-            has_content = bool(st.session_state.content_brief.get('generated_content'))
-            if st.button("Continue to Quality Check →", type="primary", use_container_width=True, disabled=not has_content):
-                st.session_state.current_step = 4
-                st.rerun()
+            if st.button("Continue to Quality Check →", type="primary", use_container_width=True):
+                if st.session_state.content_brief.get('generated_content'):
+                    st.session_state.current_step = 4
+                    st.rerun()
+                else:
+                    st.warning("Please generate content first")
     
     elif st.session_state.current_step == 4:
         st.subheader("Step 4: Quality Check")
-
+        
         # Check if we have content to analyze
         if not st.session_state.content_brief.get('generated_content'):
-            st.error("⚠️ No content available to analyze")
-            if st.button("← Back to Generate", type="primary"):
+            st.warning("Please generate content first")
+            if st.button("← Back to Generate"):
                 st.session_state.current_step = 3
                 st.rerun()
-            st.stop()
-
         else:
             # Import quality checker
             if APIS_AVAILABLE:
@@ -1958,31 +1958,116 @@ if selected_mode == "📝 New Content":
     
     elif st.session_state.current_step == 5:
         st.subheader("Step 5: Export Content")
-
-        # Source validation function
-        def validate_source_attribution(content_sections, research_sources):
+    
+    # Source validation function
+    def validate_source_attribution(content_sections, research_sources):
+        """Validate that all cited sources in content exist in research sources"""
+        validation_errors = []
+        research_source_names = set()
+        
+        # Extract source names from research
+        if research_sources:
+            for source in research_sources:
+                if isinstance(source, dict):
+                    title = source.get('title', '').lower()
+                    url = source.get('url', '')
+                    if title:
+                        research_source_names.add(title)
+                    if url:
+                        # Extract domain name
+                        domain = url.split('//')[1].split('/')[0] if '//' in url else url
+                        research_source_names.add(domain.replace('www.', '').lower())
+        
+        # Check for fabricated sources in content
+        forbidden_sources = [
+            'market research future', 'fortune business insights',
+            'according to research', 'according to market research',
+            'according to industry analysis', 'according to studies'
+        ]
+        
+        all_content_text = ""
+        for section in content_sections:
+            content = section.get('content', '')
+            if isinstance(content, str):
+                all_content_text += content.lower() + " "
+        
+        for forbidden in forbidden_sources:
+            if forbidden in all_content_text:
+                validation_errors.append(f"⚠️ Found fabricated source: '{forbidden}' - not in research data")
+        
+        return validation_errors
+    
+    # Check if we have content to export
+    if not st.session_state.content_brief.get('generated_content'):
+        st.warning("Please generate content first")
+        if st.button("← Back to Generate"):
+            st.session_state.current_step = 3
+            st.rerun()
+    else:
+        # Prepare full content for export
+        # Build complete content structure
+        export_content = {
+            'metadata': {
+                'primary_keyword': st.session_state.content_brief.get('primary_keyword', ''),
+                'generated_date': datetime.now().isoformat(),
+                'quality_scores': st.session_state.content_brief.get('quality_scores', {}),
+                'word_count': 0
+            },
+            'content': {
+                'introduction': st.session_state.content_brief.get('introduction', ''),
+                'sections': []
+            }
+        }
+        
+        # Calculate total word count
+        total_words = len(st.session_state.content_brief.get('introduction', '').split())
+        
+        # Add sections
+        for heading in st.session_state.content_brief.get('headings', []):
+            if heading['text'] in st.session_state.content_brief.get('generated_content', {}):
+                content_data = st.session_state.content_brief['generated_content'][heading['text']]
+                export_content['content']['sections'].append({
+                    'heading': heading['text'],
+                    'level': heading['level'],
+                    'content': content_data['content'],
+                    'word_count': content_data.get('word_count', len(content_data['content'].split())),
+                    'function': content_data.get('function', '')
+                })
+                total_words += content_data.get('word_count', len(content_data['content'].split()))
+        
+        export_content['metadata']['word_count'] = total_words
+        
+        # Display export preview
+        st.markdown("### 📄 Content Preview")
+        
+        # Show metadata
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Total Words", total_words)
+        with col2:
+            sections_count = len(export_content['content']['sections'])
+            st.metric("Sections", sections_count + 1)  # +1 for introduction
+        with col3:
+            avg_quality = 0
+            if st.session_state.content_brief.get('quality_scores'):
+                scores = [s['overall_score'] for s in st.session_state.content_brief['quality_scores'].values()]
+                avg_quality = sum(scores) / len(scores) if scores else 0
+            st.metric("Avg Quality", f"{avg_quality:.1f}%")
+        
+        # Source validation function (defined inline to avoid scope issues)
+        def validate_source_attribution_inline(content_sections, research_sources):
             """Validate that all cited sources in content exist in research sources"""
             validation_errors = []
-            research_source_names = set()
             
-            # Extract source names from research
-            if research_sources:
-                for source in research_sources:
-                    if isinstance(source, dict):
-                        title = source.get('title', '').lower()
-                        url = source.get('url', '')
-                        if title:
-                            research_source_names.add(title)
-                        if url:
-                            # Extract domain name
-                            domain = url.split('//')[1].split('/')[0] if '//' in url else url
-                            research_source_names.add(domain.replace('www.', '').lower())
-            
-            # Check for fabricated sources in content
+            # Check for fabricated sources in content (comprehensive list)
             forbidden_sources = [
                 'market research future', 'fortune business insights',
-                'according to research', 'according to market research',
-                'according to industry analysis', 'according to studies'
+                'according to research', 'according to market research', 
+                'according to industry analysis', 'according to studies',
+                'according to reports', 'according to data',
+                'market research data', 'market research reports',
+                'research shows', 'studies indicate', 'data suggests',
+                'based on research', 'research findings'
             ]
             
             all_content_text = ""
@@ -1997,582 +2082,496 @@ if selected_mode == "📝 New Content":
             
             return validation_errors
         
-        # Check if we have content to export
-        if not st.session_state.content_brief.get('generated_content'):
-            st.error("⚠️ No content available to export")
-            if st.button("← Back to Generate", type="primary"):
-                st.session_state.current_step = 3
-                st.rerun()
-            st.stop()
-        else:
-            # Prepare full content for export
-            # Build complete content structure
-            export_content = {
-                'metadata': {
-                    'primary_keyword': st.session_state.content_brief.get('primary_keyword', ''),
-                    'generated_date': datetime.now().isoformat(),
-                    'quality_scores': st.session_state.content_brief.get('quality_scores', {}),
-                    'word_count': 0
-                },
+        # Validate source attribution before export
+        research_data = st.session_state.content_brief.get('research_data', {})
+        research_sources = research_data.get('data', {}).get('sources', [])
+        content_sections = export_content['content']['sections']
+        
+        validation_errors = validate_source_attribution_inline(content_sections, research_sources)
+        if validation_errors:
+            st.error("⚠️ **Source Attribution Issues Found:**")
+            for error in validation_errors:
+                st.error(error)
+            st.warning("These issues may indicate fabricated sources that don't exist in the research data. Please review the content before export.")
+        
+        # Export configuration
+        st.markdown("---")
+        st.markdown("### 📤 Export to Google Docs")
+
+        # Fixed settings for Google Docs export
+        export_format = "Google Docs Format"
+        include_sources = True  # Always include research sources
+        include_metadata = False  # Clean format without metadata
+        include_quality = False  # No quality scores in export
+        
+        # Generate export content based on format
+        def generate_markdown():
+            """Generate Markdown format"""
+            md_content = []
+            
+            # Add metadata as comments
+            if include_metadata:
+                md_content.append(f"<!-- Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->")
+                md_content.append(f"<!-- Primary Keyword: {export_content['metadata']['primary_keyword']} -->")
+                md_content.append(f"<!-- Word Count: {export_content['metadata']['word_count']} -->")
+                if include_quality and avg_quality > 0:
+                    md_content.append(f"<!-- Quality Score: {avg_quality:.1f}% -->")
+                md_content.append("")
+            
+            # Add title
+            md_content.append(f"# {export_content['metadata']['primary_keyword'].title()}")
+            md_content.append("")
+            
+            # Add introduction
+            if export_content['content']['introduction']:
+                md_content.append(export_content['content']['introduction'])
+                md_content.append("")
+            
+            # Add sections
+            for section in export_content['content']['sections']:
+                level = section['level']
+                if level == 'H1':
+                    md_content.append(f"# {section['heading']}")
+                elif level == 'H2':
+                    md_content.append(f"## {section['heading']}")
+                elif level == 'H3':
+                    md_content.append(f"### {section['heading']}")
+                else:
+                    md_content.append(f"## {section['heading']}")
+                
+                md_content.append("")
+                md_content.append(section['content'])
+                md_content.append("")
+            
+            # Add sources if available
+            if include_sources and st.session_state.content_brief.get('research_data'):
+                research = st.session_state.content_brief['research_data'].get('data', {})
+                if research.get('sources'):
+                    md_content.append("---")
+                    md_content.append("")
+                    md_content.append("## Sources")
+                    md_content.append("")
+                    for i, source in enumerate(research['sources'][:10], 1):
+                        if isinstance(source, dict):
+                            md_content.append(f"{i}. [{source.get('title', 'Source')}]({source.get('url', '#')})")
+                        else:
+                            md_content.append(f"{i}. {source}")
+            
+            return '\n'.join(md_content)
+        
+        def generate_html():
+            """Generate HTML format"""
+            html_parts = []
+            
+            # HTML header
+            html_parts.append('<!DOCTYPE html>')
+            html_parts.append('<html lang="en">')
+            html_parts.append('<head>')
+            html_parts.append('    <meta charset="UTF-8">')
+            html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
+            html_parts.append(f'    <title>{export_content["metadata"]["primary_keyword"].title()}</title>')
+            
+            if include_metadata:
+                html_parts.append(f'    <meta name="keywords" content="{export_content["metadata"]["primary_keyword"]}">')
+                html_parts.append(f'    <meta name="generated" content="{datetime.now().isoformat()}">')
+            
+            html_parts.append('    <style>')
+            html_parts.append('        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ')
+            html_parts.append('               line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }')
+            html_parts.append('        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }')
+            html_parts.append('        h2 { color: #555; margin-top: 30px; }')
+            html_parts.append('        h3 { color: #666; }')
+            html_parts.append('        ul, ol { margin: 15px 0; padding-left: 30px; }')
+            html_parts.append('        li { margin: 8px 0; line-height: 1.6; }')
+            html_parts.append('        li strong { color: #333; }')
+            html_parts.append('        p { margin: 15px 0; }')
+            html_parts.append('        .metadata { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }')
+            html_parts.append('        .metadata dl { margin: 0; }')
+            html_parts.append('        .metadata dt { font-weight: bold; display: inline-block; width: 120px; }')
+            html_parts.append('        .metadata dd { display: inline; margin: 0; }')
+            html_parts.append('    </style>')
+            html_parts.append('</head>')
+            html_parts.append('<body>')
+            
+            # Metadata section
+            if include_metadata:
+                html_parts.append('    <div class="metadata">')
+                html_parts.append('        <h3>Document Information</h3>')
+                html_parts.append('        <dl>')
+                html_parts.append(f'            <dt>Keyword:</dt><dd>{export_content["metadata"]["primary_keyword"]}</dd><br>')
+                html_parts.append(f'            <dt>Generated:</dt><dd>{datetime.now().strftime("%Y-%m-%d %H:%M")}</dd><br>')
+                html_parts.append(f'            <dt>Word Count:</dt><dd>{export_content["metadata"]["word_count"]}</dd><br>')
+                if include_quality and avg_quality > 0:
+                    html_parts.append(f'            <dt>Quality Score:</dt><dd>{avg_quality:.1f}%</dd>')
+                html_parts.append('        </dl>')
+                html_parts.append('    </div>')
+            
+            # Main content
+            html_parts.append(f'    <h1>{export_content["metadata"]["primary_keyword"].title()}</h1>')
+            
+            # Introduction - properly split into paragraphs
+            if export_content['content']['introduction']:
+                intro_paragraphs = export_content['content']['introduction'].split('\n\n')
+                for para in intro_paragraphs:
+                    if para.strip():
+                        # Convert markdown bold to HTML
+                        para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para.strip())
+                        html_parts.append(f'    <p>{para_html}</p>')
+            
+            # Sections
+            for section in export_content['content']['sections']:
+                level = section['level']
+                tag = 'h1' if level == 'H1' else 'h2' if level == 'H2' else 'h3'
+                html_parts.append(f'    <{tag}>{section["heading"]}</{tag}>')
+                
+                # Convert content to paragraphs and lists
+                content = section['content']
+                
+                # First, split by double newlines for paragraphs
+                paragraphs = content.split('\n\n')
+                
+                # Process each paragraph - but handle lists specially
+                i = 0
+                while i < len(paragraphs):
+                    para = paragraphs[i].strip()
+                    if not para:
+                        i += 1
+                        continue
+                        
+                    # Check if this is a numbered list (starts with number and period)
+                    if re.match(r'^\d+\.\s', para):
+                        # Check for intro text before the list
+                        intro_match = re.match(r'^(.+?)(?=\n?\d+\.\s)', para)
+                        if intro_match and not intro_match.group(1).strip().startswith('1.'):
+                            intro_text = intro_match.group(1).strip()
+                            html_parts.append(f'    <p>{intro_text}</p>')
+                        
+                        # Collect all numbered items from this paragraph and subsequent ones
+                        all_numbered_items = []
+                        
+                        # Extract items from current paragraph
+                        numbered_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', para, re.DOTALL)
+                        all_numbered_items.extend(numbered_items)
+                        
+                        # Look ahead for more numbered items in next paragraphs
+                        while i + 1 < len(paragraphs):
+                            next_para = paragraphs[i + 1].strip()
+                            if re.match(r'^\d+\.\s', next_para):
+                                # This is a continuation of the list
+                                more_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', next_para, re.DOTALL)
+                                all_numbered_items.extend(more_items)
+                                i += 1
+                            else:
+                                break
+                        
+                        # Now output all items in a single <ol>
+                        if all_numbered_items:
+                            html_parts.append('    <ol>')
+                            for item in all_numbered_items:
+                                # Convert markdown bold to HTML and clean up
+                                item_text = item.strip()
+                                # Fix incomplete sentences
+                                if item_text.endswith('-') or item_text.endswith('affect'):
+                                    # Try to complete common patterns
+                                    if 'AES-' in item_text and item_text.endswith('-'):
+                                        item_text = item_text[:-1] + '256.'
+                                    elif item_text.endswith('which affect'):
+                                        item_text = item_text + ' 98.6% of organizations.'
+                                    elif item_text.endswith('affect'):
+                                        item_text = item_text + ' your security posture.'
+                                # Also check for other incomplete patterns
+                                if not item_text.rstrip().endswith(('.', '!', '?', ')', '"')):
+                                    # Sentence seems incomplete, add a period
+                                    item_text = item_text.rstrip() + '.'
+                                item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item_text)
+                                html_parts.append(f'        <li>{item_html}</li>')
+                            html_parts.append('    </ol>')
+                        
+                        i += 1
+                    
+                    # Check if this is a bullet list (contains bullet points)
+                    elif '•' in para:
+                        # Check for list introduction
+                        parts = para.split('\n')
+                        list_intro = None
+                        bullet_items = []
+                        
+                        for part in parts:
+                            if '•' in part:
+                                # This line contains bullet points
+                                items = part.split('•')
+                                # First item might be introduction text
+                                if items[0].strip() and 'listed below' in items[0].lower():
+                                    list_intro = items[0].strip()
+                                # Add all bullet items
+                                for item in items[1:]:
+                                    if item.strip():
+                                        bullet_items.append(item.strip())
+                            elif part.strip() and not bullet_items:
+                                # This is likely the introduction
+                                if 'listed below' in part.lower() or 'following' in part.lower():
+                                    list_intro = part.strip()
+                            elif part.strip():
+                                # Additional bullet item on its own line
+                                if part.strip().startswith('**'):
+                                    bullet_items.append(part.strip())
+                        
+                        # Output list introduction if present
+                        if list_intro:
+                            html_parts.append(f'    <p>{list_intro}</p>')
+                        
+                        # Output all bullet items in a single list
+                        if bullet_items:
+                            html_parts.append('    <ul>')
+                            for item in bullet_items:
+                                # Convert markdown bold to HTML
+                                item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
+                                html_parts.append(f'        <li>{item_html}</li>')
+                            html_parts.append('    </ul>')
+                        
+                        i += 1
+                    
+                    else:
+                        # Regular paragraph
+                        para_text = para.strip()
+                        
+                        # Convert markdown bold to HTML
+                        para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para_text)
+                        
+                        # Clean up malformed punctuation from previous processing
+                        para_html = re.sub(r',\.\s*', '. ', para_html)  # Fix ",. " -> ". "
+                        para_html = re.sub(r',\s+([A-Z])', r'. \1', para_html)  # Fix ", Who" -> ". Who"
+                        para_html = re.sub(r',\s*$', '.', para_html)  # Fix sentences ending with comma
+                        
+                        # Fix periods that should be commas in lists
+                        para_html = re.sub(r'\. (ISO \d+)\. (GDPR)\.', r', \1, \2', para_html)  # Fix "SOC 2. ISO 27001. GDPR."
+                        para_html = re.sub(r'management\. (DDoS)', r'management, \1', para_html)  # Fix "management. DDoS"
+                        
+                        # Fix content generation errors
+                        para_html = para_html.replace('cooperation cloud security', 'comprehensive cloud security')
+                        
+                        # Check if paragraph is very long and needs splitting
+                        word_count = len(para_html.split())
+                        
+                        if word_count > 120:  # Only split very long paragraphs
+                            # Split on sentence boundaries more carefully
+                            # First, protect common abbreviations by temporarily replacing them
+                            protected_text = para_html
+                            abbreviations = ['Mr.', 'Mrs.', 'Dr.', 'Prof.', 'Inc.', 'Ltd.', 'Corp.', 'vs.', 'etc.', 'i.e.', 'e.g.']
+                            temp_replacements = {}
+                            
+                            for i, abbrev in enumerate(abbreviations):
+                                placeholder = f"__ABBREV_{i}__"
+                                temp_replacements[placeholder] = abbrev
+                                protected_text = protected_text.replace(abbrev, placeholder)
+                            
+                            # Now split on period + space + capital letter
+                            sentences = re.split(r'\.\s+(?=[A-Z])', protected_text)
+                            
+                            # Restore abbreviations
+                            for j, sentence in enumerate(sentences):
+                                for placeholder, abbrev in temp_replacements.items():
+                                    sentence = sentence.replace(placeholder, abbrev)
+                                sentences[j] = sentence
+                            
+                            if len(sentences) > 1:
+                                # Group sentences into smaller paragraphs (max 60 words each)
+                                current_para = []
+                                current_word_count = 0
+                                
+                                for sentence in sentences:
+                                    sentence = sentence.strip()
+                                    if not sentence:
+                                        continue
+                                        
+                                    # Ensure sentence ends with proper punctuation
+                                    if not sentence.endswith(('.', '!', '?', ':', ';')):
+                                        sentence += '.'
+                                        
+                                    sentence_words = len(sentence.split())
+                                    
+                                    # If adding this sentence would make paragraph too long, start new one
+                                    if current_word_count > 0 and current_word_count + sentence_words > 60:
+                                        if current_para:
+                                            html_parts.append(f'    <p>{" ".join(current_para)}</p>')
+                                        current_para = [sentence]
+                                        current_word_count = sentence_words
+                                    else:
+                                        current_para.append(sentence)
+                                        current_word_count += sentence_words
+                                
+                                # Add remaining sentences
+                                if current_para:
+                                    html_parts.append(f'    <p>{" ".join(current_para)}</p>')
+                            else:
+                                # No good split points found, keep as single paragraph
+                                html_parts.append(f'    <p>{para_html}</p>')
+                        else:
+                            # Paragraph is reasonable length, keep as is
+                            html_parts.append(f'    <p>{para_html}</p>')
+                        
+                        i += 1
+            
+            # Sources
+            if include_sources and st.session_state.content_brief.get('research_data'):
+                research = st.session_state.content_brief['research_data'].get('data', {})
+                if research.get('sources'):
+                    html_parts.append('    <hr>')
+                    html_parts.append('    <h2>Sources</h2>')
+                    html_parts.append('    <ol>')
+                    for source in research['sources'][:10]:
+                        if isinstance(source, dict):
+                            url = source.get("url", "").strip()
+                            title = source.get("title", "").strip()
+                            
+                            # Only include sources with proper URL and title
+                            if url and title and url.startswith('http') and len(title) > 3:
+                                html_parts.append(f'        <li><a href="{url}">{title}</a></li>')
+                            elif title and len(title) > 10:  # Title-only sources
+                                html_parts.append(f'        <li>{title}</li>')
+                        elif isinstance(source, str) and len(source.strip()) > 10:
+                            html_parts.append(f'        <li>{source}</li>')
+                    html_parts.append('    </ol>')
+            
+            html_parts.append('</body>')
+            html_parts.append('</html>')
+            
+            # Post-process to merge consecutive <ul> tags into single lists
+            html_content = '\n'.join(html_parts)
+            
+            # Merge consecutive </ul>\n    <ul> patterns
+            html_content = re.sub(r'</ul>\s*<ul>', '', html_content)
+            
+            # Convert all <ul> to <ol> for better Google Sheets compatibility
+            html_content = html_content.replace('<ul>', '<ol>')
+            html_content = html_content.replace('</ul>', '</ol>')
+            
+            return html_content
+        
+        def generate_text():
+            """Generate plain text format"""
+            text_parts = []
+            
+            # Header
+            text_parts.append(export_content['metadata']['primary_keyword'].upper())
+            text_parts.append('=' * len(export_content['metadata']['primary_keyword']))
+            text_parts.append('')
+            
+            if include_metadata:
+                text_parts.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                text_parts.append(f"Word Count: {export_content['metadata']['word_count']}")
+                if include_quality and avg_quality > 0:
+                    text_parts.append(f"Quality Score: {avg_quality:.1f}%")
+                text_parts.append('')
+                text_parts.append('-' * 40)
+                text_parts.append('')
+            
+            # Introduction
+            if export_content['content']['introduction']:
+                text_parts.append(export_content['content']['introduction'])
+                text_parts.append('')
+            
+            # Sections
+            for section in export_content['content']['sections']:
+                text_parts.append(section['heading'].upper())
+                text_parts.append('-' * len(section['heading']))
+                text_parts.append('')
+                text_parts.append(section['content'])
+                text_parts.append('')
+            
+            # Sources
+            if include_sources and st.session_state.content_brief.get('research_data'):
+                research = st.session_state.content_brief['research_data'].get('data', {})
+                if research.get('sources'):
+                    text_parts.append('-' * 40)
+                    text_parts.append('')
+                    text_parts.append('SOURCES')
+                    text_parts.append('')
+                    for i, source in enumerate(research['sources'][:10], 1):
+                        if isinstance(source, dict):
+                            text_parts.append(f"{i}. {source.get('title', 'Source')} - {source.get('url', '')}")
+                        else:
+                            text_parts.append(f"{i}. {source}")
+            
+            return '\n'.join(text_parts)
+        
+        def generate_json():
+            """Generate JSON format"""
+            json_export = {
+                'metadata': export_content['metadata'],
                 'content': {
-                    'introduction': st.session_state.content_brief.get('introduction', ''),
-                    'sections': []
+                    'title': export_content['metadata']['primary_keyword'].title(),
+                    'introduction': export_content['content']['introduction'],
+                    'sections': export_content['content']['sections']
                 }
             }
             
-            # Calculate total word count
-            total_words = len(st.session_state.content_brief.get('introduction', '').split())
+            if include_quality:
+                json_export['quality_analysis'] = st.session_state.content_brief.get('quality_scores', {})
             
-            # Add sections
-            for heading in st.session_state.content_brief.get('headings', []):
-                if heading['text'] in st.session_state.content_brief.get('generated_content', {}):
-                    content_data = st.session_state.content_brief['generated_content'][heading['text']]
-                    export_content['content']['sections'].append({
-                        'heading': heading['text'],
-                        'level': heading['level'],
-                        'content': content_data['content'],
-                        'word_count': content_data.get('word_count', len(content_data['content'].split())),
-                        'function': content_data.get('function', '')
-                    })
-                    total_words += content_data.get('word_count', len(content_data['content'].split()))
+            if include_sources and st.session_state.content_brief.get('research_data'):
+                json_export['research'] = st.session_state.content_brief.get('research_data', {})
             
-            export_content['metadata']['word_count'] = total_words
-            
-            # Display export preview
-            st.markdown("### 📄 Content Preview")
-            
-            # Show metadata
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.metric("Total Words", total_words)
-            with col2:
-                sections_count = len(export_content['content']['sections'])
-                st.metric("Sections", sections_count + 1)  # +1 for introduction
-            with col3:
-                avg_quality = 0
-                if st.session_state.content_brief.get('quality_scores'):
-                    scores = [s['overall_score'] for s in st.session_state.content_brief['quality_scores'].values()]
-                    avg_quality = sum(scores) / len(scores) if scores else 0
-                st.metric("Avg Quality", f"{avg_quality:.1f}%")
-            
-            # Source validation function (defined inline to avoid scope issues)
-            def validate_source_attribution_inline(content_sections, research_sources):
-                """Validate that all cited sources in content exist in research sources"""
-                validation_errors = []
-                
-                # Check for fabricated sources in content (comprehensive list)
-                forbidden_sources = [
-                    'market research future', 'fortune business insights',
-                    'according to research', 'according to market research', 
-                    'according to industry analysis', 'according to studies',
-                    'according to reports', 'according to data',
-                    'market research data', 'market research reports',
-                    'research shows', 'studies indicate', 'data suggests',
-                    'based on research', 'research findings'
-                ]
-                
-                all_content_text = ""
-                for section in content_sections:
-                    content = section.get('content', '')
-                    if isinstance(content, str):
-                        all_content_text += content.lower() + " "
-                
-                for forbidden in forbidden_sources:
-                    if forbidden in all_content_text:
-                        validation_errors.append(f"⚠️ Found fabricated source: '{forbidden}' - not in research data")
-                
-                return validation_errors
-            
-            # Validate source attribution before export
-            research_data = st.session_state.content_brief.get('research_data', {})
-            research_sources = research_data.get('data', {}).get('sources', [])
-            content_sections = export_content['content']['sections']
-            
-            validation_errors = validate_source_attribution_inline(content_sections, research_sources)
-            if validation_errors:
-                st.error("⚠️ **Source Attribution Issues Found:**")
-                for error in validation_errors:
-                    st.error(error)
-                st.warning("These issues may indicate fabricated sources that don't exist in the research data. Please review the content before export.")
-            
-            # Export configuration
-            st.markdown("---")
-            st.markdown("### 📤 Export to Google Docs")
-    
-            # Fixed settings for Google Docs export
-            export_format = "Google Docs Format"
-            include_sources = True  # Always include research sources
-            include_metadata = False  # Clean format without metadata
-            include_quality = False  # No quality scores in export
-            
-            # Generate export content based on format
-            def generate_markdown():
-                """Generate Markdown format"""
-                md_content = []
-                
-                # Add metadata as comments
-                if include_metadata:
-                    md_content.append(f"<!-- Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->")
-                    md_content.append(f"<!-- Primary Keyword: {export_content['metadata']['primary_keyword']} -->")
-                    md_content.append(f"<!-- Word Count: {export_content['metadata']['word_count']} -->")
-                    if include_quality and avg_quality > 0:
-                        md_content.append(f"<!-- Quality Score: {avg_quality:.1f}% -->")
-                    md_content.append("")
-                
-                # Add title
-                md_content.append(f"# {export_content['metadata']['primary_keyword'].title()}")
-                md_content.append("")
-                
-                # Add introduction
-                if export_content['content']['introduction']:
-                    md_content.append(export_content['content']['introduction'])
-                    md_content.append("")
-                
-                # Add sections
-                for section in export_content['content']['sections']:
-                    level = section['level']
-                    if level == 'H1':
-                        md_content.append(f"# {section['heading']}")
-                    elif level == 'H2':
-                        md_content.append(f"## {section['heading']}")
-                    elif level == 'H3':
-                        md_content.append(f"### {section['heading']}")
-                    else:
-                        md_content.append(f"## {section['heading']}")
-                    
-                    md_content.append("")
-                    md_content.append(section['content'])
-                    md_content.append("")
-                
-                # Add sources if available
-                if include_sources and st.session_state.content_brief.get('research_data'):
-                    research = st.session_state.content_brief['research_data'].get('data', {})
-                    if research.get('sources'):
-                        md_content.append("---")
-                        md_content.append("")
-                        md_content.append("## Sources")
-                        md_content.append("")
-                        for i, source in enumerate(research['sources'][:10], 1):
-                            if isinstance(source, dict):
-                                md_content.append(f"{i}. [{source.get('title', 'Source')}]({source.get('url', '#')})")
-                            else:
-                                md_content.append(f"{i}. {source}")
-                
-                return '\n'.join(md_content)
-            
-            def generate_html():
-                """Generate HTML format"""
-                html_parts = []
-                
-                # HTML header
-                html_parts.append('<!DOCTYPE html>')
-                html_parts.append('<html lang="en">')
-                html_parts.append('<head>')
-                html_parts.append('    <meta charset="UTF-8">')
-                html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
-                html_parts.append(f'    <title>{export_content["metadata"]["primary_keyword"].title()}</title>')
-                
-                if include_metadata:
-                    html_parts.append(f'    <meta name="keywords" content="{export_content["metadata"]["primary_keyword"]}">')
-                    html_parts.append(f'    <meta name="generated" content="{datetime.now().isoformat()}">')
-                
-                html_parts.append('    <style>')
-                html_parts.append('        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ')
-                html_parts.append('               line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }')
-                html_parts.append('        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }')
-                html_parts.append('        h2 { color: #555; margin-top: 30px; }')
-                html_parts.append('        h3 { color: #666; }')
-                html_parts.append('        ul, ol { margin: 15px 0; padding-left: 30px; }')
-                html_parts.append('        li { margin: 8px 0; line-height: 1.6; }')
-                html_parts.append('        li strong { color: #333; }')
-                html_parts.append('        p { margin: 15px 0; }')
-                html_parts.append('        .metadata { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }')
-                html_parts.append('        .metadata dl { margin: 0; }')
-                html_parts.append('        .metadata dt { font-weight: bold; display: inline-block; width: 120px; }')
-                html_parts.append('        .metadata dd { display: inline; margin: 0; }')
-                html_parts.append('    </style>')
-                html_parts.append('</head>')
-                html_parts.append('<body>')
-                
-                # Metadata section
-                if include_metadata:
-                    html_parts.append('    <div class="metadata">')
-                    html_parts.append('        <h3>Document Information</h3>')
-                    html_parts.append('        <dl>')
-                    html_parts.append(f'            <dt>Keyword:</dt><dd>{export_content["metadata"]["primary_keyword"]}</dd><br>')
-                    html_parts.append(f'            <dt>Generated:</dt><dd>{datetime.now().strftime("%Y-%m-%d %H:%M")}</dd><br>')
-                    html_parts.append(f'            <dt>Word Count:</dt><dd>{export_content["metadata"]["word_count"]}</dd><br>')
-                    if include_quality and avg_quality > 0:
-                        html_parts.append(f'            <dt>Quality Score:</dt><dd>{avg_quality:.1f}%</dd>')
-                    html_parts.append('        </dl>')
-                    html_parts.append('    </div>')
-                
-                # Main content
-                html_parts.append(f'    <h1>{export_content["metadata"]["primary_keyword"].title()}</h1>')
-                
-                # Introduction - properly split into paragraphs
-                if export_content['content']['introduction']:
-                    intro_paragraphs = export_content['content']['introduction'].split('\n\n')
-                    for para in intro_paragraphs:
-                        if para.strip():
-                            # Convert markdown bold to HTML
-                            para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para.strip())
-                            html_parts.append(f'    <p>{para_html}</p>')
-                
-                # Sections
-                for section in export_content['content']['sections']:
-                    level = section['level']
-                    tag = 'h1' if level == 'H1' else 'h2' if level == 'H2' else 'h3'
-                    html_parts.append(f'    <{tag}>{section["heading"]}</{tag}>')
-                    
-                    # Convert content to paragraphs and lists
-                    content = section['content']
-                    
-                    # First, split by double newlines for paragraphs
-                    paragraphs = content.split('\n\n')
-                    
-                    # Process each paragraph - but handle lists specially
-                    i = 0
-                    while i < len(paragraphs):
-                        para = paragraphs[i].strip()
-                        if not para:
-                            i += 1
-                            continue
-                            
-                        # Check if this is a numbered list (starts with number and period)
-                        if re.match(r'^\d+\.\s', para):
-                            # Check for intro text before the list
-                            intro_match = re.match(r'^(.+?)(?=\n?\d+\.\s)', para)
-                            if intro_match and not intro_match.group(1).strip().startswith('1.'):
-                                intro_text = intro_match.group(1).strip()
-                                html_parts.append(f'    <p>{intro_text}</p>')
-                            
-                            # Collect all numbered items from this paragraph and subsequent ones
-                            all_numbered_items = []
-                            
-                            # Extract items from current paragraph
-                            numbered_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', para, re.DOTALL)
-                            all_numbered_items.extend(numbered_items)
-                            
-                            # Look ahead for more numbered items in next paragraphs
-                            while i + 1 < len(paragraphs):
-                                next_para = paragraphs[i + 1].strip()
-                                if re.match(r'^\d+\.\s', next_para):
-                                    # This is a continuation of the list
-                                    more_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', next_para, re.DOTALL)
-                                    all_numbered_items.extend(more_items)
-                                    i += 1
-                                else:
-                                    break
-                            
-                            # Now output all items in a single <ol>
-                            if all_numbered_items:
-                                html_parts.append('    <ol>')
-                                for item in all_numbered_items:
-                                    # Convert markdown bold to HTML and clean up
-                                    item_text = item.strip()
-                                    # Fix incomplete sentences
-                                    if item_text.endswith('-') or item_text.endswith('affect'):
-                                        # Try to complete common patterns
-                                        if 'AES-' in item_text and item_text.endswith('-'):
-                                            item_text = item_text[:-1] + '256.'
-                                        elif item_text.endswith('which affect'):
-                                            item_text = item_text + ' 98.6% of organizations.'
-                                        elif item_text.endswith('affect'):
-                                            item_text = item_text + ' your security posture.'
-                                    # Also check for other incomplete patterns
-                                    if not item_text.rstrip().endswith(('.', '!', '?', ')', '"')):
-                                        # Sentence seems incomplete, add a period
-                                        item_text = item_text.rstrip() + '.'
-                                    item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item_text)
-                                    html_parts.append(f'        <li>{item_html}</li>')
-                                html_parts.append('    </ol>')
-                            
-                            i += 1
-                        
-                        # Check if this is a bullet list (contains bullet points)
-                        elif '•' in para:
-                            # Check for list introduction
-                            parts = para.split('\n')
-                            list_intro = None
-                            bullet_items = []
-                            
-                            for part in parts:
-                                if '•' in part:
-                                    # This line contains bullet points
-                                    items = part.split('•')
-                                    # First item might be introduction text
-                                    if items[0].strip() and 'listed below' in items[0].lower():
-                                        list_intro = items[0].strip()
-                                    # Add all bullet items
-                                    for item in items[1:]:
-                                        if item.strip():
-                                            bullet_items.append(item.strip())
-                                elif part.strip() and not bullet_items:
-                                    # This is likely the introduction
-                                    if 'listed below' in part.lower() or 'following' in part.lower():
-                                        list_intro = part.strip()
-                                elif part.strip():
-                                    # Additional bullet item on its own line
-                                    if part.strip().startswith('**'):
-                                        bullet_items.append(part.strip())
-                            
-                            # Output list introduction if present
-                            if list_intro:
-                                html_parts.append(f'    <p>{list_intro}</p>')
-                            
-                            # Output all bullet items in a single list
-                            if bullet_items:
-                                html_parts.append('    <ul>')
-                                for item in bullet_items:
-                                    # Convert markdown bold to HTML
-                                    item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
-                                    html_parts.append(f'        <li>{item_html}</li>')
-                                html_parts.append('    </ul>')
-                            
-                            i += 1
-                        
-                        else:
-                            # Regular paragraph
-                            para_text = para.strip()
-                            
-                            # Convert markdown bold to HTML
-                            para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para_text)
-                            
-                            # Clean up malformed punctuation from previous processing
-                            para_html = re.sub(r',\.\s*', '. ', para_html)  # Fix ",. " -> ". "
-                            para_html = re.sub(r',\s+([A-Z])', r'. \1', para_html)  # Fix ", Who" -> ". Who"
-                            para_html = re.sub(r',\s*$', '.', para_html)  # Fix sentences ending with comma
-                            
-                            # Fix periods that should be commas in lists
-                            para_html = re.sub(r'\. (ISO \d+)\. (GDPR)\.', r', \1, \2', para_html)  # Fix "SOC 2. ISO 27001. GDPR."
-                            para_html = re.sub(r'management\. (DDoS)', r'management, \1', para_html)  # Fix "management. DDoS"
-                            
-                            # Fix content generation errors
-                            para_html = para_html.replace('cooperation cloud security', 'comprehensive cloud security')
-                            
-                            # Check if paragraph is very long and needs splitting
-                            word_count = len(para_html.split())
-                            
-                            if word_count > 120:  # Only split very long paragraphs
-                                # Split on sentence boundaries more carefully
-                                # First, protect common abbreviations by temporarily replacing them
-                                protected_text = para_html
-                                abbreviations = ['Mr.', 'Mrs.', 'Dr.', 'Prof.', 'Inc.', 'Ltd.', 'Corp.', 'vs.', 'etc.', 'i.e.', 'e.g.']
-                                temp_replacements = {}
-                                
-                                for i, abbrev in enumerate(abbreviations):
-                                    placeholder = f"__ABBREV_{i}__"
-                                    temp_replacements[placeholder] = abbrev
-                                    protected_text = protected_text.replace(abbrev, placeholder)
-                                
-                                # Now split on period + space + capital letter
-                                sentences = re.split(r'\.\s+(?=[A-Z])', protected_text)
-                                
-                                # Restore abbreviations
-                                for j, sentence in enumerate(sentences):
-                                    for placeholder, abbrev in temp_replacements.items():
-                                        sentence = sentence.replace(placeholder, abbrev)
-                                    sentences[j] = sentence
-                                
-                                if len(sentences) > 1:
-                                    # Group sentences into smaller paragraphs (max 60 words each)
-                                    current_para = []
-                                    current_word_count = 0
-                                    
-                                    for sentence in sentences:
-                                        sentence = sentence.strip()
-                                        if not sentence:
-                                            continue
-                                            
-                                        # Ensure sentence ends with proper punctuation
-                                        if not sentence.endswith(('.', '!', '?', ':', ';')):
-                                            sentence += '.'
-                                            
-                                        sentence_words = len(sentence.split())
-                                        
-                                        # If adding this sentence would make paragraph too long, start new one
-                                        if current_word_count > 0 and current_word_count + sentence_words > 60:
-                                            if current_para:
-                                                html_parts.append(f'    <p>{" ".join(current_para)}</p>')
-                                            current_para = [sentence]
-                                            current_word_count = sentence_words
-                                        else:
-                                            current_para.append(sentence)
-                                            current_word_count += sentence_words
-                                    
-                                    # Add remaining sentences
-                                    if current_para:
-                                        html_parts.append(f'    <p>{" ".join(current_para)}</p>')
-                                else:
-                                    # No good split points found, keep as single paragraph
-                                    html_parts.append(f'    <p>{para_html}</p>')
-                            else:
-                                # Paragraph is reasonable length, keep as is
-                                html_parts.append(f'    <p>{para_html}</p>')
-                            
-                            i += 1
-                
-                # Sources
-                if include_sources and st.session_state.content_brief.get('research_data'):
-                    research = st.session_state.content_brief['research_data'].get('data', {})
-                    if research.get('sources'):
-                        html_parts.append('    <hr>')
-                        html_parts.append('    <h2>Sources</h2>')
-                        html_parts.append('    <ol>')
-                        for source in research['sources'][:10]:
-                            if isinstance(source, dict):
-                                url = source.get("url", "").strip()
-                                title = source.get("title", "").strip()
-                                
-                                # Only include sources with proper URL and title
-                                if url and title and url.startswith('http') and len(title) > 3:
-                                    html_parts.append(f'        <li><a href="{url}">{title}</a></li>')
-                                elif title and len(title) > 10:  # Title-only sources
-                                    html_parts.append(f'        <li>{title}</li>')
-                            elif isinstance(source, str) and len(source.strip()) > 10:
-                                html_parts.append(f'        <li>{source}</li>')
-                        html_parts.append('    </ol>')
-                
-                html_parts.append('</body>')
-                html_parts.append('</html>')
-                
-                # Post-process to merge consecutive <ul> tags into single lists
-                html_content = '\n'.join(html_parts)
-                
-                # Merge consecutive </ul>\n    <ul> patterns
-                html_content = re.sub(r'</ul>\s*<ul>', '', html_content)
-                
-                # Convert all <ul> to <ol> for better Google Sheets compatibility
-                html_content = html_content.replace('<ul>', '<ol>')
-                html_content = html_content.replace('</ul>', '</ol>')
-                
-                return html_content
-            
-            def generate_text():
-                """Generate plain text format"""
-                text_parts = []
-                
-                # Header
-                text_parts.append(export_content['metadata']['primary_keyword'].upper())
-                text_parts.append('=' * len(export_content['metadata']['primary_keyword']))
-                text_parts.append('')
-                
-                if include_metadata:
-                    text_parts.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                    text_parts.append(f"Word Count: {export_content['metadata']['word_count']}")
-                    if include_quality and avg_quality > 0:
-                        text_parts.append(f"Quality Score: {avg_quality:.1f}%")
-                    text_parts.append('')
-                    text_parts.append('-' * 40)
-                    text_parts.append('')
-                
-                # Introduction
-                if export_content['content']['introduction']:
-                    text_parts.append(export_content['content']['introduction'])
-                    text_parts.append('')
-                
-                # Sections
-                for section in export_content['content']['sections']:
-                    text_parts.append(section['heading'].upper())
-                    text_parts.append('-' * len(section['heading']))
-                    text_parts.append('')
-                    text_parts.append(section['content'])
-                    text_parts.append('')
-                
-                # Sources
-                if include_sources and st.session_state.content_brief.get('research_data'):
-                    research = st.session_state.content_brief['research_data'].get('data', {})
-                    if research.get('sources'):
-                        text_parts.append('-' * 40)
-                        text_parts.append('')
-                        text_parts.append('SOURCES')
-                        text_parts.append('')
-                        for i, source in enumerate(research['sources'][:10], 1):
-                            if isinstance(source, dict):
-                                text_parts.append(f"{i}. {source.get('title', 'Source')} - {source.get('url', '')}")
-                            else:
-                                text_parts.append(f"{i}. {source}")
-                
-                return '\n'.join(text_parts)
-            
-            def generate_json():
-                """Generate JSON format"""
-                json_export = {
-                    'metadata': export_content['metadata'],
-                    'content': {
-                        'title': export_content['metadata']['primary_keyword'].title(),
-                        'introduction': export_content['content']['introduction'],
-                        'sections': export_content['content']['sections']
-                    }
+            return json.dumps(json_export, indent=2)
+        
+        # Generate Google Docs HTML format
+        export_data = generate_html()
+        file_extension = "html"
+        mime_type = "text/html"
+
+        # Generate filename
+        keyword_slug = re.sub(r'[^a-z0-9]+', '_', export_content['metadata']['primary_keyword'].lower())
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"{keyword_slug}_{timestamp}.{file_extension}"
+
+        # Single export button
+        st.download_button(
+            label="📥 Export to Google Docs",
+            data=export_data,
+            file_name=filename,
+            mime=mime_type,
+            use_container_width=True,
+            type="primary"
+        )
+
+        st.info("💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles.")
+
+        # Export summary
+        st.markdown("---")
+        st.success(f"""
+        ✅ **Export Ready!**
+        - Format: Google Docs (HTML)
+        - Filename: {filename}
+        - Word Count: {total_words:,}
+        - Sections: {len(export_content['content']['sections']) + 1}
+        - Includes Research Sources
+        """)
+        
+        # Navigation
+        st.markdown("---")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            if st.button("← Back to Quality Check"):
+                st.session_state.current_step = 4
+                st.rerun()
+        with col2:
+            if st.button("📝 Start New Content", type="secondary"):
+                # Reset session state
+                st.session_state.content_brief = {
+                    'primary_keyword': '',
+                    'introduction': '',
+                    'headings': [],
+                    'research_data': {},
+                    'generated_content': {},
+                    'quality_scores': {}
                 }
-                
-                if include_quality:
-                    json_export['quality_analysis'] = st.session_state.content_brief.get('quality_scores', {})
-                
-                if include_sources and st.session_state.content_brief.get('research_data'):
-                    json_export['research'] = st.session_state.content_brief.get('research_data', {})
-                
-                return json.dumps(json_export, indent=2)
-            
-            # Generate Google Docs HTML format
-            export_data = generate_html()
-            file_extension = "html"
-            mime_type = "text/html"
-    
-            # Generate filename
-            keyword_slug = re.sub(r'[^a-z0-9]+', '_', export_content['metadata']['primary_keyword'].lower())
-            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            filename = f"{keyword_slug}_{timestamp}.{file_extension}"
-    
-            # Single export button
-            st.download_button(
-                label="📥 Export to Google Docs",
-                data=export_data,
-                file_name=filename,
-                mime=mime_type,
-                use_container_width=True,
-                type="primary"
-            )
-    
-            st.info("💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles.")
-    
-            # Export summary
-            st.markdown("---")
-            st.success(f"""
-            ✅ **Export Ready!**
-            - Format: Google Docs (HTML)
-            - Filename: {filename}
-            - Word Count: {total_words:,}
-            - Sections: {len(export_content['content']['sections']) + 1}
-            - Includes Research Sources
-            """)
-            
-            # Navigation
-            st.markdown("---")
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col1:
-                if st.button("← Back to Quality Check"):
-                    st.session_state.current_step = 4
-                    st.rerun()
-            with col2:
-                if st.button("📝 Start New Content", type="secondary"):
-                    # Reset session state
-                    st.session_state.content_brief = {
-                        'primary_keyword': '',
-                        'introduction': '',
-                        'headings': [],
-                        'research_data': {},
-                        'generated_content': {},
-                        'quality_scores': {}
-                    }
-                    st.session_state.current_step = 1
-                    st.rerun()
-            with col3:
-                if st.button("✨ Generate More", type="primary"):
-                    st.session_state.current_step = 1
-                    st.rerun()
-    
+                st.session_state.current_step = 1
+                st.rerun()
+        with col3:
+            if st.button("✨ Generate More", type="primary"):
+                st.session_state.current_step = 1
+                st.rerun()
+
 elif selected_mode == "🔧 Content Optimization":
     # CONTENT OPTIMIZATION WORKFLOW
     st.header("Optimize Existing Content")
@@ -2581,12 +2580,14 @@ elif selected_mode == "🔧 Content Optimization":
     optimization_steps = {
     1: "📥 Import Content",
     2: "🔍 Competitor Analysis",
-    3: "📋 Structure Editor & Generate",
-    4: "📤 Export"
+    3: "📋 Structure Editor",
+    4: "🔧 Generate/Optimize",
+    5: "✅ Quality Check",
+    6: "📤 Export"
     }
 
     # Progress indicator
-    progress_cols = st.columns(4)
+    progress_cols = st.columns(6)
     for i, (step_num, step_name) in enumerate(optimization_steps.items()):
         with progress_cols[i]:
             if st.session_state.active_mode == "🔧 Content Optimization":
@@ -3314,472 +3315,333 @@ elif selected_mode == "🔧 Content Optimization":
                 st.warning("API not available. Product CTAs disabled.")
                 st.session_state.optimization_data['selected_product'] = "none"
 
-        # Navigation and generation buttons
+        # Navigation
+        st.markdown("---")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            if st.button("← Back to Analysis"):
+                st.session_state.current_step = 2
+                st.rerun()
+        with col3:
+            if st.button("Generate Content →", type="primary"):
+                st.session_state.current_step = 4  # Go to Step 4 (Generate)
+                st.rerun()
+
+    elif st.session_state.current_step == 4:
+        st.subheader("Step 4: Generate Optimized Content")
+
+        # Check prerequisites
+        if not st.session_state.optimization_data.get('optimized_headings'):
+            st.warning("Please complete Structure Editor first")
+        if st.button("← Back to Structure Editor"):
+            st.session_state.current_step = 3
+            st.rerun()
+        else:
+            # Import optimization modules
+            try:
+                from core.content_optimizer import ContentOptimizer
+                from core.content_generator import ContentGenerator
+                OPTIMIZER_AVAILABLE = True
+
+                # Initialize optimizer with generator if available
+                if ANTHROPIC_API_KEY and APIS_AVAILABLE:
+                    content_generator = ContentGenerator()
+                    optimizer = ContentOptimizer(content_generator)
+                else:
+                    optimizer = ContentOptimizer()
+            except ImportError:
+                OPTIMIZER_AVAILABLE = False
+                optimizer = None
+        
+        # Show generation plan summary
+        st.markdown("### 📋 Content Generation Plan")
+        
+        actions_summary = {
+            'keep': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'keep']),
+            'improve': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'improve']),
+            'add': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'add']),
+            'remove': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'remove'])
+        }
+
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("✅ Keep As-Is", actions_summary['keep'])
+        with col2:
+            st.metric("🔧 Improve", actions_summary['improve'])
+        with col3:
+            st.metric("➕ Add New", actions_summary['add'])
+        with col4:
+            st.metric("❌ Remove", actions_summary['remove'])
+        
+        # Generate optimized content button
         st.markdown("---")
 
-        # Only show generate button if content hasn't been generated yet
-        if not st.session_state.optimization_data.get('optimized_content'):
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col1:
-                if st.button("← Back to Analysis"):
-                    st.session_state.current_step = 2
-                    st.rerun()
-            with col3:
-                if st.button("🚀 Generate Optimized Content", type="primary"):
-                    print("\n🚀 GENERATE BUTTON CLICKED - Starting generation")
+        if st.button("🚀 Generate Optimized Content", type="primary"):
+            print("\n🚀 BUTTON CLICKED - Starting generation")
 
-                    # Import modules
-                    try:
-                        from core.content_optimizer import ContentOptimizer
-                        from core.content_generator import ContentGenerator
+            if APIS_AVAILABLE and content_generator:
+                print(f"✓ APIs available, starting generation")
 
-                        if ANTHROPIC_API_KEY and APIS_AVAILABLE:
-                            content_generator = ContentGenerator()
-                            optimizer = ContentOptimizer(content_generator)
+                # Create progress indicators (same as new content workflow)
+                progress_bar = st.progress(0)
+                status_text = st.empty()
 
-                            # Create progress indicators
-                            progress_bar = st.progress(0)
-                            status_text = st.empty()
+                # Initialize results storage
+                optimized_sections = {}
+                total_headings = len([h for h in st.session_state.optimization_data['optimized_headings']
+                                     if h.get('action') != 'remove'])
+                processed = 0
+                print(f"✓ Total headings to process: {total_headings}")
 
-                            # Initialize storage
-                            optimized_sections = {}
-                            total_headings = len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') != 'remove'])
-                            processed = 0
+                # Generate introduction
+                print("📝 Generating introduction...")
+                status_text.text("Generating & humanizing introduction...")
+                progress_bar.progress(0.05)
+                print("✓ Progress bar set to 5%")
+                intro_result = content_generator.generate_introduction(
+                    topic=st.session_state.optimization_data['primary_keyword'],
+                    headings=st.session_state.optimization_data.get('optimized_headings', []),
+                    research_data=st.session_state.optimization_data.get('research_data'),
+                    include_gcore=False
+                )
 
-                            # Generate introduction
-                            status_text.text("Generating & humanizing introduction...")
-                            progress_bar.progress(0.05)
-                            intro_result = content_generator.generate_introduction(
-                                topic=st.session_state.optimization_data['primary_keyword'],
-                                headings=st.session_state.optimization_data.get('optimized_headings', []),
-                                research_data=st.session_state.optimization_data.get('research_data'),
-                                include_gcore=False
-                            )
+                if intro_result['status'] == 'success' and intro_result.get('content'):
+                    st.session_state.optimization_data['introduction'] = intro_result['content']
+                else:
+                    keyword = st.session_state.optimization_data['primary_keyword']
+                    st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
 
-                            if intro_result['status'] == 'success' and intro_result.get('content'):
-                                st.session_state.optimization_data['introduction'] = intro_result['content']
-                            else:
-                                keyword = st.session_state.optimization_data['primary_keyword']
-                                st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
+                # Process each heading based on action
+                print(f"\n📋 Processing {len(st.session_state.optimization_data['optimized_headings'])} headings...")
+                for heading in st.session_state.optimization_data['optimized_headings']:
+                    action = heading.get('action', 'keep')
+                    heading_text = heading['text']
 
-                            # Process each heading
-                            for heading in st.session_state.optimization_data['optimized_headings']:
-                                action = heading.get('action', 'keep')
-                                heading_text = heading['text']
+                    if action == 'remove':
+                        # Skip removed sections
+                        print(f"⏭️  Skipping REMOVE: {heading_text}")
+                        continue
 
-                                if action == 'remove':
-                                    continue
+                    processed += 1
+                    progress_val = 0.1 + (0.9 * processed / total_headings)  # 10% for intro, 90% for sections
+                    progress.progress(progress_val)
+                    print(f"📊 Progress: {progress_val*100:.1f}% ({processed}/{total_headings})")
 
-                                processed += 1
-                                progress_val = 0.1 + (0.9 * processed / total_headings)
-                                progress_bar.progress(progress_val)
-                                status_text.text(f"Generating & humanizing: {heading_text}...")
+                    # Show detailed status with action emoji
+                    action_emoji = {
+                        'keep': '✅',
+                        'improve': '🔧',
+                        'add': '➕'
+                    }
+                    action_label = {
+                        'keep': 'Preserving',
+                        'improve': 'Improving & humanizing',
+                        'add': 'Generating & humanizing'
+                    }
+                    emoji = action_emoji.get(action, '📝')
+                    label = action_label.get(action, 'Processing')
 
-                                if action == 'keep':
+                    status_msg = f"{emoji} {label} ({processed}/{total_headings}): {heading_text[:45]}..."
+                    st.write(status_msg)
+                    print(f"📝 {status_msg}")
+
+                    if action == 'keep':
+                        # Use original content as-is
+                        optimized_sections[heading_text] = {
+                                'content': heading.get('original_content', ''),
+                                'word_count': heading.get('word_count', 0),
+                                'action': 'kept',
+                                'function': heading.get('function', '')
+                            }
+
+                        elif action == 'improve':
+                            # Generate improved content with preservation
+                            if optimizer and OPTIMIZER_AVAILABLE:
+                                # Extract valuable elements from original
+                                valuable_elements = optimizer._extract_valuable_elements(
+                                    heading.get('original_content', '')
+                                )
+                                
+                                # Generate new content
+                                result = content_generator.generate_section(
+                                    heading=heading_text,
+                                    research_data=st.session_state.optimization_data.get('research_data'),
+                                    parent_context={
+                                        'heading_level': heading['level'],
+                                        'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+                                        'gcore_features': []
+                                    },
+                                    include_gcore=False,
+                                    function_name=heading.get('function', 'generate_definition')
+                                )
+                                
+                                if result['status'] == 'success':
+                                    # Merge valuable elements with new content
+                                    improved_content = optimizer.merge_content(
+                                        heading.get('original_content', ''),
+                                        result['content'],
+                                        'preserve_valuable'
+                                    )
+                                    optimized_sections[heading_text] = {
+                                        'content': improved_content,
+                                        'word_count': len(improved_content.split()),
+                                        'action': 'improved',
+                                        'preserved_elements': valuable_elements,
+                                        'function': heading.get('function', '')
+                                    }
+                                else:
+                                    # Fallback to original
                                     optimized_sections[heading_text] = {
                                         'content': heading.get('original_content', ''),
                                         'word_count': heading.get('word_count', 0),
                                         'action': 'kept',
                                         'function': heading.get('function', '')
                                     }
+                            else:
+                                # No optimizer available, generate new
+                                result = content_generator.generate_section(
+                                    heading=heading_text,
+                                    research_data=st.session_state.optimization_data.get('research_data'),
+                                    parent_context={
+                                        'heading_level': heading['level'],
+                                        'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+                                        'gcore_features': []
+                                    },
+                                    include_gcore=False,
+                                    function_name=heading.get('function', 'generate_definition')
+                                )
+                                
+                                if result['status'] == 'success':
+                                    optimized_sections[heading_text] = {
+                                        'content': result['content'],
+                                        'word_count': result.get('word_count', 0),
+                                        'action': 'improved',
+                                        'function': heading.get('function', '')
+                                    }
+                    
+                        elif action == 'add':
+                            # Generate completely new content
+                            result = content_generator.generate_section(
+                                heading=heading_text,
+                                research_data=st.session_state.optimization_data.get('research_data'),
+                                parent_context={
+                                    'heading_level': heading['level'],
+                                    'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+                                    'gcore_features': []
+                                },
+                                include_gcore=False,
+                                function_name=heading.get('function', 'generate_definition')
+                            )
 
-                                elif action == 'improve':
-                                    result = content_generator.generate_section(
-                                        heading=heading_text,
-                                        research_data=st.session_state.optimization_data.get('research_data'),
-                                        parent_context={'heading_level': heading['level']},
-                                        include_gcore=False,
-                                        function_name=heading.get('function', 'generate_definition')
-                                    )
-                                    if result['status'] == 'success':
-                                        optimized_sections[heading_text] = {
-                                            'content': result['content'],
-                                            'word_count': result.get('word_count', 0),
-                                            'action': 'improved',
-                                            'function': heading.get('function', '')
-                                        }
+                            if result['status'] == 'success':
+                                optimized_sections[heading_text] = {
+                                    'content': result['content'],
+                                    'word_count': result.get('word_count', 0),
+                                    'action': 'generated',
+                                    'function': heading.get('function', '')
+                                }
+                            else:
+                                optimized_sections[heading_text] = {
+                                    'content': f"Content for {heading_text}",
+                                    'word_count': 10,
+                                    'action': 'generated',
+                                    'function': heading.get('function', '')
+                                }
+                
+                    # Store results
+                    print(f"\n✅ All {len(optimized_sections)} sections processed!")
+                    st.session_state.optimization_data['optimized_content'] = optimized_sections
+                    progress.progress(1.0)
+                    st.write("✅ All sections generated and humanized!")
+                    print("✓ Progress bar set to 100%")
 
-                                elif action == 'add':
-                                    result = content_generator.generate_section(
-                                        heading=heading_text,
-                                        research_data=st.session_state.optimization_data.get('research_data'),
-                                        parent_context={'heading_level': heading['level']},
-                                        include_gcore=False,
-                                        function_name=heading.get('function', 'generate_definition')
-                                    )
-                                    if result['status'] == 'success':
-                                        optimized_sections[heading_text] = {
-                                            'content': result['content'],
-                                            'word_count': result.get('word_count', 0),
-                                            'action': 'generated',
-                                            'function': heading.get('function', '')
-                                        }
+                    # Show summary stats
+                    kept_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'kept')
+                    improved_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'improved')
+                    added_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'generated')
+                    print(f"📊 Summary: {kept_count} kept, {improved_count} improved, {added_count} added")
 
-                            # Store results
-                            st.session_state.optimization_data['optimized_content'] = optimized_sections
-                            progress_bar.progress(1.0)
-                            status_text.text("Generation complete!")
+                    # Update status to complete
+                    status.update(label=f"✅ Complete! ({kept_count} kept, {improved_count} improved, {added_count} added)", state="complete")
 
-                            st.success(f"✅ Content generated successfully!")
-                            st.rerun()  # Refresh to show the preview
+                # Show success message outside the status block
+                st.success(f"✅ Content optimization complete! ({kept_count} kept, {improved_count} improved, {added_count} added)")
+
+                # Rerun to show the generated content
+                print("🔄 Rerunning to display results...")
+                st.rerun()
+
+            else:
+                # Fallback demo mode
+                print("⚠️  Running in DEMO mode (no APIs available)")
+                topic = st.session_state.optimization_data['primary_keyword']
+                st.session_state.optimization_data['introduction'] = f"{topic} is a technology that enables organizations to optimize their digital infrastructure."
+
+                optimized_sections = {}
+                for heading in st.session_state.optimization_data['optimized_headings']:
+                    if heading.get('action') != 'remove':
+                        heading_text = heading['text']
+                        if heading.get('action') == 'keep':
+                            content = heading.get('original_content', 'Original content preserved.')
                         else:
-                            st.error("API keys not configured")
-                    except Exception as e:
-                        st.error(f"Error: {str(e)}")
-        else:
-            # Show generated content preview and continue button
+                            content = f"This is demo content for {heading_text}. In production, this would contain AI-optimized content."
+                        
+                        optimized_sections[heading_text] = {
+                            'content': content,
+                            'word_count': len(content.split()),
+                            'action': heading.get('action', 'generated'),
+                            'function': heading.get('function', '')
+                        }
+                
+                st.session_state.optimization_data['optimized_content'] = optimized_sections
+                st.success("✅ Demo content generated!")
+        
+        # Show current optimization results if available
+        if st.session_state.optimization_data.get('optimized_content'):
             st.markdown("---")
-            st.subheader("📄 Generated Content Preview")
+            st.markdown("### 📄 Optimized Content Preview")
+            
+            # Display introduction if available
+            if st.session_state.optimization_data.get('introduction'):
+                with st.expander("📝 Introduction", expanded=False):
+                    st.write(st.session_state.optimization_data['introduction'])
+            
+            optimized = st.session_state.optimization_data['optimized_content']
+            
+            # Show optimized sections
+            if optimized:
+                for heading in st.session_state.optimization_data.get('optimized_headings', []):
+                    heading_text = heading['text']
+                    if heading_text in optimized and heading.get('action') != 'remove':
+                        section_data = optimized[heading_text]
+                        
+                        # Section header with action indicator
+                        action_emoji = {
+                            'kept': '✅',
+                            'improved': '🔧',
+                            'generated': '✨'
+                        }.get(section_data.get('action', ''), '•')
+                        
+                        with st.expander(f"{action_emoji} {heading['level']}: {heading_text}", expanded=False):
+                            st.write(section_data.get('content', ''))
+                            st.caption(f"Action: {section_data.get('action', 'unknown')} | Words: {section_data.get('word_count', 0)} | Function: {section_data.get('function', 'N/A')}")
+    
+        # Navigation
+        st.markdown("---")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            if st.button("← Back to Content Brief"):
+                st.session_state.current_step = 3
+            st.rerun()
+        with col3:
+            can_continue = st.session_state.optimization_data.get('optimized_content') is not None
+        if st.button("Continue to Quality Comparison →", type="primary", disabled=not can_continue):
+            st.session_state.current_step = 5  # Go to Step 5 (Quality)
+            st.rerun()
+        if not can_continue:
+            st.caption("Execute optimization before continuing")
 
-            total_words = sum(s.get('word_count', 0) for s in st.session_state.optimization_data['optimized_content'].values())
-            kept = sum(1 for s in st.session_state.optimization_data['optimized_content'].values() if s.get('action') == 'kept')
-            improved = sum(1 for s in st.session_state.optimization_data['optimized_content'].values() if s.get('action') == 'improved')
-            added = sum(1 for s in st.session_state.optimization_data['optimized_content'].values() if s.get('action') == 'generated')
-
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("Total Words", f"{total_words:,}")
-            with col2:
-                st.metric("Kept", kept)
-            with col3:
-                st.metric("Improved", improved)
-            with col4:
-                st.metric("Added", added)
-
-            # Continue button
-            st.markdown("---")
-            col_left, col_right = st.columns(2)
-            with col_left:
-                if st.button("← Back to Edit Structure"):
-                    st.session_state.current_step = 3
-                    st.session_state.optimization_data.pop('optimized_content', None)  # Clear generated content
-                    st.rerun()
-            with col_right:
-                if st.button("Continue to Export →", type="primary"):
-                    st.session_state.current_step = 4
-                    st.rerun()
-
-#     elif st.session_state.current_step == 4:
-#         print(f"\n📍 RENDERING Step 4 (current_step = {st.session_state.current_step})")
-#         print(f"   Headings count: {len(st.session_state.optimization_data.get('optimized_headings', []))}")
-# 
-#         st.subheader("Step 4: Generate Optimized Content")
-#         st.write("🔄 Loading generation interface...")  # Visible marker
-# 
-#         # Check prerequisites
-#         if not st.session_state.optimization_data.get('optimized_headings'):
-#             st.error("❌ No headings found! Please complete Structure Editor first")
-#             if st.button("← Back to Step 3"):
-#                 st.session_state.current_step = 3
-#                 st.rerun()
-#             st.stop()  # Stop rendering this step
-# 
-#         # Import optimization modules
-#         try:
-#             from core.content_optimizer import ContentOptimizer
-#             from core.content_generator import ContentGenerator
-#             OPTIMIZER_AVAILABLE = True
-# 
-#             # Initialize optimizer with generator if available
-#             if ANTHROPIC_API_KEY and APIS_AVAILABLE:
-#                 content_generator = ContentGenerator()
-#                 optimizer = ContentOptimizer(content_generator)
-#             else:
-#                 optimizer = ContentOptimizer()
-#         except ImportError:
-#             OPTIMIZER_AVAILABLE = False
-#             optimizer = None
-# 
-#         if st.button("← Back to Structure Editor"):
-#             st.session_state.current_step = 3
-#             st.rerun()
-# 
-#         # Show generation plan summary
-#         st.markdown("### 📋 Content Generation Plan")
-#         
-#         actions_summary = {
-#             'keep': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'keep']),
-#             'improve': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'improve']),
-#             'add': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'add']),
-#             'remove': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'remove'])
-#         }
-# 
-#         col1, col2, col3, col4 = st.columns(4)
-#         with col1:
-#             st.metric("✅ Keep As-Is", actions_summary['keep'])
-#         with col2:
-#             st.metric("🔧 Improve", actions_summary['improve'])
-#         with col3:
-#             st.metric("➕ Add New", actions_summary['add'])
-#         with col4:
-#             st.metric("❌ Remove", actions_summary['remove'])
-#         
-#         # Generate optimized content button
-#         st.markdown("---")
-# 
-#         if st.button("🚀 Generate Optimized Content", type="primary"):
-#             print("\n🚀 BUTTON CLICKED - Starting generation")
-# 
-#             if APIS_AVAILABLE and content_generator:
-#                 print(f"✓ APIs available, starting generation")
-# 
-#                 # Create progress indicators (same as new content workflow)
-#                 progress_bar = st.progress(0)
-#                 status_text = st.empty()
-# 
-#                 # Initialize results storage
-#                 optimized_sections = {}
-#                 total_headings = len([h for h in st.session_state.optimization_data['optimized_headings']
-#                                      if h.get('action') != 'remove'])
-#                 processed = 0
-#                 print(f"✓ Total headings to process: {total_headings}")
-# 
-#                 # Generate introduction
-#                 print("📝 Generating introduction...")
-#                 status_text.text("Generating & humanizing introduction...")
-#                 progress_bar.progress(0.05)
-#                 print("✓ Progress bar set to 5%")
-#                 intro_result = content_generator.generate_introduction(
-#                     topic=st.session_state.optimization_data['primary_keyword'],
-#                     headings=st.session_state.optimization_data.get('optimized_headings', []),
-#                     research_data=st.session_state.optimization_data.get('research_data'),
-#                     include_gcore=False
-#                 )
-# 
-#                 if intro_result['status'] == 'success' and intro_result.get('content'):
-#                     st.session_state.optimization_data['introduction'] = intro_result['content']
-#                 else:
-#                     keyword = st.session_state.optimization_data['primary_keyword']
-#                     st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
-# 
-#                 # Process each heading based on action
-#                 print(f"\n📋 Processing {len(st.session_state.optimization_data['optimized_headings'])} headings...")
-#                 for heading in st.session_state.optimization_data['optimized_headings']:
-#                     action = heading.get('action', 'keep')
-#                     heading_text = heading['text']
-# 
-#                     if action == 'remove':
-#                         # Skip removed sections
-#                         print(f"⏭️  Skipping REMOVE: {heading_text}")
-#                         continue
-# 
-#                     processed += 1
-#                     progress_val = 0.1 + (0.9 * processed / total_headings)  # 10% for intro, 90% for sections
-#                     progress_bar.progress(progress_val)
-#                     print(f"📊 Progress: {progress_val*100:.1f}% ({processed}/{total_headings})")
-# 
-#                     # Show detailed status with action emoji
-#                     action_emoji = {
-#                         'keep': '✅',
-#                         'improve': '🔧',
-#                         'add': '➕'
-#                     }
-#                     action_label = {
-#                         'keep': 'Preserving',
-#                         'improve': 'Improving & humanizing',
-#                         'add': 'Generating & humanizing'
-#                     }
-#                     emoji = action_emoji.get(action, '📝')
-#                     label = action_label.get(action, 'Processing')
-# 
-#                     status_msg = f"{emoji} {label} ({processed}/{total_headings}): {heading_text[:45]}..."
-#                     status_text.text(status_msg)
-#                     print(f"📝 {status_msg}")
-# 
-#                     if action == 'keep':
-#                         # Use original content as-is
-#                         optimized_sections[heading_text] = {
-#                                 'content': heading.get('original_content', ''),
-#                                 'word_count': heading.get('word_count', 0),
-#                                 'action': 'kept',
-#                                 'function': heading.get('function', '')
-#                             }
-# 
-#                     elif action == 'improve':
-#                             # Generate improved content with preservation
-#                             if optimizer and OPTIMIZER_AVAILABLE:
-#                                 # Extract valuable elements from original
-#                                 valuable_elements = optimizer._extract_valuable_elements(
-#                                     heading.get('original_content', '')
-#                                 )
-#                                 
-#                                 # Generate new content
-#                                 result = content_generator.generate_section(
-#                                     heading=heading_text,
-#                                     research_data=st.session_state.optimization_data.get('research_data'),
-#                                     parent_context={
-#                                         'heading_level': heading['level'],
-#                                         'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
-#                                         'gcore_features': []
-#                                     },
-#                                     include_gcore=False,
-#                                     function_name=heading.get('function', 'generate_definition')
-#                                 )
-#                                 
-#                                 if result['status'] == 'success':
-#                                     # Merge valuable elements with new content
-#                                     improved_content = optimizer.merge_content(
-#                                         heading.get('original_content', ''),
-#                                         result['content'],
-#                                         'preserve_valuable'
-#                                     )
-#                                     optimized_sections[heading_text] = {
-#                                         'content': improved_content,
-#                                         'word_count': len(improved_content.split()),
-#                                         'action': 'improved',
-#                                         'preserved_elements': valuable_elements,
-#                                         'function': heading.get('function', '')
-#                                     }
-#                                 else:
-#                                     # Fallback to original
-#                                     optimized_sections[heading_text] = {
-#                                         'content': heading.get('original_content', ''),
-#                                         'word_count': heading.get('word_count', 0),
-#                                         'action': 'kept',
-#                                         'function': heading.get('function', '')
-#                                     }
-#                             else:
-#                                 # No optimizer available, generate new
-#                                 result = content_generator.generate_section(
-#                                     heading=heading_text,
-#                                     research_data=st.session_state.optimization_data.get('research_data'),
-#                                     parent_context={
-#                                         'heading_level': heading['level'],
-#                                         'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
-#                                         'gcore_features': []
-#                                     },
-#                                     include_gcore=False,
-#                                     function_name=heading.get('function', 'generate_definition')
-#                                 )
-#                                 
-#                                 if result['status'] == 'success':
-#                                     optimized_sections[heading_text] = {
-#                                         'content': result['content'],
-#                                         'word_count': result.get('word_count', 0),
-#                                         'action': 'improved',
-#                                         'function': heading.get('function', '')
-#                                     }
-#                     
-#                     elif action == 'add':
-#                             # Generate completely new content
-#                             result = content_generator.generate_section(
-#                                 heading=heading_text,
-#                                 research_data=st.session_state.optimization_data.get('research_data'),
-#                                 parent_context={
-#                                     'heading_level': heading['level'],
-#                                     'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
-#                                     'gcore_features': []
-#                                 },
-#                                 include_gcore=False,
-#                                 function_name=heading.get('function', 'generate_definition')
-#                             )
-# 
-#                             if result['status'] == 'success':
-#                                 optimized_sections[heading_text] = {
-#                                     'content': result['content'],
-#                                     'word_count': result.get('word_count', 0),
-#                                     'action': 'generated',
-#                                     'function': heading.get('function', '')
-#                                 }
-#                             else:
-#                                 optimized_sections[heading_text] = {
-#                                     'content': f"Content for {heading_text}",
-#                                     'word_count': 10,
-#                                     'action': 'generated',
-#                                     'function': heading.get('function', '')
-#                                 }
-#                 
-#                 # Store results
-#                 print(f"\n✅ All {len(optimized_sections)} sections processed!")
-#                 st.session_state.optimization_data['optimized_content'] = optimized_sections
-#                 progress_bar.progress(1.0)
-#                 status_text.text("Generation complete!")
-#                 print("✓ Progress bar set to 100%")
-# 
-#                 # Show summary stats
-#                 kept_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'kept')
-#                 improved_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'improved')
-#                 added_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'generated')
-#                 print(f"📊 Summary: {kept_count} kept, {improved_count} improved, {added_count} added")
-# 
-#                 st.success(f"✅ Content optimization complete! ({kept_count} kept, {improved_count} improved, {added_count} added)")
-# 
-#                 # Automatically advance to Step 5
-#                 st.session_state.current_step = 5
-#                 print("🔄 Advancing to Step 5...")
-#                 st.rerun()
-# 
-#             else:
-#                 # Fallback demo mode
-#                 print("⚠️  Running in DEMO mode (no APIs available)")
-#                 topic = st.session_state.optimization_data['primary_keyword']
-#                 st.session_state.optimization_data['introduction'] = f"{topic} is a technology that enables organizations to optimize their digital infrastructure."
-# 
-#                 optimized_sections = {}
-#                 for heading in st.session_state.optimization_data['optimized_headings']:
-#                     if heading.get('action') != 'remove':
-#                         heading_text = heading['text']
-#                         if heading.get('action') == 'keep':
-#                             content = heading.get('original_content', 'Original content preserved.')
-#                         else:
-#                             content = f"This is demo content for {heading_text}. In production, this would contain AI-optimized content."
-#                         
-#                         optimized_sections[heading_text] = {
-#                             'content': content,
-#                             'word_count': len(content.split()),
-#                             'action': heading.get('action', 'generated'),
-#                             'function': heading.get('function', '')
-#                         }
-#                 
-#                 st.session_state.optimization_data['optimized_content'] = optimized_sections
-#                 st.success("✅ Demo content generated!")
-#         
-#         # Show current optimization results if available
-#         if st.session_state.optimization_data.get('optimized_content'):
-#             st.markdown("---")
-#             st.markdown("### 📄 Optimized Content Preview")
-#             
-#             # Display introduction if available
-#             if st.session_state.optimization_data.get('introduction'):
-#                 with st.expander("📝 Introduction", expanded=False):
-#                     st.write(st.session_state.optimization_data['introduction'])
-#             
-#             optimized = st.session_state.optimization_data['optimized_content']
-#             
-#             # Show optimized sections
-#             if optimized:
-#                 for heading in st.session_state.optimization_data.get('optimized_headings', []):
-#                     heading_text = heading['text']
-#                     if heading_text in optimized and heading.get('action') != 'remove':
-#                         section_data = optimized[heading_text]
-#                         
-#                         # Section header with action indicator
-#                         action_emoji = {
-#                             'kept': '✅',
-#                             'improved': '🔧',
-#                             'generated': '✨'
-#                         }.get(section_data.get('action', ''), '•')
-#                         
-#                         with st.expander(f"{action_emoji} {heading['level']}: {heading_text}", expanded=False):
-#                             st.write(section_data.get('content', ''))
-#                             st.caption(f"Action: {section_data.get('action', 'unknown')} | Words: {section_data.get('word_count', 0)} | Function: {section_data.get('function', 'N/A')}")
-#     
-#         # Navigation
-#         st.markdown("---")
-#         col1, col2, col3 = st.columns([1, 1, 1])
-#         with col1:
-#             if st.button("← Back to Content Brief"):
-#                 st.session_state.current_step = 3
-#             st.rerun()
-#         with col3:
-#             can_continue = st.session_state.optimization_data.get('optimized_content') is not None
-#         if st.button("Continue to Quality Comparison →", type="primary", disabled=not can_continue):
-#             st.session_state.current_step = 5  # Go to Step 5 (Quality)
-#             st.rerun()
-#         if not can_continue:
-#             st.caption("Execute optimization before continuing")
-# 
-    elif st.session_state.current_step == 4:
+    elif st.session_state.current_step == 5:
         st.subheader("Step 5: Quality Comparison")
         st.info("Compare original vs optimized content quality...")
     
@@ -3794,8 +3656,8 @@ elif selected_mode == "🔧 Content Optimization":
                 st.session_state.current_step = 6  # Go to Step 6 (Export)
             st.rerun()
 
-    elif st.session_state.current_step == 4:
-        st.subheader("Step 4: Export Optimized Content")
+    elif st.session_state.current_step == 6:
+        st.subheader("Step 6: Export Optimized Content")
         st.info("Export your optimized content with change tracking...")
 
         # Check if we have optimized content to export

@@ -1,0 +1,126 @@
+{
+  "id": "7c3341c8-8b5b-4993-869c-9e9ccceacf8c",
+  "model": "sonar",
+  "created": 1759391161,
+  "usage": {
+    "prompt_tokens": 147,
+    "completion_tokens": 937,
+    "total_tokens": 1084,
+    "search_context_size": "low",
+    "cost": {
+      "input_tokens_cost": 0.0,
+      "output_tokens_cost": 0.001,
+      "request_cost": 0.005,
+      "total_cost": 0.006
+    }
+  },
+  "citations": [
+    "https://en.wikipedia.org/wiki/Cloud_computing",
+    "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+    "https://www.comptia.org/en-us/blog/what-is-cloud-computing-/",
+    "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+    "https://openmetal.io/resources/blog/what-is-cloud-computing/",
+    "https://www.ibm.com/think/topics/cloud-computing",
+    "https://aws.amazon.com/what-is-cloud-computing/",
+    "https://www.oracle.com/cloud/what-is-cloud-computing/",
+    "https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-cloud-computing",
+    "https://www.cisco.com/site/us/en/learn/topics/computing/what-is-cloud-computing.html"
+  ],
+  "search_results": [
+    {
+      "title": "Cloud computing",
+      "url": "https://en.wikipedia.org/wiki/Cloud_computing",
+      "date": "2007-03-03",
+      "last_updated": "2025-09-30",
+      "snippet": "Cloud computing is a paradigm for enabling network access to a scalable and elastic pool of shareable physical or virtual resources",
+      "source": "web"
+    },
+    {
+      "title": "The NIST Definition of Cloud Computing",
+      "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf",
+      "date": null,
+      "last_updated": "2025-10-02",
+      "snippet": "by P Mell \u00b7 2011 \u00b7 Cited by 24292 \u2014 Certain commercial entities, equipment, or materials may be identified in this document in order to describe an experimental procedure or concept adequately.",
+      "source": "web"
+    },
+    {
+      "title": "What Is Cloud Computing?",
+      "url": "https://www.comptia.org/en-us/blog/what-is-cloud-computing-/",
+      "date": "2025-02-19",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing is the next step in the evolution, and while it bears several similarities to previous models, there are some unique ...",
+      "source": "web"
+    },
+    {
+      "title": "What Is Cloud Computing?",
+      "url": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing",
+      "date": "2000-01-01",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing is the delivery of computing services\u2014including servers, storage, databases, networking, software, analytics, and intelligence\u2014over the internet ...",
+      "source": "web"
+    },
+    {
+      "title": "Cloud Computing 101: Understanding the Basics and ...",
+      "url": "https://openmetal.io/resources/blog/what-is-cloud-computing/",
+      "date": "2025-07-18",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing refers to a convenient way of accessing computer resources whenever needed through the internet.",
+      "source": "web"
+    },
+    {
+      "title": "What Is Cloud Computing? | IBM",
+      "url": "https://www.ibm.com/think/topics/cloud-computing",
+      "date": "2025-02-10",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing is on-demand access to computing resources\u2014physical or virtual servers, data storage, networking capabilities, application development tools ...",
+      "source": "web"
+    },
+    {
+      "title": "What is Cloud Computing?",
+      "url": "https://aws.amazon.com/what-is-cloud-computing/",
+      "date": "2025-09-29",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing is the on-demand delivery of IT resources over the Internet with pay-as-you-go pricing.",
+      "source": "web"
+    },
+    {
+      "title": "What Is Cloud Computing?",
+      "url": "https://www.oracle.com/cloud/what-is-cloud-computing/",
+      "date": "2025-04-10",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing is a model for delivering computing services, including infrastructure, software, storage, databases, development platforms and ...",
+      "source": "web"
+    },
+    {
+      "title": "What is cloud computing: Its uses and benefits",
+      "url": "https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-cloud-computing",
+      "date": "2024-07-31",
+      "last_updated": "2025-10-02",
+      "snippet": "Cloud computing allows companies to store their infrastructures remotely via the internet, ultimately reducing costs and creating value.",
+      "source": "web"
+    },
+    {
+      "title": "What is Cloud Computing? - Cloud Computing Definition",
+      "url": "https://www.cisco.com/site/us/en/learn/topics/computing/what-is-cloud-computing.html",
+      "date": "2024-08-22",
+      "last_updated": "2025-09-22",
+      "snippet": "Cloud computing is the delivery of on-demand computing services over the internet. Cloud computing services are categorized as IaaS, PaaS, & SaaS.",
+      "source": "web"
+    }
+  ],
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\"facts\":[\"Cloud computing is a paradigm enabling network access to a scalable and elastic pool of shareable physical or virtual resources with self-service provisioning and administration on-demand, commonly referred to as \\\"the cloud\\\"[1][2].\",\"According to NIST, cloud computing has five essential characteristics: on-demand self-service, broad network access, resource pooling, rapid elasticity, and measured service[1][2].\",\"Cloud computing delivers computing services such as servers, storage, databases, networking, software, analytics, and intelligence over the internet to provide faster innovation, flexible resources, and economies of scale[4][6].\",\"The main types of cloud computing service models are Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS)[2][5].\",\"Cloud deployment models include public cloud, private cloud, community cloud, and hybrid cloud, each differing in ownership, access, and management[2][5].\",\"Cloud computing works by connecting users to a cloud platform via a network (usually the internet), allowing them to request and access virtualized computing resources hosted on remote servers managed by providers[5].\",\"Resource pooling in cloud computing means providers serve multiple consumers using a multi-tenant model with dynamically assigned physical and virtual resources[1][2].\",\"Rapid elasticity allows cloud resources to be elastically provisioned and released automatically to scale rapidly outward and inward according to demand, often appearing unlimited to consumers[1][2].\",\"Measured service means cloud systems automatically control and optimize resource use by metering capabilities such as storage, processing, bandwidth, and active user accounts, enabling transparency and pay-per-use pricing[1][2][6].\",\"Cloud computing offers key benefits including cost efficiency, scalability, flexibility, faster innovation, and reduced need for physical infrastructure management[4][6].\",\"Performance metrics in cloud computing include resource utilization, latency, throughput, availability, and scalability, which are critical for evaluating cloud service quality[1][6].\",\"Scalability considerations involve the ability to dynamically allocate resources to meet workload demands without service disruption, leveraging rapid elasticity features[1][5].\",\"Best practices in cloud computing include ensuring security and privacy, choosing appropriate deployment models, monitoring resource usage, and optimizing costs through measured service[5][6].\",\"Cloud computing supports broad network access, enabling use from heterogeneous client platforms such as mobile phones, tablets, laptops, and workstations[1][2][3].\",\"Cloud computing is integral to many real-world applications including email services (e.g., Gmail), streaming platforms (e.g., Netflix), cloud-hosted gaming, and enterprise IT infrastructure[6].\"],\"statistics\":[{\"value\":\"Over 100,000 subscribers\",\"context\":\"Number of subscribers receiving IBM's Think Newsletter on AI, security, automation, data, and infrastructure, indicating broad interest in cloud and related technologies[6].\"},{\"value\":\"NIST Special Publication 800-145 cited over 24,000 times\",\"context\":\"Reflects the authoritative and widely referenced definition of cloud computing by NIST from 2011[2].\"}],\"key_points\":[\"Cloud computing enables on-demand, scalable access to shared computing resources over the internet with minimal management effort.\",\"The five essential characteristics defined by NIST form the foundation of cloud computing systems and services.\",\"Service models (IaaS, PaaS, SaaS) provide different levels of abstraction and management responsibility for users.\",\"Deployment models (public, private, community, hybrid) offer flexibility in ownership, control, and access depending on organizational needs.\",\"Rapid elasticity and resource pooling allow cloud providers to efficiently allocate resources dynamically to meet varying demand.\",\"Measured service supports pay-per-use pricing, improving cost efficiency and transparency for consumers.\",\"Performance metrics such as latency, throughput, and availability are critical for assessing cloud service quality and user experience.\",\"Security and privacy remain key considerations and best practices in cloud adoption and operation.\",\"Cloud computing supports a wide range of real-world applications from consumer services to enterprise IT infrastructure.\",\"Scalability and flexibility offered by cloud computing accelerate innovation and reduce operational complexity.\"],\"examples\":[\"Google Gmail uses cloud computing to provide email services accessible globally via the internet[6].\",\"Netflix streams movies and TV shows using cloud infrastructure to handle massive, variable workloads and deliver content worldwide[6].\",\"Enterprises use cloud platforms like Microsoft Azure and IBM Cloud to host applications, store data, and run analytics with scalable resources[4][6].\",\"Cloud-hosted video games leverage cloud servers to provide gaming experiences without requiring powerful local hardware[6].\",\"Startups deploy applications on cloud platforms to rapidly scale their services without upfront infrastructure investment[3][5].\"]}"
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      }
+    }
+  ]
+}
