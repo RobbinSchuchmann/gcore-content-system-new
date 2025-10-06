@@ -88,10 +88,17 @@ class ContentScraper:
             result['headings'] = headings
             result['success'] = True
             
+        except requests.exceptions.HTTPError as e:
+            status_code = e.response.status_code if hasattr(e, 'response') else 'unknown'
+            result['error'] = f"HTTP Error {status_code}: {str(e)}"
+        except requests.exceptions.ConnectionError as e:
+            result['error'] = f"Connection Error: Unable to reach {url}. Check your internet connection or the URL."
+        except requests.exceptions.Timeout as e:
+            result['error'] = f"Timeout Error: The request to {url} took too long."
         except requests.exceptions.RequestException as e:
-            result['error'] = f"Failed to fetch URL: {str(e)}"
+            result['error'] = f"Request Error: {str(e)}"
         except Exception as e:
-            result['error'] = f"Failed to parse content: {str(e)}"
+            result['error'] = f"Parse Error: {str(e)}"
         
         return result
     
