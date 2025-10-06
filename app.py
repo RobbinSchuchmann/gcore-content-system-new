@@ -96,7 +96,11 @@ def check_authentication():
     """Check if user is authenticated"""
     # Initialize authentication state
     if 'authenticated' not in st.session_state:
-        st.session_state.authenticated = is_authenticated()
+        # Try file-based auth first (for local), fallback to False
+        try:
+            st.session_state.authenticated = is_authenticated()
+        except:
+            st.session_state.authenticated = False
 
     if not st.session_state.authenticated:
         show_login_form()
@@ -123,7 +127,10 @@ def show_login_form():
                 # Hardcoded credentials
                 if username == "Gcore" and password == "pqz@J5rkv@3$zGUv":
                     st.session_state.authenticated = True
-                    set_authenticated()  # Save authentication to file
+                    try:
+                        set_authenticated()  # Save authentication to file (local only)
+                    except:
+                        pass  # Ignore file write errors on Streamlit Cloud
                     st.success("✅ Login successful! Redirecting...")
                     st.rerun()
                 else:
