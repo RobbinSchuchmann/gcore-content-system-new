@@ -3813,12 +3813,12 @@ elif selected_mode == "🔧 Content Optimization":
         col1, col2, col3 = st.columns([1, 1, 1])
         with col1:
             if st.button("← Back to Optimize"):
-                st.session_state.current_step = 4  # Back to Step 4 (Generate/Optimize)
-            st.rerun()
+                st.session_state.current_step = 3  # Back to Step 3 (Structure Editor & Generate)
+                st.rerun()
         with col3:
             if st.button("Continue to Export →", type="primary"):
-                st.session_state.current_step = 6  # Go to Step 6 (Export)
-            st.rerun()
+                st.session_state.current_step = 4  # Go to Step 4 (Export)
+                st.rerun()
 
     elif st.session_state.current_step == 4:
         st.subheader("Step 4: Export Optimized Content")
