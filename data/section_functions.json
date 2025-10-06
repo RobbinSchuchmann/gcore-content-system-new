@@ -30,7 +30,7 @@
       "name": "List/Listicle",
       "description": "List definition + Listing",
       "article_methodology": "List definition + Listing",
-      "prompt_template": "Answer the question: {heading}\n\nPATTERN for 'What + plural' questions:\n1. First sentence: Define what the items refer to (e.g., \"Signs of X refer to...\")\n2. Second sentence: \"The [items] are listed below.\"\n3. Then provide bulleted list with bullet points (•)\n4. Format: • **Term**: Explanation (2-3 sentences)\n5. Include 5-10 items\n6. NO Gcore mentions in the list items\n\nEXACT FORMAT:\n• **Term**: Main explanation sentence. Supporting detail sentence. [Optional third sentence.]\n\nIMPORTANT: Only capitalize the FIRST letter of each bolded term (not every word)\n\nExample:\nQ: \"What are the benefits of CDN?\"\nA: \"The benefits of CDN refer to the advantages organizations gain from using content delivery networks. The benefits of CDN are listed below.\n\n• **Faster load times**: CDN servers cache content closer to users, reducing the distance data travels. This proximity can cut page load times by 50-70%.\n\n• **Reduced bandwidth costs**: By caching content at edge locations, CDNs minimize data transfer from origin servers. This reduction saves significant bandwidth expenses.\n\n• **Resource optimization**: Multiple websites can share CDN infrastructure, making it cost-effective for smaller sites. This shared model reduces individual infrastructure investments.\"\n\nRULES:\n- USE bullet points (•) before each term\n- Bold terms with **Term**: (only first letter capitalized)\n- Examples: **Resource optimization** NOT **Resource Optimization**\n- Examples: **Faster response times** NOT **Faster Response Times**\n- NO Gcore/company mentions\n- Each item gets 2-3 sentences maximum\n- Focus on facts and evidence\n\nWrite the list now:",
+      "prompt_template": "Answer the question: {heading}\n\nPATTERN for 'What + plural' questions:\n1. First sentence: Define what the items refer to (e.g., \"Signs of X refer to...\")\n2. Second sentence: \"The [items] are listed below.\"\n3. Then provide bulleted list with bullet points (•)\n4. Format: • **Term**: Explanation (2-3 sentences)\n5. Include 5-10 items\n6. NO Gcore mentions in the list items\n\nCRITICAL FORMATTING RULES:\n• **Only bold the 2-4 word term/phrase** - NOT the entire first sentence\n• First letter of bolded term only - NOT title case\n• Pattern: • **Short term**: Full sentence explanation. Another sentence.\n\nEXACT FORMAT:\n• **Term**: Main explanation sentence. Supporting detail sentence. [Optional third sentence.]\n\nCORRECT EXAMPLES:\n• **Faster load times**: CDN servers cache content closer to users...\n• **Reduced bandwidth costs**: By caching content at edge locations...\n• **Resource optimization**: Multiple websites can share CDN infrastructure...\n\nINCORRECT (Do NOT do this):\n• **The benefits of cloud servers refer to the advantages organizations and individuals gain from using virtual computing resources**: Wrong\n• **Faster Load Times**: Wrong capitalization\n\nExample:\nQ: \"What are the benefits of CDN?\"\nA: \"The benefits of CDN refer to the advantages organizations gain from using content delivery networks. The benefits of CDN are listed below.\n\n• **Faster load times**: CDN servers cache content closer to users, reducing the distance data travels. This proximity can cut page load times by 50-70%.\n\n• **Reduced bandwidth costs**: By caching content at edge locations, CDNs minimize data transfer from origin servers. This reduction saves significant bandwidth expenses.\n\n• **Resource optimization**: Multiple websites can share CDN infrastructure, making it cost-effective for smaller sites. This shared model reduces individual infrastructure investments.\"\n\nRULES:\n- USE bullet points (•) before each term\n- Bold ONLY the short term (2-4 words max) with **Term**:\n- Only first letter capitalized: **Resource optimization** NOT **Resource Optimization**\n- NO Gcore/company mentions\n- Each item gets 2-3 sentences maximum\n- Focus on facts and evidence\n\nWrite the list now:",
       "requirements": [
         "Start with 'The [items] are listed below.'",
         "Start with definition sentence",
@@ -235,6 +235,19 @@
         "Ultra-concise format"
       ]
     },
+    "generate_factors": {
+      "name": "Factors/Criteria (Evaluation)",
+      "description": "Lists factors or criteria to consider",
+      "article_methodology": "Factor identification and evaluation",
+      "prompt_template": "Answer this question about factors or criteria: {heading}\n\nPATTERN for 'what factors' or 'what criteria' questions:\n1. First sentence: Define what the factors/criteria refer to\n2. Second sentence: \"The [factors/criteria] are listed below.\"\n3. Provide bulleted list with bullet points (•)\n4. Format: • **Factor name**: Explanation (2-3 sentences)\n5. Include 5-8 key factors\n6. NO company mentions\n\nCRITICAL FORMATTING:\n• Bold ONLY the 2-4 word factor name - NOT the full sentence\n• First letter capitalized only\n\nExample:\nQ: \"What factors should you consider when choosing a cloud server?\"\nA: \"The factors you should consider when choosing a cloud server refer to the key technical, operational, and financial criteria that determine which provider and configuration best meet your needs. The factors are listed below.\n\n• **Performance requirements**: Assess your CPU, RAM, and storage needs based on your application workload. Match these to server specifications that provide adequate capacity with room for growth.\n\n• **Geographic location**: Choose data centers close to your primary user base to minimize latency. Sub-50ms response times require servers within 500-1000 miles of users.\n\n• **Pricing structure**: Compare pay-as-you-go vs reserved pricing models for your usage pattern. Reserved instances can save 30-50% for predictable workloads.\n\n• **Scalability options**: Verify you can easily increase resources during traffic spikes. Auto-scaling capabilities prevent manual intervention during peak demand.\n\n• **Security features**: Ensure DDoS protection, firewalls, and encryption are included or available. These should not require separate subscriptions.\"\n\nRULES:\n- Bold ONLY the short factor name (2-4 words)\n- First letter capitalized: **Performance requirements** NOT **Performance Requirements**\n- Each factor gets 2-3 sentences\n- Focus on practical evaluation criteria\n- NO promotional content\n\nWrite the factors list now:",
+      "requirements": [
+        "Define what factors/criteria refer to",
+        "List format with bullet points",
+        "Bold factor names only (2-4 words)",
+        "2-3 sentences per factor",
+        "5-8 key factors total"
+      ]
+    },
     "generate_intelligent_cta": {
       "name": "Intelligent CTA (Context-Aware)",
       "description": "Smart CTA that adapts to article context and creates natural transitions",
@@ -252,6 +265,8 @@
   "auto_detection_map": {
     "what is": "generate_definition",
     "what are": "generate_listicle",
+    "what factors": "generate_factors",
+    "what criteria": "generate_factors",
     "how does": "generate_how",
     "how do": "generate_how",
     "how to": "generate_how_list",
