@@ -13,8 +13,20 @@ class ContentScraper:
     """Scrape and extract content from web pages"""
     
     def __init__(self):
+        self.user_agents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0'
+        ]
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': self.user_agents[0],
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1'
         }
         # Common content selectors for different sites
         self.content_selectors = {
@@ -52,9 +64,26 @@ class ContentScraper:
         }
         
         try:
-            # Fetch the page
-            response = requests.get(url, headers=self.headers, timeout=10)
-            response.raise_for_status()
+            # Try fetching with retry logic for 403 errors
+            response = None
+            for i, user_agent in enumerate(self.user_agents):
+                headers = self.headers.copy()
+                headers['User-Agent'] = user_agent
+
+                try:
+                    response = requests.get(url, headers=headers, timeout=15, allow_redirects=True)
+                    response.raise_for_status()
+                    break  # Success, exit loop
+                except requests.exceptions.HTTPError as e:
+                    if e.response.status_code == 403 and i < len(self.user_agents) - 1:
+                        # Try next user agent
+                        continue
+                    else:
+                        # Not a 403 or no more user agents to try
+                        raise
+
+            if response is None:
+                raise Exception("Failed to fetch URL after retrying with different user agents")
             
             # Parse with BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
