@@ -3511,6 +3511,325 @@ elif selected_mode == "🔧 Content Optimization":
                     st.session_state.current_step = 4
                     st.rerun()
 
+#     elif st.session_state.current_step == 4:
+#         print(f"\n📍 RENDERING Step 4 (current_step = {st.session_state.current_step})")
+#         print(f"   Headings count: {len(st.session_state.optimization_data.get('optimized_headings', []))}")
+# 
+#         st.subheader("Step 4: Generate Optimized Content")
+#         st.write("🔄 Loading generation interface...")  # Visible marker
+# 
+#         # Check prerequisites
+#         if not st.session_state.optimization_data.get('optimized_headings'):
+#             st.error("❌ No headings found! Please complete Structure Editor first")
+#             if st.button("← Back to Step 3"):
+#                 st.session_state.current_step = 3
+#                 st.rerun()
+#             st.stop()  # Stop rendering this step
+# 
+#         # Import optimization modules
+#         try:
+#             from core.content_optimizer import ContentOptimizer
+#             from core.content_generator import ContentGenerator
+#             OPTIMIZER_AVAILABLE = True
+# 
+#             # Initialize optimizer with generator if available
+#             if ANTHROPIC_API_KEY and APIS_AVAILABLE:
+#                 content_generator = ContentGenerator()
+#                 optimizer = ContentOptimizer(content_generator)
+#             else:
+#                 optimizer = ContentOptimizer()
+#         except ImportError:
+#             OPTIMIZER_AVAILABLE = False
+#             optimizer = None
+# 
+#         if st.button("← Back to Structure Editor"):
+#             st.session_state.current_step = 3
+#             st.rerun()
+# 
+#         # Show generation plan summary
+#         st.markdown("### 📋 Content Generation Plan")
+#         
+#         actions_summary = {
+#             'keep': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'keep']),
+#             'improve': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'improve']),
+#             'add': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'add']),
+#             'remove': len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') == 'remove'])
+#         }
+# 
+#         col1, col2, col3, col4 = st.columns(4)
+#         with col1:
+#             st.metric("✅ Keep As-Is", actions_summary['keep'])
+#         with col2:
+#             st.metric("🔧 Improve", actions_summary['improve'])
+#         with col3:
+#             st.metric("➕ Add New", actions_summary['add'])
+#         with col4:
+#             st.metric("❌ Remove", actions_summary['remove'])
+#         
+#         # Generate optimized content button
+#         st.markdown("---")
+# 
+#         if st.button("🚀 Generate Optimized Content", type="primary"):
+#             print("\n🚀 BUTTON CLICKED - Starting generation")
+# 
+#             if APIS_AVAILABLE and content_generator:
+#                 print(f"✓ APIs available, starting generation")
+# 
+#                 # Create progress indicators (same as new content workflow)
+#                 progress_bar = st.progress(0)
+#                 status_text = st.empty()
+# 
+#                 # Initialize results storage
+#                 optimized_sections = {}
+#                 total_headings = len([h for h in st.session_state.optimization_data['optimized_headings']
+#                                      if h.get('action') != 'remove'])
+#                 processed = 0
+#                 print(f"✓ Total headings to process: {total_headings}")
+# 
+#                 # Generate introduction
+#                 print("📝 Generating introduction...")
+#                 status_text.text("Generating & humanizing introduction...")
+#                 progress_bar.progress(0.05)
+#                 print("✓ Progress bar set to 5%")
+#                 intro_result = content_generator.generate_introduction(
+#                     topic=st.session_state.optimization_data['primary_keyword'],
+#                     headings=st.session_state.optimization_data.get('optimized_headings', []),
+#                     research_data=st.session_state.optimization_data.get('research_data'),
+#                     include_gcore=False
+#                 )
+# 
+#                 if intro_result['status'] == 'success' and intro_result.get('content'):
+#                     st.session_state.optimization_data['introduction'] = intro_result['content']
+#                 else:
+#                     keyword = st.session_state.optimization_data['primary_keyword']
+#                     st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
+# 
+#                 # Process each heading based on action
+#                 print(f"\n📋 Processing {len(st.session_state.optimization_data['optimized_headings'])} headings...")
+#                 for heading in st.session_state.optimization_data['optimized_headings']:
+#                     action = heading.get('action', 'keep')
+#                     heading_text = heading['text']
+# 
+#                     if action == 'remove':
+#                         # Skip removed sections
+#                         print(f"⏭️  Skipping REMOVE: {heading_text}")
+#                         continue
+# 
+#                     processed += 1
+#                     progress_val = 0.1 + (0.9 * processed / total_headings)  # 10% for intro, 90% for sections
+#                     progress_bar.progress(progress_val)
+#                     print(f"📊 Progress: {progress_val*100:.1f}% ({processed}/{total_headings})")
+# 
+#                     # Show detailed status with action emoji
+#                     action_emoji = {
+#                         'keep': '✅',
+#                         'improve': '🔧',
+#                         'add': '➕'
+#                     }
+#                     action_label = {
+#                         'keep': 'Preserving',
+#                         'improve': 'Improving & humanizing',
+#                         'add': 'Generating & humanizing'
+#                     }
+#                     emoji = action_emoji.get(action, '📝')
+#                     label = action_label.get(action, 'Processing')
+# 
+#                     status_msg = f"{emoji} {label} ({processed}/{total_headings}): {heading_text[:45]}..."
+#                     status_text.text(status_msg)
+#                     print(f"📝 {status_msg}")
+# 
+#                     if action == 'keep':
+#                         # Use original content as-is
+#                         optimized_sections[heading_text] = {
+#                                 'content': heading.get('original_content', ''),
+#                                 'word_count': heading.get('word_count', 0),
+#                                 'action': 'kept',
+#                                 'function': heading.get('function', '')
+#                             }
+# 
+#                     elif action == 'improve':
+#                             # Generate improved content with preservation
+#                             if optimizer and OPTIMIZER_AVAILABLE:
+#                                 # Extract valuable elements from original
+#                                 valuable_elements = optimizer._extract_valuable_elements(
+#                                     heading.get('original_content', '')
+#                                 )
+#                                 
+#                                 # Generate new content
+#                                 result = content_generator.generate_section(
+#                                     heading=heading_text,
+#                                     research_data=st.session_state.optimization_data.get('research_data'),
+#                                     parent_context={
+#                                         'heading_level': heading['level'],
+#                                         'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+#                                         'gcore_features': []
+#                                     },
+#                                     include_gcore=False,
+#                                     function_name=heading.get('function', 'generate_definition')
+#                                 )
+#                                 
+#                                 if result['status'] == 'success':
+#                                     # Merge valuable elements with new content
+#                                     improved_content = optimizer.merge_content(
+#                                         heading.get('original_content', ''),
+#                                         result['content'],
+#                                         'preserve_valuable'
+#                                     )
+#                                     optimized_sections[heading_text] = {
+#                                         'content': improved_content,
+#                                         'word_count': len(improved_content.split()),
+#                                         'action': 'improved',
+#                                         'preserved_elements': valuable_elements,
+#                                         'function': heading.get('function', '')
+#                                     }
+#                                 else:
+#                                     # Fallback to original
+#                                     optimized_sections[heading_text] = {
+#                                         'content': heading.get('original_content', ''),
+#                                         'word_count': heading.get('word_count', 0),
+#                                         'action': 'kept',
+#                                         'function': heading.get('function', '')
+#                                     }
+#                             else:
+#                                 # No optimizer available, generate new
+#                                 result = content_generator.generate_section(
+#                                     heading=heading_text,
+#                                     research_data=st.session_state.optimization_data.get('research_data'),
+#                                     parent_context={
+#                                         'heading_level': heading['level'],
+#                                         'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+#                                         'gcore_features': []
+#                                     },
+#                                     include_gcore=False,
+#                                     function_name=heading.get('function', 'generate_definition')
+#                                 )
+#                                 
+#                                 if result['status'] == 'success':
+#                                     optimized_sections[heading_text] = {
+#                                         'content': result['content'],
+#                                         'word_count': result.get('word_count', 0),
+#                                         'action': 'improved',
+#                                         'function': heading.get('function', '')
+#                                     }
+#                     
+#                     elif action == 'add':
+#                             # Generate completely new content
+#                             result = content_generator.generate_section(
+#                                 heading=heading_text,
+#                                 research_data=st.session_state.optimization_data.get('research_data'),
+#                                 parent_context={
+#                                     'heading_level': heading['level'],
+#                                     'gcore_product': st.session_state.optimization_data.get('selected_product', 'cdn'),
+#                                     'gcore_features': []
+#                                 },
+#                                 include_gcore=False,
+#                                 function_name=heading.get('function', 'generate_definition')
+#                             )
+# 
+#                             if result['status'] == 'success':
+#                                 optimized_sections[heading_text] = {
+#                                     'content': result['content'],
+#                                     'word_count': result.get('word_count', 0),
+#                                     'action': 'generated',
+#                                     'function': heading.get('function', '')
+#                                 }
+#                             else:
+#                                 optimized_sections[heading_text] = {
+#                                     'content': f"Content for {heading_text}",
+#                                     'word_count': 10,
+#                                     'action': 'generated',
+#                                     'function': heading.get('function', '')
+#                                 }
+#                 
+#                 # Store results
+#                 print(f"\n✅ All {len(optimized_sections)} sections processed!")
+#                 st.session_state.optimization_data['optimized_content'] = optimized_sections
+#                 progress_bar.progress(1.0)
+#                 status_text.text("Generation complete!")
+#                 print("✓ Progress bar set to 100%")
+# 
+#                 # Show summary stats
+#                 kept_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'kept')
+#                 improved_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'improved')
+#                 added_count = sum(1 for s in optimized_sections.values() if s.get('action') == 'generated')
+#                 print(f"📊 Summary: {kept_count} kept, {improved_count} improved, {added_count} added")
+# 
+#                 st.success(f"✅ Content optimization complete! ({kept_count} kept, {improved_count} improved, {added_count} added)")
+# 
+#                 # Automatically advance to Step 5
+#                 st.session_state.current_step = 5
+#                 print("🔄 Advancing to Step 5...")
+#                 st.rerun()
+# 
+#             else:
+#                 # Fallback demo mode
+#                 print("⚠️  Running in DEMO mode (no APIs available)")
+#                 topic = st.session_state.optimization_data['primary_keyword']
+#                 st.session_state.optimization_data['introduction'] = f"{topic} is a technology that enables organizations to optimize their digital infrastructure."
+# 
+#                 optimized_sections = {}
+#                 for heading in st.session_state.optimization_data['optimized_headings']:
+#                     if heading.get('action') != 'remove':
+#                         heading_text = heading['text']
+#                         if heading.get('action') == 'keep':
+#                             content = heading.get('original_content', 'Original content preserved.')
+#                         else:
+#                             content = f"This is demo content for {heading_text}. In production, this would contain AI-optimized content."
+#                         
+#                         optimized_sections[heading_text] = {
+#                             'content': content,
+#                             'word_count': len(content.split()),
+#                             'action': heading.get('action', 'generated'),
+#                             'function': heading.get('function', '')
+#                         }
+#                 
+#                 st.session_state.optimization_data['optimized_content'] = optimized_sections
+#                 st.success("✅ Demo content generated!")
+#         
+#         # Show current optimization results if available
+#         if st.session_state.optimization_data.get('optimized_content'):
+#             st.markdown("---")
+#             st.markdown("### 📄 Optimized Content Preview")
+#             
+#             # Display introduction if available
+#             if st.session_state.optimization_data.get('introduction'):
+#                 with st.expander("📝 Introduction", expanded=False):
+#                     st.write(st.session_state.optimization_data['introduction'])
+#             
+#             optimized = st.session_state.optimization_data['optimized_content']
+#             
+#             # Show optimized sections
+#             if optimized:
+#                 for heading in st.session_state.optimization_data.get('optimized_headings', []):
+#                     heading_text = heading['text']
+#                     if heading_text in optimized and heading.get('action') != 'remove':
+#                         section_data = optimized[heading_text]
+#                         
+#                         # Section header with action indicator
+#                         action_emoji = {
+#                             'kept': '✅',
+#                             'improved': '🔧',
+#                             'generated': '✨'
+#                         }.get(section_data.get('action', ''), '•')
+#                         
+#                         with st.expander(f"{action_emoji} {heading['level']}: {heading_text}", expanded=False):
+#                             st.write(section_data.get('content', ''))
+#                             st.caption(f"Action: {section_data.get('action', 'unknown')} | Words: {section_data.get('word_count', 0)} | Function: {section_data.get('function', 'N/A')}")
+#     
+#         # Navigation
+#         st.markdown("---")
+#         col1, col2, col3 = st.columns([1, 1, 1])
+#         with col1:
+#             if st.button("← Back to Content Brief"):
+#                 st.session_state.current_step = 3
+#             st.rerun()
+#         with col3:
+#             can_continue = st.session_state.optimization_data.get('optimized_content') is not None
+#         if st.button("Continue to Quality Comparison →", type="primary", disabled=not can_continue):
+#             st.session_state.current_step = 5  # Go to Step 5 (Quality)
+#             st.rerun()
+#         if not can_continue:
+#             st.caption("Execute optimization before continuing")
 # 
     elif st.session_state.current_step == 4:
         st.subheader("Step 4: Export Optimized Content")
@@ -3526,46 +3845,54 @@ elif selected_mode == "🔧 Content Optimization":
                     st.session_state.current_step = 5  # Back to Step 5 (Quality Check)
                     st.rerun()
         else:
-            # Prepare content for export
-            primary_keyword = st.session_state.optimization_data.get('primary_keyword', 'Optimized Content')
-            export_content = {
-                'metadata': {
-                    'primary_keyword': primary_keyword,
-                    'word_count': 0,
-                    'timestamp': datetime.now().isoformat(),
-                    'type': 'optimized_content'
-                },
-                'content': {
-                    'introduction': st.session_state.optimization_data.get('introduction', ''),
-                    'sections': []
-                }
+            # DEBUG: Show what we have in optimized_content
+            st.info("🔍 DEBUG: Checking optimized content structure...")
+        st.write(f"- Has optimized_content: {bool(optimized_content)}")
+        st.write(f"- Introduction present: {bool(st.session_state.optimization_data.get('introduction'))}")
+        st.write(f"- Number of sections: {len(optimized_content)}")
+
+        # Prepare content for export
+        primary_keyword = st.session_state.optimization_data.get('primary_keyword', 'Optimized Content')
+        export_content = {
+            'metadata': {
+                'primary_keyword': primary_keyword,
+                'word_count': 0,
+                'timestamp': datetime.now().isoformat(),
+                'type': 'optimized_content'
+            },
+            'content': {
+                'introduction': st.session_state.optimization_data.get('introduction', ''),
+                'sections': []
             }
+        }
 
-            # Add sections and calculate word count
-            total_words = 0
-            sections_added = 0
+        # Add sections and calculate word count
+        total_words = 0
+        sections_added = 0
 
-            # optimized_content is a dict with heading names as keys
-            for heading_text, section_data in optimized_content.items():
-                if isinstance(section_data, dict) and 'content' in section_data:
-                    section_content = section_data['content']
+        # optimized_content is a dict with heading names as keys
+        for heading_text, section_data in optimized_content.items():
+            if isinstance(section_data, dict) and 'content' in section_data:
+                section_content = section_data['content']
 
-                    export_content['content']['sections'].append({
-                        'heading': heading_text,
-                        'content': section_content
-                    })
+                export_content['content']['sections'].append({
+                    'heading': heading_text,
+                    'content': section_content
+                })
 
-                    # Count words
-                    words = len(section_content.split()) if section_content else 0
-                    total_words += words
-                    sections_added += 1
+                # Count words
+                words = len(section_content.split()) if section_content else 0
+                total_words += words
+                sections_added += 1
 
-            # Add introduction word count
-            if export_content['content']['introduction']:
-                intro_words = len(export_content['content']['introduction'].split())
-                total_words += intro_words
+        st.write(f"- Sections added to export: {sections_added}")
 
-            export_content['metadata']['word_count'] = total_words
+        # Add introduction word count
+        if export_content['content']['introduction']:
+            intro_words = len(export_content['content']['introduction'].split())
+            total_words += intro_words
+
+        export_content['metadata']['word_count'] = total_words
 
         # Export configuration
         st.markdown("---")
