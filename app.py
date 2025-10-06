@@ -4,6 +4,15 @@ Main application with tab navigation for New Content and Content Optimization
 """
 
 import streamlit as st
+
+# Page configuration - MUST be first Streamlit command
+st.set_page_config(
+    page_title="Gcore Content System",
+    page_icon="📝",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import json
 import re
 from datetime import datetime
@@ -37,14 +46,6 @@ try:
     SCRAPER_AVAILABLE = True
 except ImportError:
     SCRAPER_AVAILABLE = False
-
-# Page configuration
-st.set_page_config(
-    page_title="Gcore Content System",
-    page_icon="📝",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Authentication system
 import time
