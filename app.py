@@ -3857,7 +3857,7 @@ elif selected_mode == "🔧 Content Optimization":
                 'type': 'optimized_content'
             },
             'content': {
-                'introduction': optimized_content.get('introduction', ''),
+                'introduction': st.session_state.optimization_data.get('introduction', ''),
                 'sections': []
             }
         }
