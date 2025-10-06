@@ -9,9 +9,16 @@ load_dotenv()
 try:
     import streamlit as st
     # Try to get from Streamlit secrets first, fallback to env vars
-    ANTHROPIC_API_KEY = st.secrets.get('ANTHROPIC_API_KEY', os.getenv('ANTHROPIC_API_KEY'))
-    PERPLEXITY_API_KEY = st.secrets.get('PERPLEXITY_API_KEY', os.getenv('PERPLEXITY_API_KEY'))
-except (ImportError, FileNotFoundError, AttributeError):
+    try:
+        ANTHROPIC_API_KEY = st.secrets['ANTHROPIC_API_KEY']
+    except (KeyError, FileNotFoundError):
+        ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+
+    try:
+        PERPLEXITY_API_KEY = st.secrets['PERPLEXITY_API_KEY']
+    except (KeyError, FileNotFoundError):
+        PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
+except (ImportError, AttributeError):
     # Fallback to environment variables if not running in Streamlit
     ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
     PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
