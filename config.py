@@ -5,9 +5,15 @@ from pathlib import Path
 # Load environment variables
 load_dotenv()
 
-# API Configuration
-ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
+# API Configuration - supports both local .env and Streamlit Cloud secrets
+try:
+    import streamlit as st
+    ANTHROPIC_API_KEY = st.secrets.get('ANTHROPIC_API_KEY') or os.getenv('ANTHROPIC_API_KEY')
+    PERPLEXITY_API_KEY = st.secrets.get('PERPLEXITY_API_KEY') or os.getenv('PERPLEXITY_API_KEY')
+except (ImportError, FileNotFoundError):
+    # Fallback to environment variables if not running in Streamlit
+    ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+    PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
 
 # Model Configuration
 CLAUDE_MODEL = "claude-sonnet-4-5-20250929"  # Latest Claude Sonnet 4.5 model
