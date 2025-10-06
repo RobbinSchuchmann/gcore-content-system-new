@@ -3806,21 +3806,6 @@ elif selected_mode == "🔧 Content Optimization":
 #             st.caption("Execute optimization before continuing")
 # 
     elif st.session_state.current_step == 4:
-        st.subheader("Step 5: Quality Comparison")
-        st.info("Compare original vs optimized content quality...")
-    
-        # Navigation
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col1:
-            if st.button("← Back to Optimize"):
-                st.session_state.current_step = 3  # Back to Step 3 (Structure Editor & Generate)
-                st.rerun()
-        with col3:
-            if st.button("Continue to Export →", type="primary"):
-                st.session_state.current_step = 4  # Go to Step 4 (Export)
-                st.rerun()
-
-    elif st.session_state.current_step == 4:
         st.subheader("Step 4: Export Optimized Content")
         st.info("Export your optimized content with change tracking...")
 
