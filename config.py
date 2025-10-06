@@ -8,9 +8,10 @@ load_dotenv()
 # API Configuration - supports both local .env and Streamlit Cloud secrets
 try:
     import streamlit as st
-    ANTHROPIC_API_KEY = st.secrets.get('ANTHROPIC_API_KEY') or os.getenv('ANTHROPIC_API_KEY')
-    PERPLEXITY_API_KEY = st.secrets.get('PERPLEXITY_API_KEY') or os.getenv('PERPLEXITY_API_KEY')
-except (ImportError, FileNotFoundError):
+    # Try to get from Streamlit secrets first, fallback to env vars
+    ANTHROPIC_API_KEY = st.secrets.get('ANTHROPIC_API_KEY', os.getenv('ANTHROPIC_API_KEY'))
+    PERPLEXITY_API_KEY = st.secrets.get('PERPLEXITY_API_KEY', os.getenv('PERPLEXITY_API_KEY'))
+except (ImportError, FileNotFoundError, AttributeError):
     # Fallback to environment variables if not running in Streamlit
     ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
     PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
