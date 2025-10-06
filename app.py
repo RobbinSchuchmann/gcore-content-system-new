@@ -3092,7 +3092,28 @@ elif selected_mode == "🔧 Content Optimization":
                         heading_dict['original_content'] = ''
                         heading_dict['word_count'] = 0
 
+                    # Add the H2 heading
                     optimized_headings.append(heading_dict)
+
+                    # EXPAND H3 SUBHEADINGS into actual heading items
+                    h3_subs = rec.get('h3_subheadings', [])
+                    if h3_subs:
+                        # Check if this is a FAQ section
+                        is_faq = any(keyword in heading_text.lower() for keyword in ['faq', 'frequently asked', 'common questions'])
+
+                        for h3_text in h3_subs:
+                            h3_dict = {
+                                'level': 'H3',
+                                'text': h3_text,
+                                'original_text': '',
+                                'action': 'add',  # H3s are always new content
+                                'function': 'generate_faq_answer' if is_faq else auto_detect_function(h3_text, section_functions),
+                                'h3_subheadings': [],
+                                'reason': f"Subheading under: {heading_text}",
+                                'original_content': '',
+                                'word_count': 0
+                            }
+                            optimized_headings.append(h3_dict)
 
                 # DEBUG
                 print(f"DEBUG Step 3: Built {len(optimized_headings)} optimized headings from AI recommendations")
@@ -3171,10 +3192,14 @@ elif selected_mode == "🔧 Content Optimization":
             action = heading.get('action', 'keep')
             heading_text = heading['text']
             word_count = heading.get('word_count', 0)
+            heading_level = heading.get('level', 'H2')
 
             # Action emoji
             action_emoji = {"keep": "✅", "improve": "🔧", "add": "➕"}
             action_label = {"keep": "Keep", "improve": "Improve", "add": "Add"}
+
+            # Indent H3 headings
+            indent = "    " if heading_level == 'H3' else ""
 
             if auto_accept:
                 # ACCEPT MODE: Simple view with function selector only
@@ -3192,21 +3217,16 @@ elif selected_mode == "🔧 Content Optimization":
                     # Show original → improved for IMPROVE actions
                     original_text = heading.get('original_text', '')
                     if action == 'improve' and original_text and original_text != heading_text:
-                        st.markdown(f"**{i+1}. {original_text}** → **{heading_text}**")
-                        st.caption(f"{badge} • {word_count} words")
+                        st.markdown(f"{indent}**{i+1}. {original_text}** → **{heading_text}**")
+                        st.caption(f"{indent}{badge} • {word_count} words")
                     else:
-                        st.markdown(f"**{i+1}. {heading_text}**")
-                        st.caption(f"{badge} • {word_count} words")
+                        st.markdown(f"{indent}**{i+1}. {heading_text}**")
+                        st.caption(f"{indent}{badge} • {word_count} words")
 
                     # Show reason
                     reason = heading.get('reason', '')
                     if reason:
-                        st.caption(f"💡 {reason}")
-
-                    # Show H3 subheadings if present
-                    h3_subs = heading.get('h3_subheadings', [])
-                    if h3_subs:
-                        st.caption(f"**H3 subheadings:** {', '.join(h3_subs[:3])}" + (f" (+{len(h3_subs)-3} more)" if len(h3_subs) > 3 else ""))
+                        st.caption(f"{indent}💡 {reason}")
 
                 with col2:
                     # Function selector
@@ -3229,7 +3249,7 @@ elif selected_mode == "🔧 Content Optimization":
                 col1, col2, col3, col4, col5 = st.columns([0.3, 2.5, 1.5, 0.6, 0.6])
 
                 with col1:
-                    st.write(f"{i+1}.")
+                    st.write(f"{indent}{i+1}.")
 
                 with col2:
                     # Show action badge with color
