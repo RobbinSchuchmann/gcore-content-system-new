@@ -26,6 +26,7 @@ from urllib.parse import urlparse
 load_dotenv()
 
 # Import core modules
+import_error_msg = None
 try:
     from core.semantic_patterns import detect_question_type, get_pattern_template
     from core.research_engine import ResearchEngine
@@ -35,7 +36,8 @@ try:
     from core.serp_analyzer import SERPAnalyzer
     from config import validate_api_keys, ANTHROPIC_API_KEY, PERPLEXITY_API_KEY
     APIS_AVAILABLE = True
-except ImportError:
+except ImportError as e:
+    import_error_msg = str(e)
     APIS_AVAILABLE = False
     ANTHROPIC_API_KEY = None
     PERPLEXITY_API_KEY = None
@@ -693,11 +695,13 @@ else:
 # Debug: Always show API key detection status
 import config
 st.sidebar.markdown("### 🔍 Debug Info")
-st.sidebar.code(f"""APIS_AVAILABLE: {APIS_AVAILABLE}
+debug_info = f"""APIS_AVAILABLE: {APIS_AVAILABLE}
 api_valid: {api_valid}
 ANTHROPIC_KEY: {'✓' if config.ANTHROPIC_API_KEY else '✗'} ({len(config.ANTHROPIC_API_KEY) if config.ANTHROPIC_API_KEY else 0} chars)
-PERPLEXITY_KEY: {'✓' if config.PERPLEXITY_API_KEY else '✗'} ({len(config.PERPLEXITY_API_KEY) if config.PERPLEXITY_API_KEY else 0} chars)
-""")
+PERPLEXITY_KEY: {'✓' if config.PERPLEXITY_API_KEY else '✗'} ({len(config.PERPLEXITY_API_KEY) if config.PERPLEXITY_API_KEY else 0} chars)"""
+if import_error_msg:
+    debug_info += f"\n\nImport Error:\n{import_error_msg}"
+st.sidebar.code(debug_info)
 
 # Sidebar navigation
 st.sidebar.title("📝 Gcore Content System")
