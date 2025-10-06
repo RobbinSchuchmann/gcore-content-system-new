@@ -171,11 +171,12 @@ if 'optimization_data' not in st.session_state:
         'quality_comparison': {}
     }
 
-if 'current_step' not in st.session_state:
-    st.session_state.current_step = 0
-
 if 'active_mode' not in st.session_state:
     st.session_state.active_mode = "📝 New Content"
+
+if 'current_step' not in st.session_state:
+    # Set initial step based on active mode
+    st.session_state.current_step = 1 if st.session_state.active_mode == "🔧 Content Optimization" else 0
 
 if 'ai_word_data' not in st.session_state:
     st.session_state.ai_word_data = {
@@ -692,16 +693,16 @@ else:
     api_valid = False
     api_message = "Core modules not available - running in demo mode"
 
-# Debug: Always show API key detection status
+# Debug: Show API key detection status (collapsible)
 import config
-st.sidebar.markdown("### 🔍 Debug Info")
-debug_info = f"""APIS_AVAILABLE: {APIS_AVAILABLE}
+with st.sidebar.expander("🔍 Debug Info", expanded=False):
+    debug_info = f"""APIS_AVAILABLE: {APIS_AVAILABLE}
 api_valid: {api_valid}
 ANTHROPIC_KEY: {'✓' if config.ANTHROPIC_API_KEY else '✗'} ({len(config.ANTHROPIC_API_KEY) if config.ANTHROPIC_API_KEY else 0} chars)
 PERPLEXITY_KEY: {'✓' if config.PERPLEXITY_API_KEY else '✗'} ({len(config.PERPLEXITY_API_KEY) if config.PERPLEXITY_API_KEY else 0} chars)"""
-if import_error_msg:
-    debug_info += f"\n\nImport Error:\n{import_error_msg}"
-st.sidebar.code(debug_info)
+    if import_error_msg:
+        debug_info += f"\n\nImport Error:\n{import_error_msg}"
+    st.code(debug_info)
 
 # Sidebar navigation
 st.sidebar.title("📝 Gcore Content System")
@@ -776,6 +777,10 @@ if st.session_state.active_mode != selected_mode:
     st.session_state.previous_mode = selected_mode
 else:
     st.session_state.active_mode = selected_mode
+
+# Ensure step is correct for current mode (fix for existing sessions)
+if selected_mode == "🔧 Content Optimization" and st.session_state.current_step == 0:
+    st.session_state.current_step = 1
 
 st.sidebar.markdown("---")
 
