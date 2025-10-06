@@ -139,3 +139,4 @@ Generated content is automatically saved to `data/saved_content/` with:
 - Metadata files with generation parameters
 - Quality metrics and compliance scores
 - Research data and sources used
+- remember to always push changes to the gcore-content-system-new git
