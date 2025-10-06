@@ -686,13 +686,18 @@ def implement_ai_word_manager():
 # Check API keys if available
 if APIS_AVAILABLE:
     api_valid, api_message = validate_api_keys()
-    # Debug: Show what keys we're detecting
-    if not api_valid:
-        import config
-        st.sidebar.info(f"Debug: Anthropic key present: {bool(config.ANTHROPIC_API_KEY)}, Perplexity key present: {bool(config.PERPLEXITY_API_KEY)}")
 else:
     api_valid = False
     api_message = "Core modules not available - running in demo mode"
+
+# Debug: Always show API key detection status
+import config
+st.sidebar.markdown("### 🔍 Debug Info")
+st.sidebar.code(f"""APIS_AVAILABLE: {APIS_AVAILABLE}
+api_valid: {api_valid}
+ANTHROPIC_KEY: {'✓' if config.ANTHROPIC_API_KEY else '✗'} ({len(config.ANTHROPIC_API_KEY) if config.ANTHROPIC_API_KEY else 0} chars)
+PERPLEXITY_KEY: {'✓' if config.PERPLEXITY_API_KEY else '✗'} ({len(config.PERPLEXITY_API_KEY) if config.PERPLEXITY_API_KEY else 0} chars)
+""")
 
 # Sidebar navigation
 st.sidebar.title("📝 Gcore Content System")
