@@ -3402,12 +3402,29 @@ elif selected_mode == "🔧 Content Optimization":
                                 status_text.text(f"Generating & humanizing: {heading_text}...")
 
                                 if action == 'keep':
-                                    optimized_sections[heading_text] = {
-                                        'content': heading.get('original_content', ''),
-                                        'word_count': heading.get('word_count', 0),
-                                        'action': 'kept',
-                                        'function': heading.get('function', '')
-                                    }
+                                    # Re-generate even "kept" sections to ensure clean, properly formatted content
+                                    result = content_generator.generate_section(
+                                        heading=heading_text,
+                                        research_data=st.session_state.optimization_data.get('research_data'),
+                                        parent_context={'heading_level': heading['level']},
+                                        include_gcore=False,
+                                        function_name=heading.get('function', 'generate_definition')
+                                    )
+                                    if result['status'] == 'success':
+                                        optimized_sections[heading_text] = {
+                                            'content': result['content'],
+                                            'word_count': result.get('word_count', 0),
+                                            'action': 'kept',
+                                            'function': heading.get('function', '')
+                                        }
+                                    else:
+                                        # Fallback to original if generation fails
+                                        optimized_sections[heading_text] = {
+                                            'content': heading.get('original_content', ''),
+                                            'word_count': heading.get('word_count', 0),
+                                            'action': 'kept',
+                                            'function': heading.get('function', '')
+                                        }
 
                                 elif action == 'improve':
                                     result = content_generator.generate_section(
