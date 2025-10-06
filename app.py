@@ -3822,15 +3822,8 @@ elif selected_mode == "🔧 Content Optimization":
             # DEBUG: Show what we have in optimized_content
             st.info("🔍 DEBUG: Checking optimized content structure...")
         st.write(f"- Has optimized_content: {bool(optimized_content)}")
-        st.write(f"- Introduction present: {bool(optimized_content.get('introduction'))}")
-        st.write(f"- Number of sections: {len(optimized_content.get('sections', []))}")
-
-        # Show structure of first section for debugging
-        sections = optimized_content.get('sections', [])
-        if sections:
-            st.write(f"- First section type: {type(sections[0])}")
-            st.write(f"- First section keys: {list(sections[0].keys()) if isinstance(sections[0], dict) else 'Not a dict'}")
-            st.write(f"- First section sample: {str(sections[0])[:200]}...")
+        st.write(f"- Introduction present: {bool(st.session_state.optimization_data.get('introduction'))}")
+        st.write(f"- Number of sections: {len(optimized_content)}")
 
         # Prepare content for export
         primary_keyword = st.session_state.optimization_data.get('primary_keyword', 'Optimized Content')
@@ -3850,13 +3843,14 @@ elif selected_mode == "🔧 Content Optimization":
         # Add sections and calculate word count
         total_words = 0
         sections_added = 0
-        for section_data in optimized_content.get('sections', []):
+
+        # optimized_content is a dict with heading names as keys
+        for heading_text, section_data in optimized_content.items():
             if isinstance(section_data, dict) and 'content' in section_data:
                 section_content = section_data['content']
-                section_title = section_data.get('heading', 'Section')
 
                 export_content['content']['sections'].append({
-                    'heading': section_title,
+                    'heading': heading_text,
                     'content': section_content
                 })
 
