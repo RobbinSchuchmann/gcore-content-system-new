@@ -28,6 +28,7 @@ from core.internal_linker import InternalLinker
 from core.link_manager import LinkManager
 from core.product_loader import product_loader
 from core.source_manager import SourceManager
+from core.editorial_guidelines import get_humanization_prompt_section, get_generation_prompt_section
 import re
 
 def validate_content_structure(content: str) -> Dict[str, Any]:
@@ -454,23 +455,13 @@ class ContentGenerator:
                 heading, function_config, research_data, context, section_functions
             )
         
-        # Build prompt from function template
+        # Build prompt from function template with Gcore editorial guidelines
+        gcore_editorial = get_generation_prompt_section()
+
         prompt_parts = [
-            "You are a technical content writer creating educational content for technical professionals.",
+            gcore_editorial,
             "",
-            "EDITORIAL GUIDELINES:",
-            "- Be simple: Use simple structures, front-load important points",
-            "- Be concise: Use as few words as possible to convey your message",
-            "- Be friendly: Write in a professional but conversational tone, like explaining to a knowledgeable colleague",
-            "- Be helpful: Focus on user needs and education",
-            "- Be specific: Use exact numbers and facts, not vague terms",
-            "- IMPORTANT: NO company promotion or sales language",
-            "",
-            "WRITING STYLE:",
-            "- Vary sentence length naturally - mix short punchy sentences (5-10 words) with longer detailed ones (20-30 words)",
-            "- Use contractions naturally and sporadically (don't force them everywhere)",
-            "- Use diverse transitions, not formulaic patterns (avoid always using 'First, Then, Next')",
-            "- Write naturally as a human would, with varied rhythm and flow",
+            "IMPORTANT: NO company promotion or sales language in educational sections",
             "",
             f"CONTENT TYPE: {function_config.get('article_methodology', function_config.get('name', function_name))}",
             "",
@@ -754,15 +745,13 @@ class ContentGenerator:
                     gcore_product=product_name
                 )
         
-        # Build the complete prompt
+        # Build the complete prompt with Gcore editorial guidelines
+        gcore_editorial = get_generation_prompt_section()
+
         prompt_parts = [
-            "You are a technical content writer creating educational content for technical professionals with natural product integration.",
+            gcore_editorial,
             "",
-            "WRITING STYLE:",
-            "- Professional but conversational tone",
-            "- Vary sentence length naturally (mix 5-10 word and 20-30 word sentences)",
-            "- Use contractions naturally, not uniformly",
-            "- Diverse transitions and natural flow",
+            "CONTEXT: Creating educational content with natural product integration.",
             "",
             formatted_prompt,
             ""
@@ -955,16 +944,12 @@ class ContentGenerator:
         
         # Extract semantic triple
         triple = get_semantic_triple(heading)
-        
+
+        # Get Gcore editorial guidelines for generation
+        gcore_editorial = get_generation_prompt_section()
+
         prompt_parts = [
-            "You are a technical content writer creating educational content for technical professionals.",
-            "",
-            "WRITING STYLE:",
-            "- Professional but conversational tone, like explaining to a knowledgeable colleague",
-            "- Vary sentence length naturally - mix short (5-10 words) and longer (20-30 words) sentences",
-            "- Use contractions naturally and sporadically, not uniformly",
-            "- Use diverse transitions, not formulaic patterns",
-            "- Write with natural rhythm and flow",
+            gcore_editorial,
             "",
             "Write content that directly answers the following question/heading:",
             f"\nHeading: {heading}",
@@ -1503,43 +1488,36 @@ class ContentGenerator:
         # ALWAYS humanize - Ahrefs detects deeper AI patterns than just blacklist words
         # Don't skip even if no obvious AI words found
 
-        humanization_prompt = f'''Improve this content to sound more naturally written while strictly preserving semantic SEO structure and technical accuracy.
+        # Get Gcore editorial guidelines for humanization
+        gcore_guidelines = get_humanization_prompt_section()
+
+        humanization_prompt = f'''Improve this content to match Gcore's editorial voice: professional expertise with friendly warmth.
 
 CONTENT TO IMPROVE:
 {content}
 
-SUBTLE HUMANIZATION INSTRUCTIONS:
-1. Replace overly formal vocabulary with clearer alternatives where appropriate
-   - "encompasses" → "includes"
-   - "aimed at" → "designed to"
-   - "safeguarding" → "protecting"
-2. Replace em dashes (—) with commas, periods, or parentheses for more natural punctuation
-3. Add natural sentence length variation (mix 8-15 word sentences with 20-30 word sentences)
-4. Use contractions occasionally and naturally (it's, don't, you'll) - not forced
-5. Vary sentence starters where semantically appropriate
-6. Replace some passive voice with active voice when natural
-7. Use simpler, more direct phrasing while maintaining professional tone
+{gcore_guidelines}
 
 CRITICAL SEMANTIC SEO REQUIREMENTS (DO NOT VIOLATE):
 - MUST preserve exact semantic opening patterns ("X is...", "Yes/No,", etc.)
 - MUST keep list parallelism perfect (all items same grammatical structure)
-- MUST maintain formal, educational tone throughout
+- MUST maintain professional, authoritative tone (friendly but expert)
 - MUST keep direct answer structure (no rhetorical questions)
 - MUST preserve subject-predicate-object triples
 - DO NOT break grammar rules or add imperfections
-- DO NOT add casual phrases or informal language
+- DO NOT add casual slang or overly informal language
 - DO NOT change headings, bullet formatting, or list structures
 - DO NOT add or remove any information or statistics
 - DO NOT change technical terminology
 
 MAINTAIN:
-- Professional, authoritative voice
+- Professional, authoritative voice (with warmth)
 - Educational content style
-- Technical accuracy
+- Technical accuracy and precision
 - Semantic search optimization
 - Structured, predictable patterns
 
-GOAL: Make word choices slightly more natural without breaking the semantic framework or sounding too casual.
+GOAL: Apply Gcore editorial principles (simple, concise, friendly, helpful, specific) while preserving semantic framework.
 
 Return ONLY the improved content. No explanations or notes.'''
 
@@ -1547,7 +1525,7 @@ Return ONLY the improved content. No explanations or notes.'''
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=MAX_TOKENS,
-                temperature=0.7,  # Balanced for natural word choice while maintaining structure
+                temperature=0.75,  # Balanced for Gcore editorial voice - natural but controlled
                 messages=[{"role": "user", "content": humanization_prompt}]
             )
 
@@ -1578,14 +1556,13 @@ Return ONLY the improved content. No explanations or notes.'''
         
         try:
             # Build introduction-specific prompt
+            # Get Gcore editorial guidelines for introduction
+            gcore_editorial = get_generation_prompt_section()
+
             prompt_parts = [
                 "You are writing an introduction for a comprehensive article for technical professionals, following Holistic SEO SOP requirements.",
                 "",
-                "WRITING STYLE:",
-                "- Professional but conversational tone",
-                "- Vary sentence length naturally - mix short impactful sentences with longer detailed ones",
-                "- Use contractions naturally and sporadically",
-                "- Write with natural rhythm and flow, not robotic patterns",
+                gcore_editorial,
                 "",
                 f"Topic: {topic}",
                 "",
