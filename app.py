@@ -1011,11 +1011,6 @@ if selected_mode == "📝 New Content":
                     st.markdown("### 📌 Suggested H1")
                     st.info(f"**{suggestions['h1']}**")
 
-                # Display strategic insights
-                if suggestions.get('strategic_insights'):
-                    with st.expander("💡 Strategic Insights", expanded=True):
-                        st.markdown(suggestions['strategic_insights'])
-
                 # Display H2 sections
                 if suggestions.get('h2_sections'):
                     st.markdown("### 📋 Suggested H2/H3 Structure")
@@ -2788,11 +2783,6 @@ elif selected_mode == "🔧 Content Optimization":
                 if analysis_result.get('success'):
                     st.markdown("---")
                     st.success("## ✅ AI ANALYSIS COMPLETE!")
-
-                    # Strategic Insights - prominent placement
-                    if analysis_result.get('strategic_insights'):
-                        st.markdown("### 🎯 Strategic Insight")
-                        st.info(analysis_result['strategic_insights'])
 
                     # Display recommendations by category
                     recommendations = analysis_result.get('recommendations', [])
