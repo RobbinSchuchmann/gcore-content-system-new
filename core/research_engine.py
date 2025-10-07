@@ -353,9 +353,37 @@ class ResearchEngine:
                 import json
                 # If content is JSON, parse it directly
                 structured_data = json.loads(content)
-            except json.JSONDecodeError:
-                # Content is not JSON, use fallback extraction
-                pass
+            except json.JSONDecodeError as e:
+                # Try to extract JSON from markdown code blocks or mixed content
+                import re
+                # Look for JSON in code blocks
+                json_pattern = r'```(?:json)?\s*(\{.*?\})\s*```'
+                json_match = re.search(json_pattern, content, re.DOTALL)
+                if json_match:
+                    try:
+                        structured_data = json.loads(json_match.group(1))
+                    except json.JSONDecodeError:
+                        pass
+
+                # Try to find raw JSON object in content
+                if not structured_data:
+                    json_obj_pattern = r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}'
+                    json_matches = re.findall(json_obj_pattern, content, re.DOTALL)
+                    for match in json_matches:
+                        try:
+                            structured_data = json.loads(match)
+                            # Validate it has expected fields
+                            if 'facts' in structured_data or 'statistics' in structured_data:
+                                break
+                            structured_data = None
+                        except json.JSONDecodeError:
+                            continue
+
+                # If still no structured data, log and use fallback
+                if not structured_data:
+                    import logging
+                    logging.warning(f"Failed to parse JSON from Perplexity response. Content preview: {content[:200]}")
+                    logging.debug(f"JSON parsing error: {str(e)}")
         
         # If we have structured data, use it directly
         if structured_data and isinstance(structured_data, dict):
@@ -580,65 +608,98 @@ class ResearchEngine:
         import re
         facts = []
         seen_facts = set()  # Avoid duplicates
-        lines = content.split('\n')
-        
-        # Pattern 1: Definition patterns
+
+        # Split content into sentences first (better than lines)
+        # Handle multiple sentence endings and preserve structure
+        sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z])', content)
+
+        # Pattern 1: Definition patterns (complete sentences)
         definition_patterns = [
-            r'^[\w\s]+ (?:is|are|refers to|means|involves|consists of|represents) .+',
-            r'^[\w\s]+ (?:can be defined as|is defined as|is known as) .+',
-            r'^(?:A |An |The )?[\w\s]+ (?:is a|is an|are) .+'
+            r'^[A-Z][\w\s,]+ (?:is|are|refers to|means|involves|consists of|represents) [^.]+\.',
+            r'^[A-Z][\w\s,]+ (?:can be defined as|is defined as|is known as) [^.]+\.',
+            r'^(?:A |An |The )?[A-Z][\w\s,]+ (?:is a|is an|are) [^.]+\.'
         ]
-        
-        # Pattern 2: Statistical/numerical facts
-        stat_fact_pattern = r'.+\d+(?:\.\d+)?(?:%|\s*percent|\s*times|x|\s*fold).+'
-        
-        # Pattern 3: Feature/characteristic descriptions
+
+        # Pattern 2: Statistical/numerical facts (complete sentences)
+        stat_fact_pattern = r'^[A-Z][^.]*\d+(?:\.\d+)?(?:%|\s*percent|\s*times|x|\s*fold)[^.]*\.'
+
+        # Pattern 3: Feature/characteristic descriptions (complete sentences)
         feature_patterns = [
-            r'.+(?:provides|offers|enables|allows|supports|includes|features) .+',
-            r'.+(?:capable of|used for|designed for|suitable for) .+'
+            r'^[A-Z][^.]*(?:provides|offers|enables|allows|supports|includes|features) [^.]+\.',
+            r'^[A-Z][^.]*(?:capable of|used for|designed for|suitable for) [^.]+\.'
         ]
-        
-        for line in lines:
-            line = line.strip().strip('•-*').strip()
-            if len(line) < 20 or len(line) > 300:  # Skip too short/long lines
+
+        # Pattern 4: Process and action facts
+        process_patterns = [
+            r'^[A-Z][^.]*(?:works by|operates by|functions by|processes|handles) [^.]+\.',
+            r'^(?:The|This) (?:system|technology|method|approach) [^.]*\.'
+        ]
+
+        # Process each sentence
+        for sentence in sentences:
+            sentence = sentence.strip()
+
+            # Skip too short or too long sentences
+            if len(sentence) < 20 or len(sentence) > 400:
                 continue
-            
-            # Check if line matches any pattern
+
+            # Ensure sentence ends with punctuation
+            if not sentence.endswith(('.', '!', '?')):
+                sentence = sentence + '.'
+
+            # Check if sentence matches any pattern
             is_fact = False
-            
+
             # Check definition patterns
             for pattern in definition_patterns:
-                if re.match(pattern, line, re.IGNORECASE):
+                if re.match(pattern, sentence):
                     is_fact = True
                     break
-            
+
             # Check statistical pattern
-            if not is_fact and re.match(stat_fact_pattern, line, re.IGNORECASE):
+            if not is_fact and re.match(stat_fact_pattern, sentence):
                 is_fact = True
-            
+
             # Check feature patterns
             if not is_fact:
                 for pattern in feature_patterns:
-                    if re.search(pattern, line, re.IGNORECASE):
+                    if re.match(pattern, sentence):
                         is_fact = True
                         break
-            
-            # Check for section headers that contain facts
-            if line.startswith(('KEY FACT:', 'FACT:', 'Important:', 'Note:')):
-                fact_text = re.sub(r'^[^:]+:\s*', '', line)
-                if fact_text and fact_text not in seen_facts:
-                    facts.append(fact_text)
-                    seen_facts.add(fact_text)
-            elif is_fact and line not in seen_facts:
-                facts.append(line)
-                seen_facts.add(line)
-        
-        # Extract facts from numbered lists
-        numbered_pattern = r'^\d+\.\s+(.+)'
+
+            # Check process patterns
+            if not is_fact:
+                for pattern in process_patterns:
+                    if re.match(pattern, sentence):
+                        is_fact = True
+                        break
+
+            # Add unique facts
+            if is_fact and sentence not in seen_facts:
+                facts.append(sentence)
+                seen_facts.add(sentence)
+
+        # Also extract from numbered/bulleted lists in original content
+        lines = content.split('\n')
         for line in lines:
-            match = re.match(numbered_pattern, line)
-            if match:
-                fact = match.group(1).strip()
+            line = line.strip()
+
+            # Check for numbered lists
+            numbered_match = re.match(r'^\d+\.\s+(.+)', line)
+            if numbered_match:
+                fact = numbered_match.group(1).strip()
+                if not fact.endswith('.'):
+                    fact += '.'
+                if fact and fact not in seen_facts and len(fact) > 20:
+                    facts.append(fact)
+                    seen_facts.add(fact)
+
+            # Check for bulleted lists
+            bullet_match = re.match(r'^[•\-\*]\s+(.+)', line)
+            if bullet_match:
+                fact = bullet_match.group(1).strip()
+                if not fact.endswith('.'):
+                    fact += '.'
                 if fact and fact not in seen_facts and len(fact) > 20:
                     facts.append(fact)
                     seen_facts.add(fact)
@@ -648,30 +709,34 @@ class ResearchEngine:
     def _extract_statistics(self, content: str) -> List[str]:
         """Extract statistics and numerical data with enhanced patterns"""
         import re
-        
+
         statistics = []
         seen_stats = set()
         lines = content.split('\n')
-        
+
         # Enhanced patterns for different types of statistics
         # Use full line capture to avoid truncation
         stat_patterns = [
-            # Percentages
-            (r'.*\d+(?:\.\d+)?\s*(?:%|percent).*', 'percentage'),
-            # Time measurements
-            (r'.*\d+(?:\.\d+)?\s*(?:ms|milliseconds?|seconds?|minutes?|hours?|days?|weeks?|months?|years?).*', 'time'),
-            # Data sizes
-            (r'.*\d+(?:\.\d+)?\s*(?:[KMGT]B|[kmgt]b|bytes?|kilobytes?|megabytes?|gigabytes?|terabytes?).*', 'size'),
-            # Speed/bandwidth
-            (r'.*\d+(?:\.\d+)?\s*(?:[KMG]bps|Mbps|Gbps|requests?/sec|ops/sec).*', 'speed'),
-            # Counts/quantities
-            (r'.*\d+(?:\.\d+)?\s*(?:billion|million|thousand|users?|servers?|locations?|PoPs?|nodes?).*', 'count'),
-            # Comparisons
-            (r'.*\d+(?:\.\d+)?\s*(?:x|times|fold)\s+(?:faster|slower|better|worse|more|less).*', 'comparison'),
-            # Monetary
-            (r'.*\$\d+(?:\.\d+)?(?:\s*[BMK])?(?:\s*(?:billion|million|thousand))?.*', 'monetary'),
-            # Uptime/availability
-            (r'.*\d+(?:\.\d+)?\s*(?:9s|nines|%\s*uptime|%\s*availability).*', 'availability')
+            # Percentages with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:%|percent)[^.]*\.', 'percentage'),
+            # Time measurements with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:ms|milliseconds?|seconds?|minutes?|hours?|days?|weeks?|months?|years?)[^.]*\.', 'time'),
+            # Data sizes with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:[KMGT]B|[kmgt]b|bytes?|kilobytes?|megabytes?|gigabytes?|terabytes?)[^.]*\.', 'size'),
+            # Speed/bandwidth with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:[KMG]bps|Mbps|Gbps|requests?/sec|ops/sec)[^.]*\.', 'speed'),
+            # Counts/quantities with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:billion|million|thousand|users?|servers?|locations?|PoPs?|nodes?)[^.]*\.', 'count'),
+            # Comparisons with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:x|times|fold)\s+(?:faster|slower|better|worse|more|less)[^.]*\.', 'comparison'),
+            # Monetary with context
+            (r'[^.]*\$\d+(?:\.\d+)?(?:\s*[BMK])?(?:\s*(?:billion|million|thousand))?[^.]*\.', 'monetary'),
+            # Uptime/availability with context
+            (r'[^.]*\d+(?:\.\d+)?\s*(?:9s|nines|%\s*uptime|%\s*availability)[^.]*\.', 'availability'),
+            # Year-based statistics (e.g., "In 2024, X increased by Y%")
+            (r'(?:In|By|Since)\s+20\d{2}[^.]*\d+(?:\.\d+)?(?:%|percent|million|billion)[^.]*\.', 'yearly'),
+            # Growth/change statistics
+            (r'[^.]*(?:increased|decreased|grew|declined|rose|fell)\s+by\s+\d+(?:\.\d+)?(?:%|percent)[^.]*\.', 'growth')
         ]
         
         for i, line in enumerate(lines):

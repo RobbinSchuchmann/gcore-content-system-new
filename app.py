@@ -1102,6 +1102,9 @@ if selected_mode == "📝 New Content":
                         st.session_state.content_brief['primary_keyword'] = st.session_state.serp_analysis['keyword']
                         st.session_state.content_brief['headings'] = headings
 
+                        # Trigger automatic research after competitor analysis
+                        st.session_state.content_brief['trigger_research'] = True
+
                         # Move to Step 1
                         st.session_state.current_step = 1
                         st.success("✅ Heading structure applied! Proceeding to Content Brief...")
@@ -1165,6 +1168,9 @@ if selected_mode == "📝 New Content":
                         # Update content brief with suggestions
                         st.session_state.content_brief['primary_keyword'] = st.session_state.serp_analysis['keyword']
                         st.session_state.content_brief['headings'] = headings
+
+                        # Trigger automatic research after competitor analysis
+                        st.session_state.content_brief['trigger_research'] = True
 
                         # Move to Step 1 for manual editing
                         st.session_state.current_step = 1
@@ -1350,14 +1356,13 @@ if selected_mode == "📝 New Content":
     
     elif st.session_state.current_step == 2:
         st.header("🔍 Step 2: Research Topic")
-        
+
         st.info(f"**Topic**: {st.session_state.content_brief['primary_keyword']}")
-        
-        use_perplexity = st.checkbox("Use Perplexity for research", value=PERPLEXITY_API_KEY is not None)
-        
-        if st.button("🚀 Start Research", type="primary"):
-            with st.spinner("Researching topic..."):
-                if use_perplexity and APIS_AVAILABLE:
+
+        # Trigger automatic research if coming from competitor analysis
+        if st.session_state.content_brief.get('trigger_research') and not st.session_state.content_brief.get('research_data'):
+            with st.spinner("🔬 Performing automatic research with Perplexity..."):
+                try:
                     research_engine = ResearchEngine()
                     research_result = research_engine.research_topic(
                         st.session_state.content_brief['primary_keyword'],
@@ -1365,46 +1370,126 @@ if selected_mode == "📝 New Content":
                         context="Focus on Gcore-relevant information about edge computing, CDN, and cloud infrastructure"
                     )
                     st.session_state.content_brief['research_data'] = research_result
-                else:
-                    # Fallback mock data
-                    st.session_state.content_brief['research_data'] = {
-                        'status': 'completed',
-                        'timestamp': datetime.now().isoformat(),
-                        'topic': st.session_state.content_brief['primary_keyword'],
-                        'data': {
-                            'facts': [
-                                f"Key fact about {st.session_state.content_brief['primary_keyword']}",
-                                "Edge computing reduces latency by processing data closer to users",
-                                "CDN improves performance by caching content globally",
-                                "Cloud infrastructure enables scalable applications"
-                            ],
-                            'statistics': [
-                                {'text': "99.99% uptime SLA for enterprise services"},
-                                {'text': "30ms average global latency"},
-                                {'text': "180+ Points of Presence worldwide"}
-                            ],
-                            'key_points': [
-                                "Scalability is essential for modern applications",
-                                "Performance optimization reduces costs",
-                                "Security must be built-in from the start"
-                            ],
-                            'examples': ["E-commerce platforms", "Video streaming services", "Gaming applications"],
-                            'sources': []
+                    st.session_state.content_brief['trigger_research'] = False
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Auto-research failed: {str(e)}")
+                    st.session_state.content_brief['research_data'] = None
+                    st.session_state.content_brief['trigger_research'] = False
+
+        # Manual research option (if auto-research didn't run or user wants to re-research)
+        if not st.session_state.content_brief.get('research_data'):
+            use_perplexity = st.checkbox("Use Perplexity for research", value=PERPLEXITY_API_KEY is not None)
+
+            if st.button("🚀 Start Research", type="primary"):
+                with st.spinner("Researching topic..."):
+                    if use_perplexity and APIS_AVAILABLE:
+                        research_engine = ResearchEngine()
+                        research_result = research_engine.research_topic(
+                            st.session_state.content_brief['primary_keyword'],
+                            st.session_state.content_brief['headings'],
+                            context="Focus on Gcore-relevant information about edge computing, CDN, and cloud infrastructure"
+                        )
+                        st.session_state.content_brief['research_data'] = research_result
+                    else:
+                        # Fallback mock data
+                        st.session_state.content_brief['research_data'] = {
+                            'status': 'completed',
+                            'timestamp': datetime.now().isoformat(),
+                            'topic': st.session_state.content_brief['primary_keyword'],
+                            'data': {
+                                'facts': [
+                                    f"Key fact about {st.session_state.content_brief['primary_keyword']}",
+                                    "Edge computing reduces latency by processing data closer to users",
+                                    "CDN improves performance by caching content globally",
+                                    "Cloud infrastructure enables scalable applications"
+                                ],
+                                'statistics': [
+                                    {'text': "99.99% uptime SLA for enterprise services"},
+                                    {'text': "30ms average global latency"},
+                                    {'text': "180+ Points of Presence worldwide"}
+                                ],
+                                'key_points': [
+                                    "Scalability is essential for modern applications",
+                                    "Performance optimization reduces costs",
+                                    "Security must be built-in from the start"
+                                ],
+                                'examples': ["E-commerce platforms", "Video streaming services", "Gaming applications"],
+                                'sources': []
+                            }
                         }
-                    }
-                st.success("✅ Research completed!")
-                st.rerun()
+                    st.success("✅ Research completed!")
+                    st.rerun()
         
         if st.session_state.content_brief.get('research_data'):
-            st.subheader("Research Results")
-            
-            research = st.session_state.content_brief['research_data'].get('data', {})
-            
-            # Display quality score if available
-            if research.get('quality_score'):
-                score = research['quality_score']['overall']
-                rating = research['quality_score']['rating']
-                st.metric("Research Quality", f"{score}/100 - {rating}")
+            research_data = st.session_state.content_brief['research_data']
+            research = research_data.get('data', {})
+            quality_score = research.get('quality_score', {})
+
+            st.markdown("---")
+
+            # Display quality score with enhanced UI
+            if quality_score:
+                st.markdown("### 🔬 Research Quality")
+
+                # Quality score display
+                col_score, col_rating, col_action = st.columns([1, 1, 1])
+
+                with col_score:
+                    score_value = quality_score.get('overall', 0)
+                    score_color = "🟢" if score_value >= 80 else "🟡" if score_value >= 60 else "🔴"
+                    st.metric("Research Score", f"{score_value}/100", delta=score_color)
+
+                with col_rating:
+                    rating = quality_score.get('rating', 'N/A')
+                    st.metric("Quality Rating", rating)
+
+                with col_action:
+                    if score_value < 60:
+                        if st.button("🔄 Re-research", help="Research quality is low, try again"):
+                            st.session_state.content_brief.pop('research_data', None)
+                            st.rerun()
+
+                # Research preview in expander
+                with st.expander("📊 Research Preview & Breakdown", expanded=score_value >= 60):
+                    # Score breakdown
+                    st.markdown("**Score Breakdown:**")
+                    score_cols = st.columns(5)
+                    with score_cols[0]:
+                        st.caption(f"Facts: {quality_score.get('facts_score', 0)}/25")
+                    with score_cols[1]:
+                        st.caption(f"Stats: {quality_score.get('statistics_score', 0)}/25")
+                    with score_cols[2]:
+                        st.caption(f"Examples: {quality_score.get('examples_score', 0)}/20")
+                    with score_cols[3]:
+                        st.caption(f"Complete: {quality_score.get('completeness', 0)}/20")
+                    with score_cols[4]:
+                        st.caption(f"Recency: {quality_score.get('recency', 0)}/10")
+
+                    st.markdown("---")
+
+                    # Show extracted data counts
+                    facts = research.get('facts', [])
+                    stats = research.get('statistics', [])
+                    examples = research.get('examples', [])
+
+                    if facts:
+                        st.markdown(f"**✓ {len(facts)} Facts Extracted**")
+                    if stats:
+                        st.markdown(f"**✓ {len(stats)} Statistics Found**")
+                    if examples:
+                        st.markdown(f"**✓ {len(examples)} Examples Identified**")
+
+                    # Coverage gaps
+                    coverage_gaps = research.get('coverage_gaps', [])
+                    if coverage_gaps:
+                        st.markdown("**⚠️ Coverage Gaps:**")
+                        for gap in coverage_gaps[:3]:
+                            st.caption(f"• {gap}")
+
+                st.markdown("---")
+
+            st.subheader("Research Data Preview")
             
             col1, col2 = st.columns(2)
             
@@ -2685,6 +2770,8 @@ elif selected_mode == "🔧 Content Optimization":
                             if analysis_result['success']:
                                 st.session_state.optimization_data['analysis_result'] = analysis_result
                                 st.session_state.optimization_data['analysis_complete'] = True
+                                # Trigger automatic research after analysis
+                                st.session_state.optimization_data['trigger_research'] = True
                                 st.success("✅ Analysis complete!")
                                 st.rerun()
                             else:
@@ -2820,6 +2907,127 @@ elif selected_mode == "🔧 Content Optimization":
                                     st.markdown("---")
                         else:
                             st.info("No sections are optimal yet - improvements recommended for all content")
+
+                    # Automatic Research Section
+                    st.markdown("---")
+
+                    # Trigger automatic research if not done yet
+                    if st.session_state.optimization_data.get('trigger_research') and not st.session_state.optimization_data.get('research_data'):
+                        with st.spinner("🔬 Performing research with Perplexity... This will enhance content quality..."):
+                            try:
+                                from core.research_engine import ResearchEngine
+
+                                research_engine = ResearchEngine()
+
+                                # Build headings list from recommendations
+                                research_headings = []
+                                for rec in recommendations:
+                                    if rec['action'] != 'remove':
+                                        research_headings.append({'text': rec['heading'], 'level': 'H2'})
+
+                                # Perform research
+                                research_result = research_engine.research_topic(
+                                    primary_keyword=st.session_state.optimization_data.get('primary_keyword', ''),
+                                    headings=research_headings[:10],  # Limit to top 10 headings
+                                    context="Content optimization for SEO"
+                                )
+
+                                if research_result['status'] == 'success':
+                                    st.session_state.optimization_data['research_data'] = research_result
+                                    st.session_state.optimization_data['trigger_research'] = False
+                                    st.rerun()
+                                else:
+                                    st.session_state.optimization_data['research_data'] = {
+                                        'status': 'error',
+                                        'data': {},
+                                        'quality_score': {'overall': 0, 'rating': 'Failed'}
+                                    }
+                                    st.session_state.optimization_data['trigger_research'] = False
+
+                            except Exception as e:
+                                st.error(f"Research failed: {str(e)}")
+                                st.session_state.optimization_data['research_data'] = {
+                                    'status': 'error',
+                                    'data': {},
+                                    'quality_score': {'overall': 0, 'rating': 'Failed'}
+                                }
+                                st.session_state.optimization_data['trigger_research'] = False
+
+                    # Display research results if available
+                    if st.session_state.optimization_data.get('research_data'):
+                        research_data = st.session_state.optimization_data['research_data']
+                        quality_score = research_data.get('data', {}).get('quality_score', {})
+
+                        st.markdown("### 🔬 Research Quality")
+
+                        # Quality score display
+                        col_score, col_rating, col_action = st.columns([1, 1, 1])
+
+                        with col_score:
+                            score_value = quality_score.get('overall', 0)
+                            score_color = "🟢" if score_value >= 80 else "🟡" if score_value >= 60 else "🔴"
+                            st.metric("Research Score", f"{score_value}/100", delta=score_color)
+
+                        with col_rating:
+                            rating = quality_score.get('rating', 'N/A')
+                            st.metric("Quality Rating", rating)
+
+                        with col_action:
+                            if score_value < 60:
+                                if st.button("🔄 Re-research", help="Research quality is low, try again"):
+                                    st.session_state.optimization_data['trigger_research'] = True
+                                    st.session_state.optimization_data.pop('research_data', None)
+                                    st.rerun()
+
+                        # Research preview in expander
+                        with st.expander("📊 Research Preview", expanded=score_value >= 60):
+                            data = research_data.get('data', {})
+
+                            # Score breakdown
+                            st.markdown("**Score Breakdown:**")
+                            score_cols = st.columns(5)
+                            with score_cols[0]:
+                                st.caption(f"Facts: {quality_score.get('facts_score', 0)}/25")
+                            with score_cols[1]:
+                                st.caption(f"Stats: {quality_score.get('statistics_score', 0)}/25")
+                            with score_cols[2]:
+                                st.caption(f"Examples: {quality_score.get('examples_score', 0)}/20")
+                            with score_cols[3]:
+                                st.caption(f"Complete: {quality_score.get('completeness', 0)}/20")
+                            with score_cols[4]:
+                                st.caption(f"Recency: {quality_score.get('recency', 0)}/10")
+
+                            st.markdown("---")
+
+                            # Show extracted data
+                            facts = data.get('facts', [])
+                            stats = data.get('statistics', [])
+                            examples = data.get('examples', [])
+
+                            if facts:
+                                st.markdown(f"**✓ {len(facts)} Facts Extracted**")
+                                for fact in facts[:3]:
+                                    fact_text = fact.get('text', fact) if isinstance(fact, dict) else fact
+                                    st.caption(f"• {fact_text[:100]}...")
+
+                            if stats:
+                                st.markdown(f"**✓ {len(stats)} Statistics Found**")
+                                for stat in stats[:3]:
+                                    stat_text = stat.get('text', stat) if isinstance(stat, dict) else stat
+                                    st.caption(f"• {stat_text[:100]}...")
+
+                            if examples:
+                                st.markdown(f"**✓ {len(examples)} Examples Identified**")
+                                for example in examples[:2]:
+                                    example_text = example if isinstance(example, str) else str(example)
+                                    st.caption(f"• {example_text[:100]}...")
+
+                            # Coverage gaps
+                            coverage_gaps = data.get('coverage_gaps', [])
+                            if coverage_gaps:
+                                st.markdown("**⚠️ Coverage Gaps:**")
+                                for gap in coverage_gaps[:3]:
+                                    st.caption(f"• {gap}")
 
                     # Action buttons
                     st.markdown("---")
