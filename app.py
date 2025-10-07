@@ -1022,7 +1022,8 @@ if selected_mode == "📝 New Content":
 
                     for i, section in enumerate(suggestions['h2_sections']):
                         with st.expander(f"**H2: {section['h2']}**", expanded=i<3):
-                            st.markdown(f"**Why include this:** {section['why']}")
+                            if section.get('why'):
+                                st.markdown(f"**Why include this:** {section['why']}")
 
                             if section.get('h3_subheadings'):
                                 st.markdown("**Suggested H3 subheadings:**")
@@ -1087,7 +1088,7 @@ if selected_mode == "📝 New Content":
                             headings.append({
                                 'text': faq.get('h2', 'Frequently Asked Questions'),
                                 'level': 'H2',
-                                'function': 'generate_faq_intro'
+                                'function': None  # No intro paragraph, just heading
                             })
 
                             for q in faq['questions']:
@@ -1151,7 +1152,7 @@ if selected_mode == "📝 New Content":
                             headings.append({
                                 'text': faq.get('h2', 'Frequently asked questions'),
                                 'level': 'H2',
-                                'function': 'generate_faq_intro'
+                                'function': None  # No intro paragraph, just heading
                             })
 
                             for q in faq['questions']:
@@ -1203,7 +1204,7 @@ if selected_mode == "📝 New Content":
                     {"text": "What are the essential {topic} technologies and tools?", "level": "H2", "function": "generate_listicle"},
                     {"text": "What are the key benefits of {topic}?", "level": "H2", "function": "generate_listicle"},
                     {"text": "How to implement {topic} best practices?", "level": "H2", "function": "generate_how_list"},
-                    {"text": "Frequently asked questions", "level": "H2", "function": "generate_faq_intro"},
+                    {"text": "Frequently asked questions", "level": "H2", "function": None},
                     {"text": "What's the difference between {topic} and traditional approaches?", "level": "H3", "function": "generate_differences"},
                     {"text": "Is {topic} more secure?", "level": "H3", "function": "generate_yes_no_answer"},
                     {"text": "What is {topic} posture management?", "level": "H3", "function": "generate_definition"},
@@ -2124,12 +2125,6 @@ if selected_mode == "📝 New Content":
             # Export configuration
             st.markdown("---")
             st.markdown("### 📤 Export to Google Docs")
-    
-            # Fixed settings for Google Docs export
-            export_format = "Google Docs Format"
-            include_sources = True  # Always include research sources
-            include_metadata = False  # Clean format without metadata
-            include_quality = False  # No quality scores in export
             
             # Generate export content based on format
             def generate_markdown():
@@ -2187,9 +2182,9 @@ if selected_mode == "📝 New Content":
                 return '\n'.join(md_content)
             
             def generate_html():
-                """Generate HTML format"""
+                """Generate HTML format with proper list handling"""
                 html_parts = []
-                
+
                 # HTML header
                 html_parts.append('<!DOCTYPE html>')
                 html_parts.append('<html lang="en">')
@@ -2197,11 +2192,6 @@ if selected_mode == "📝 New Content":
                 html_parts.append('    <meta charset="UTF-8">')
                 html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
                 html_parts.append(f'    <title>{export_content["metadata"]["primary_keyword"].title()}</title>')
-                
-                if include_metadata:
-                    html_parts.append(f'    <meta name="keywords" content="{export_content["metadata"]["primary_keyword"]}">')
-                    html_parts.append(f'    <meta name="generated" content="{datetime.now().isoformat()}">')
-                
                 html_parts.append('    <style>')
                 html_parts.append('        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ')
                 html_parts.append('               line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }')
@@ -2212,235 +2202,86 @@ if selected_mode == "📝 New Content":
                 html_parts.append('        li { margin: 8px 0; line-height: 1.6; }')
                 html_parts.append('        li strong { color: #333; }')
                 html_parts.append('        p { margin: 15px 0; }')
-                html_parts.append('        .metadata { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }')
-                html_parts.append('        .metadata dl { margin: 0; }')
-                html_parts.append('        .metadata dt { font-weight: bold; display: inline-block; width: 120px; }')
-                html_parts.append('        .metadata dd { display: inline; margin: 0; }')
                 html_parts.append('    </style>')
                 html_parts.append('</head>')
                 html_parts.append('<body>')
-                
-                # Metadata section
-                if include_metadata:
-                    html_parts.append('    <div class="metadata">')
-                    html_parts.append('        <h3>Document Information</h3>')
-                    html_parts.append('        <dl>')
-                    html_parts.append(f'            <dt>Keyword:</dt><dd>{export_content["metadata"]["primary_keyword"]}</dd><br>')
-                    html_parts.append(f'            <dt>Generated:</dt><dd>{datetime.now().strftime("%Y-%m-%d %H:%M")}</dd><br>')
-                    html_parts.append(f'            <dt>Word Count:</dt><dd>{export_content["metadata"]["word_count"]}</dd><br>')
-                    if include_quality and avg_quality > 0:
-                        html_parts.append(f'            <dt>Quality Score:</dt><dd>{avg_quality:.1f}%</dd>')
-                    html_parts.append('        </dl>')
-                    html_parts.append('    </div>')
-                
-                # Main content
+
+                # Title
                 html_parts.append(f'    <h1>{export_content["metadata"]["primary_keyword"].title()}</h1>')
-                
-                # Introduction - properly split into paragraphs
+
+                # Introduction
                 if export_content['content']['introduction']:
                     intro_paragraphs = export_content['content']['introduction'].split('\n\n')
                     for para in intro_paragraphs:
                         if para.strip():
-                            # Convert markdown bold to HTML
                             para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para.strip())
                             html_parts.append(f'    <p>{para_html}</p>')
                 
-                # Sections
+                # Sections with proper list handling
                 for section in export_content['content']['sections']:
                     level = section['level']
                     tag = 'h1' if level == 'H1' else 'h2' if level == 'H2' else 'h3'
                     html_parts.append(f'    <{tag}>{section["heading"]}</{tag}>')
-                    
-                    # Convert content to paragraphs and lists
+
                     content = section['content']
-                    
-                    # First, split by double newlines for paragraphs
                     paragraphs = content.split('\n\n')
-                    
-                    # Process each paragraph - but handle lists specially
+
                     i = 0
                     while i < len(paragraphs):
                         para = paragraphs[i].strip()
                         if not para:
                             i += 1
                             continue
-                            
-                        # Check if this is a numbered list (starts with number and period)
+
+                        # Handle numbered lists
                         if re.match(r'^\d+\.\s', para):
-                            # Check for intro text before the list
-                            intro_match = re.match(r'^(.+?)(?=\n?\d+\.\s)', para)
-                            if intro_match and not intro_match.group(1).strip().startswith('1.'):
-                                intro_text = intro_match.group(1).strip()
-                                html_parts.append(f'    <p>{intro_text}</p>')
-                            
-                            # Collect all numbered items from this paragraph and subsequent ones
                             all_numbered_items = []
-                            
-                            # Extract items from current paragraph
                             numbered_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', para, re.DOTALL)
                             all_numbered_items.extend(numbered_items)
-                            
-                            # Look ahead for more numbered items in next paragraphs
+
                             while i + 1 < len(paragraphs):
                                 next_para = paragraphs[i + 1].strip()
                                 if re.match(r'^\d+\.\s', next_para):
-                                    # This is a continuation of the list
                                     more_items = re.findall(r'\d+\.\s+(.+?)(?=\n?\d+\.|$)', next_para, re.DOTALL)
                                     all_numbered_items.extend(more_items)
                                     i += 1
                                 else:
                                     break
-                            
-                            # Now output all items in a single <ol>
+
                             if all_numbered_items:
                                 html_parts.append('    <ol>')
                                 for item in all_numbered_items:
-                                    # Convert markdown bold to HTML and clean up
-                                    item_text = item.strip()
-                                    # Fix incomplete sentences
-                                    if item_text.endswith('-') or item_text.endswith('affect'):
-                                        # Try to complete common patterns
-                                        if 'AES-' in item_text and item_text.endswith('-'):
-                                            item_text = item_text[:-1] + '256.'
-                                        elif item_text.endswith('which affect'):
-                                            item_text = item_text + ' 98.6% of organizations.'
-                                        elif item_text.endswith('affect'):
-                                            item_text = item_text + ' your security posture.'
-                                    # Also check for other incomplete patterns
-                                    if not item_text.rstrip().endswith(('.', '!', '?', ')', '"')):
-                                        # Sentence seems incomplete, add a period
-                                        item_text = item_text.rstrip() + '.'
-                                    item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item_text)
+                                    item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item.strip())
                                     html_parts.append(f'        <li>{item_html}</li>')
                                 html_parts.append('    </ol>')
-                            
                             i += 1
-                        
-                        # Check if this is a bullet list (contains bullet points)
+
+                        # Handle bullet lists
                         elif '•' in para:
-                            # Check for list introduction
-                            parts = para.split('\n')
-                            list_intro = None
                             bullet_items = []
-                            
-                            for part in parts:
+                            for part in para.split('\n'):
                                 if '•' in part:
-                                    # This line contains bullet points
                                     items = part.split('•')
-                                    # First item might be introduction text
-                                    if items[0].strip() and 'listed below' in items[0].lower():
-                                        list_intro = items[0].strip()
-                                    # Add all bullet items
                                     for item in items[1:]:
                                         if item.strip():
                                             bullet_items.append(item.strip())
-                                elif part.strip() and not bullet_items:
-                                    # This is likely the introduction
-                                    if 'listed below' in part.lower() or 'following' in part.lower():
-                                        list_intro = part.strip()
-                                elif part.strip():
-                                    # Additional bullet item on its own line
-                                    if part.strip().startswith('**'):
-                                        bullet_items.append(part.strip())
-                            
-                            # Output list introduction if present
-                            if list_intro:
-                                html_parts.append(f'    <p>{list_intro}</p>')
-                            
-                            # Output all bullet items in a single list
+
                             if bullet_items:
                                 html_parts.append('    <ul>')
                                 for item in bullet_items:
-                                    # Convert markdown bold to HTML
                                     item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
                                     html_parts.append(f'        <li>{item_html}</li>')
                                 html_parts.append('    </ul>')
-                            
                             i += 1
-                        
+
                         else:
                             # Regular paragraph
-                            para_text = para.strip()
-                            
-                            # Convert markdown bold to HTML
-                            para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para_text)
-                            
-                            # Clean up malformed punctuation from previous processing
-                            para_html = re.sub(r',\.\s*', '. ', para_html)  # Fix ",. " -> ". "
-                            para_html = re.sub(r',\s+([A-Z])', r'. \1', para_html)  # Fix ", Who" -> ". Who"
-                            para_html = re.sub(r',\s*$', '.', para_html)  # Fix sentences ending with comma
-                            
-                            # Fix periods that should be commas in lists
-                            para_html = re.sub(r'\. (ISO \d+)\. (GDPR)\.', r', \1, \2', para_html)  # Fix "SOC 2. ISO 27001. GDPR."
-                            para_html = re.sub(r'management\. (DDoS)', r'management, \1', para_html)  # Fix "management. DDoS"
-                            
-                            # Fix content generation errors
-                            para_html = para_html.replace('cooperation cloud security', 'comprehensive cloud security')
-                            
-                            # Check if paragraph is very long and needs splitting
-                            word_count = len(para_html.split())
-                            
-                            if word_count > 120:  # Only split very long paragraphs
-                                # Split on sentence boundaries more carefully
-                                # First, protect common abbreviations by temporarily replacing them
-                                protected_text = para_html
-                                abbreviations = ['Mr.', 'Mrs.', 'Dr.', 'Prof.', 'Inc.', 'Ltd.', 'Corp.', 'vs.', 'etc.', 'i.e.', 'e.g.']
-                                temp_replacements = {}
-                                
-                                for i, abbrev in enumerate(abbreviations):
-                                    placeholder = f"__ABBREV_{i}__"
-                                    temp_replacements[placeholder] = abbrev
-                                    protected_text = protected_text.replace(abbrev, placeholder)
-                                
-                                # Now split on period + space + capital letter
-                                sentences = re.split(r'\.\s+(?=[A-Z])', protected_text)
-                                
-                                # Restore abbreviations
-                                for j, sentence in enumerate(sentences):
-                                    for placeholder, abbrev in temp_replacements.items():
-                                        sentence = sentence.replace(placeholder, abbrev)
-                                    sentences[j] = sentence
-                                
-                                if len(sentences) > 1:
-                                    # Group sentences into smaller paragraphs (max 60 words each)
-                                    current_para = []
-                                    current_word_count = 0
-                                    
-                                    for sentence in sentences:
-                                        sentence = sentence.strip()
-                                        if not sentence:
-                                            continue
-                                            
-                                        # Ensure sentence ends with proper punctuation
-                                        if not sentence.endswith(('.', '!', '?', ':', ';')):
-                                            sentence += '.'
-                                            
-                                        sentence_words = len(sentence.split())
-                                        
-                                        # If adding this sentence would make paragraph too long, start new one
-                                        if current_word_count > 0 and current_word_count + sentence_words > 60:
-                                            if current_para:
-                                                html_parts.append(f'    <p>{" ".join(current_para)}</p>')
-                                            current_para = [sentence]
-                                            current_word_count = sentence_words
-                                        else:
-                                            current_para.append(sentence)
-                                            current_word_count += sentence_words
-                                    
-                                    # Add remaining sentences
-                                    if current_para:
-                                        html_parts.append(f'    <p>{" ".join(current_para)}</p>')
-                                else:
-                                    # No good split points found, keep as single paragraph
-                                    html_parts.append(f'    <p>{para_html}</p>')
-                            else:
-                                # Paragraph is reasonable length, keep as is
-                                html_parts.append(f'    <p>{para_html}</p>')
-                            
+                            para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para)
+                            html_parts.append(f'    <p>{para_html}</p>')
                             i += 1
                 
-                # Sources
-                if include_sources and st.session_state.content_brief.get('research_data'):
+                # Sources - always include for new content
+                if st.session_state.content_brief.get('research_data'):
                     research = st.session_state.content_brief['research_data'].get('data', {})
                     if research.get('sources'):
                         html_parts.append('    <hr>')
@@ -2450,7 +2291,7 @@ if selected_mode == "📝 New Content":
                             if isinstance(source, dict):
                                 url = source.get("url", "").strip()
                                 title = source.get("title", "").strip()
-                                
+
                                 # Only include sources with proper URL and title
                                 if url and title and url.startswith('http') and len(title) > 3:
                                     html_parts.append(f'        <li><a href="{url}">{title}</a></li>')
@@ -2462,18 +2303,8 @@ if selected_mode == "📝 New Content":
                 
                 html_parts.append('</body>')
                 html_parts.append('</html>')
-                
-                # Post-process to merge consecutive <ul> tags into single lists
-                html_content = '\n'.join(html_parts)
-                
-                # Merge consecutive </ul>\n    <ul> patterns
-                html_content = re.sub(r'</ul>\s*<ul>', '', html_content)
-                
-                # Convert all <ul> to <ol> for better Google Sheets compatibility
-                html_content = html_content.replace('<ul>', '<ol>')
-                html_content = html_content.replace('</ul>', '</ol>')
-                
-                return html_content
+
+                return '\n'.join(html_parts)
             
             def generate_text():
                 """Generate plain text format"""
