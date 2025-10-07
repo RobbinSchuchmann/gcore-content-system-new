@@ -64,7 +64,11 @@ IMPROVEMENTS TO MAKE:
    - "Let's dive into" → "Let's explore"
    - "It's important to understand" → just explain it directly
 
-5. Replace em-dashes with commas or periods for more natural punctuation
+5. CRITICAL: Replace ALL em-dashes (—) with commas, periods, or parentheses:
+   - "botnets—networks of devices" → "botnets (networks of devices)" or "botnets, which are networks of devices,"
+   - "400 Gbps—enough to" → "400 Gbps, enough to" or "400 Gbps. This is enough to"
+   - Search specifically for the — character and replace EVERY instance
+   - Exception: Keep en-dashes (–) for number ranges like "20-30%"
 
 6. Use active voice and direct language where possible
 

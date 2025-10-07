@@ -434,6 +434,8 @@ Provide your suggestions in this exact format:
 - What are the requirements for [keyword]?
 - How does [concept] apply to [keyword]?
 
+IMPORTANT: DO NOT include "Strategic Insights" as an H3 under the FAQ section. Strategic Insights should be a separate section at the end.
+
 ## Strategic Insights:
 [2-3 sentences explaining your overall strategy and why this structure will outperform competitors]
 
@@ -468,8 +470,9 @@ Provide your suggestions in this exact format:
             suggestions['h1'] = h1_match.group(1).strip()
 
         # Extract H2 sections with H3s and explanations
+        # Note: Use [^\n]+ for Why field to capture full line without newlines
         h2_sections = re.findall(
-            r'### H2: (.+?)\n\*\*Why:\*\* (.+?)(?:\n\*\*H3 subheadings:\*\*\n((?:- .+\n?)+))?',
+            r'### H2: (.+?)\n\*\*Why:\*\* ([^\n]+?)(?:\n\*\*H3 subheadings:\*\*\n((?:- .+\n?)+))?',
             response_text,
             re.MULTILINE | re.DOTALL
         )
