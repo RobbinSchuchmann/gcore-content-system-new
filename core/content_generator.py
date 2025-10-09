@@ -1299,14 +1299,14 @@ class ContentGenerator:
             for line in lines:
                 # For listicle format, ensure bullet points and bold terms
                 if ':' in line:
-                    # Check if it already has a bullet
-                    if not line.strip().startswith('•'):
-                        # Add bullet point
+                    # Check if it already has a bullet or numbered list format
+                    if not line.strip().startswith('•') and not line.strip()[0].isdigit():
+                        # Add bullet point only if it's not a numbered list
                         parts = line.split(':', 1)
                         if len(parts) == 2:
                             term = parts[0].strip()
                             # Bold if not already bolded
-                            if '**' not in term and term and not term[0].isdigit():
+                            if '**' not in term and term:
                                 line = f"• **{term}**: {parts[1].strip()}"
                             else:
                                 line = f"• {line.strip()}"
