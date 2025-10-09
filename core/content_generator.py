@@ -165,23 +165,37 @@ class ContentGenerator:
         return cleaned_content
     
     def _fix_format_mixing(self, content: str) -> str:
-        """Fix HTML/Markdown format mixing issues"""
+        """Fix HTML/Markdown format mixing issues and remove meta-commentary"""
         import re
-        
+
         # Remove markdown headings that shouldn't be in content
         # These appear when Claude adds extra structure
         content = re.sub(r'^#{1,6}\s+.*$', '', content, flags=re.MULTILINE)
-        
+
+        # Remove meta-commentary patterns that become H3s in HTML
+        meta_commentary_patterns = [
+            r'^##?\s*Strategic Insights:.*$',
+            r'^This structure outperforms.*$',
+            r'^This approach.*competitor.*$',
+            r'^Q:.*$',  # Remove Q: format questions
+            r'^A:.*$',  # Remove A: format answers
+            r'^Analysis:.*$',
+            r'^Note about.*$',
+            r'^Meta-commentary:.*$',
+        ]
+        for pattern in meta_commentary_patterns:
+            content = re.sub(pattern, '', content, flags=re.MULTILINE | re.IGNORECASE)
+
         # Clean up any double line breaks created by heading removal
         content = re.sub(r'\n{3,}', '\n\n', content)
-        
+
         # Remove any standalone markdown formatting
         content = re.sub(r'^\*\*([^*]+)\*\*$', r'\1', content, flags=re.MULTILINE)  # **text** on own line
         content = re.sub(r'^\*([^*]+)\*$', r'\1', content, flags=re.MULTILINE)      # *text* on own line
-        
+
         # Clean up extra whitespace
         content = content.strip()
-        
+
         return content
     
     def _remove_duplicate_statistics_from_content(self, content: str) -> str:
@@ -378,6 +392,9 @@ class ContentGenerator:
 
             # Deep humanization pass - automatic for all content
             humanized_content = self._deep_humanize_content(processed_content, pattern_type)
+
+            # Fix format mixing AGAIN after humanization (catch any markdown added during humanization)
+            humanized_content = self._fix_format_mixing(humanized_content)
 
             # Check if content could benefit from table format
             table_data = None
@@ -1682,6 +1699,9 @@ Return ONLY the improved content. No explanations or notes.'''
 
                 # Deep humanization for introduction
                 humanized_content = self._deep_humanize_content(cleaned_content, 'introduction')
+
+                # Fix format mixing AGAIN after humanization
+                humanized_content = self._fix_format_mixing(humanized_content)
 
             except Exception as e:
                 return {

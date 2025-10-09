@@ -2313,6 +2313,11 @@ if selected_mode == "📝 New Content":
                             i += 1
                             continue
 
+                        # Skip markdown headings (they shouldn't be in content)
+                        if re.match(r'^#{1,6}\s', para):
+                            i += 1
+                            continue
+
                         # Handle numbered lists
                         if re.match(r'^\d+\.\s', para):
                             all_numbered_items = []
@@ -2339,12 +2344,27 @@ if selected_mode == "📝 New Content":
                         # Handle bullet lists
                         elif '•' in para:
                             bullet_items = []
+                            # Process current paragraph
                             for part in para.split('\n'):
                                 if '•' in part:
                                     items = part.split('•')
                                     for item in items[1:]:
                                         if item.strip():
                                             bullet_items.append(item.strip())
+
+                            # Look ahead for more consecutive bullet items
+                            while i + 1 < len(paragraphs):
+                                next_para = paragraphs[i + 1].strip()
+                                if '•' in next_para:
+                                    for part in next_para.split('\n'):
+                                        if '•' in part:
+                                            items = part.split('•')
+                                            for item in items[1:]:
+                                                if item.strip():
+                                                    bullet_items.append(item.strip())
+                                    i += 1
+                                else:
+                                    break
 
                             if bullet_items:
                                 html_parts.append('    <ul>')
@@ -3695,6 +3715,11 @@ elif selected_mode == "🔧 Content Optimization":
                         i += 1
                         continue
 
+                    # Skip markdown headings (they shouldn't be in content)
+                    if re.match(r'^#{1,6}\s', para):
+                        i += 1
+                        continue
+
                     # Handle numbered lists
                     if re.match(r'^\d+\.\s', para):
                         all_numbered_items = []
@@ -3721,12 +3746,27 @@ elif selected_mode == "🔧 Content Optimization":
                     # Handle bullet lists
                     elif '•' in para:
                         bullet_items = []
+                        # Process current paragraph
                         for part in para.split('\n'):
                             if '•' in part:
                                 items = part.split('•')
                                 for item in items[1:]:
                                     if item.strip():
                                         bullet_items.append(item.strip())
+
+                        # Look ahead for more consecutive bullet items
+                        while i + 1 < len(paragraphs):
+                            next_para = paragraphs[i + 1].strip()
+                            if '•' in next_para:
+                                for part in next_para.split('\n'):
+                                    if '•' in part:
+                                        items = part.split('•')
+                                        for item in items[1:]:
+                                            if item.strip():
+                                                bullet_items.append(item.strip())
+                                i += 1
+                            else:
+                                break
 
                         if bullet_items:
                             html_parts.append('    <ul>')
