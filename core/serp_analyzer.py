@@ -393,8 +393,14 @@ Create a comprehensive heading structure that:
 1. Covers all essential topics from competitors
 2. Converts all H2 headings to question format
 3. Identifies and fills content gaps
-4. Includes a FAQ section with 5-7 question-format H3s
-5. Uses natural, user-focused language
+4. ALWAYS includes a CTA section in question format (e.g., "How can Gcore help with [keyword]?")
+5. Includes a FAQ section with 5-7 question-format H3s as the LAST section
+6. Uses natural, user-focused language
+
+**CORRECT ARTICLE ORDER:**
+1. Main educational H2 sections (What is, How does, What are, etc.)
+2. CTA section (H2: "How can Gcore help..." - comes after main content)
+3. FAQ section (H2: "Frequently asked questions" with H3 questions - MUST BE LAST)
 
 **OUTPUT FORMAT:**
 Provide your suggestions in this exact format:
@@ -424,7 +430,14 @@ Provide your suggestions in this exact format:
 **H3 subheadings:**
 - [Optional H3 if needed]
 
-## FAQ Section:
+## CTA Section (REQUIRED):
+
+### H2: How can Gcore help with [keyword]?
+**Why:** Natural call-to-action positioned as helpful question - signals to VA that Gcore service CTA is needed
+**H3 subheadings:**
+- [Optional product-specific H3 if needed]
+
+## FAQ Section (MUST BE LAST):
 
 ### H2: Frequently asked questions
 **H3 Questions:**
@@ -434,10 +447,15 @@ Provide your suggestions in this exact format:
 - What are the requirements for [keyword]?
 - How does [concept] apply to [keyword]?
 
-IMPORTANT: DO NOT include "Strategic Insights" as an H3 under the FAQ section. Strategic Insights should be a separate section at the end.
+IMPORTANT STRUCTURE RULES:
+- Main educational H2 sections come first
+- CTA section comes after main content (before FAQ)
+- FAQ section is ALWAYS the very last H2 in the article
+- DO NOT include "Strategic Insights" as an H3 under the FAQ section
+- The CTA H2 should be in question format like "How can Gcore help with X?" or "Why choose Gcore for X?"
 
-## Strategic Insights:
-[2-3 sentences explaining your overall strategy and why this structure will outperform competitors]
+## Strategic Insights (Internal - not part of article):
+[2-3 sentences explaining your overall strategy and why this structure will outperform competitors - this is for planning purposes only and not included in the actual article structure]
 
 **CRITICAL RULES:**
 - ALL H2 headings (except "Frequently asked questions") MUST be questions

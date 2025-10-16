@@ -132,16 +132,15 @@
       "dynamic_product_data": true
     },
     "generate_faq_intro": {
-      "name": "FAQ Section Introduction (Skip - Optional)",
-      "description": "Brief intro for FAQ section - OPTIONAL, can be skipped",
-      "article_methodology": "FAQ Introduction (Optional)",
-      "prompt_template": "Write a brief introduction for an FAQ section about: {heading}\n\nREQUIREMENTS:\n1. Write exactly 2-3 sentences maximum\n2. First sentence should acknowledge common questions about the topic\n3. Second sentence should briefly mention what areas the FAQs will cover\n4. Keep it concise and direct - this is just a brief intro\n5. NO promotional language or company mentions\n6. Focus on setting context for the questions that follow\n\nEXAMPLE PATTERNS:\n\nExample 1:\nHeading: \"FAQs about CDN caching\"\nIntro: \"Common questions about CDN caching help clarify implementation details and performance expectations. These answers address technical requirements, costs, and integration considerations that organizations typically evaluate.\"\n\nExample 2:\nHeading: \"Frequently asked questions\"\nIntro: \"Organizations evaluating edge computing solutions often have similar concerns about deployment and performance. The following questions address the most common technical and operational considerations.\"\n\nExample 3:\nHeading: \"FAQs\"\nIntro: \"These frequently asked questions cover essential aspects of cloud infrastructure deployment. From security to scalability, these answers provide quick clarity on key decision factors.\"\n\nRULES:\n- Maximum 2-3 sentences\n- No bullet points or lists\n- Natural, conversational tone\n- Focus on helping readers find answers\n- \nWrite the FAQ introduction now:",
+      "name": "FAQ Section Introduction (NO CONTENT)",
+      "description": "NO intro text - FAQ section should only show the H2 heading",
+      "article_methodology": "No FAQ Introduction",
+      "prompt_template": "DO NOT GENERATE ANY CONTENT.\n\nThe FAQ section for: {heading}\n\nCRITICAL INSTRUCTION:\nDo NOT write any introduction paragraph or text.\nThe FAQ section should ONLY display the H2 heading \"Frequently asked questions\" with NO additional intro text.\nThe H3 questions will follow immediately after the H2 heading.\n\nRETURN EMPTY STRING - NO CONTENT SHOULD BE GENERATED FOR THIS SECTION.\n\nWrite nothing:",
       "requirements": [
-        "2-3 sentences maximum",
-        "Acknowledge common questions",
-        "Preview FAQ topics briefly",
-        "Conversational tone",
-        "No promotional content"
+        "NO content generation",
+        "Empty output",
+        "H2 heading only (no intro text)",
+        "Questions follow immediately"
       ]
     },
     "generate_differences": {

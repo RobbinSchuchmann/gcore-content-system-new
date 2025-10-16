@@ -1204,6 +1204,7 @@ if selected_mode == "📝 New Content":
                     {"text": "What are the essential {topic} technologies and tools?", "level": "H2", "function": "generate_listicle"},
                     {"text": "What are the key benefits of {topic}?", "level": "H2", "function": "generate_listicle"},
                     {"text": "How to implement {topic} best practices?", "level": "H2", "function": "generate_how_list"},
+                    {"text": "How can Gcore help with {topic}?", "level": "H2", "function": "generate_intelligent_cta"},
                     {"text": "Frequently asked questions", "level": "H2", "function": None},
                     {"text": "What's the difference between {topic} and traditional approaches?", "level": "H3", "function": "generate_differences"},
                     {"text": "Is {topic} more secure?", "level": "H3", "function": "generate_yes_no_answer"},
