@@ -530,7 +530,7 @@ class ContentGenerator:
                 "STRATEGIC CITATION POLICY:",
                 "  - Only cite claims that truly need verification (market data, financial projections, technical specs)",
                 "  - Do NOT cite basic definitions, common processes, or general explanations",
-                "  - NEVER include citations in FAQ sections - keep FAQs clean and direct",
+                "  - FAQ sections: Generate full answer content BUT do NOT include citations - keep FAQs clean and direct",
                 "  - Maximum 5 citations per entire document (be very selective)",
                 "  - Maximum 1 citation per section (including introduction)",
                 "  - Focus citations on: market size, growth rates, performance claims, industry scale",
