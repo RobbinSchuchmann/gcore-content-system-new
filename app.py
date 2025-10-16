@@ -1696,12 +1696,23 @@ if selected_mode == "📝 New Content":
                     
                     for idx, heading in enumerate(st.session_state.content_brief['headings']):
                         heading_text = heading['text']
-                        function_name = heading.get('function', 'generate_definition')
-                        
+                        function_name = heading.get('function')  # Don't provide default - None is valid
+
                         progress = (idx + 1) / (total_headings + 1)
                         progress_bar.progress(progress)
                         status_text.text(f"Generating & humanizing: {heading_text}...")
-                        
+
+                        # Skip content generation for headings with function=None (e.g., FAQ H2)
+                        if function_name is None:
+                            # This heading should have NO content (just the heading itself)
+                            generated_content[heading_text] = {
+                                'content': '',  # Empty content for FAQ H2
+                                'word_count': 0,
+                                'function': None,
+                                'internal_links': []
+                            }
+                            continue
+
                         # Build generation context
                         generation_context = {
                             'include_gcore': include_gcore,
@@ -1710,7 +1721,7 @@ if selected_mode == "📝 New Content":
                             'gcore_product': st.session_state.content_brief.get('selected_product', 'cdn'),
                             'gcore_features': []  # Can be extended later for feature-specific CTAs
                         }
-                        
+
                         result = generator.generate_section(
                             heading=heading_text,
                             research_data=st.session_state.content_brief.get('research_data'),
@@ -1719,7 +1730,7 @@ if selected_mode == "📝 New Content":
                             function_name=function_name,
                             include_internal_links=enable_internal_links
                         )
-                        
+
                         if result['status'] == 'success':
                             generated_content[heading_text] = {
                                 'content': result['content'],
