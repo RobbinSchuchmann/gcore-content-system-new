@@ -1017,8 +1017,7 @@ if selected_mode == "📝 New Content":
 
                     for i, section in enumerate(suggestions['h2_sections']):
                         with st.expander(f"**H2: {section['h2']}**", expanded=i<3):
-                            if section.get('why'):
-                                st.markdown(f"**Why include this:** {section['why']}")
+                            # Note: 'why' field is internal reasoning and not displayed
 
                             if section.get('h3_subheadings'):
                                 st.markdown("**Suggested H3 subheadings:**")
