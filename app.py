@@ -1017,12 +1017,14 @@ if selected_mode == "📝 New Content":
 
                     for i, section in enumerate(suggestions['h2_sections']):
                         with st.expander(f"**H2: {section['h2']}**", expanded=i<3):
-                            # Note: 'why' field is internal reasoning and not displayed
-
+                            # Show H3 subheadings if they exist
                             if section.get('h3_subheadings'):
                                 st.markdown("**Suggested H3 subheadings:**")
                                 for h3 in section['h3_subheadings']:
                                     st.markdown(f"- {h3}")
+                            else:
+                                # Show a message if no H3s
+                                st.caption("No H3 subheadings suggested for this section")
 
                 # Display FAQ section
                 if suggestions.get('faq_section', {}).get('questions'):
