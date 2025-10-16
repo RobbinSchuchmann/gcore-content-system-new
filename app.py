@@ -221,22 +221,26 @@ def auto_detect_function(heading, section_functions, context=None):
     
     heading_lower = heading.lower().strip()
     auto_map = section_functions.get('auto_detection_map', {})
-    
+
     # Check if we're in FAQ context (H3 after FAQ H2)
     if context and context.get('in_faq_section') and context.get('heading_level') == 'H3':
         # All H3s in FAQ section should use FAQ answer format
         return "generate_faq_answer"
-    
+
+    # PRIORITY CHECK: Detect CTA/Gcore headings first (before other patterns)
+    if 'gcore' in heading_lower or 'how can gcore' in heading_lower or 'why choose gcore' in heading_lower:
+        return "generate_intelligent_cta"
+
     # Check for exact matches first
     for pattern, function in auto_map.items():
         if heading_lower.startswith(pattern):
             return function
-    
+
     # Check for keywords anywhere in heading
     for pattern, function in auto_map.items():
         if pattern in heading_lower:
             return function
-    
+
     return "generate_definition"
 
 def parse_existing_content(content: str) -> Dict[str, Any]:
