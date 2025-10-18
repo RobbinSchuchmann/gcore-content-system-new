@@ -131,7 +131,7 @@
       ],
       "dynamic_product_data": true
     },
-    "generate_faq_intro": {
+    "generate__intro": {
       "name": "FAQ Section Introduction (NO CONTENT)",
       "description": "NO intro text - FAQ section should only show the H2 heading",
       "article_methodology": "No FAQ Introduction",
