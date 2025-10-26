@@ -137,31 +137,52 @@ class ContentGenerator:
     def _clean_competitor_mentions(self, content: str) -> str:
         """Remove competitor mentions and replace with generic terms"""
         import re
-        
-        # Define competitor replacement patterns
+
+        # Define competitor replacement patterns - COMPREHENSIVE LIST
         replacements = [
-            # Major cloud providers
-            (r'\b(?:AWS|Amazon Web Services|Amazon EC2)\b', 'major cloud providers'),
-            (r'\b(?:Microsoft Azure|Azure GPU|Azure ML|Azure)\b', 'enterprise cloud platforms'),
-            (r'\b(?:Google Cloud|Google Cloud Platform|GCP)\b', 'leading cloud platforms'),
-            
-            # Multiple competitors mentioned together  
+            # Multiple competitors mentioned together (check first for better matching)
             (r'\b(?:AWS|Amazon),\s*(?:Azure|Microsoft),?\s*(?:and\s+)?(?:Google Cloud|GCP)\b', 'major cloud providers'),
             (r'\b(?:AWS|Amazon)\s*,\s*(?:Google Cloud|GCP)\s*,?\s*(?:and\s+)?(?:Azure|Microsoft)\b', 'leading cloud platforms'),
             (r'\b(?:Azure|Microsoft)\s*,\s*(?:AWS|Amazon)\s*,?\s*(?:and\s+)?(?:Google Cloud|GCP)\b', 'major cloud providers'),
-            
-            # Other competitors
-            (r'\b(?:Oracle Cloud|IBM Cloud|Alibaba Cloud|DigitalOcean)\b', 'cloud platforms'),
-            
-            # Generic patterns
-            (r'providers?\s+like\s+(?:AWS|Azure|Google Cloud)(?:\s*,\s*\w+)*', 'major cloud providers'),
-            (r'(?:AWS|Azure|Google Cloud)(?:\s*,\s*\w+)*\s+offers?', 'cloud providers offer'),
+
+            # CDN competitors (CRITICAL - mentioned in feedback)
+            (r'\b(?:Cloudflare|CloudFlare)\b', 'leading CDN providers'),
+            (r'\b(?:Akamai|Fastly|KeyCDN)\b', 'CDN providers'),
+            (r'\b(?:StackPath|BunnyCDN|CDN77)\b', 'content delivery networks'),
+
+            # Major cloud providers - AWS variations
+            (r'\bAWS\s+(?:Lambda|S3|EC2|CloudFront|Route\s*53)\b', 'serverless platforms'),
+            (r'\b(?:AWS|Amazon Web Services|Amazon EC2|Amazon S3|Amazon CloudFront)\b', 'major cloud providers'),
+
+            # Major cloud providers - Azure variations
+            (r'\bAzure\s+(?:GPU|ML|Functions|CDN|Blob Storage)\b', 'cloud infrastructure'),
+            (r'\b(?:Microsoft Azure|Azure)\b', 'enterprise cloud platforms'),
+
+            # Major cloud providers - Google variations
+            (r'\b(?:Google Cloud|Google Cloud Platform|GCP|Google Compute Engine)\b', 'leading cloud platforms'),
+
+            # Other cloud competitors
+            (r'\b(?:Oracle Cloud|OCI)\b', 'cloud platforms'),
+            (r'\b(?:IBM Cloud|IBM Bluemix)\b', 'cloud platforms'),
+            (r'\b(?:Alibaba Cloud|Aliyun)\b', 'cloud platforms'),
+            (r'\b(?:DigitalOcean|DO)\b', 'cloud hosting providers'),
+            (r'\b(?:Linode|Vultr)\b', 'cloud hosting providers'),
+            (r'\b(?:Heroku|Platform\.sh)\b', 'cloud platforms'),
+
+            # Hosting/infrastructure competitors
+            (r'\b(?:GoDaddy|Bluehost|HostGator)\b', 'hosting providers'),
+            (r'\b(?:Cloudinary|Imgix)\b', 'media optimization services'),
+
+            # Generic patterns with specific competitors
+            (r'providers?\s+like\s+(?:AWS|Azure|Google Cloud|Cloudflare)(?:\s*,\s*\w+)*', 'major cloud providers'),
+            (r'(?:AWS|Azure|Google Cloud|Cloudflare)(?:\s*,\s*\w+)*\s+offers?', 'cloud providers offer'),
+            (r'services?\s+such\s+as\s+(?:AWS|Azure|Google Cloud|Cloudflare)', 'cloud services'),
         ]
-        
+
         cleaned_content = content
         for pattern, replacement in replacements:
             cleaned_content = re.sub(pattern, replacement, cleaned_content, flags=re.IGNORECASE)
-        
+
         return cleaned_content
     
     def _fix_format_mixing(self, content: str) -> str:
@@ -615,17 +636,27 @@ class ContentGenerator:
             "",
             "COMPETITOR AVOIDANCE (CRITICAL - Gcore brand requirement):",
             "• NEVER mention specific competitors by name:",
-            "  - AWS, Amazon Web Services, Amazon EC2",
-            "  - Microsoft Azure, Azure GPU, Azure ML",
-            "  - Google Cloud, Google Cloud Platform, GCP",
-            "  - Oracle Cloud, IBM Cloud, Alibaba Cloud",
+            "  - Cloud providers: AWS, Amazon Web Services, Azure, Microsoft Azure, Google Cloud, GCP",
+            "  - CDN competitors: Cloudflare, Akamai, Fastly, KeyCDN, StackPath, BunnyCDN",
+            "  - Cloud platforms: Oracle Cloud, IBM Cloud, Alibaba Cloud, DigitalOcean, Linode, Vultr",
+            "  - Hosting: GoDaddy, Bluehost, HostGator, Heroku",
+            "  - Media services: Cloudinary, Imgix",
             "• Use generic terms instead:",
             "  - 'major cloud providers' instead of 'AWS, Azure, Google Cloud'",
-            "  - 'leading platforms' instead of specific company names",
+            "  - 'leading CDN providers' instead of 'Cloudflare, Akamai'",
+            "  - 'cloud hosting providers' instead of specific names",
             "  - 'enterprise cloud services' instead of Azure/AWS",
-            "  - 'cloud computing platforms' for general references",
+            "  - 'content delivery networks' for CDN references",
             "• Focus on capabilities and features, not company names",
             "• When examples are needed, use generic scenarios or 'Provider A/B'",
+            "",
+            "CURRENT DATA (CRITICAL - always use current year):",
+            "• Current year is 2025",
+            "• When citing statistics or data:",
+            "  - Use 2025 for current year references (NOT 2024 or earlier)",
+            "  - Say 'in 2025' or 'as of 2025' for recent statistics",
+            "  - For studies/reports, use '2025 study' or '2025 report'",
+            "  - NEVER reference 2024 or earlier years unless it's historical context",
             "",
             # Note: FORBIDDEN WORDS are now comprehensively covered at the beginning of the prompt
         ])
@@ -1203,6 +1234,47 @@ class ContentGenerator:
 
         return '\n\n'.join(varied_paragraphs)
 
+    def _update_outdated_years(self, content: str) -> str:
+        """
+        Update outdated years in statistics to current year (2025).
+        Feedback issue: stats mentioning 2024 or earlier should be updated.
+        """
+        import re
+        from datetime import datetime
+
+        # Get current year (2025)
+        current_year = 2025
+
+        # Common patterns where years appear in statistics
+        # Examples: "in 2024", "by 2023", "since 2022", "2024 study", "2024 report"
+
+        # Pattern 1: Standalone years in common contexts
+        # "in 2024" -> "in 2025", "by 2024" -> "by 2025"
+        year_patterns = [
+            (r'\bin\s+202[0-4]\b', f'in {current_year}'),
+            (r'\bby\s+202[0-4]\b', f'by {current_year}'),
+            (r'\bsince\s+202[0-4]\b', f'since {current_year}'),
+            (r'\bduring\s+202[0-4]\b', f'during {current_year}'),
+            (r'\bas of\s+202[0-4]\b', f'as of {current_year}'),
+        ]
+
+        for pattern, replacement in year_patterns:
+            content = re.sub(pattern, replacement, content, flags=re.IGNORECASE)
+
+        # Pattern 2: Year in study/report/data references
+        # "2024 study" -> "2025 study", "2024 report" -> "2025 report"
+        content = re.sub(r'\b202[0-4]\s+(study|report|survey|research|data|analysis|statistics)\b',
+                        f'{current_year} \\1', content, flags=re.IGNORECASE)
+
+        # Pattern 3: Year ranges ending in 2024 or earlier
+        # "2020-2024" -> "2020-2025", "2023-2024" -> "2023-2025"
+        content = re.sub(r'\b(\d{4})-202[0-4]\b', f'\\1-{current_year}', content)
+
+        # Pattern 4: Phrases like "As of 2024" at start of sentences
+        content = re.sub(r'As of 202[0-4],', f'As of {current_year},', content, flags=re.IGNORECASE)
+
+        return content
+
     def _post_process_content(self, content: str, pattern_type: str, heading: str, function_name: str = None) -> str:
         """Post-process generated content to ensure quality"""
 
@@ -1401,11 +1473,68 @@ class ContentGenerator:
         if len(content) < 50:
             # Content seems broken, return error message
             return f"Content generation incomplete. Please regenerate this section."
+
+        # CRITICAL: Validate CTA sections have proper content (feedback issue)
+        if is_cta_section:
+            word_count = len(content.split())
+            paragraphs = [p.strip() for p in content.split('\n\n') if p.strip()]
+
+            # Check word count
+            if word_count < 80:  # CTAs should be 3 paragraphs, ~100-150 words minimum
+                return f"CTA content too short ({word_count} words). Regenerate with minimum 100 words in 3 paragraphs."
+
+            # Check paragraph count - should have at least 3 substantial paragraphs
+            if len(paragraphs) < 3:
+                return f"CTA needs at least 3 paragraphs (found {len(paragraphs)}). Regenerate with proper structure."
+
+            # Check if CTA mentions Gcore (critical for brand visibility)
+            if 'gcore' not in content.lower():
+                return f"CTA must mention Gcore. Regenerate with proper Gcore context and value proposition."
         
         # Check for obviously broken content patterns
         if content.endswith(('Res.', 'Res:', '• **Res.', '**Res')):
             return f"Content generation was interrupted. Please regenerate this section."
-        
+
+        # CRITICAL: Check for random fragments and incomplete sentences (feedback issue)
+        # Common broken patterns: "Older versions like SSL", "Configure your", etc.
+        import re
+
+        # Check last line for incomplete fragments
+        lines = [line.strip() for line in content.split('\n') if line.strip()]
+        if lines:
+            last_line = lines[-1]
+
+            # Detect random fragments: short lines without proper ending punctuation
+            # or lines that end with prepositions/articles suggesting incompleteness
+            incomplete_patterns = [
+                r'like\s+[A-Z][a-z]*\s*$',  # "like SSL", "like TLS"
+                r'\b(?:the|a|an|your|their|our|its)\s*$',  # Ends with article/possessive
+                r'\b(?:by|with|from|to|for|in|on|at|of)\s+\w+\s*$',  # Ends with preposition + one word
+                r'^\w+\s+versions?\s+like\s+\w+\s*$',  # "Older versions like SSL"
+                r'^Configure\s+\w+\s*$',  # "Configure your"
+                r'^\w+\s+the\s*$',  # Incomplete phrase
+                r'such\s+as\s+\w+\s*$',  # "such as TLS"
+            ]
+
+            is_incomplete = False
+            for pattern in incomplete_patterns:
+                if re.search(pattern, last_line, re.IGNORECASE):
+                    is_incomplete = True
+                    break
+
+            # Also check if last line is suspiciously short and doesn't end properly
+            if not is_incomplete and len(last_line) < 30 and not last_line.endswith(('.', '!', '?', ':', ')')):
+                # Check if it's a bullet point or numbered list item
+                if not re.match(r'^\s*[\d•\-\*]', last_line):
+                    is_incomplete = True
+
+            if is_incomplete:
+                # Remove the incomplete last line/sentence
+                content = '\n'.join(lines[:-1])
+                # Add proper ending if needed
+                if content and not content.rstrip().endswith(('.', '!', '?')):
+                    content = content.rstrip() + '.'
+
         # Check for truncated sentences (ending with single letters)
         # Be more specific - only consider it truncated if it's a truly isolated single letter
         # not part of common patterns like "your X" being cut to "y"
@@ -1466,6 +1595,9 @@ class ContentGenerator:
 
         # Add sentence variety for more human-like writing (burstiness)
         content = self._add_sentence_variety(content, pattern_type)
+
+        # Update outdated years in statistics (feedback issue - 2024 should be 2025)
+        content = self._update_outdated_years(content)
 
         return content
 

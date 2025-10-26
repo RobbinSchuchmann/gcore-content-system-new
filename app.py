@@ -243,6 +243,41 @@ def auto_detect_function(heading, section_functions, context=None):
 
     return "generate_definition"
 
+def format_heading_text(heading: str) -> str:
+    """
+    Format heading text according to blog style guide
+    - Remove question marks from "How to" statements
+    - Keep question marks for actual questions
+    - Ensure sentence case
+    """
+    if not heading:
+        return heading
+
+    heading = heading.strip()
+
+    # Remove question mark from "How to" statements (these are instructions, not questions)
+    if heading.lower().startswith('how to ') and heading.endswith('?'):
+        heading = heading[:-1]  # Remove trailing ?
+
+    # Remove question mark from other imperative/instructional headings
+    instructional_patterns = [
+        'how to ',
+        'ways to ',
+        'steps to ',
+        'methods to ',
+        'tips for ',
+        'best practices for ',
+        'guide to '
+    ]
+
+    heading_lower = heading.lower()
+    for pattern in instructional_patterns:
+        if heading_lower.startswith(pattern) and heading.endswith('?'):
+            heading = heading[:-1]
+            break
+
+    return heading
+
 def parse_existing_content(content: str) -> Dict[str, Any]:
     """
     Parse existing content to extract structure and sections
@@ -1657,7 +1692,50 @@ if selected_mode == "📝 New Content":
         
         # Gcore context handled by dedicated CTA sections - no need to include globally
         include_gcore = False
-        
+
+        # Ensure CTA is always present before generation
+        def ensure_cta_present(headings, selected_product='cdn'):
+            """Ensure there's always a CTA section in the headings"""
+            if not headings:
+                return headings
+
+            # Check if any heading is already a CTA
+            has_cta = False
+            for heading in headings:
+                heading_lower = heading.get('text', '').lower()
+                if 'gcore' in heading_lower or heading.get('function') == 'generate_intelligent_cta':
+                    has_cta = True
+                    break
+
+            # If no CTA found, add one at the end
+            if not has_cta:
+                # Get product name for CTA
+                product_names = {
+                    'cdn': 'Gcore CDN',
+                    'edge_cloud': 'Gcore Edge Cloud',
+                    'ai_infrastructure': 'Gcore AI Infrastructure',
+                    'streaming': 'Gcore Streaming',
+                    'hosting': 'Gcore Hosting'
+                }
+                product_name = product_names.get(selected_product, 'Gcore')
+
+                cta_heading = {
+                    'text': f'{product_name} for your infrastructure',
+                    'level': 'H2',
+                    'function': 'generate_intelligent_cta'
+                }
+                headings.append(cta_heading)
+                st.info(f"✅ Added CTA section: {cta_heading['text']}")
+
+            return headings
+
+        # Validate and ensure CTA before generation
+        if 'headings' in st.session_state.content_brief:
+            st.session_state.content_brief['headings'] = ensure_cta_present(
+                st.session_state.content_brief['headings'],
+                st.session_state.content_brief.get('selected_product', 'cdn')
+            )
+
         if st.button("🚀 Generate Content", type="primary"):
             with st.spinner("Generating & humanizing content..."):
                 progress_bar = st.progress(0)
@@ -2237,8 +2315,11 @@ if selected_mode == "📝 New Content":
                         md_content.append(f"<!-- Quality Score: {avg_quality:.1f}% -->")
                     md_content.append("")
                 
-                # Add title
-                md_content.append(f"# {export_content['metadata']['primary_keyword'].title()}")
+                # Add title - use sentence case (capitalize first letter only)
+                title = export_content['metadata']['primary_keyword']
+                if title:
+                    title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+                md_content.append(f"# {title}")
                 md_content.append("")
                 
                 # Add introduction
@@ -2249,15 +2330,17 @@ if selected_mode == "📝 New Content":
                 # Add sections
                 for section in export_content['content']['sections']:
                     level = section['level']
+                    # Format heading text (remove ? from "How to" statements)
+                    formatted_heading = format_heading_text(section['heading'])
                     if level == 'H1':
-                        md_content.append(f"# {section['heading']}")
+                        md_content.append(f"# {formatted_heading}")
                     elif level == 'H2':
-                        md_content.append(f"## {section['heading']}")
+                        md_content.append(f"## {formatted_heading}")
                     elif level == 'H3':
-                        md_content.append(f"### {section['heading']}")
+                        md_content.append(f"### {formatted_heading}")
                     else:
-                        md_content.append(f"## {section['heading']}")
-                    
+                        md_content.append(f"## {formatted_heading}")
+
                     md_content.append("")
                     md_content.append(section['content'])
                     md_content.append("")
@@ -2288,7 +2371,11 @@ if selected_mode == "📝 New Content":
                 html_parts.append('<head>')
                 html_parts.append('    <meta charset="UTF-8">')
                 html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
-                html_parts.append(f'    <title>{export_content["metadata"]["primary_keyword"].title()}</title>')
+                # Use sentence case for title (capitalize first letter only)
+                title = export_content["metadata"]["primary_keyword"]
+                if title:
+                    title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+                html_parts.append(f'    <title>{title}</title>')
                 html_parts.append('    <style>')
                 html_parts.append('        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ')
                 html_parts.append('               line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }')
@@ -2303,8 +2390,11 @@ if selected_mode == "📝 New Content":
                 html_parts.append('</head>')
                 html_parts.append('<body>')
 
-                # Title
-                html_parts.append(f'    <h1>{export_content["metadata"]["primary_keyword"].title()}</h1>')
+                # Title - use sentence case (capitalize first letter only)
+                h1_title = export_content["metadata"]["primary_keyword"]
+                if h1_title:
+                    h1_title = h1_title[0].upper() + h1_title[1:] if len(h1_title) > 1 else h1_title.upper()
+                html_parts.append(f'    <h1>{h1_title}</h1>')
 
                 # Introduction
                 if export_content['content']['introduction']:
@@ -2318,7 +2408,9 @@ if selected_mode == "📝 New Content":
                 for section in export_content['content']['sections']:
                     level = section['level']
                     tag = 'h1' if level == 'H1' else 'h2' if level == 'H2' else 'h3'
-                    html_parts.append(f'    <{tag}>{section["heading"]}</{tag}>')
+                    # Format heading text (remove ? from "How to" statements)
+                    formatted_heading = format_heading_text(section["heading"])
+                    html_parts.append(f'    <{tag}>{formatted_heading}</{tag}>')
 
                     content = section['content']
                     paragraphs = content.split('\n\n')
@@ -2472,10 +2564,14 @@ if selected_mode == "📝 New Content":
             
             def generate_json():
                 """Generate JSON format"""
+                # Use sentence case for title (capitalize first letter only)
+                title = export_content['metadata']['primary_keyword']
+                if title:
+                    title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
                 json_export = {
                     'metadata': export_content['metadata'],
                     'content': {
-                        'title': export_content['metadata']['primary_keyword'].title(),
+                        'title': title,
                         'introduction': export_content['content']['introduction'],
                         'sections': export_content['content']['sections']
                     }
@@ -3652,8 +3748,12 @@ elif selected_mode == "🔧 Content Optimization":
                 md_content.append(f"<!-- Export Date: {export_content['metadata']['timestamp']} -->")
                 md_content.append("")
 
-            # Title
-            md_content.append(f"# {export_content['metadata']['primary_keyword'].title()}")
+            # Title - use sentence case (capitalize first letter only)
+            title = export_content['metadata']['primary_keyword']
+            # Ensure first letter is capitalized, rest stays as-is
+            if title:
+                title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+            md_content.append(f"# {title}")
             md_content.append("")
 
             # Introduction
@@ -3665,7 +3765,9 @@ elif selected_mode == "🔧 Content Optimization":
             for section in export_content['content']['sections']:
                 heading_level = 2  # Default to H2 for optimized content sections
                 heading_prefix = "#" * heading_level
-                md_content.append(f"{heading_prefix} {section['heading']}")
+                # Format heading text (remove ? from "How to" statements)
+                formatted_heading = format_heading_text(section['heading'])
+                md_content.append(f"{heading_prefix} {formatted_heading}")
                 md_content.append("")
                 md_content.append(section['content'])
                 md_content.append("")
@@ -3692,7 +3794,11 @@ elif selected_mode == "🔧 Content Optimization":
             html_parts.append('<head>')
             html_parts.append('    <meta charset="UTF-8">')
             html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
-            html_parts.append(f'    <title>{export_content["metadata"]["primary_keyword"].title()}</title>')
+            # Use sentence case for title (capitalize first letter only)
+            title = export_content["metadata"]["primary_keyword"]
+            if title:
+                title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+            html_parts.append(f'    <title>{title}</title>')
             html_parts.append('    <style>')
             html_parts.append('        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ')
             html_parts.append('               line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }')
@@ -3707,8 +3813,11 @@ elif selected_mode == "🔧 Content Optimization":
             html_parts.append('</head>')
             html_parts.append('<body>')
 
-            # Title
-            html_parts.append(f'    <h1>{export_content["metadata"]["primary_keyword"].title()}</h1>')
+            # Title - use sentence case (capitalize first letter only)
+            h1_title = export_content["metadata"]["primary_keyword"]
+            if h1_title:
+                h1_title = h1_title[0].upper() + h1_title[1:] if len(h1_title) > 1 else h1_title.upper()
+            html_parts.append(f'    <h1>{h1_title}</h1>')
 
             # Introduction
             if export_content['content']['introduction']:
@@ -3720,7 +3829,9 @@ elif selected_mode == "🔧 Content Optimization":
 
             # Sections with proper list handling
             for section in export_content['content']['sections']:
-                html_parts.append(f'    <h2>{section["heading"]}</h2>')
+                # Format heading text (remove ? from "How to" statements)
+                formatted_heading = format_heading_text(section["heading"])
+                html_parts.append(f'    <h2>{formatted_heading}</h2>')
 
                 content = section['content']
                 paragraphs = content.split('\n\n')
@@ -3836,10 +3947,14 @@ elif selected_mode == "🔧 Content Optimization":
 
         def generate_json():
             """Generate JSON format"""
+            # Use sentence case for title (capitalize first letter only)
+            title = export_content['metadata']['primary_keyword']
+            if title:
+                title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
             json_export = {
                 'metadata': export_content['metadata'],
                 'content': {
-                    'title': export_content['metadata']['primary_keyword'].title(),
+                    'title': title,
                     'introduction': export_content['content']['introduction'],
                     'sections': export_content['content']['sections']
                 }
@@ -3857,8 +3972,11 @@ elif selected_mode == "🔧 Content Optimization":
             """Generate detailed change report"""
             report_parts = []
             
-            # Header
-            report_parts.append(f"# Optimization Report: {export_content['metadata']['primary_keyword'].title()}")
+            # Header - use sentence case for title
+            title = export_content['metadata']['primary_keyword']
+            if title:
+                title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+            report_parts.append(f"# Optimization Report: {title}")
             report_parts.append("")
             report_parts.append(f"**Generated**: {export_content['metadata']['timestamp']}")
             report_parts.append("")
