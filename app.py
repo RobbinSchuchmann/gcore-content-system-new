@@ -2918,7 +2918,7 @@ elif selected_mode == "🔧 Content Optimization":
 
             st.markdown("---")
             st.markdown("### 🔍 Add Competitor URLs")
-            st.markdown("Search Google for your keyword and paste 3-7 competitor URLs below:")
+            st.markdown("Search Google for your keyword and paste 2-3 competitor URLs below for comparison:")
 
             # Competitor URL input
             col_input, col_add = st.columns([4, 1])
@@ -2971,9 +2971,14 @@ elif selected_mode == "🔧 Content Optimization":
                             from core.serp_analyzer import SERPAnalyzer
 
                             analyzer = SERPAnalyzer()
+                            # Try to get 2 successful competitor fetches from the list
+                            # If scraping fails for some URLs, try more from the list
+                            all_competitor_urls = st.session_state.optimization_data['competitor_urls']
+                            competitor_urls = all_competitor_urls[:4]  # Try up to 4 to get 2 successful
+
                             analysis_result = analyzer.analyze_for_optimization(
                                 existing_url=st.session_state.optimization_data['url'],
-                                competitor_urls=st.session_state.optimization_data['competitor_urls'],
+                                competitor_urls=competitor_urls,
                                 keyword=st.session_state.optimization_data.get('primary_keyword', '')
                             )
 
@@ -3435,8 +3440,8 @@ elif selected_mode == "🔧 Content Optimization":
             indent = "    " if heading_level == 'H3' else ""
 
             if auto_accept:
-                # ACCEPT MODE: Simple view with function selector only
-                col1, col2, col3 = st.columns([3, 2, 0.5])
+                # ACCEPT MODE: Simple view with function selector and delete button
+                col1, col2, col3, col4 = st.columns([2.5, 1.5, 0.8, 0.5])
 
                 with col1:
                     # Show action badge with color
@@ -3475,11 +3480,33 @@ elif selected_mode == "🔧 Content Optimization":
                     heading['function'] = selected_function
 
                 with col3:
-                    st.write("")  # Spacing
+                    # Force rewrite checkbox for KEEP sections
+                    if action == 'keep':
+                        force_rewrite = st.checkbox(
+                            "Rewrite",
+                            value=heading.get('force_rewrite', False),
+                            key=f"rewrite_accept_{i}",
+                            help="Force regenerate this section even though it's marked as keep"
+                        )
+                        if force_rewrite:
+                            heading['action'] = 'improve'  # Change to improve so it gets regenerated
+                            heading['force_rewrite'] = True
+                        else:
+                            if heading.get('force_rewrite'):  # Was previously forced, now unchecked
+                                heading['action'] = 'keep'
+                                heading['force_rewrite'] = False
+                    else:
+                        st.write("")  # Spacing
+
+                with col4:
+                    # Delete button
+                    if st.button("🗑️", key=f"delete_accept_{i}", help="Remove this heading"):
+                        del optimized_headings[i]
+                        st.rerun()
 
             else:
                 # CUSTOMIZE MODE: Full editing controls
-                col1, col2, col3, col4, col5 = st.columns([0.3, 2.5, 1.5, 0.6, 0.6])
+                col1, col2, col3, col4, col5, col6, col7 = st.columns([0.3, 2, 1.3, 0.6, 0.4, 0.4, 0.4])
 
                 with col1:
                     st.write(f"{indent}{i+1}.")
@@ -3528,6 +3555,25 @@ elif selected_mode == "🔧 Content Optimization":
                     heading['function'] = selected_function
 
                 with col4:
+                    # Force rewrite checkbox for KEEP sections
+                    if action == 'keep':
+                        force_rewrite = st.checkbox(
+                            "✏️",
+                            value=heading.get('force_rewrite', False),
+                            key=f"rewrite_custom_{i}",
+                            help="Force regenerate this section"
+                        )
+                        if force_rewrite:
+                            heading['action'] = 'improve'
+                            heading['force_rewrite'] = True
+                        else:
+                            if heading.get('force_rewrite'):
+                                heading['action'] = 'keep'
+                                heading['force_rewrite'] = False
+                    else:
+                        st.write("")
+
+                with col5:
                     # Move up button
                     if i > 0:
                         if st.button("↑", key=f"up_{i}", help="Move up"):
@@ -3536,7 +3582,7 @@ elif selected_mode == "🔧 Content Optimization":
                     else:
                         st.write("")
 
-                with col5:
+                with col6:
                     # Move down button
                     if i < len(optimized_headings) - 1:
                         if st.button("↓", key=f"down_{i}", help="Move down"):
@@ -3544,6 +3590,12 @@ elif selected_mode == "🔧 Content Optimization":
                             st.rerun()
                     else:
                         st.write("")
+
+                with col7:
+                    # Delete button
+                    if st.button("🗑️", key=f"delete_{i}", help="Remove this heading"):
+                        del optimized_headings[i]
+                        st.rerun()
 
         # Show removed sections if we have AI recommendations
         if st.session_state.optimization_data.get('analysis_complete'):
@@ -3560,14 +3612,26 @@ elif selected_mode == "🔧 Content Optimization":
 
         # CTA Product Selection
         st.markdown("---")
-        with st.expander("🎯 CTA Product Settings", expanded=False):
-            st.markdown("**Configure product CTAs for optimized content**")
+        with st.expander("⚙️ Content Settings", expanded=False):
+            st.markdown("**Configure intro and CTA settings**")
+
+            # Intro rewrite option
+            st.markdown("#### Introduction")
+            rewrite_intro = st.checkbox(
+                "Regenerate introduction",
+                value=st.session_state.optimization_data.get('rewrite_intro', True),
+                help="Uncheck to keep the existing introduction, check to regenerate it"
+            )
+            st.session_state.optimization_data['rewrite_intro'] = rewrite_intro
+
+            st.markdown("---")
+            st.markdown("#### CTA Product")
 
             if APIS_AVAILABLE:
                 try:
                     from core.product_loader import product_loader
 
-                    products = product_loader.get_products()
+                    products = product_loader.get_product_list()
                     product_options = {"none": "No Product CTA"}
                     for product in products:
                         product_options[product['slug']] = f"{product['name']} - {product['category']}"
@@ -3625,21 +3689,36 @@ elif selected_mode == "🔧 Content Optimization":
                             total_headings = len([h for h in st.session_state.optimization_data['optimized_headings'] if h.get('action') != 'remove'])
                             processed = 0
 
-                            # Generate introduction
-                            status_text.text("Generating & humanizing introduction...")
-                            progress_bar.progress(0.05)
-                            intro_result = content_generator.generate_introduction(
-                                topic=st.session_state.optimization_data['primary_keyword'],
-                                headings=st.session_state.optimization_data.get('optimized_headings', []),
-                                research_data=st.session_state.optimization_data.get('research_data'),
-                                include_gcore=False
-                            )
+                            # Generate or keep introduction based on user choice
+                            rewrite_intro = st.session_state.optimization_data.get('rewrite_intro', True)
 
-                            if intro_result['status'] == 'success' and intro_result.get('content'):
-                                st.session_state.optimization_data['introduction'] = intro_result['content']
+                            if rewrite_intro:
+                                status_text.text("Generating & humanizing introduction...")
+                                progress_bar.progress(0.05)
+                                intro_result = content_generator.generate_introduction(
+                                    topic=st.session_state.optimization_data['primary_keyword'],
+                                    headings=st.session_state.optimization_data.get('optimized_headings', []),
+                                    research_data=st.session_state.optimization_data.get('research_data'),
+                                    include_gcore=False
+                                )
+
+                                if intro_result['status'] == 'success' and intro_result.get('content'):
+                                    st.session_state.optimization_data['introduction'] = intro_result['content']
+                                else:
+                                    keyword = st.session_state.optimization_data['primary_keyword']
+                                    st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
                             else:
-                                keyword = st.session_state.optimization_data['primary_keyword']
-                                st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
+                                # Keep existing intro from parsed content
+                                status_text.text("Keeping existing introduction...")
+                                progress_bar.progress(0.05)
+                                parsed = st.session_state.optimization_data.get('parsed_structure', {})
+                                existing_intro = parsed.get('introduction', '')
+                                if existing_intro:
+                                    st.session_state.optimization_data['introduction'] = existing_intro
+                                else:
+                                    # Fallback if no existing intro found
+                                    keyword = st.session_state.optimization_data['primary_keyword']
+                                    st.session_state.optimization_data['introduction'] = f"{keyword} is a fundamental aspect of modern technology infrastructure."
 
                             # Process each heading
                             for heading in st.session_state.optimization_data['optimized_headings']:
