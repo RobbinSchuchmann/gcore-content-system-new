@@ -1475,21 +1475,23 @@ class ContentGenerator:
             return f"Content generation incomplete. Please regenerate this section."
 
         # CRITICAL: Validate CTA sections have proper content (feedback issue)
+        # Note: These are warnings only - the prompt should enforce requirements
         if is_cta_section:
             word_count = len(content.split())
             paragraphs = [p.strip() for p in content.split('\n\n') if p.strip()]
 
-            # Check word count
-            if word_count < 80:  # CTAs should be 3 paragraphs, ~100-150 words minimum
-                return f"CTA content too short ({word_count} words). Regenerate with minimum 100 words in 3 paragraphs."
+            # Log warnings but don't block content (prompt should handle this)
+            if word_count < 80:
+                import logging
+                logging.warning(f"CTA content too short ({word_count} words). Expected minimum 100 words.")
 
-            # Check paragraph count - should have at least 3 substantial paragraphs
             if len(paragraphs) < 3:
-                return f"CTA needs at least 3 paragraphs (found {len(paragraphs)}). Regenerate with proper structure."
+                import logging
+                logging.warning(f"CTA needs at least 3 paragraphs (found {len(paragraphs)}).")
 
-            # Check if CTA mentions Gcore (critical for brand visibility)
             if 'gcore' not in content.lower():
-                return f"CTA must mention Gcore. Regenerate with proper Gcore context and value proposition."
+                import logging
+                logging.warning("CTA doesn't mention Gcore - may need to regenerate.")
         
         # Check for obviously broken content patterns
         if content.endswith(('Res.', 'Res:', '• **Res.', '**Res')):

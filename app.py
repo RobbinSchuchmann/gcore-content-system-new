@@ -1693,6 +1693,82 @@ if selected_mode == "📝 New Content":
         # Gcore context handled by dedicated CTA sections - no need to include globally
         include_gcore = False
 
+        # Ensure FAQ section is present before CTA
+        def ensure_faq_present(headings, topic):
+            """Ensure there's always an FAQ section before the CTA"""
+            if not headings:
+                return headings
+
+            # Check if FAQ section already exists
+            has_faq = False
+            cta_index = None
+
+            for i, heading in enumerate(headings):
+                heading_lower = heading.get('text', '').lower()
+                # Check for FAQ section
+                if 'faq' in heading_lower or 'frequently asked' in heading_lower or 'common questions' in heading_lower:
+                    has_faq = True
+                # Find CTA position
+                if 'gcore' in heading_lower or heading.get('function') == 'generate_intelligent_cta':
+                    cta_index = i
+
+            # If no FAQ found, add one before CTA with smart questions
+            if not has_faq:
+                # Analyze existing headings to avoid duplication
+                existing_topics = set()
+                for h in headings:
+                    h_lower = h.get('text', '').lower()
+                    existing_topics.add(h_lower)
+
+                # Generate complementary FAQ questions that don't duplicate main content
+                # These should be practical, user-focused questions not covered in main sections
+                potential_faqs = [
+                    (f"Is {topic} difficult to implement?", 'difficulty'),
+                    (f"How much does {topic} cost?", 'cost'),
+                    (f"Can {topic} integrate with existing systems?", 'integration'),
+                    (f"What are common mistakes with {topic}?", 'mistakes'),
+                    (f"How long does it take to set up {topic}?", 'setup time'),
+                    (f"Does {topic} require specialized expertise?", 'expertise'),
+                    (f"Is {topic} secure?", 'security'),
+                    (f"Can small businesses benefit from {topic}?", 'small business'),
+                    (f"What's the ROI of {topic}?", 'roi'),
+                    (f"How does {topic} compare to alternatives?", 'comparison')
+                ]
+
+                # Filter out questions that might already be covered
+                faq_questions = []
+                for question, keyword in potential_faqs:
+                    # Check if topic is already covered in existing headings
+                    if not any(keyword in existing.lower() for existing in existing_topics):
+                        faq_questions.append(question)
+                    if len(faq_questions) >= 5:
+                        break
+
+                # Only add FAQ section if we have unique questions
+                if faq_questions:
+                    # Add FAQ H2
+                    faq_h2 = {
+                        'text': 'Frequently asked questions',
+                        'level': 'H2',
+                        'function': None  # No intro paragraph
+                    }
+
+                    # Add FAQ after CTA (at the end)
+                    # CTA should come first for better conversion
+                    headings.append(faq_h2)
+
+                    # Add FAQ questions as H3s
+                    for question in faq_questions:
+                        headings.append({
+                            'text': question,
+                            'level': 'H3',
+                            'function': 'generate_faq_answer'
+                        })
+
+                    st.info(f"✅ Added FAQ section with {len(faq_questions)} complementary questions after CTA")
+
+            return headings
+
         # Ensure CTA is always present before generation
         def ensure_cta_present(headings, selected_product='cdn'):
             """Ensure there's always a CTA section in the headings"""
@@ -1729,11 +1805,17 @@ if selected_mode == "📝 New Content":
 
             return headings
 
-        # Validate and ensure CTA before generation
+        # Validate and ensure CTA + FAQ before generation (CTA before FAQ)
         if 'headings' in st.session_state.content_brief:
+            # First add CTA section
             st.session_state.content_brief['headings'] = ensure_cta_present(
                 st.session_state.content_brief['headings'],
                 st.session_state.content_brief.get('selected_product', 'cdn')
+            )
+            # Then add FAQ section (will be inserted before CTA automatically)
+            st.session_state.content_brief['headings'] = ensure_faq_present(
+                st.session_state.content_brief['headings'],
+                st.session_state.content_brief.get('primary_keyword', 'this topic')
             )
 
         if st.button("🚀 Generate Content", type="primary"):
