@@ -274,7 +274,7 @@ class QualityChecker:
             issues.append(f"{len(long_paragraphs)} paragraphs exceed max length")
         
         # Check for Gcore context inclusion
-        gcore_mentioned = any(term in content.lower() for term in ['gcore', '180+ pops', '30ms'])
+        gcore_mentioned = any(term in content.lower() for term in ['gcore', '210+ pops', '30ms'])
         if not gcore_mentioned:
             issues.append("No Gcore-specific context included")
             score -= 10

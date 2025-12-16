@@ -556,15 +556,16 @@ class ContentOptimizer:
     
     def _clean_content(self, content: str) -> str:
         """
-        Clean content by removing AI words and fixing quality issues
-        
+        Clean content by removing AI words, fixing quality issues,
+        applying American English spellings, and handling first-person pronouns
+
         Args:
             content: Content to clean
-            
+
         Returns:
             Cleaned content
         """
-        # Import AI word replacements
+        # AI word replacements
         ai_replacements = {
             'leverage': 'use',
             'utilize': 'use',
@@ -575,20 +576,172 @@ class ContentOptimizer:
             'thus': 'therefore',
             'hence': 'so'
         }
-        
+
+        # British to American English spelling corrections
+        british_to_american = {
+            'optimise': 'optimize',
+            'customise': 'customize',
+            'organise': 'organize',
+            'analyse': 'analyze',
+            'authorise': 'authorize',
+            'synchronise': 'synchronize',
+            'initialise': 'initialize',
+            'finalise': 'finalize',
+            'realise': 'realize',
+            'recognise': 'recognize',
+            'minimise': 'minimize',
+            'maximise': 'maximize',
+            'prioritise': 'prioritize',
+            'visualise': 'visualize',
+            'normalise': 'normalize',
+            'virtualise': 'virtualize',
+            'containerise': 'containerize',
+            'localise': 'localize',
+            'colour': 'color',
+            'behaviour': 'behavior',
+            'favour': 'favor',
+            'honour': 'honor',
+            'labour': 'labor',
+            'neighbour': 'neighbor',
+            'favourite': 'favorite',
+            'centre': 'center',
+            'metre': 'meter',
+            'fibre': 'fiber',
+            'catalogue': 'catalog',
+            'dialogue': 'dialog',
+            'defence': 'defense',
+            'offence': 'offense',
+            'licence': 'license',
+            'cancelled': 'canceled',
+            'labelled': 'labeled',
+            'travelled': 'traveled',
+            'modelled': 'modeled',
+            'grey': 'gray',
+            'judgement': 'judgment',
+            'acknowledgement': 'acknowledgment',
+            'programme': 'program'
+        }
+
+        # First-person pronoun replacements
+        first_person_replacements = {
+            'We recommend': 'The recommended approach is',
+            'we recommend': 'the recommended approach is',
+            'We suggest': 'Consider',
+            'we suggest': 'consider',
+            'We offer': 'Gcore offers',
+            'we offer': 'Gcore offers',
+            'We provide': 'Gcore provides',
+            'we provide': 'Gcore provides',
+            'We support': 'Gcore supports',
+            'we support': 'Gcore supports',
+            'We have': 'Gcore has',
+            'we have': 'Gcore has',
+            'We use': 'This uses',
+            'we use': 'this uses',
+            'We can': 'You can',
+            'we can': 'you can',
+            "We'll": 'This guide will',
+            "we'll": 'this guide will',
+            "We've": 'Gcore has',
+            "we've": 'Gcore has',
+            'Our platform': 'The Gcore platform',
+            'our platform': 'the Gcore platform',
+            'Our servers': 'Gcore servers',
+            'our servers': 'Gcore servers',
+            'Our network': 'The Gcore network',
+            'our network': 'the Gcore network',
+            'Our CDN': 'Gcore CDN',
+            'our CDN': 'Gcore CDN',
+            'Our infrastructure': 'Gcore infrastructure',
+            'our infrastructure': 'Gcore infrastructure',
+            'Our solution': 'This solution',
+            'our solution': 'this solution',
+            'Our service': 'This service',
+            'our service': 'this service',
+            'Our team': 'The Gcore team',
+            'our team': 'the Gcore team',
+            'Our customers': 'Gcore customers',
+            'our customers': 'Gcore customers'
+        }
+
+        # Inclusive language replacements (Google Style Guide)
+        inclusive_replacements = {
+            'blacklist': 'denylist',
+            'blacklisted': 'denylisted',
+            'blacklisting': 'denylisting',
+            'whitelist': 'allowlist',
+            'whitelisted': 'allowlisted',
+            'whitelisting': 'allowlisting',
+            'master branch': 'main branch',
+            'master/slave': 'primary/replica',
+            'man-hours': 'person-hours',
+            'sanity check': 'quick check',
+            'sanity-check': 'quick check',
+            'dummy value': 'placeholder value',
+            'dummy data': 'sample data',
+            'grandfathered': 'legacy',
+            'mankind': 'humanity',
+            'man-made': 'artificial'
+        }
+
+        # Google word list simplifications
+        google_word_replacements = {
+            'allows you to': 'lets you',
+            'in order to': 'to',
+            'enables you to': 'lets you',
+            'provides the ability to': 'lets you',
+            'has the capability to': 'can',
+            'is able to': 'can',
+            'in the event that': 'if',
+            'at this point in time': 'now',
+            'due to the fact that': 'because',
+            'for the purpose of': 'to'
+        }
+
         cleaned = content
-        
-        # Replace AI words
+
+        # Replace AI words (case-insensitive with word boundaries)
         for ai_word, replacement in ai_replacements.items():
             pattern = r'\b' + ai_word + r'\b'
             cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
-        
+
+        # Apply British to American spellings (case-insensitive with word boundaries)
+        for british, american in british_to_american.items():
+            pattern = r'\b' + british + r'\b'
+            # Preserve case of first letter
+            def replace_preserve_case(match, american=american):
+                word = match.group(0)
+                if word[0].isupper():
+                    return american.capitalize()
+                return american
+            cleaned = re.sub(pattern, replace_preserve_case, cleaned, flags=re.IGNORECASE)
+
+        # Apply first-person pronoun replacements (exact phrase matching)
+        for first_person, replacement in first_person_replacements.items():
+            cleaned = cleaned.replace(first_person, replacement)
+
+        # Apply inclusive language replacements (case-insensitive)
+        for non_inclusive, inclusive in inclusive_replacements.items():
+            pattern = r'\b' + re.escape(non_inclusive) + r'\b'
+            def replace_inclusive(match, inclusive=inclusive):
+                word = match.group(0)
+                if word[0].isupper():
+                    return inclusive.capitalize()
+                return inclusive
+            cleaned = re.sub(pattern, replace_inclusive, cleaned, flags=re.IGNORECASE)
+
+        # Apply Google word list simplifications (exact phrase matching)
+        for wordy, simple in google_word_replacements.items():
+            cleaned = cleaned.replace(wordy, simple)
+            # Also handle capitalized versions
+            cleaned = cleaned.replace(wordy.capitalize(), simple.capitalize())
+
         # Fix double spaces
         cleaned = re.sub(r'\s+', ' ', cleaned)
-        
+
         # Fix sentence spacing
         cleaned = re.sub(r'\.([A-Z])', r'. \1', cleaned)
-        
+
         return cleaned.strip()
     
     def _get_changes(self, original: str, modified: str) -> str:

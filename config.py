@@ -32,6 +32,10 @@ MAX_TOKENS = 4000
 PERPLEXITY_API_URL = "https://api.perplexity.ai/chat/completions"
 PERPLEXITY_MODEL = "sonar"
 
+# SearchAPI Configuration (for SERP analysis)
+SEARCHAPI_API_KEY = "12HpcjrPS2Wj5AtqJqjzRKpR"
+SEARCHAPI_URL = "https://www.searchapi.io/api/v1/search"
+
 # Content Generation Settings
 CONTENT_SETTINGS = {
     'max_heading_length': 100,
@@ -46,13 +50,13 @@ CONTENT_SETTINGS = {
 # Gcore Specific Information
 GCORE_INFO = {
     'company': 'Gcore',
-    'pops': '180+',
+    'pops': '210+',
     'average_latency': '30ms',
     'services': {
         'cdn': {
             'name': 'CDN',
             'key_features': [
-                '180+ Points of Presence',
+                '210+ Points of Presence',
                 '30ms average global latency',
                 'DDoS protection',
                 'Real-time analytics',
@@ -81,7 +85,7 @@ GCORE_INFO = {
         }
     },
     'differentiators': [
-        'Global edge network with 180+ PoPs',
+        'Global edge network with 210+ PoPs',
         'Average 30ms latency worldwide',
         'Enterprise-grade security',
         'Cost-effective pricing',

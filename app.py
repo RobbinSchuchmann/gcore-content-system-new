@@ -34,7 +34,8 @@ try:
     from core.quality_checker import QualityChecker, fix_ai_words
     from core.content_editor import ContentEditor
     from core.serp_analyzer import SERPAnalyzer
-    from config import validate_api_keys, ANTHROPIC_API_KEY, PERPLEXITY_API_KEY
+    from core.serp_search import SERPSearchService
+    from config import validate_api_keys, ANTHROPIC_API_KEY, PERPLEXITY_API_KEY, SEARCHAPI_API_KEY
     APIS_AVAILABLE = True
 except ImportError as e:
     import_error_msg = str(e)
@@ -191,7 +192,9 @@ if 'serp_analysis' not in st.session_state:
         'selected_urls': [],
         'competitor_headings': {},
         'ai_suggestions': {},
-        'analysis_complete': False
+        'analysis_complete': False,
+        'serp_results': [],  # Store SERP search results
+        'serp_searched': False  # Track if search has been performed
     }
 
 # Load section functions configuration
@@ -210,7 +213,7 @@ def get_function_options(section_functions):
 
 def auto_detect_function(heading, section_functions, context=None):
     """Auto-detect the best function based on heading text and context
-    
+
     Args:
         heading: The heading text to analyze
         section_functions: The loaded section functions configuration
@@ -218,8 +221,8 @@ def auto_detect_function(heading, section_functions, context=None):
     """
     if not heading:
         return "generate_definition"
-    
-    heading_lower = heading.lower().strip()
+
+    heading_lower = heading.lower().strip().rstrip('?')
     auto_map = section_functions.get('auto_detection_map', {})
 
     # Check if we're in FAQ context (H3 after FAQ H2)
@@ -231,13 +234,45 @@ def auto_detect_function(heading, section_functions, context=None):
     if 'gcore' in heading_lower or 'how can gcore' in heading_lower or 'why choose gcore' in heading_lower:
         return "generate_intelligent_cta"
 
+    # SMART "What are" detection:
+    # "What are bot attacks?" = Definition (asking for concept definition)
+    # "What are the main types of X?" = Listicle (listing items)
+    # "What are the benefits of X?" = Listicle (listing items)
+    # "What are the signs of X?" = Listicle (listing items)
+    if heading_lower.startswith('what are '):
+        # Check for listicle indicators (listing multiple items)
+        listicle_indicators = [
+            'types of', 'kinds of', 'forms of', 'categories of',
+            'benefits of', 'advantages of', 'disadvantages of',
+            'signs of', 'symptoms of', 'indicators of',
+            'causes of', 'reasons for', 'effects of', 'consequences of',
+            'features of', 'characteristics of', 'components of',
+            'steps to', 'ways to', 'methods to', 'techniques for',
+            'best practices', 'key factors', 'main factors',
+            'the main', 'the key', 'the top', 'the most common',
+            'different', 'various', 'common'
+        ]
+
+        # If any listicle indicator is present, use listicle
+        if any(indicator in heading_lower for indicator in listicle_indicators):
+            return "generate_listicle"
+        else:
+            # Simple "What are X?" asking for definition of a concept
+            return "generate_definition"
+
     # Check for exact matches first
     for pattern, function in auto_map.items():
+        # Skip "what are" as we handled it above
+        if pattern == "what are":
+            continue
         if heading_lower.startswith(pattern):
             return function
 
     # Check for keywords anywhere in heading
     for pattern, function in auto_map.items():
+        # Skip "what are" as we handled it above
+        if pattern == "what are":
+            continue
         if pattern in heading_lower:
             return function
 
@@ -857,18 +892,17 @@ if selected_mode == "📝 New Content":
     # NEW CONTENT WORKFLOW
     st.header("Create New Content")
     
-    # Workflow steps for new content
+    # Workflow steps for new content (Quality Check removed - automated in final_article_pass)
     new_content_steps = {
         0: "🔍 Competitor Analysis",
         1: "📋 Content Brief",
         2: "🔎 Research",
         3: "✍️ Generate",
-        4: "✅ Quality Check",
-        5: "📤 Export"
+        5: "📤 Export"  # Step 4 (Quality Check) skipped - now automated
     }
 
     # Progress indicator
-    progress_cols = st.columns(6)
+    progress_cols = st.columns(5)  # 5 columns now instead of 6
     for i, (step_num, step_name) in enumerate(new_content_steps.items()):
         with progress_cols[i]:
             if st.session_state.active_mode == "📝 New Content":
@@ -885,100 +919,159 @@ if selected_mode == "📝 New Content":
     if st.session_state.current_step == 0:
         st.subheader("Step 0: Competitor Analysis (Optional)")
 
-        st.info("💡 **For VAs and Non-SEO Users**: Analyze competitor content to get AI-suggested heading structures. Just search Google for your keyword, paste 3-7 competitor URLs below, and get an SEO-optimized content brief!")
+        st.info("💡 **For VAs and Non-SEO Users**: Enter your keyword, search Google to see top 10 results, select 3-7 competitors, and get an AI-generated content brief!")
 
-        # Keyword input
-        serp_keyword = st.text_input(
-            "Primary Keyword",
-            value=st.session_state.serp_analysis.get('keyword', ''),
-            placeholder="e.g., cloud computing, CDN security, edge computing",
-            help="Enter the main topic you want to research",
-            key="serp_keyword_input"
-        )
+        # Keyword input with search button
+        col_keyword, col_search = st.columns([4, 1])
+
+        with col_keyword:
+            serp_keyword = st.text_input(
+                "Primary Keyword",
+                value=st.session_state.serp_analysis.get('keyword', ''),
+                placeholder="e.g., cloud computing, CDN security, edge computing",
+                help="Enter the main topic you want to research",
+                key="serp_keyword_input"
+            )
+
+        with col_search:
+            st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
+            search_clicked = st.button("🔍 Search Google", use_container_width=True, disabled=not serp_keyword, type="primary")
 
         st.session_state.serp_analysis['keyword'] = serp_keyword
 
-        st.markdown("---")
+        # Perform SERP search when button is clicked
+        if search_clicked and serp_keyword:
+            with st.spinner("Searching Google for top results..."):
+                try:
+                    serp_service = SERPSearchService(SEARCHAPI_API_KEY)
+                    results = serp_service.search(serp_keyword, num_results=10)
 
-        # Instructions
-        with st.expander("📖 How to use this feature", expanded=False):
-            st.markdown("""
-            **Step 1:** Enter your primary keyword above
-
-            **Step 2:** Go to Google and search for your keyword
-
-            **Step 3:** Copy URLs from top ranking pages (AWS, Google Cloud, Azure, etc.)
-
-            **Step 4:** Paste each URL below and click "Add URL"
-
-            **Step 5:** Once you have 3-7 URLs, click "Analyze Competitors"
-
-            **Tip:** Choose direct competitors and authority sites. Avoid your own Gcore pages.
-            """)
-
-        # URL input section
-        st.subheader("Add Competitor URLs")
-
-        col_url, col_add = st.columns([4, 1])
-
-        with col_url:
-            new_url = st.text_input(
-                "Competitor URL",
-                placeholder="https://aws.amazon.com/what-is-cloud-computing/",
-                help="Paste a competitor URL to analyze",
-                key="new_competitor_url",
-                label_visibility="collapsed"
-            )
-
-        with col_add:
-            st.markdown("<div style='margin-top: 0px;'></div>", unsafe_allow_html=True)
-            if st.button("➕ Add URL", use_container_width=True, disabled=not new_url):
-                # Initialize selected_urls if not exists
-                if 'selected_urls' not in st.session_state.serp_analysis:
-                    st.session_state.serp_analysis['selected_urls'] = []
-
-                # Validate URL
-                if new_url.startswith('http://') or new_url.startswith('https://'):
-                    if new_url not in st.session_state.serp_analysis['selected_urls']:
-                        st.session_state.serp_analysis['selected_urls'].append(new_url)
-                        st.success(f"✅ Added URL #{len(st.session_state.serp_analysis['selected_urls'])}")
+                    if results['success']:
+                        # Filter out Gcore URLs
+                        filtered_results = serp_service.filter_results(
+                            results['results'],
+                            exclude_domains=['gcore.com', 'gcorelabs.com']
+                        )
+                        st.session_state.serp_analysis['serp_results'] = filtered_results
+                        st.session_state.serp_analysis['serp_searched'] = True
+                        st.session_state.serp_analysis['selected_urls'] = []  # Reset selections
+                        st.success(f"✅ Found {len(filtered_results)} competitor results!")
                         st.rerun()
                     else:
-                        st.warning("⚠️ URL already added")
-                else:
-                    st.error("❌ Please enter a valid URL starting with http:// or https://")
+                        st.error(f"❌ Search failed: {results.get('error', 'Unknown error')}")
+                except Exception as e:
+                    st.error(f"❌ Error performing search: {str(e)}")
 
-        # Display added URLs
+        st.markdown("---")
+
+        # Show SERP results if available
+        serp_results = st.session_state.serp_analysis.get('serp_results', [])
+
+        if serp_results:
+            st.subheader("📊 Top Google Results")
+            st.caption("Select 3-7 competitors to analyze (Gcore URLs are automatically excluded)")
+
+            # Create checkboxes for each result
+            selected_urls = st.session_state.serp_analysis.get('selected_urls', [])
+
+            for i, result in enumerate(serp_results):
+                col_check, col_pos, col_info = st.columns([0.5, 0.5, 9])
+
+                with col_check:
+                    is_selected = result['link'] in selected_urls
+                    if st.checkbox("", value=is_selected, key=f"serp_result_{i}", label_visibility="collapsed"):
+                        if result['link'] not in selected_urls:
+                            selected_urls.append(result['link'])
+                            st.session_state.serp_analysis['selected_urls'] = selected_urls
+                    else:
+                        if result['link'] in selected_urls:
+                            selected_urls.remove(result['link'])
+                            st.session_state.serp_analysis['selected_urls'] = selected_urls
+
+                with col_pos:
+                    st.markdown(f"**#{result['position']}**")
+
+                with col_info:
+                    st.markdown(f"**[{result['title'][:60]}{'...' if len(result['title']) > 60 else ''}]({result['link']})**")
+                    st.caption(f"🌐 {result['domain']}")
+
+            st.markdown("---")
+            st.markdown(f"**Selected: {len(selected_urls)} competitors**")
+
+            if len(selected_urls) < 2:
+                st.warning("⚠️ Select at least 2 competitors to analyze")
+            elif len(selected_urls) > 7:
+                st.warning("⚠️ We recommend selecting 3-7 competitors for best results")
+
+        else:
+            # Show manual URL input as fallback
+            with st.expander("📝 Or add URLs manually", expanded=not st.session_state.serp_analysis.get('serp_searched', False)):
+                st.markdown("If you prefer, you can manually add competitor URLs:")
+
+                col_url, col_add = st.columns([4, 1])
+
+                with col_url:
+                    new_url = st.text_input(
+                        "Competitor URL",
+                        placeholder="https://aws.amazon.com/what-is-cloud-computing/",
+                        help="Paste a competitor URL to analyze",
+                        key="new_competitor_url",
+                        label_visibility="collapsed"
+                    )
+
+                with col_add:
+                    if st.button("➕ Add URL", use_container_width=True, disabled=not new_url):
+                        # Initialize selected_urls if not exists
+                        if 'selected_urls' not in st.session_state.serp_analysis:
+                            st.session_state.serp_analysis['selected_urls'] = []
+
+                        # Validate URL
+                        if new_url.startswith('http://') or new_url.startswith('https://'):
+                            if new_url not in st.session_state.serp_analysis['selected_urls']:
+                                st.session_state.serp_analysis['selected_urls'].append(new_url)
+                                st.success(f"✅ Added URL #{len(st.session_state.serp_analysis['selected_urls'])}")
+                                st.rerun()
+                            else:
+                                st.warning("⚠️ URL already added")
+                        else:
+                            st.error("❌ Please enter a valid URL starting with http:// or https://")
+
+        # Get final selected URLs (from SERP or manual input)
         selected_urls = st.session_state.serp_analysis.get('selected_urls', [])
 
+        # Action buttons section - show when we have selected URLs
         if selected_urls:
             st.markdown("---")
-            st.subheader(f"📊 Competitor URLs ({len(selected_urls)})")
 
-            urls_to_remove = []
-            for i, url in enumerate(selected_urls):
-                col_num, col_url_display, col_remove = st.columns([0.5, 8, 1])
+            # Show selected URLs summary (only for manual input when no SERP results)
+            if not serp_results:
+                st.subheader(f"📊 Selected Competitor URLs ({len(selected_urls)})")
 
-                with col_num:
-                    st.markdown(f"**{i+1}.**")
+                urls_to_remove = []
+                for i, url in enumerate(selected_urls):
+                    col_num, col_url_display, col_remove = st.columns([0.5, 8, 1])
 
-                with col_url_display:
-                    domain = urlparse(url).netloc
-                    st.markdown(f"[{domain}]({url})")
+                    with col_num:
+                        st.markdown(f"**{i+1}.**")
 
-                with col_remove:
-                    if st.button("🗑️", key=f"remove_{i}", help="Remove this URL"):
-                        urls_to_remove.append(url)
+                    with col_url_display:
+                        domain = urlparse(url).netloc
+                        st.markdown(f"[{domain}]({url})")
 
-            # Remove URLs if any were marked for removal
-            if urls_to_remove:
-                st.session_state.serp_analysis['selected_urls'] = [
-                    u for u in selected_urls if u not in urls_to_remove
-                ]
-                st.rerun()
+                    with col_remove:
+                        if st.button("🗑️", key=f"remove_{i}", help="Remove this URL"):
+                            urls_to_remove.append(url)
+
+                # Remove URLs if any were marked for removal
+                if urls_to_remove:
+                    st.session_state.serp_analysis['selected_urls'] = [
+                        u for u in selected_urls if u not in urls_to_remove
+                    ]
+                    st.rerun()
+
+                st.markdown("---")
 
             # Action buttons
-            st.markdown("---")
             col_analyze, col_clear, col_skip = st.columns([2, 1, 1])
 
             with col_analyze:
@@ -1016,6 +1109,8 @@ if selected_mode == "📝 New Content":
             with col_clear:
                 if st.button("🗑️ Clear All", use_container_width=True):
                     st.session_state.serp_analysis['selected_urls'] = []
+                    st.session_state.serp_analysis['serp_results'] = []
+                    st.session_state.serp_analysis['serp_searched'] = False
                     st.rerun()
 
             with col_skip:
@@ -1024,12 +1119,13 @@ if selected_mode == "📝 New Content":
                     st.rerun()
 
             if len(selected_urls) < 2:
-                st.caption("⚠️ Add at least 2 competitor URLs to analyze")
+                st.caption("⚠️ Select at least 2 competitor URLs to analyze")
             if not serp_keyword:
                 st.caption("⚠️ Enter a primary keyword above")
 
-        else:
-            st.caption("👆 Add competitor URLs above to get started, or skip this step")
+        elif not serp_results:
+            # Only show this when there are no SERP results and no selected URLs
+            st.caption("👆 Search Google for your keyword or add URLs manually, then select competitors to analyze")
 
             col_skip_bottom = st.columns([1, 1, 1])
             with col_skip_bottom[1]:
@@ -1443,7 +1539,7 @@ if selected_mode == "📝 New Content":
                                 'statistics': [
                                     {'text': "99.99% uptime SLA for enterprise services"},
                                     {'text': "30ms average global latency"},
-                                    {'text': "180+ Points of Presence worldwide"}
+                                    {'text': "210+ Points of Presence worldwide"}
                                 ],
                                 'key_points': [
                                     "Scalability is essential for modern applications",
@@ -1451,7 +1547,17 @@ if selected_mode == "📝 New Content":
                                     "Security must be built-in from the start"
                                 ],
                                 'examples': ["E-commerce platforms", "Video streaming services", "Gaming applications"],
-                                'sources': []
+                                'sources': [],
+                                'quality_score': {
+                                    'overall': 70,
+                                    'rating': 'Good',
+                                    'facts_score': 15,
+                                    'statistics_score': 20,
+                                    'examples_score': 15,
+                                    'completeness': 10,
+                                    'recency': 10
+                                },
+                                'coverage_gaps': []
                             }
                         }
                     st.success("✅ Research completed!")
@@ -1693,6 +1799,45 @@ if selected_mode == "📝 New Content":
         # Gcore context handled by dedicated CTA sections - no need to include globally
         include_gcore = False
 
+        def extract_topic_from_keyword(keyword):
+            """
+            Extract the actual topic from a keyword/H1.
+            'What are bot attacks' -> 'bot attacks'
+            'How to prevent DDoS' -> 'DDoS prevention'
+            'What is a CDN' -> 'CDN'
+            """
+            if not keyword:
+                return 'this topic'
+
+            keyword = keyword.strip().rstrip('?')
+            keyword_lower = keyword.lower()
+
+            # Remove question prefixes
+            prefixes_to_remove = [
+                'what are the ', 'what are ', 'what is a ', 'what is an ', 'what is ',
+                'how to ', 'how do ', 'how does ', 'how can ',
+                'why do ', 'why does ', 'why is ', 'why are ',
+                'when to ', 'when should ',
+                'where to ', 'where can ',
+                'which ', 'who ',
+                'is ', 'are ', 'can ', 'does ', 'do ', 'will ', 'should '
+            ]
+
+            result = keyword_lower
+            for prefix in prefixes_to_remove:
+                if result.startswith(prefix):
+                    result = result[len(prefix):]
+                    break
+
+            # Clean up and return with proper casing
+            result = result.strip()
+
+            # If result is empty, return original
+            if not result:
+                return keyword
+
+            return result
+
         # Ensure FAQ section is present before CTA
         def ensure_faq_present(headings, topic):
             """Ensure there's always an FAQ section before the CTA"""
@@ -1813,9 +1958,12 @@ if selected_mode == "📝 New Content":
                 st.session_state.content_brief.get('selected_product', 'cdn')
             )
             # Then add FAQ section (will be inserted before CTA automatically)
+            # Extract clean topic from primary keyword for FAQ questions
+            raw_keyword = st.session_state.content_brief.get('primary_keyword', 'this topic')
+            clean_topic = extract_topic_from_keyword(raw_keyword)
             st.session_state.content_brief['headings'] = ensure_faq_present(
                 st.session_state.content_brief['headings'],
-                st.session_state.content_brief.get('primary_keyword', 'this topic')
+                clean_topic
             )
 
         if st.button("🚀 Generate Content", type="primary"):
@@ -1906,9 +2054,29 @@ if selected_mode == "📝 New Content":
                             }
                     
                     st.session_state.content_brief['generated_content'] = generated_content
+
+                    # Run final article pass for holistic quality check
+                    status_text.text("Running final article polish...")
+                    full_content = {
+                        'introduction': st.session_state.content_brief.get('introduction'),
+                        'sections': generated_content
+                    }
+                    polished_content = generator.final_article_pass(full_content)
+
+                    # Update with polished content
+                    if polished_content.get('introduction'):
+                        intro = polished_content['introduction']
+                        if isinstance(intro, dict) and intro.get('content'):
+                            st.session_state.content_brief['introduction'] = intro['content']
+                        elif isinstance(intro, str):
+                            st.session_state.content_brief['introduction'] = intro
+
+                    if polished_content.get('sections'):
+                        st.session_state.content_brief['generated_content'] = polished_content['sections']
+
                     progress_bar.progress(1.0)
                     status_text.text("Generation complete!")
-                    st.success("✅ Content generated successfully!")
+                    st.success("✅ Content generated and polished successfully!")
                 else:
                     # Demo mode - generate placeholder content
                     topic = st.session_state.content_brief['primary_keyword']
@@ -1961,8 +2129,9 @@ if selected_mode == "📝 New Content":
                 st.rerun()
         with col_right:
             has_content = bool(st.session_state.content_brief.get('generated_content'))
-            if st.button("Continue to Quality Check →", type="primary", use_container_width=True, disabled=not has_content):
-                st.session_state.current_step = 4
+            # Skip Quality Check (Step 4) - automated fixes are applied in final_article_pass
+            if st.button("Continue to Export →", type="primary", use_container_width=True, disabled=not has_content):
+                st.session_state.current_step = 5
                 st.rerun()
     
     elif st.session_state.current_step == 4:
@@ -2565,6 +2734,37 @@ if selected_mode == "📝 New Content":
                                 html_parts.append('    </ul>')
                             i += 1
 
+                        # Handle **Bold term**: explanation pattern (listicle format)
+                        elif re.match(r'^\*\*[^*]+\*\*:', para):
+                            bold_items = []
+                            # Process current paragraph - split by newlines for multi-line content
+                            lines = para.split('\n')
+                            for line in lines:
+                                line = line.strip()
+                                if re.match(r'^\*\*[^*]+\*\*:', line):
+                                    bold_items.append(line)
+
+                            # Look ahead for more bold items in subsequent paragraphs
+                            while i + 1 < len(paragraphs):
+                                next_para = paragraphs[i + 1].strip()
+                                if re.match(r'^\*\*[^*]+\*\*:', next_para):
+                                    lines = next_para.split('\n')
+                                    for line in lines:
+                                        line = line.strip()
+                                        if re.match(r'^\*\*[^*]+\*\*:', line):
+                                            bold_items.append(line)
+                                    i += 1
+                                else:
+                                    break
+
+                            if bold_items:
+                                html_parts.append('    <ul>')
+                                for item in bold_items:
+                                    item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
+                                    html_parts.append(f'        <li>{item_html}</li>')
+                                html_parts.append('    </ul>')
+                            i += 1
+
                         else:
                             # Regular paragraph
                             para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para)
@@ -2899,7 +3099,7 @@ elif selected_mode == "🔧 Content Optimization":
     elif st.session_state.current_step == 2:
         st.subheader("Step 2: Competitor Analysis")
 
-        st.info("💡 **AI-Powered Analysis**: Add 3-7 competitor URLs and get AI recommendations on what to Keep, Improve, Add, or Remove!")
+        st.info("💡 **AI-Powered Analysis**: Search Google for competitors, select 2-4 URLs, and get AI recommendations on what to Keep, Improve, Add, or Remove!")
 
         # Check if we have content from Step 1
         if not st.session_state.optimization_data.get('parsed_structure'):
@@ -2917,46 +3117,136 @@ elif selected_mode == "🔧 Content Optimization":
                 st.text(f"Keyword: {st.session_state.optimization_data.get('primary_keyword', 'N/A')}")
 
             st.markdown("---")
-            st.markdown("### 🔍 Add Competitor URLs")
-            st.markdown("Search Google for your keyword and paste 2-3 competitor URLs below for comparison:")
 
-            # Competitor URL input
-            col_input, col_add = st.columns([4, 1])
+            # SERP Search Section
+            opt_keyword = st.session_state.optimization_data.get('primary_keyword', '')
 
-            with col_input:
-                new_competitor_url = st.text_input(
-                    "Competitor URL",
-                    key="opt_competitor_url_input",
-                    placeholder="https://aws.amazon.com/...",
-                    label_visibility="collapsed"
+            st.markdown("### 🔍 Search for Competitors")
+
+            col_keyword, col_search = st.columns([4, 1])
+
+            with col_keyword:
+                search_query = st.text_input(
+                    "Search Query",
+                    value=opt_keyword,
+                    placeholder="Enter keyword to search competitors",
+                    key="opt_serp_keyword",
+                    help="Uses your primary keyword by default"
                 )
 
-            with col_add:
-                st.write("")  # Spacing
-                st.write("")  # Spacing
-                if st.button("➕ Add URL", key="opt_add_competitor_url"):
-                    if new_competitor_url.startswith('http'):
-                        # Initialize if needed
-                        if 'competitor_urls' not in st.session_state.optimization_data:
-                            st.session_state.optimization_data['competitor_urls'] = []
+            with col_search:
+                st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
+                opt_search_clicked = st.button("🔍 Search Google", key="opt_search_btn", use_container_width=True, disabled=not search_query, type="primary")
 
-                        st.session_state.optimization_data['competitor_urls'].append(new_competitor_url)
-                        st.rerun()
-                    else:
-                        st.error("Please enter a valid URL starting with http:// or https://")
+            # Initialize SERP state for optimization
+            if 'opt_serp_results' not in st.session_state.optimization_data:
+                st.session_state.optimization_data['opt_serp_results'] = []
+            if 'opt_serp_searched' not in st.session_state.optimization_data:
+                st.session_state.optimization_data['opt_serp_searched'] = False
 
-            # Display added competitor URLs
-            if st.session_state.optimization_data.get('competitor_urls'):
-                st.markdown("**Added Competitors:**")
-                for i, url in enumerate(st.session_state.optimization_data['competitor_urls']):
-                    col_url_display, col_remove = st.columns([5, 1])
-                    with col_url_display:
-                        domain = urlparse(url).netloc
-                        st.text(f"{i+1}. {domain}")
-                    with col_remove:
-                        if st.button("✖", key=f"opt_remove_{i}", help="Remove this competitor"):
-                            st.session_state.optimization_data['competitor_urls'].pop(i)
+            # Perform SERP search
+            if opt_search_clicked and search_query:
+                with st.spinner("Searching Google for competitors..."):
+                    try:
+                        serp_service = SERPSearchService(SEARCHAPI_API_KEY)
+                        results = serp_service.search(search_query, num_results=10)
+
+                        if results['success']:
+                            # Filter out Gcore URLs and the current article URL
+                            current_url = st.session_state.optimization_data.get('url', '')
+                            current_domain = urlparse(current_url).netloc if current_url else ''
+
+                            filtered_results = serp_service.filter_results(
+                                results['results'],
+                                exclude_domains=['gcore.com', 'gcorelabs.com', current_domain]
+                            )
+                            st.session_state.optimization_data['opt_serp_results'] = filtered_results
+                            st.session_state.optimization_data['opt_serp_searched'] = True
+                            st.session_state.optimization_data['competitor_urls'] = []  # Reset selections
+                            st.success(f"✅ Found {len(filtered_results)} competitor results!")
                             st.rerun()
+                        else:
+                            st.error(f"❌ Search failed: {results.get('error', 'Unknown error')}")
+                    except Exception as e:
+                        st.error(f"❌ Error performing search: {str(e)}")
+
+            # Show SERP results if available
+            opt_serp_results = st.session_state.optimization_data.get('opt_serp_results', [])
+
+            if opt_serp_results:
+                st.markdown("---")
+                st.subheader("📊 Top Google Results")
+                st.caption("Select 2-4 competitors to analyze against your article")
+
+                competitor_urls = st.session_state.optimization_data.get('competitor_urls', [])
+
+                for i, result in enumerate(opt_serp_results):
+                    col_check, col_pos, col_info = st.columns([0.5, 0.5, 9])
+
+                    with col_check:
+                        is_selected = result['link'] in competitor_urls
+                        if st.checkbox("", value=is_selected, key=f"opt_serp_result_{i}", label_visibility="collapsed"):
+                            if result['link'] not in competitor_urls:
+                                competitor_urls.append(result['link'])
+                                st.session_state.optimization_data['competitor_urls'] = competitor_urls
+                        else:
+                            if result['link'] in competitor_urls:
+                                competitor_urls.remove(result['link'])
+                                st.session_state.optimization_data['competitor_urls'] = competitor_urls
+
+                    with col_pos:
+                        st.markdown(f"**#{result['position']}**")
+
+                    with col_info:
+                        st.markdown(f"**[{result['title'][:60]}{'...' if len(result['title']) > 60 else ''}]({result['link']})**")
+                        st.caption(f"🌐 {result['domain']}")
+
+                st.markdown("---")
+                st.markdown(f"**Selected: {len(competitor_urls)} competitors**")
+
+                if len(competitor_urls) < 2:
+                    st.warning("⚠️ Select at least 2 competitors to analyze")
+                elif len(competitor_urls) > 4:
+                    st.warning("⚠️ We recommend selecting 2-4 competitors for best results")
+
+            else:
+                # Show manual URL input as fallback
+                with st.expander("📝 Or add URLs manually", expanded=not st.session_state.optimization_data.get('opt_serp_searched', False)):
+                    st.markdown("If you prefer, you can manually add competitor URLs:")
+
+                    col_input, col_add = st.columns([4, 1])
+
+                    with col_input:
+                        new_competitor_url = st.text_input(
+                            "Competitor URL",
+                            key="opt_competitor_url_input",
+                            placeholder="https://aws.amazon.com/...",
+                            label_visibility="collapsed"
+                        )
+
+                    with col_add:
+                        if st.button("➕ Add URL", key="opt_add_competitor_url"):
+                            if new_competitor_url.startswith('http'):
+                                if 'competitor_urls' not in st.session_state.optimization_data:
+                                    st.session_state.optimization_data['competitor_urls'] = []
+
+                                st.session_state.optimization_data['competitor_urls'].append(new_competitor_url)
+                                st.rerun()
+                            else:
+                                st.error("Please enter a valid URL starting with http:// or https://")
+
+                    # Display manually added URLs
+                    if st.session_state.optimization_data.get('competitor_urls'):
+                        st.markdown("**Added Competitors:**")
+                        for i, url in enumerate(st.session_state.optimization_data['competitor_urls']):
+                            col_url_display, col_remove = st.columns([5, 1])
+                            with col_url_display:
+                                domain = urlparse(url).netloc
+                                st.text(f"{i+1}. {domain}")
+                            with col_remove:
+                                if st.button("✖", key=f"opt_remove_{i}", help="Remove this competitor"):
+                                    st.session_state.optimization_data['competitor_urls'].pop(i)
+                                    st.rerun()
 
             st.markdown("---")
 
@@ -4063,6 +4353,44 @@ elif selected_mode == "🔧 Content Optimization":
                                 item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
                                 html_parts.append(f'        <li>{item_html}</li>')
                             html_parts.append('    </ul>')
+                        i += 1
+
+                    # Handle **Bold text** listicle pattern (bold term followed by description)
+                    elif re.match(r'^\*\*[^*]+\*\*', para):
+                        # Check if this is a listicle (multiple bold items in succession)
+                        bold_items = []
+
+                        # Process current paragraph - may contain multiple lines
+                        lines = para.split('\n')
+                        for line in lines:
+                            line = line.strip()
+                            if line and re.match(r'^\*\*[^*]+\*\*', line):
+                                bold_items.append(line)
+
+                        # Look ahead for more bold items
+                        while i + 1 < len(paragraphs):
+                            next_para = paragraphs[i + 1].strip()
+                            if re.match(r'^\*\*[^*]+\*\*', next_para):
+                                lines = next_para.split('\n')
+                                for line in lines:
+                                    line = line.strip()
+                                    if line and re.match(r'^\*\*[^*]+\*\*', line):
+                                        bold_items.append(line)
+                                i += 1
+                            else:
+                                break
+
+                        # If we have multiple bold items, format as a list
+                        if len(bold_items) > 1:
+                            html_parts.append('    <ul>')
+                            for item in bold_items:
+                                item_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', item)
+                                html_parts.append(f'        <li>{item_html}</li>')
+                            html_parts.append('    </ul>')
+                        else:
+                            # Single bold item - just a paragraph
+                            para_html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', para)
+                            html_parts.append(f'    <p>{para_html}</p>')
                         i += 1
 
                     else:

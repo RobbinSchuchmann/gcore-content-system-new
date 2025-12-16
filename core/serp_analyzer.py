@@ -871,6 +871,14 @@ Steps:
 3. If NO and it appears in 2+ competitors → ADD it
 4. If YES → Skip (will handle in Phase 3 or 4)
 
+**MANDATORY DEFINITION SECTION:**
+For ANY educational/informational article, you MUST ensure there is a definition section as the FIRST content section. This is REQUIRED regardless of whether competitors have it.
+
+- If the keyword contains "what is", the article MUST start with "What is [keyword]?" as H2
+- If the keyword describes a technology/concept (e.g., "DDoS attack", "cloud storage", "CDN"), the article MUST start with "What is [concept]?" as H2
+- If current article is missing this definition section → ADD "What is [primary keyword]?" as priority 1
+- The definition section should ALWAYS be first in the optimal structure
+
 **FAQ HANDLING:**
 - If competitors have FAQ section and we don't → Add ONE H2: "Frequently asked questions"
 - For individual FAQ-type questions → Add as H3 subheadings under the FAQ H2
@@ -965,7 +973,8 @@ OUTPUT FORMAT - FOLLOW EXACTLY
 
 ## Optimal Structure:
 [List ALL headings in logical order - KEEP + IMPROVE + ADD sections. Exclude REMOVE.]
-1. H2: What is [keyword]? - KEEP
+**IMPORTANT: The definition section "What is [keyword]?" MUST ALWAYS be #1 - add it if missing!**
+1. H2: What is [keyword]? - ADD/KEEP (REQUIRED - always first)
 2. H2: How does [keyword] work? - IMPROVE
 3. H2: What are the benefits of [keyword]? - ADD
 ...

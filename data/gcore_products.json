@@ -2,9 +2,9 @@
   "cdn": {
     "name": "CDN",
     "full_name": "Content Delivery Network",
-    "description": "Global content delivery network with 180+ PoPs for fast, secure content distribution",
+    "description": "Global content delivery network with 210+ PoPs for fast, secure content distribution",
     "key_features": [
-      "180+ Points of Presence globally",
+      "210+ Points of Presence globally",
       "30ms average global latency",
       "DDoS protection up to 1 Tbps",
       "Real-time analytics and reporting",

@@ -1601,6 +1601,174 @@ class ContentGenerator:
         # Update outdated years in statistics (feedback issue - 2024 should be 2025)
         content = self._update_outdated_years(content)
 
+        # Apply editorial guidelines: American English spellings and first-person pronoun fixes
+        content = self._apply_editorial_guidelines(content)
+
+        return content
+
+    def _apply_editorial_guidelines(self, content: str) -> str:
+        """
+        Apply Gcore editorial guidelines including American English spellings
+        and first-person pronoun replacements.
+
+        Args:
+            content: Content to process
+
+        Returns:
+            Content with editorial guidelines applied
+        """
+        # British to American English spelling corrections
+        british_to_american = {
+            'optimise': 'optimize',
+            'customise': 'customize',
+            'organise': 'organize',
+            'analyse': 'analyze',
+            'authorise': 'authorize',
+            'synchronise': 'synchronize',
+            'initialise': 'initialize',
+            'finalise': 'finalize',
+            'realise': 'realize',
+            'recognise': 'recognize',
+            'minimise': 'minimize',
+            'maximise': 'maximize',
+            'prioritise': 'prioritize',
+            'visualise': 'visualize',
+            'normalise': 'normalize',
+            'virtualise': 'virtualize',
+            'containerise': 'containerize',
+            'localise': 'localize',
+            'colour': 'color',
+            'behaviour': 'behavior',
+            'favour': 'favor',
+            'honour': 'honor',
+            'labour': 'labor',
+            'neighbour': 'neighbor',
+            'favourite': 'favorite',
+            'centre': 'center',
+            'metre': 'meter',
+            'fibre': 'fiber',
+            'catalogue': 'catalog',
+            'dialogue': 'dialog',
+            'defence': 'defense',
+            'offence': 'offense',
+            'licence': 'license',
+            'cancelled': 'canceled',
+            'labelled': 'labeled',
+            'travelled': 'traveled',
+            'modelled': 'modeled',
+            'grey': 'gray',
+            'judgement': 'judgment',
+            'acknowledgement': 'acknowledgment',
+            'programme': 'program'
+        }
+
+        # First-person pronoun replacements
+        first_person_replacements = {
+            'We recommend': 'The recommended approach is',
+            'we recommend': 'the recommended approach is',
+            'We suggest': 'Consider',
+            'we suggest': 'consider',
+            'We offer': 'Gcore offers',
+            'we offer': 'Gcore offers',
+            'We provide': 'Gcore provides',
+            'we provide': 'Gcore provides',
+            'We support': 'Gcore supports',
+            'we support': 'Gcore supports',
+            'We have': 'Gcore has',
+            'we have': 'Gcore has',
+            'We use': 'This uses',
+            'we use': 'this uses',
+            'We can': 'You can',
+            'we can': 'you can',
+            "We'll": 'This guide will',
+            "we'll": 'this guide will',
+            "We've": 'Gcore has',
+            "we've": 'Gcore has',
+            'Our platform': 'The Gcore platform',
+            'our platform': 'the Gcore platform',
+            'Our servers': 'Gcore servers',
+            'our servers': 'Gcore servers',
+            'Our network': 'The Gcore network',
+            'our network': 'the Gcore network',
+            'Our CDN': 'Gcore CDN',
+            'our CDN': 'Gcore CDN',
+            'Our infrastructure': 'Gcore infrastructure',
+            'our infrastructure': 'Gcore infrastructure',
+            'Our solution': 'This solution',
+            'our solution': 'this solution',
+            'Our service': 'This service',
+            'our service': 'this service',
+            'Our team': 'The Gcore team',
+            'our team': 'the Gcore team',
+            'Our customers': 'Gcore customers',
+            'our customers': 'Gcore customers'
+        }
+
+        # Inclusive language replacements (Google Style Guide)
+        inclusive_replacements = {
+            'blacklist': 'denylist',
+            'blacklisted': 'denylisted',
+            'blacklisting': 'denylisting',
+            'whitelist': 'allowlist',
+            'whitelisted': 'allowlisted',
+            'whitelisting': 'allowlisting',
+            'master branch': 'main branch',
+            'master/slave': 'primary/replica',
+            'man-hours': 'person-hours',
+            'sanity check': 'quick check',
+            'sanity-check': 'quick check',
+            'dummy value': 'placeholder value',
+            'dummy data': 'sample data',
+            'grandfathered': 'legacy',
+            'mankind': 'humanity',
+            'man-made': 'artificial'
+        }
+
+        # Google word list simplifications
+        google_word_replacements = {
+            'allows you to': 'lets you',
+            'in order to': 'to',
+            'enables you to': 'lets you',
+            'provides the ability to': 'lets you',
+            'has the capability to': 'can',
+            'is able to': 'can',
+            'in the event that': 'if',
+            'at this point in time': 'now',
+            'due to the fact that': 'because',
+            'for the purpose of': 'to'
+        }
+
+        # Apply British to American spellings (case-insensitive with word boundaries)
+        for british, american in british_to_american.items():
+            pattern = r'\b' + british + r'\b'
+            # Preserve case of first letter
+            def replace_preserve_case(match, american=american):
+                word = match.group(0)
+                if word[0].isupper():
+                    return american.capitalize()
+                return american
+            content = re.sub(pattern, replace_preserve_case, content, flags=re.IGNORECASE)
+
+        # Apply first-person pronoun replacements (exact phrase matching)
+        for first_person, replacement in first_person_replacements.items():
+            content = content.replace(first_person, replacement)
+
+        # Apply inclusive language replacements (case-insensitive)
+        for non_inclusive, inclusive in inclusive_replacements.items():
+            pattern = r'\b' + re.escape(non_inclusive) + r'\b'
+            def replace_inclusive(match, inclusive=inclusive):
+                word = match.group(0)
+                if word[0].isupper():
+                    return inclusive.capitalize()
+                return inclusive
+            content = re.sub(pattern, replace_inclusive, content, flags=re.IGNORECASE)
+
+        # Apply Google word list simplifications (exact phrase matching)
+        for wordy, simple in google_word_replacements.items():
+            content = content.replace(wordy, simple)
+            # Also handle capitalized versions
+            content = content.replace(wordy.capitalize(), simple.capitalize())
+
         return content
 
     def _remove_meta_commentary(self, content: str) -> str:
@@ -1758,6 +1926,9 @@ Return ONLY the improved content. No explanations or notes.'''
                 "- Address reader as 'you'",
                 "- NO uncertainty words (maybe, perhaps, probably)",
                 "- NO competitor mentions (AWS, Azure, Cloudflare, etc.)",
+                "- NO Gcore mentions in the introduction - keep it generic and educational",
+                "- Do NOT reference 'Gcore platform', 'Gcore infrastructure', or 'Gcore' at all",
+                "- The introduction explains the topic generally, not in context of any specific company",
                 "- Natural, conversational tone",
                 "",
             ]
@@ -2047,6 +2218,521 @@ Return ONLY the improved content. No explanations or notes.'''
             results[heading_text] = result
         
         return results
+
+    # =========================================================================
+    # FINAL ARTICLE PASS - Holistic quality check after all sections generated
+    # =========================================================================
+
+    def final_article_pass(self, generated_content: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Final quality pass on complete article before export.
+        Runs AFTER all sections are generated and humanized.
+
+        Checks and fixes:
+        1. Duplicate statistics/facts across sections
+        2. Vague citation removal (enforce SOP: specific source or none)
+        3. Google Style Guide compliance
+        4. Incomplete sentence detection
+        5. Remove Gcore mentions from introduction
+
+        Args:
+            generated_content: Dict with 'introduction' and 'sections' keys
+
+        Returns:
+            Modified generated_content dict with issues fixed
+        """
+        if not generated_content:
+            return generated_content
+
+        # Process introduction - also remove Gcore mentions
+        if generated_content.get('introduction'):
+            intro = generated_content['introduction']
+            if isinstance(intro, dict) and intro.get('content'):
+                intro['content'] = self._apply_final_pass_to_text(intro['content'])
+                intro['content'] = self._remove_gcore_from_intro(intro['content'])
+            elif isinstance(intro, str):
+                intro_text = self._apply_final_pass_to_text(intro)
+                intro_text = self._remove_gcore_from_intro(intro_text)
+                generated_content['introduction'] = intro_text
+
+        # Collect all section content for cross-section deduplication
+        all_stats_seen = {}  # stat_pattern -> first_section_heading
+
+        # First pass: collect all statistics
+        sections = generated_content.get('sections', {})
+        for heading, section_data in sections.items():
+            if isinstance(section_data, dict) and section_data.get('content'):
+                content = section_data['content']
+                stats = self._extract_statistics(content)
+                for stat in stats:
+                    if stat not in all_stats_seen:
+                        all_stats_seen[stat] = heading
+
+        # Second pass: remove duplicates (keep first occurrence)
+        for heading, section_data in sections.items():
+            if isinstance(section_data, dict) and section_data.get('content'):
+                content = section_data['content']
+
+                # Apply all final pass fixes
+                content = self._apply_final_pass_to_text(content)
+
+                # Remove duplicate statistics (keep only if first occurrence was in this section)
+                content = self._remove_duplicate_stats(content, heading, all_stats_seen)
+
+                section_data['content'] = content
+
+        # Third pass: deduplicate source citations across the entire article
+        generated_content = self._deduplicate_source_citations(generated_content)
+
+        return generated_content
+
+    def _apply_final_pass_to_text(self, text: str) -> str:
+        """Apply all final pass transformations to a text block"""
+        if not text:
+            return text
+
+        # 1. Remove AI words (most important - do first)
+        text = self._remove_ai_words(text)
+
+        # 2. Remove vague citations
+        text = self._remove_vague_citations(text)
+
+        # 3. Fix timeless language (remove year references in running text)
+        text = self._fix_timeless_language(text)
+
+        # 4. Fix incomplete sentences
+        text = self._fix_incomplete_sentences(text)
+
+        # 5. Fix imperative capitalization in lists
+        text = self._fix_imperative_capitalization(text)
+
+        # 6. Merge orphan short paragraphs (single sentences standing alone)
+        # TEMPORARILY DISABLED - investigating paragraph spacing issue
+        # text = self._merge_orphan_paragraphs(text)
+
+        return text
+
+    def _remove_ai_words(self, text: str) -> str:
+        """
+        Remove AI-sounding words and replace with natural alternatives.
+        Uses the ai_word_replacements.json file loaded at init.
+        """
+        if not text or not self.ai_word_replacements:
+            return text
+
+        # Get simple replacements
+        simple_replacements = self.ai_word_replacements.get('simple_replacements', {})
+
+        # Get word group replacements
+        word_groups = self.ai_word_replacements.get('word_groups', {})
+
+        # Apply simple replacements first
+        for ai_word, replacement in simple_replacements.items():
+            # Use word boundary to avoid partial matches
+            pattern = r'\b' + re.escape(ai_word) + r'\b'
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+        # Apply word group replacements (use first replacement option)
+        for group_name, group_data in word_groups.items():
+            words = group_data.get('words', [])
+            replacements = group_data.get('replacements', [])
+            if words and replacements:
+                replacement = replacements[0]  # Use first option
+                for word in words:
+                    pattern = r'\b' + re.escape(word) + r'\b'
+                    text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+        return text
+
+    def _remove_vague_citations(self, text: str) -> str:
+        """
+        Remove vague citation phrases, keeping just the facts.
+        SOP: Either cite specific source or state fact directly without attribution.
+        """
+        vague_patterns = [
+            # "Studies show that X" -> "X"
+            (r'Studies show( that)?\s*', ''),
+            (r'Research (shows|indicates|suggests|has shown)( that)?\s*', ''),
+            (r'A \d{4} study (shows|found|indicates|revealed)( that)?\s*', ''),
+            (r'According to (research|studies|data|experts|industry reports?),?\s*', ''),
+            (r'Recent (research|studies|data|reports?) (shows?|indicates?|suggests?|reveals?)( that)?\s*', ''),
+            (r'Data (shows|indicates|suggests)( that)?\s*', ''),
+            (r'Experts (say|suggest|indicate|believe)( that)?\s*', ''),
+            (r'Industry (data|reports?|analysis) (shows?|indicates?|suggests?)( that)?\s*', ''),
+            (r'It\'s estimated( that)?\s*', ''),
+            (r'Estimates suggest( that)?\s*', ''),
+        ]
+
+        for pattern, replacement in vague_patterns:
+            # Case insensitive replacement
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+        # Capitalize first letter after removal if sentence now starts lowercase
+        text = re.sub(r'(?<=[.!?]\s)([a-z])', lambda m: m.group(1).upper(), text)
+
+        return text
+
+    def _fix_timeless_language(self, text: str) -> str:
+        """
+        Remove time-anchored language that becomes outdated.
+        Google Style Guide: Avoid "currently", "now", "in 2025", etc.
+        """
+        current_year = datetime.now().year
+
+        # Remove year references in running text (keep in specific citations)
+        # "in 2025" -> "" (only when not part of a specific citation)
+        text = re.sub(rf'\s+in {current_year}(?!\s+(?:study|report|survey))', '', text)
+
+        # "as of 2025" -> ""
+        text = re.sub(rf'\s+as of {current_year}', '', text)
+
+        # Don't remove years that are part of actual citations like "according to Gartner (2025)"
+        # Those patterns have the year in parentheses
+
+        return text
+
+    def _fix_incomplete_sentences(self, text: str) -> str:
+        """
+        Detect and remove incomplete/truncated sentences.
+        """
+        # Split into sentences
+        lines = text.split('\n')
+        fixed_lines = []
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                fixed_lines.append(line)
+                continue
+
+            # Check for incomplete sentence patterns at line end
+            incomplete_patterns = [
+                r'like exactly$',
+                r'such as$',
+                r'including$',
+                r'for example$',
+                r'for instance$',
+                r':\s*$',  # ends with colon and nothing after
+                r',\s*$',  # ends with comma
+                r'\band\s*$',  # ends with "and"
+                r'\bor\s*$',   # ends with "or"
+                r'\bthe\s*$',  # ends with "the"
+                r'\ba\s*$',    # ends with "a"
+                r'\ban\s*$',   # ends with "an"
+                r'According to [^,]+,\s*$',  # "According to X," with nothing after
+                r'\(\d{4}\),\s*$',  # "(2025)," with nothing after
+            ]
+
+            is_incomplete = False
+            for pattern in incomplete_patterns:
+                if re.search(pattern, line, re.IGNORECASE):
+                    is_incomplete = True
+                    break
+
+            if is_incomplete:
+                # Try to fix by removing the incomplete part
+                line = re.sub(r'\s+(?:like exactly|such as|including|for example|for instance)$', '.', line)
+                line = re.sub(r'According to [^,]+,\s*$', '', line)  # Remove incomplete citation
+                line = re.sub(r'\([^)]+\),\s*$', '.', line)  # Remove trailing "(Year),"
+                line = re.sub(r'[,:]\s*$', '.', line)
+                line = re.sub(r'\s+(?:and|or|the|a|an)\s*$', '.', line)
+
+                # If line is now empty or just whitespace, skip it
+                if not line.strip() or line.strip() == '.':
+                    continue
+
+            fixed_lines.append(line)
+
+        return '\n'.join(fixed_lines)
+
+    def _fix_imperative_capitalization(self, text: str) -> str:
+        """
+        Ensure imperative verbs at start of list items are capitalized.
+        """
+        # Match numbered list items: "1. use something" -> "1. Use something"
+        text = re.sub(
+            r'^(\d+\.)\s+([a-z])',
+            lambda m: f"{m.group(1)} {m.group(2).upper()}",
+            text,
+            flags=re.MULTILINE
+        )
+
+        # Match bullet items: "• use something" -> "• Use something"
+        text = re.sub(
+            r'^([•\-\*])\s+([a-z])',
+            lambda m: f"{m.group(1)} {m.group(2).upper()}",
+            text,
+            flags=re.MULTILINE
+        )
+
+        return text
+
+    def _merge_orphan_paragraphs(self, text: str) -> str:
+        """
+        Merge very short standalone paragraphs (orphans) with the following paragraph.
+        Only merge if the orphan is a VERY short topic sentence (under 8 words).
+
+        This is conservative to avoid merging all paragraphs into one block.
+
+        Example:
+        "Financial gain drives most bot attacks.
+
+        Credential stuffing attacks target..."
+
+        Becomes:
+        "Financial gain drives most bot attacks. Credential stuffing attacks target..."
+        """
+        if not text:
+            return text
+
+        # Split by double newlines (paragraphs)
+        paragraphs = text.split('\n\n')
+        if len(paragraphs) <= 1:
+            return text
+
+        merged = []
+        skip_next = False
+
+        for i, para in enumerate(paragraphs):
+            # Skip if this paragraph was already merged with previous
+            if skip_next:
+                skip_next = False
+                continue
+
+            para = para.strip()
+
+            # Skip list items, headings, empty paragraphs - pass them through
+            if not para or para.startswith('•') or para.startswith('-') or para.startswith('#') or para.startswith('**'):
+                merged.append(para)
+                continue
+
+            # Check if this is a TRUE orphan (very short topic sentence)
+            word_count = len(para.split())
+            sentences = [s.strip() for s in re.split(r'[.!?]+', para) if s.strip()]
+            sentence_count = len(sentences)
+
+            # An orphan is: exactly 1 sentence AND under 8 words AND ends with period
+            # Also must NOT be a complete thought that stands on its own
+            is_orphan = (
+                word_count <= 8 and
+                sentence_count == 1 and
+                para.endswith('.') and
+                not para.startswith('•') and
+                not para.startswith('-') and
+                not re.match(r'^\d+\.', para)  # Not a numbered list item
+            )
+
+            if is_orphan and i + 1 < len(paragraphs):
+                next_para = paragraphs[i + 1].strip()
+                # Only merge if next paragraph is a regular paragraph (not a list, heading, etc.)
+                if (next_para and
+                    not next_para.startswith('•') and
+                    not next_para.startswith('-') and
+                    not next_para.startswith('#') and
+                    not next_para.startswith('**') and
+                    not re.match(r'^\d+\.', next_para)):
+                    # Merge: orphan becomes first sentence of next paragraph
+                    merged.append(f"{para} {next_para}")
+                    skip_next = True
+                    continue
+
+            merged.append(para)
+
+        return '\n\n'.join(merged)
+
+    def _extract_statistics(self, text: str) -> List[str]:
+        """
+        Extract statistics and numerical facts from text for deduplication.
+        """
+        stats = []
+
+        # Patterns for common statistics
+        stat_patterns = [
+            r'\d+(?:\.\d+)?%',  # percentages: 95%, 99.9%
+            r'\$[\d,]+(?:\.\d+)?\s*(?:million|billion|trillion)?',  # money: $250,000, $6 million
+            r'\d+(?:,\d{3})*\s*(?:million|billion|trillion)',  # large numbers: 100 million
+            r'\d+\s*(?:ms|seconds?|minutes?|hours?)',  # time: 30ms, 5 seconds
+            r'\d+\s*(?:GB|TB|MB|KB|Gbps|Mbps)',  # data sizes/speeds
+            r'\d+\+?\s*(?:PoPs?|points? of presence)',  # PoPs: 210+ PoPs
+        ]
+
+        for pattern in stat_patterns:
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            stats.extend([m.lower().strip() for m in matches])
+
+        return stats
+
+    def _remove_duplicate_stats(self, text: str, current_heading: str,
+                                 all_stats_seen: Dict[str, str]) -> str:
+        """
+        Remove or rephrase statistics that already appeared in earlier sections.
+        Keep the statistic only if this section was the first to use it.
+        """
+        lines = text.split('\n')
+        cleaned_lines = []
+
+        for line in lines:
+            stats_in_line = self._extract_statistics(line)
+            duplicate_stats = []
+
+            for stat in stats_in_line:
+                # If this stat was first seen in a different section, it's a duplicate
+                first_section = all_stats_seen.get(stat)
+                if first_section and first_section != current_heading:
+                    duplicate_stats.append(stat)
+
+            if duplicate_stats:
+                # Remove the specific statistic phrase from the line
+                modified_line = line
+                for stat in duplicate_stats:
+                    # Try to remove sentences containing the duplicate stat
+                    # Match patterns like "Studies show that X%" or "According to research, X%"
+                    stat_escaped = re.escape(stat)
+
+                    # Remove sentences containing the stat
+                    sentence_patterns = [
+                        rf'[^.]*{stat_escaped}[^.]*\.\s*',  # Full sentence with stat
+                        rf'[A-Z][^.]*{stat_escaped}[^.]*\.\s*',  # Sentence starting with capital
+                    ]
+
+                    for pattern in sentence_patterns:
+                        modified_line = re.sub(pattern, '', modified_line, flags=re.IGNORECASE)
+
+                # Only add non-empty lines
+                if modified_line.strip():
+                    cleaned_lines.append(modified_line)
+            else:
+                cleaned_lines.append(line)
+
+        return '\n'.join(cleaned_lines)
+
+    def _extract_source_citations(self, text: str) -> List[str]:
+        """
+        Extract source citations from text for deduplication.
+        Matches patterns like:
+        - "according to Thales (2025)"
+        - "Thales (2025)"
+        - "according to F5 Labs"
+        """
+        citations = []
+
+        # Patterns for citations
+        citation_patterns = [
+            r'according to\s+([A-Z][A-Za-z0-9\s]+?)(?:\s*\(\d{4}\))?',  # "according to Source (year)"
+            r'([A-Z][A-Za-z0-9\s]+?)\s*\(\d{4}\)',  # "Source (year)"
+        ]
+
+        for pattern in citation_patterns:
+            matches = re.findall(pattern, text)
+            for match in matches:
+                # Normalize the source name
+                source = match.strip().lower()
+                # Skip very short matches or common words
+                if len(source) > 2 and source not in ['the', 'for', 'and', 'this']:
+                    citations.append(source)
+
+        return citations
+
+    def _deduplicate_source_citations(self, generated_content: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Track source citations across the entire article and remove duplicate mentions.
+        Keep the first occurrence of each source, remove subsequent ones.
+        """
+        if not generated_content:
+            return generated_content
+
+        # Track which sources we've seen
+        sources_seen = set()
+
+        # Process introduction
+        if generated_content.get('introduction'):
+            intro = generated_content['introduction']
+            if isinstance(intro, dict) and intro.get('content'):
+                intro['content'], sources_seen = self._remove_duplicate_citations_from_text(
+                    intro['content'], sources_seen
+                )
+            elif isinstance(intro, str):
+                generated_content['introduction'], sources_seen = self._remove_duplicate_citations_from_text(
+                    intro, sources_seen
+                )
+
+        # Process sections
+        sections = generated_content.get('sections', {})
+        for heading, section_data in sections.items():
+            if isinstance(section_data, dict) and section_data.get('content'):
+                section_data['content'], sources_seen = self._remove_duplicate_citations_from_text(
+                    section_data['content'], sources_seen
+                )
+
+        return generated_content
+
+    def _remove_duplicate_citations_from_text(self, text: str, sources_seen: set) -> tuple:
+        """
+        Remove duplicate source citations from text, keeping first occurrence.
+        Returns updated text and updated set of seen sources.
+        """
+        if not text:
+            return text, sources_seen
+
+        # Find all citations in this text
+        citation_pattern = r'(?:,?\s*according to\s+([A-Z][A-Za-z0-9\s]+?)\s*\(\d{4}\))|(?:,?\s*([A-Z][A-Za-z0-9\s]+?)\s*\(\d{4}\))'
+
+        def replace_duplicate(match):
+            full_match = match.group(0)
+            source = match.group(1) or match.group(2)
+            if source:
+                source_normalized = source.strip().lower()
+                if source_normalized in sources_seen:
+                    # This is a duplicate, remove it
+                    return ''
+                else:
+                    # First occurrence, keep it and track
+                    sources_seen.add(source_normalized)
+                    return full_match
+            return full_match
+
+        # Apply replacement
+        updated_text = re.sub(citation_pattern, replace_duplicate, text)
+
+        # Clean up any double SPACES (not newlines) or orphaned punctuation
+        # Use [ ] or [^\S\n] to avoid collapsing paragraph breaks
+        updated_text = re.sub(r'[ ]{2,}', ' ', updated_text)  # Only collapse multiple spaces
+        updated_text = re.sub(r'\.\s*\.', '.', updated_text)
+        updated_text = re.sub(r',\s*\.', '.', updated_text)
+
+        return updated_text, sources_seen
+
+    def _remove_gcore_from_intro(self, text: str) -> str:
+        """
+        Remove Gcore-specific mentions from introduction text.
+        The introduction should be generic and educational, not company-specific.
+        """
+        replacements = [
+            # Platform/infrastructure mentions
+            (r'\s+on the Gcore platform', ' on your platform'),
+            (r'the Gcore platform', 'your platform'),
+            (r'Gcore infrastructure', 'your infrastructure'),
+            (r'Gcore\'s infrastructure', 'your infrastructure'),
+            (r'Gcore servers?', 'your servers'),
+            (r'Gcore\'s servers?', 'your servers'),
+            (r'Gcore network', 'your network'),
+            (r'Gcore\'s network', 'your network'),
+            (r'Gcore systems?', 'your systems'),
+            (r'Gcore\'s systems?', 'your systems'),
+            # Service mentions
+            (r'Gcore CDN', 'your CDN'),
+            (r'Gcore\'s CDN', 'your CDN'),
+            (r'Gcore Edge', 'your edge'),
+            (r'Gcore\'s Edge', 'your edge'),
+            # Generic company mentions in intro context
+            (r'(?:on|with|using|through)\s+Gcore\b', 'on your infrastructure'),
+            (r'Gcore\'s\s+(?=\w+\s+(?:service|solution|product|offering))', 'your '),
+        ]
+
+        for pattern, replacement in replacements:
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+        return text
 
 # Convenience functions for Streamlit
 def generate_content(heading: str, 

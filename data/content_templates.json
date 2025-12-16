@@ -114,7 +114,7 @@
           "level": "H3",
           "function": "generate_gcore_service",
           "gcore_product": "cdn",
-          "gcore_features": ["180+ PoPs", "30ms latency", "DDoS protection"]
+          "gcore_features": ["210+ PoPs", "30ms latency", "DDoS protection"]
         }
       ]
     },

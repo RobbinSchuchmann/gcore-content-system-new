@@ -146,7 +146,7 @@ class SemanticPatternDetector:
                 pattern_type='where',
                 opening_template='{subject} is located {location}. {additional_details}',
                 structure='Direct location answer with additional context.',
-                example='CDN edge servers are located in data centers across major cities worldwide. Gcore maintains 180+ Points of Presence strategically positioned to ensure optimal coverage and minimal latency for all users.',
+                example='CDN edge servers are located in data centers across major cities worldwide. Gcore maintains 210+ Points of Presence strategically positioned to ensure optimal coverage and minimal latency for all users.',
                 min_words=50,
                 max_words=100
             ),
@@ -162,7 +162,7 @@ class SemanticPatternDetector:
                 pattern_type='which',
                 opening_template='{comparison_answer}. {justification}',
                 structure='Direct answer to comparison/selection followed by justification.',
-                example='The best CDN for gaming applications is one that offers low latency and high availability. Gcore\'s CDN provides 30ms average latency globally with 180+ PoPs, making it ideal for real-time gaming requirements.',
+                example='The best CDN for gaming applications is one that offers low latency and high availability. Gcore\'s CDN provides 30ms average latency globally with 210+ PoPs, making it ideal for real-time gaming requirements.',
                 min_words=75,
                 max_words=150
             ),

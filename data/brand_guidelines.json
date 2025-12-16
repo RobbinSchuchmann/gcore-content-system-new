@@ -4,8 +4,169 @@
     "tagline": "Global Edge Computing and CDN Provider",
     "founded": "2014",
     "headquarters": "Luxembourg",
-    "global_reach": "180+ Points of Presence",
+    "global_reach": "210+ Points of Presence",
     "average_latency": "30ms"
+  },
+  "language": {
+    "variant": "american_english",
+    "spelling_preferences": {
+      "suffix_ize": "Use -ize not -ise (optimize, customize, organize)",
+      "suffix_or": "Use -or not -our (color, behavior, favor)",
+      "suffix_er": "Use -er not -re (center, meter, fiber)",
+      "suffix_og": "Use -og not -ogue (catalog, dialog, analog)",
+      "doubled_consonants": "American style (canceled, labeled, traveled)"
+    },
+    "common_corrections": {
+      "optimise": "optimize",
+      "customise": "customize",
+      "organise": "organize",
+      "analyse": "analyze",
+      "colour": "color",
+      "behaviour": "behavior",
+      "favour": "favor",
+      "centre": "center",
+      "fibre": "fiber",
+      "metre": "meter",
+      "cancelled": "canceled",
+      "labelled": "labeled",
+      "travelling": "traveling",
+      "defence": "defense",
+      "licence": "license",
+      "catalogue": "catalog"
+    }
+  },
+  "numbers": {
+    "spell_out_under": 10,
+    "range_format": "words",
+    "range_format_note": "Use 'five to ten' not '5-10' or '5–10'",
+    "technical_exceptions": [
+      "version numbers (version 3)",
+      "percentages (5%)",
+      "measurements (4 TB, 8 GB)",
+      "technical specs (3 ms, 2 vCPUs)",
+      "when mixed with numbers 10+ in same sentence"
+    ],
+    "ordinals": "spell_out",
+    "ordinals_note": "Use first, second, third (not 1st, 2nd, 3rd)",
+    "thousands_separator": "comma",
+    "avoid_monetary_amounts": true,
+    "avoid_monetary_note": "Use ranges or qualitative descriptions when possible"
+  },
+  "pronouns": {
+    "avoid_first_person": true,
+    "prefer_second_person": true,
+    "first_person_exceptions": [
+      "When Gcore is explicitly the subject (Gcore offers...)"
+    ],
+    "replacements": {
+      "We recommend": "The recommended approach is",
+      "We offer": "Gcore offers",
+      "Our platform": "The Gcore platform",
+      "our servers": "Gcore servers",
+      "We'll show you": "This guide shows"
+    }
+  },
+  "style_references": {
+    "primary": "Chicago Manual of Style",
+    "technical_terminology": [
+      "Google Cloud (GCP)",
+      "DigitalOcean",
+      "AWS"
+    ],
+    "secondary": [
+      "Google Developer Style Guide",
+      "Microsoft Writing Style Guide"
+    ]
+  },
+  "timeless_documentation": {
+    "description": "Write content that doesn't become outdated (Google Style Guide)",
+    "words_to_avoid": [
+      "currently",
+      "now",
+      "new",
+      "newer",
+      "latest",
+      "soon",
+      "eventually",
+      "as of this writing",
+      "does not yet",
+      "old",
+      "older",
+      "presently",
+      "at present",
+      "existing",
+      "in the future"
+    ],
+    "guidance": "Remove these words or replace with specific version numbers, dates, or timelines",
+    "exceptions": [
+      "Release notes and changelogs",
+      "Version-specific documentation",
+      "Blog posts with publication dates"
+    ]
+  },
+  "inclusive_language": {
+    "description": "Use inclusive, bias-free terminology (Google Style Guide)",
+    "required_replacements": {
+      "blacklist": "denylist",
+      "whitelist": "allowlist",
+      "master/slave": "primary/replica",
+      "master branch": "main branch",
+      "man-hours": "person-hours",
+      "sanity check": "quick check",
+      "dummy value": "placeholder value",
+      "grandfathered": "legacy",
+      "mankind": "humanity",
+      "man-made": "artificial"
+    },
+    "ableist_terms_to_avoid": {
+      "crazy": "unexpected",
+      "insane": "unusual",
+      "blind to": "unaware of",
+      "cripple": "disable",
+      "dumb": "silent",
+      "lame": "inadequate"
+    },
+    "gender_neutral": {
+      "guidance": "Use they/their for singular unknown person",
+      "avoid": ["he/she", "his/her", "mankind"]
+    }
+  },
+  "date_time_format": {
+    "date_formats": {
+      "running_text": "January 19, 2025",
+      "technical_iso": "2025-01-19",
+      "avoid": ["1/19/25", "19/1/2025"]
+    },
+    "time_formats": {
+      "standard": "3:45 PM",
+      "round_hours": "3 PM",
+      "ranges": "9 AM to 5 PM",
+      "avoid": ["3:45PM", "3:00 PM", "15:45"]
+    },
+    "guidelines": [
+      "Spell out month names in running text",
+      "Use four-digit years only",
+      "Avoid season names (spring, summer) - use months or quarters",
+      "Specify time zone when relevant"
+    ]
+  },
+  "units_format": {
+    "spacing_rules": {
+      "with_space": ["64 GB", "100 ms", "30 Mbps"],
+      "no_space": ["$10", "65%", "90°"]
+    },
+    "ranges": {
+      "correct": "10 GB to 20 GB",
+      "avoid": "10-20 GB"
+    },
+    "rates": {
+      "running_text": "requests per second",
+      "technical_specs": "req/s (acceptable in tables)"
+    },
+    "thousands": {
+      "notation": "55k operations",
+      "separator": "1,000"
+    }
   },
   "style_rules": {
     "tone": "formal_but_approachable",
@@ -17,8 +178,9 @@
     "max_sentence_length": 30,
     "max_paragraph_length": 150,
     "use_active_voice": true,
-    "use_second_person": false,
-    "use_first_person_plural": true
+    "use_second_person": true,
+    "avoid_first_person": true,
+    "use_serial_comma": true
   },
   "terminology": {
     "preferred": {

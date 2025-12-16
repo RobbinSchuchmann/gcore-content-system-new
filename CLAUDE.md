@@ -98,7 +98,7 @@ The system automatically detects content patterns and applies appropriate templa
 ## Gcore-Specific Context
 
 The system includes comprehensive Gcore information:
-- **Global Reach**: 180+ Points of Presence
+- **Global Reach**: 210+ Points of Presence
 - **Performance**: 30ms average latency
 - **Services**: CDN, Edge Cloud, AI Infrastructure
 - **Brand Guidelines**: Formal but approachable tone, specific terminology preferences
