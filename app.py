@@ -2550,7 +2550,15 @@ if selected_mode == "📝 New Content":
             
             # Export configuration
             st.markdown("---")
-            st.markdown("### 📤 Export to Google Docs")
+            st.markdown("### 📤 Export Options")
+
+            # Format selection
+            export_format = st.radio(
+                "Select export format:",
+                ["HTML (Google Docs)", "Markdown (Strapi)"],
+                horizontal=True,
+                key="new_content_export_format"
+            )
             
             # Generate export content based on format
             def generate_markdown():
@@ -2867,33 +2875,43 @@ if selected_mode == "📝 New Content":
                 
                 return json.dumps(json_export, indent=2)
             
-            # Generate Google Docs HTML format
-            export_data = generate_html()
-            file_extension = "html"
-            mime_type = "text/html"
-    
+            # Generate export data based on selected format
+            if export_format == "Markdown (Strapi)":
+                export_data = generate_markdown()
+                file_extension = "md"
+                mime_type = "text/markdown"
+                button_label = "📥 Export as Markdown"
+                tip_text = "💡 **Tip**: This Markdown file is ready to import directly into Strapi."
+            else:
+                export_data = generate_html()
+                file_extension = "html"
+                mime_type = "text/html"
+                button_label = "📥 Export to Google Docs"
+                tip_text = "💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles."
+
             # Generate filename
             keyword_slug = re.sub(r'[^a-z0-9]+', '_', export_content['metadata']['primary_keyword'].lower())
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             filename = f"{keyword_slug}_{timestamp}.{file_extension}"
-    
+
             # Single export button
             st.download_button(
-                label="📥 Export to Google Docs",
+                label=button_label,
                 data=export_data,
                 file_name=filename,
                 mime=mime_type,
                 use_container_width=True,
                 type="primary"
             )
-    
-            st.info("💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles.")
+
+            st.info(tip_text)
     
             # Export summary
             st.markdown("---")
+            format_name = "Markdown (Strapi)" if export_format == "Markdown (Strapi)" else "Google Docs (HTML)"
             st.success(f"""
             ✅ **Export Ready!**
-            - Format: Google Docs (HTML)
+            - Format: {format_name}
             - Filename: {filename}
             - Word Count: {total_words:,}
             - Sections: {len(export_content['content']['sections']) + 1}
@@ -4182,10 +4200,15 @@ elif selected_mode == "🔧 Content Optimization":
 
         # Export configuration
         st.markdown("---")
-        st.markdown("### 📤 Export to Google Docs")
+        st.markdown("### 📤 Export Options")
 
-        # Fixed settings for Google Docs export
-        export_format = "Google Docs Format"
+        # Format selection
+        export_format = st.radio(
+            "Select export format:",
+            ["HTML (Google Docs)", "Markdown (Strapi)"],
+            horizontal=True,
+            key="optimization_export_format"
+        )
 
         # Generate export content based on format
         def generate_markdown():
@@ -4501,10 +4524,19 @@ elif selected_mode == "🔧 Content Optimization":
             
             return '\n'.join(report_parts)
 
-        # Generate Google Docs HTML format
-        export_data = generate_html()
-        file_extension = "html"
-        mime_type = "text/html"
+        # Generate export data based on selected format
+        if export_format == "Markdown (Strapi)":
+            export_data = generate_markdown()
+            file_extension = "md"
+            mime_type = "text/markdown"
+            button_label = "📥 Export as Markdown"
+            tip_text = "💡 **Tip**: This Markdown file is ready to import directly into Strapi."
+        else:
+            export_data = generate_html()
+            file_extension = "html"
+            mime_type = "text/html"
+            button_label = "📥 Export to Google Docs"
+            tip_text = "💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles."
 
         # Generate filename
         keyword_slug = re.sub(r'[^a-z0-9]+', '_', export_content['metadata']['primary_keyword'].lower())
@@ -4513,7 +4545,7 @@ elif selected_mode == "🔧 Content Optimization":
 
         # Single export button
         st.download_button(
-            label="📥 Export to Google Docs",
+            label=button_label,
             data=export_data,
             file_name=filename,
             mime=mime_type,
@@ -4521,14 +4553,15 @@ elif selected_mode == "🔧 Content Optimization":
             type="primary"
         )
 
-        st.info("💡 **Tip**: Download the HTML file and open it in Google Docs (File > Open > Upload) for proper formatting with lists and styles.")
+        st.info(tip_text)
 
         # Export summary
         st.markdown("---")
         avg_quality = st.session_state.optimization_data.get('quality_comparison', {}).get('optimized_score', 0)
+        format_name = "Markdown (Strapi)" if export_format == "Markdown (Strapi)" else "Google Docs (HTML)"
         st.success(f"""
         ✅ **Export Ready!**
-        - Format: Google Docs (HTML)
+        - Format: {format_name}
         - Filename: {filename}
         - Word Count: {total_words:,}
         - Sections: {len(export_content['content']['sections']) + 1}
